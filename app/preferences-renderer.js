@@ -1,6 +1,7 @@
 import VersionChecker from './utils/versionChecker.js'
 import { setSameWidths } from './utils/sameWidths.js'
 import acceleratorFromEvent from './utils/acceleratorFromEvent.js'
+import { isLightColor } from './utils/colorContrast.js'
 import { parsePauseDurations, formatPauseDurations } from './utils/pauseDurations.js'
 import HtmlTranslate from './utils/htmlTranslate.js'
 
@@ -196,6 +197,7 @@ window.onload = async (e) => {
   customColorRadio.value = settings.customColor
   customColorPicker.value = settings.customColor
   customColorRadio.nextElementSibling.style.setProperty('--custom-color', settings.customColor)
+  customColorRadio.nextElementSibling.style.setProperty('--custom-check', isLightColor(settings.customColor) ? '#000000' : '#ffffff')
   if (!eventsAttached) {
     customColorRadio.onclick = () => customColorPicker.click()
     customColorPicker.onchange = (event) => {

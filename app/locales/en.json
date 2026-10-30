@@ -45,8 +45,15 @@
       "settings": "Settings",
       "schedule": "Schedule",
       "theme": "Theme",
+      "sounds": "Sounds",
+      "shortcuts": "Shortcuts",
       "about": "About",
       "heart": "Love Stretchly"
+    },
+    "shortcutsTab": {
+      "trayMenu": "Tray menu:",
+      "keys": "Shortcuts:",
+      "hint": "Click a box and press the keys. Backspace clears it. Shortcuts need Ctrl, Cmd or Alt."
     },
     "settings": {
       "openAtLogin": "Start Stretchly automatically when logging in",
@@ -61,7 +68,6 @@
       "pauseDurations": "Pause menu durations (minutes, separated by commas):",
       "pauseUntilMorningOption": "Show \"Pause until morning\" in the menu",
       "pauseIndefinitelyOption": "Show \"Pause indefinitely\" in the menu",
-      "shortcuts": "Global keyboard shortcuts (click a box and press the keys; Backspace clears):",
       "pauseBreaksToggle": "Pause or resume breaks",
       "resetBreaks": "Reset the break timer",
       "skipToNextScheduledBreak": "Jump to the next scheduled break",

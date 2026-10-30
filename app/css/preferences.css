@@ -8,7 +8,7 @@ body > div > :last-child {
   box-shadow: var(--box-shadow);
   display: grid;
   grid-gap: 16px;
-  grid-template: 56px/ minmax(57px, min-content) minmax(57px, min-content) minmax(57px, min-content) minmax(57px, min-content) auto;
+  grid-template: 56px/ repeat(6, minmax(57px, min-content)) auto;
   padding: 0 16px;
   position: fixed;
   width: calc(100% - 16px);
@@ -40,7 +40,7 @@ body > div > :last-child {
   text-decoration: none
 }
 
-.navigation > :nth-child(5) {
+.navigation > :nth-child(7) {
   justify-self: end;
 }
 
@@ -146,7 +146,9 @@ body[dir=rtl] .schedule > :nth-child(17) {
   text-align: left
 }
 
-.theme {
+.theme,
+.audio,
+.shortcuts {
   display: grid;
   font-size: 13px;
   grid-gap: 16px 0;
@@ -155,24 +157,56 @@ body[dir=rtl] .schedule > :nth-child(17) {
   padding-top: 86px;
 }
 
-.theme > div {
+.theme > div,
+.audio > div,
+.shortcuts > div {
   grid-column: 2/-2;
 }
 
-.theme > .theme-label {
+.theme > .theme-label,
+.audio > .theme-label,
+.shortcuts > .theme-label {
   align-self: center;
   grid-column: 1/2;
   padding: 0 16px;
   text-align: right;
 }
 
-body[dir=rtl] .theme > .theme-label {
+body[dir=rtl] .theme > .theme-label,
+body[dir=rtl] .audio > .theme-label,
+body[dir=rtl] .shortcuts > .theme-label {
   text-align: left;
 }
 
 #customColorRadio + label:before {
   background: var(--custom-color);
   color: var(--custom-color);
+}
+
+#customColorRadio:checked + label:before {
+  color: var(--custom-check, #ffffff);
+}
+
+.swatches {
+  display: grid;
+  gap: 12px 8px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.swatches > .appearance > input[type="radio"] + label {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: center;
+}
+
+.swatches > .appearance > input[type="radio"] + label:before {
+  margin: 0;
+}
+
+.shortcuts p {
+  margin: 0;
 }
 
 #customColor {

@@ -34,6 +34,18 @@
         <span data-i18next="preferences.nav.theme"></span>
       </div>
     </a>
+    <a href="#" data-section="audio">
+      <div>
+        <img src="images/preferences/sounds.svg">
+        <span data-i18next="preferences.nav.sounds"></span>
+      </div>
+    </a>
+    <a href="#" data-section="shortcuts">
+      <div>
+        <img src="images/preferences/shortcuts.svg">
+        <span data-i18next="preferences.nav.shortcuts"></span>
+      </div>
+    </a>
     <a href="#" data-section="about">
       <div>
         <img src="images/preferences/about.svg">
@@ -84,47 +96,6 @@
     <div>
       <input type="checkbox" value="monitorMeetings" id="monitorMeetings">
       <label data-i18next="preferences.settings.monitorMeetings" for="monitorMeetings"></label>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.pauseDurations" for="pauseDurations"></label>
-      <input type="text" class="shortcut-input" id="pauseDurations">
-    </div>
-    <div>
-      <input type="checkbox" value="pauseUntilMorningOption" id="pauseUntilMorningOption">
-      <label data-i18next="preferences.settings.pauseUntilMorningOption" for="pauseUntilMorningOption"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="pauseIndefinitelyOption" id="pauseIndefinitelyOption">
-      <label data-i18next="preferences.settings.pauseIndefinitelyOption" for="pauseIndefinitelyOption"></label>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div>
-      <span data-i18next="preferences.settings.shortcuts"></span>
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.pauseBreaksToggle" for="pauseBreaksToggleShortcut"></label>
-      <input type="text" class="shortcut-input" name="pauseBreaksToggleShortcut" id="pauseBreaksToggleShortcut" readonly>
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.resetBreaks" for="resetBreaksShortcut"></label>
-      <input type="text" class="shortcut-input" name="resetBreaksShortcut" id="resetBreaksShortcut" readonly>
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.skipToNextScheduledBreak" for="skipToNextScheduledBreakShortcut"></label>
-      <input type="text" class="shortcut-input" name="skipToNextScheduledBreakShortcut" id="skipToNextScheduledBreakShortcut" readonly>
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.skipToNextMiniBreak" for="skipToNextMiniBreakShortcut"></label>
-      <input type="text" class="shortcut-input" name="skipToNextMiniBreakShortcut" id="skipToNextMiniBreakShortcut" readonly>
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.skipToNextLongBreak" for="skipToNextLongBreakShortcut"></label>
-      <input type="text" class="shortcut-input" name="skipToNextLongBreakShortcut" id="skipToNextLongBreakShortcut" readonly>
     </div>
     <div>
       <hr />
@@ -331,35 +302,37 @@
       <span data-i18next="preferences.theme.appearance">
       </span>
     </div>
-    <div class="appearance">
-      <input type="radio" value="#478484" name="mainColor" id="greenClouds">
-      <label data-i18next="preferences.theme.greenClouds" for="greenClouds"></label>
-    </div>
-    <div class="appearance">
-      <input type="radio" value="#633738" name="mainColor" id="autumnBeBlessed">
-      <label data-i18next="preferences.theme.autumnBeBlessed" for="autumnBeBlessed"></label>
-    </div>
+    <div class="swatches">
+      <div class="appearance">
+        <input type="radio" value="#478484" name="mainColor" id="greenClouds">
+        <label data-i18next="preferences.theme.greenClouds" for="greenClouds"></label>
+      </div>
+      <div class="appearance">
+        <input type="radio" value="#633738" name="mainColor" id="autumnBeBlessed">
+        <label data-i18next="preferences.theme.autumnBeBlessed" for="autumnBeBlessed"></label>
+      </div>
 
-    <div class="appearance">
-      <input type="radio" value="#ffffff" name="mainColor" id="snowWhite">
-      <label data-i18next="preferences.theme.snowWhite" for="snowWhite"></label>
-    </div>
-    <div class="appearance">
-      <input type="radio" value="#1D1F21" name="mainColor" id="graphiteCrystal">
-      <label data-i18next="preferences.theme.graphiteCrystal" for="graphiteCrystal"></label>
-    </div>
-    <div class="appearance">
-      <input type="radio" value="#A49898" name="mainColor" id="coffeeKisses">
-      <label data-i18next="preferences.theme.coffeeKisses" for="coffeeKisses"></label>
-    </div>
-    <div class="appearance">
-      <input type="radio" value="#567890" name="mainColor" id="morningSwim">
-      <label data-i18next="preferences.theme.morningSwim" for="morningSwim"></label>
-    </div>
-    <div class="appearance">
-      <input type="radio" value="#808080" name="mainColor" id="customColorRadio">
-      <label data-i18next="preferences.theme.customColor" for="customColorRadio"></label>
-      <input type="color" id="customColor" tabindex="-1">
+      <div class="appearance">
+        <input type="radio" value="#ffffff" name="mainColor" id="snowWhite">
+        <label data-i18next="preferences.theme.snowWhite" for="snowWhite"></label>
+      </div>
+      <div class="appearance">
+        <input type="radio" value="#1D1F21" name="mainColor" id="graphiteCrystal">
+        <label data-i18next="preferences.theme.graphiteCrystal" for="graphiteCrystal"></label>
+      </div>
+      <div class="appearance">
+        <input type="radio" value="#A49898" name="mainColor" id="coffeeKisses">
+        <label data-i18next="preferences.theme.coffeeKisses" for="coffeeKisses"></label>
+      </div>
+      <div class="appearance">
+        <input type="radio" value="#567890" name="mainColor" id="morningSwim">
+        <label data-i18next="preferences.theme.morningSwim" for="morningSwim"></label>
+      </div>
+      <div class="appearance">
+        <input type="radio" value="#808080" name="mainColor" id="customColorRadio">
+        <label data-i18next="preferences.theme.customColor" for="customColorRadio"></label>
+        <input type="color" id="customColor" tabindex="-1">
+      </div>
     </div>
     <div>
       <input type="checkbox" value="transparentMode" id="enableTransparency">
@@ -410,6 +383,76 @@
       <hr>
     </div>
     <div class="theme-label">
+      <span data-i18next="preferences.theme.trayIcon">
+      </span>
+    </div>
+    <div>
+      <div class="has-select">
+        <select name="trayIconStyle" id="trayIconStyle">
+          <option value="default" data-i18next="preferences.theme.trayIconStyleDefault"></option>
+          <option value="time" data-i18next="preferences.theme.trayIconStyleTime"></option>
+          <option value="progress" data-i18next="preferences.theme.trayIconStyleProgress"></option>
+          <option value="text" data-i18next="preferences.theme.trayIconStyleText"></option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <input type="radio" value="false" name="useMonochromeTrayIcon" id="colour">
+      <label data-i18next="preferences.theme.colour" for="colour"></label>
+    </div>
+    <div>
+      <input type="radio" value="true" name="useMonochromeTrayIcon" id="monochrome">
+      <label data-i18next="preferences.theme.monochrome" for="monochrome"></label>
+    </div>
+  </div>
+  <div class="shortcuts hidden">
+    <div class="theme-label">
+      <span data-i18next="preferences.shortcutsTab.trayMenu"></span>
+    </div>
+    <div class="shortcut">
+      <label data-i18next="preferences.settings.pauseDurations" for="pauseDurations"></label>
+      <input type="text" class="shortcut-input" id="pauseDurations">
+    </div>
+    <div>
+      <input type="checkbox" value="pauseUntilMorningOption" id="pauseUntilMorningOption">
+      <label data-i18next="preferences.settings.pauseUntilMorningOption" for="pauseUntilMorningOption"></label>
+    </div>
+    <div>
+      <input type="checkbox" value="pauseIndefinitelyOption" id="pauseIndefinitelyOption">
+      <label data-i18next="preferences.settings.pauseIndefinitelyOption" for="pauseIndefinitelyOption"></label>
+    </div>
+    <div>
+      <hr />
+    </div>
+    <div class="theme-label">
+      <span data-i18next="preferences.shortcutsTab.keys"></span>
+    </div>
+    <div>
+      <p data-i18next="preferences.shortcutsTab.hint"></p>
+    </div>
+    <div class="shortcut">
+      <label data-i18next="preferences.settings.pauseBreaksToggle" for="pauseBreaksToggleShortcut"></label>
+      <input type="text" class="shortcut-input" name="pauseBreaksToggleShortcut" id="pauseBreaksToggleShortcut" readonly>
+    </div>
+    <div class="shortcut">
+      <label data-i18next="preferences.settings.resetBreaks" for="resetBreaksShortcut"></label>
+      <input type="text" class="shortcut-input" name="resetBreaksShortcut" id="resetBreaksShortcut" readonly>
+    </div>
+    <div class="shortcut">
+      <label data-i18next="preferences.settings.skipToNextScheduledBreak" for="skipToNextScheduledBreakShortcut"></label>
+      <input type="text" class="shortcut-input" name="skipToNextScheduledBreakShortcut" id="skipToNextScheduledBreakShortcut" readonly>
+    </div>
+    <div class="shortcut">
+      <label data-i18next="preferences.settings.skipToNextMiniBreak" for="skipToNextMiniBreakShortcut"></label>
+      <input type="text" class="shortcut-input" name="skipToNextMiniBreakShortcut" id="skipToNextMiniBreakShortcut" readonly>
+    </div>
+    <div class="shortcut">
+      <label data-i18next="preferences.settings.skipToNextLongBreak" for="skipToNextLongBreakShortcut"></label>
+      <input type="text" class="shortcut-input" name="skipToNextLongBreakShortcut" id="skipToNextLongBreakShortcut" readonly>
+    </div>
+  </div>
+  <div class="audio hidden">
+    <div class="theme-label">
       <span data-i18next="preferences.theme.sounds">
       </span>
     </div>
@@ -436,31 +479,6 @@
       <input type="radio" value="reverie" name="longBreakAudio" id="reverie">
       <label data-i18next="preferences.theme.reverie" for="reverie"></label>
       <img src="images/preferences/speaker.png" data-has-dark-version alt="Play sound">
-    </div>
-    <div>
-      <hr>
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.theme.trayIcon">
-      </span>
-    </div>
-    <div>
-      <div class="has-select">
-        <select name="trayIconStyle" id="trayIconStyle">
-          <option value="default" data-i18next="preferences.theme.trayIconStyleDefault"></option>
-          <option value="time" data-i18next="preferences.theme.trayIconStyleTime"></option>
-          <option value="progress" data-i18next="preferences.theme.trayIconStyleProgress"></option>
-          <option value="text" data-i18next="preferences.theme.trayIconStyleText"></option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <input type="radio" value="false" name="useMonochromeTrayIcon" id="colour">
-      <label data-i18next="preferences.theme.colour" for="colour"></label>
-    </div>
-    <div>
-      <input type="radio" value="true" name="useMonochromeTrayIcon" id="monochrome">
-      <label data-i18next="preferences.theme.monochrome" for="monochrome"></label>
     </div>
   </div>
   <div class="about hidden">

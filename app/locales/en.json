@@ -64,6 +64,7 @@
       "allScreens": "Shows breaks on all monitors",
       "monitorIdleTime": "Monitor system idle time (breaks are paused if system is idle).",
       "monitorDnd": "Show breaks even in Do Not Disturb mode",
+      "idleResetTime": "Reset the break timer after being idle for:",
       "naturalBreaksResetNotification": "Show a popup when idle time resets the break timer (with undo)",
       "pauseDurations": "Pause menu durations (minutes, separated by commas):",
       "pauseUntilMorningOption": "Show \"Pause until morning\" in the menu",

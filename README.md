@@ -315,7 +315,7 @@ In the preferences file, set `naturalBreaksInactivityResetTime` to your preferre
 You can also set `naturalBreaksCheckInterval` in milliseconds: how often idle time is checked. A higher number means lower CPU and energy usage, but slightly less responsive detection. Default value is `2000` which is 2 seconds.
 
 #### Meetings
-On Windows, set `monitorMeetings` to `true` to detect meetings by checking whether any app is using the microphone. While a meeting is running, the break timer keeps counting down but the break itself waits until the meeting ends, and idle detection does not reset the timer. `monitorMeetingsCheckInterval` (default `5000` milliseconds) sets how often this is checked. Other platforms are not supported yet.
+On Windows, set `monitorMeetings` to `true` to detect meetings by checking whether any app is using the microphone. While a meeting is running, the break timer keeps counting down but the break itself waits until the meeting ends, and idle detection does not reset the timer. `monitorMeetingsCheckInterval` (default `5000` milliseconds) sets how often this is checked. Once the meeting ends, the deferred break starts after `meetingBreakDelay` milliseconds (default `5000`), unless a new meeting starts in the meantime. Other platforms are not supported yet.
 
 #### Do Not Disturb check interval
 In the preferences file, set `monitorDndCheckInterval` in milliseconds: how often Do Not Disturb status is checked. A higher number means lower CPU and energy usage, but slightly less responsive detection. On macOS and Linux this check can be relatively expensive, so increasing it can noticeably lower energy usage. Default value is `2000` which is 2 seconds.

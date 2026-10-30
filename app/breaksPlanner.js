@@ -20,6 +20,7 @@ class BreaksPlanner extends EventEmitter {
     this.appExclusionsManager = new AppExclusionsManager(settings)
     this.meetingManager = new MeetingManager(settings)
     this.deferredBreakEvent = null
+    this.meetingDelayTimer = null
     this.idleSnapshot = null
 
     this.on('microbreakStarted', (shouldPlaySound) => {
@@ -58,6 +59,7 @@ class BreaksPlanner extends EventEmitter {
     })
 
     this.meetingManager.on('meetingStarted', () => {
+      clearTimeout(this.meetingDelayTimer)
       this.naturalBreaksManager.isSuspended = true
       log.info('Stretchly: meeting started, breaks will wait until it ends')
     })
@@ -65,9 +67,12 @@ class BreaksPlanner extends EventEmitter {
     this.meetingManager.on('meetingFinished', () => {
       this.naturalBreaksManager.isSuspended = false
       log.info('Stretchly: meeting finished')
-      const eventName = this.deferredBreakEvent
-      this.deferredBreakEvent = null
-      if (eventName && !this.isPaused) this.emit(eventName)
+      clearTimeout(this.meetingDelayTimer)
+      this.meetingDelayTimer = setTimeout(() => {
+        const eventName = this.deferredBreakEvent
+        this.deferredBreakEvent = null
+        if (eventName && !this.isPaused) this.emit(eventName)
+      }, this.settings.get('meetingBreakDelay'))
     })
 
     this.dndManager.on('dndStarted', () => {
@@ -138,6 +143,7 @@ class BreaksPlanner extends EventEmitter {
   nextBreak () {
     this.postponesNumber = 0
     this.deferredBreakEvent = null
+    clearTimeout(this.meetingDelayTimer)
     if (this.scheduler) this.scheduler.cancel()
     const shouldBreak = this.settings.get('break')
     const shouldMicrobreak = this.settings.get('microbreak')
@@ -233,6 +239,7 @@ class BreaksPlanner extends EventEmitter {
       this.meetingManager.stop()
       this.naturalBreaksManager.isSuspended = false
       this.deferredBreakEvent = null
+      clearTimeout(this.meetingDelayTimer)
     }
   }
 
@@ -267,6 +274,7 @@ class BreaksPlanner extends EventEmitter {
   clear () {
     this.scheduler.cancel()
     this.deferredBreakEvent = null
+    clearTimeout(this.meetingDelayTimer)
     this.breakNumber = 0
     this.postponesNumber = 0
   }

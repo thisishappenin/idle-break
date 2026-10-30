@@ -52,6 +52,7 @@ export default {
   naturalBreaksResetNotification: false,
   monitorMeetings: false,
   monitorMeetingsCheckInterval: 5000,
+  meetingBreakDelay: 5000,
   miniBreakStartSound: 'silence',
   longBreakStartSound: 'silence',
   themeSource: 'system',

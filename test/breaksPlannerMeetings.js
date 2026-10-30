@@ -18,6 +18,7 @@ const settings = {
     microbreakNotification: false,
     monitorMeetings: false,
     monitorMeetingsCheckInterval: 5000,
+    meetingBreakDelay: 5000,
     naturalBreaks: false,
     monitorDnd: false
   })[key]
@@ -27,12 +28,14 @@ describe('breaksPlanner meetings', () => {
   let planner
 
   beforeEach(() => {
+    vi.useFakeTimers()
     planner = new BreaksPlanner(settings)
     planner.nextBreak()
   })
 
   afterEach(() => {
     planner.clear()
+    vi.useRealTimers()
   })
 
   it('does not defer a break when no meeting is running', () => {
@@ -46,6 +49,8 @@ describe('breaksPlanner meetings', () => {
     expect(planner.deferBreakForMeeting('startMicrobreak')).to.equal(true)
     expect(started).to.have.length(0)
     planner.meetingManager.emit('meetingFinished')
+    expect(started).to.have.length(0)
+    vi.advanceTimersByTime(5000)
     expect(started).to.deep.equal(['startMicrobreak'])
   })
 
@@ -55,6 +60,7 @@ describe('breaksPlanner meetings', () => {
     planner.meetingManager.isInMeeting = true
     planner.deferBreakForMeeting('startBreakNotification')
     planner.meetingManager.emit('meetingFinished')
+    vi.advanceTimersByTime(5000)
     expect(started).to.deep.equal(['startBreak'])
   })
 
@@ -93,5 +99,20 @@ describe('breaksPlanner meetings', () => {
     const scheduler = planner.scheduler
     planner.undoIdleReset()
     expect(planner.scheduler).to.equal(scheduler)
+  })
+
+  it('keeps the break deferred if another meeting starts during the delay', () => {
+    const started = []
+    planner.on('startMicrobreak', () => started.push('startMicrobreak'))
+    planner.meetingManager.isInMeeting = true
+    planner.deferBreakForMeeting('startMicrobreak')
+    planner.meetingManager.emit('meetingFinished')
+    vi.advanceTimersByTime(3000)
+    planner.meetingManager.emit('meetingStarted')
+    vi.advanceTimersByTime(10000)
+    expect(started).to.have.length(0)
+    planner.meetingManager.emit('meetingFinished')
+    vi.advanceTimersByTime(5000)
+    expect(started).to.deep.equal(['startMicrobreak'])
   })
 })

@@ -693,6 +693,8 @@ function createIdleResetWindow () {
     ...displayManager.getBreakWindowPosition(-1, size),
     frame: false,
     resizable: false,
+    transparent: true,
+    hasShadow: false,
     skipTaskbar: true,
     focusable: false,
     alwaysOnTop: true,
@@ -705,7 +707,8 @@ function createIdleResetWindow () {
   idleResetWin.setAlwaysOnTop(true, 'pop-up-menu')
   const query = new URLSearchParams({
     message: i18next.t('main.idleReset'),
-    undo: i18next.t('main.undoIdleReset')
+    undo: i18next.t('main.undoIdleReset'),
+    background: calculateBackgroundColor(settings.get('mainColor'))
   })
   idleResetWin.loadURL('file://' + join(__dirname, '/idle-reset.html') + '?' + query)
   idleResetWin.once('ready-to-show', () => idleResetWin?.showInactive())

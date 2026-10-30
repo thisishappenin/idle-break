@@ -1,5 +1,6 @@
 :root {
-  color-scheme: light dark;
+  --idle-bg: #478484;
+  --idle-fg: #ffffff;
 }
 
 html, body {
@@ -15,11 +16,14 @@ body {
   justify-content: center;
   gap: 8px;
   padding: 12px 16px;
-  font-family: system-ui, sans-serif;
+  font-family: 'Noto Sans Regular', system-ui, sans-serif;
   font-size: 14px;
-  background: Canvas;
-  color: CanvasText;
-  border: 1px solid GrayText;
+  background: var(--idle-bg);
+  color: var(--idle-fg);
+}
+
+body.ffffff {
+  --idle-fg: #000000;
 }
 
 p {
@@ -28,7 +32,16 @@ p {
 
 button {
   align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--idle-fg);
+  border-radius: 3px;
+  color: var(--idle-fg);
+  cursor: pointer;
   font: inherit;
   padding: 4px 12px;
-  cursor: pointer;
+}
+
+button:hover {
+  background: var(--idle-fg);
+  color: var(--idle-bg);
 }

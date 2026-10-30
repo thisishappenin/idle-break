@@ -125,13 +125,13 @@
       "opacity": "Opacity:",
       "breakWindowWidth": "Width:",
       "breakWindowHeight": "Height:",
-      "showBreaksAsRegularWindows": "Use a standalone window (title bar and taskbar button) instead of the themed popup",
+      "showBreaksAsRegularWindows": "Standalone window instead of themed popup",
       "positionCenter": "Position: center",
       "positionTopLeft": "Position: top left",
       "positionTopRight": "Position: top right",
       "positionBottomLeft": "Position: bottom left",
       "positionBottomRight": "Position: bottom right",
-      "breakWindowAlwaysOnTop": "Keep the standalone window on top of other windows"
+      "breakWindowAlwaysOnTop": "Keep standalone window on top"
     },
     "about": {
       "tagline": "The break time reminder app",

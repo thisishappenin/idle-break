@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Idle reset popup follows the selected theme color and transparency
 - Preferences: appearance swatches shown in a compact grid, with separate Sounds and Shortcuts tabs (shortcuts tab also holds the tray pause menu options)
 - CLI commands to postpone, skip and finish the current break
 - advanced preferences for custom break sounds

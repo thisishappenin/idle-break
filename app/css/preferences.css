@@ -188,17 +188,32 @@ body[dir=rtl] .shortcuts > .theme-label {
 }
 
 .swatches {
+  align-items: start;
   display: grid;
   gap: 12px 8px;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-items: start;
+}
+
+.swatches > .appearance {
+  justify-content: flex-start;
 }
 
 .swatches > .appearance > input[type="radio"] + label {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  text-align: center;
+  text-align: left;
+}
+
+.theme .has-select {
+  min-width: 260px;
+}
+
+.theme > .theme-label:first-child {
+  align-self: start;
+  padding-top: 10px;
 }
 
 .swatches > .appearance > input[type="radio"] + label:before {

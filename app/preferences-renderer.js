@@ -233,10 +233,20 @@ window.onload = async (e) => {
     }
   }
 
-  document.querySelector('#trayIconStyle').value = settings.trayIconStyle
+  document.querySelectorAll('select[data-setting]').forEach(select => {
+    select.value = settings[select.name]
+    if (!eventsAttached) {
+      select.onchange = () => window.settings.saveSettings(select.name, select.value)
+    }
+  })
+
+  const ignoredApps = document.querySelector('#monitorMeetingsIgnoreApps')
+  ignoredApps.value = settings.monitorMeetingsIgnoreApps.join(', ')
   if (!eventsAttached) {
-    document.querySelector('#trayIconStyle').onchange = (event) => {
-      window.settings.saveSettings('trayIconStyle', event.target.value)
+    ignoredApps.onchange = () => {
+      const apps = ignoredApps.value.split(',').map(app => app.trim()).filter(Boolean)
+      ignoredApps.value = apps.join(', ')
+      window.settings.saveSettings('monitorMeetingsIgnoreApps', apps)
     }
   }
 
@@ -268,13 +278,6 @@ window.onload = async (e) => {
       }
     }
   })
-
-  document.querySelector('#breakWindowPosition').value = settings.breakWindowPosition
-  if (!eventsAttached) {
-    document.querySelector('#breakWindowPosition').onchange = (event) => {
-      window.settings.saveSettings('breakWindowPosition', event.target.value)
-    }
-  }
 
   document.querySelectorAll('input[type="range"]').forEach(async range => {
     const divisor = range.dataset.divisor

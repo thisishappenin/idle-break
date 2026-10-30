@@ -226,6 +226,12 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `pauseDurations` - minutes shown as pause options in the tray menu, `pauseUntilMorningOption`, `pauseIndefinitelyOption` - show those extra pause items
 - `monitorMeetings` - on Windows, wait for meetings (microphone in use) to end before showing breaks
 - `breakWindowPosition`, `breakWindowMargin` - with `showBreaksAsRegularWindows`, place break windows in a screen corner
+- `meetingBreakDelay` - wait after a call ends before showing the deferred break (ms), `monitorMeetingsIgnoreApps` - apps whose audio capture never counts as a call
+- `microbreakPostponeTime`, `breakPostponeTime` - postpone time (ms), `microbreakPostponesLimit`, `breakPostponesLimit` - postpones allowed per break
+- `naturalBreaksInactivityResetTime` - idle time before the break timer resets (ms)
+- `pauseForSuspendOrLock` - pause breaks while the computer is locked or asleep
+- `volume` - volume of break sounds
+- `themeSource` - app theme, `trayIconThemeSource` - tray icon light/dark variant
 - `silentNotifications` - enable sounds
 - `monitorDnd` - monitor DND mode
 - `checkNewVersion` - check for new versions

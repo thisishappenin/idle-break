@@ -93,7 +93,7 @@
       <input type="checkbox" value="naturalBreaksResetNotification" id="naturalBreaksResetNotification">
       <label data-i18next="preferences.settings.naturalBreaksResetNotification" for="naturalBreaksResetNotification"></label>
     </div>
-    <div>
+    <div class="slider-row">
       <label data-i18next="preferences.settings.idleResetTime" for="idleResetTime"></label>
       <input type="range" min="1" max="60" step="1" name="naturalBreaksInactivityResetTime"
         data-divisor="60000" id="idleResetTime">
@@ -102,6 +102,19 @@
     <div>
       <input type="checkbox" value="monitorMeetings" id="monitorMeetings">
       <label data-i18next="preferences.settings.monitorMeetings" for="monitorMeetings"></label>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.settings.meetingBreakDelay" for="meetingBreakDelay"></label>
+      <input type="range" min="0" max="60" step="5" name="meetingBreakDelay" data-divisor="1000" id="meetingBreakDelay">
+      <output data-unit="seconds"></output>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.settings.monitorMeetingsIgnoreApps" for="monitorMeetingsIgnoreApps"></label>
+      <input type="text" id="monitorMeetingsIgnoreApps">
+    </div>
+    <div>
+      <input type="checkbox" value="pauseForSuspendOrLock" id="pauseForSuspendOrLock">
+      <label data-i18next="preferences.settings.pauseForSuspendOrLock" for="pauseForSuspendOrLock"></label>
     </div>
     <div>
       <hr />
@@ -302,6 +315,32 @@
       <input type="checkbox" value="breakStrictMode" id="enableStrictLong">
       <label data-i18next="preferences.schedule.enableStrictLong" for="enableStrictLong"></label>
     </div>
+    <div>
+      <hr />
+    </div>
+    <div class="theme-label">
+      <span data-i18next="preferences.schedule.postponing"></span>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.schedule.miniPostponeTime" for="miniPostponeTime"></label>
+      <input type="range" min="1" max="10" step="1" name="microbreakPostponeTime" data-divisor="60000" id="miniPostponeTime">
+      <output data-unit="minutes"></output>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.schedule.miniPostponesLimit" for="miniPostponesLimit"></label>
+      <input type="range" min="1" max="50" step="1" name="microbreakPostponesLimit" data-divisor="1" id="miniPostponesLimit">
+      <output data-unit="none"></output>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.schedule.longPostponeTime" for="longPostponeTime"></label>
+      <input type="range" min="1" max="30" step="1" name="breakPostponeTime" data-divisor="60000" id="longPostponeTime">
+      <output data-unit="minutes"></output>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.schedule.longPostponesLimit" for="longPostponesLimit"></label>
+      <input type="range" min="1" max="10" step="1" name="breakPostponesLimit" data-divisor="1" id="longPostponesLimit">
+      <output data-unit="none"></output>
+    </div>
   </div>
   <div class="theme hidden">
     <div class="theme-label">
@@ -358,7 +397,7 @@
     </div>
     <div>
       <div class="has-select">
-        <select name="breakWindowPosition" id="breakWindowPosition">
+        <select name="breakWindowPosition" id="breakWindowPosition" data-setting>
           <option value="center" data-i18next="preferences.theme.positionCenter"></option>
           <option value="top-left" data-i18next="preferences.theme.positionTopLeft"></option>
           <option value="top-right" data-i18next="preferences.theme.positionTopRight"></option>
@@ -394,7 +433,7 @@
     </div>
     <div>
       <div class="has-select">
-        <select name="trayIconStyle" id="trayIconStyle">
+        <select name="trayIconStyle" id="trayIconStyle" data-setting>
           <option value="default" data-i18next="preferences.theme.trayIconStyleDefault"></option>
           <option value="time" data-i18next="preferences.theme.trayIconStyleTime"></option>
           <option value="progress" data-i18next="preferences.theme.trayIconStyleProgress"></option>
@@ -409,6 +448,30 @@
     <div>
       <input type="radio" value="true" name="useMonochromeTrayIcon" id="monochrome">
       <label data-i18next="preferences.theme.monochrome" for="monochrome"></label>
+    </div>
+    <div>
+      <div class="has-select">
+        <select name="trayIconThemeSource" id="trayIconThemeSource" data-setting>
+          <option value="system" data-i18next="preferences.theme.trayIconThemeSystem"></option>
+          <option value="light" data-i18next="preferences.theme.trayIconThemeLight"></option>
+          <option value="dark" data-i18next="preferences.theme.trayIconThemeDark"></option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <hr>
+    </div>
+    <div class="theme-label">
+      <span data-i18next="preferences.theme.appTheme"></span>
+    </div>
+    <div>
+      <div class="has-select">
+        <select name="themeSource" id="themeSource" data-setting>
+          <option value="system" data-i18next="preferences.theme.appThemeSystem"></option>
+          <option value="light" data-i18next="preferences.theme.appThemeLight"></option>
+          <option value="dark" data-i18next="preferences.theme.appThemeDark"></option>
+        </select>
+      </div>
     </div>
   </div>
   <div class="shortcuts hidden">
@@ -465,6 +528,11 @@
     <div>
       <input type="checkbox" class="negative" value="silentNotifications" id="enableSounds">
       <label data-i18next="preferences.theme.enableSounds" for="enableSounds"></label>
+    </div>
+    <div>
+      <label data-i18next="preferences.theme.volume" for="volume"></label>
+      <input type="range" min="5" max="100" step="5" name="volume" data-divisor="0.01" id="volume">
+      <output data-unit="percent"></output>
     </div>
     <div class="sounds">
       <input type="radio" value="crystal-glass" name="longBreakAudio" id="crystalGlass">

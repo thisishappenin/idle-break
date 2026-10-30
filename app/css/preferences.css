@@ -90,6 +90,22 @@ body > div > :last-child {
   justify-content: space-between;
 }
 
+.slider-row {
+  align-items: center;
+  display: grid;
+  grid-template-columns: var(--label-width, 200px) auto 1fr;
+}
+
+.settings .slider-row {
+  --label-width: 280px;
+}
+
+.slider-row > input[type="text"] {
+  box-sizing: border-box;
+  margin: 0 16px 0 13px;
+  width: 200px;
+}
+
 .shortcut-input {
   cursor: pointer;
   text-align: center;
@@ -165,13 +181,16 @@ body[dir=rtl] .schedule > :nth-child(17) {
 
 .theme > .theme-label,
 .audio > .theme-label,
-.shortcuts > .theme-label {
-  align-self: center;
+.shortcuts > .theme-label,
+.schedule > .theme-label {
+  align-self: start;
+  padding-top: 2px;
   grid-column: 1/2;
   padding: 0 16px;
   text-align: right;
 }
 
+body[dir=rtl] .schedule > .theme-label,
 body[dir=rtl] .theme > .theme-label,
 body[dir=rtl] .audio > .theme-label,
 body[dir=rtl] .shortcuts > .theme-label {

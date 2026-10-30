@@ -3,6 +3,7 @@ import log from 'electron-log/main.js'
 import { execFile, spawn } from 'node:child_process'
 import { promisify } from 'node:util'
 
+const RESTART_DELAY = 10000
 const MICROPHONE_CONSENT_KEY = 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\microphone'
 
 const SESSION_SCRIPT = `
@@ -102,7 +103,7 @@ class MeetingManager extends EventEmitter {
   }
 
   start () {
-    if (this.timer || this.sessionProcess) return
+    if (this.timer || this.sessionProcess || this.restartTimer) return
     this.monitorMeetings = true
     if (process.platform === 'win32') {
       this._watchAudioSessions()
@@ -113,11 +114,13 @@ class MeetingManager extends EventEmitter {
   }
 
   stop () {
-    if (!this.timer && !this.sessionProcess) return
+    if (!this.timer && !this.sessionProcess && !this.monitorMeetings) return
     const wasInMeeting = this.isInMeeting
     this.monitorMeetings = false
     this.isInMeeting = false
     clearInterval(this.timer)
+    clearTimeout(this.restartTimer)
+    this.restartTimer = null
     this.timer = null
     this.sessionProcess?.kill()
     this.sessionProcess = null
@@ -168,7 +171,18 @@ class MeetingManager extends EventEmitter {
       this._checkMeeting()
     }
     child.on('error', e => fallBack(e.message))
-    child.on('exit', code => { if (!heardFrom) fallBack(`exit code ${code}`) })
+    child.on('exit', code => {
+      if (!heardFrom) return fallBack(`exit code ${code}`)
+      if (this.sessionProcess !== child) return
+      this.sessionProcess = null
+      if (!this.monitorMeetings) return
+      log.warn(`Stretchly: audio session monitoring exited (code ${code}), restarting`)
+      this._setInMeeting(false)
+      this.restartTimer = setTimeout(() => {
+        this.restartTimer = null
+        if (this.monitorMeetings && !this.sessionProcess) this._watchAudioSessions()
+      }, RESTART_DELAY)
+    })
   }
 
   async _microphoneInUse () {

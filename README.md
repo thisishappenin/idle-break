@@ -203,6 +203,7 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `microbreakInterval` - interval of Mini break (ms)
 - `breakDuration` - duration of Long break (ms)
 - `breakInterval` - interval of Long break (Mini breaks)
+- `singleBreakType` - use one kind of break only ("Just breaks"): Long breaks are turned off and Mini breaks are labelled simply as breaks
 - `breakNotification` - show notification before Mini break
 - `microbreakNotification` - show notification before Long break
 - `microbreak` - enable Mini breaks

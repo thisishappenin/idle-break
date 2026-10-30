@@ -53,7 +53,8 @@ class StatusMessages {
     }
 
     if (this.reference === 'startMicrobreak' || this.reference === 'startMicrobreakNotification') {
-      message += this.i18next.t('statusMessages.nextMiniBreak') + ' ' +
+      const nextKey = this.settings.get('singleBreakType') ? 'statusMessages.nextSingleBreak' : 'statusMessages.nextMiniBreak'
+      message += this.i18next.t(nextKey) + ' ' +
         formatTimeIn(this.timeToNextBreak, this.settings.get('language'), this.i18next, this.humanizeDuration)
       if (this.settings.get('break')) {
         message += '\n' + this.i18next.t('statusMessages.nextLongBreak') + ' ' +

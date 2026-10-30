@@ -240,6 +240,19 @@ window.onload = async (e) => {
     }
   })
 
+  const singleBreakType = document.querySelector('#singleBreakType')
+  singleBreakType.value = String(settings.singleBreakType)
+  await applyBreakType(settings.singleBreakType)
+  if (!eventsAttached) {
+    singleBreakType.onchange = async () => {
+      const single = singleBreakType.value === 'true'
+      window.settings.saveSettings('singleBreakType', single)
+      document.querySelector('#enableMiniBreaks').checked = true
+      document.querySelector('#enableLongBreaks').checked = !single
+      await applyBreakType(single)
+    }
+  }
+
   const ignoredApps = document.querySelector('#monitorMeetingsIgnoreApps')
   ignoredApps.value = settings.monitorMeetingsIgnoreApps.join(', ')
   if (!eventsAttached) {
@@ -397,5 +410,14 @@ window.onload = async (e) => {
     const microbreakInterval = document.querySelector('#miniBreakEvery').value * 1
     const breakInterval = document.querySelector('#longBreakEvery').value * 1
     return microbreakInterval * (breakInterval + 1)
+  }
+}
+
+async function applyBreakType (single) {
+  document.body.classList.toggle('single-break-type', single)
+  for (const element of document.querySelectorAll('[data-i18next-single]')) {
+    element.dataset.i18nextMulti ??= element.dataset.i18next
+    element.dataset.i18next = single ? element.dataset.i18nextSingle : element.dataset.i18nextMulti
+    element.innerHTML = await window.i18next.t(element.dataset.i18next)
   }
 }

@@ -186,15 +186,29 @@
     </div>
   </div>
   <div class="schedule hidden">
+    <div class="theme-label">
+      <span data-i18next="preferences.schedule.breakTypes"></span>
+    </div>
     <div>
-      <span data-i18next="preferences.schedule.miniBreaks">
+      <div class="has-select">
+        <select name="singleBreakType" id="singleBreakType">
+          <option value="false" data-i18next="preferences.schedule.miniAndLong"></option>
+          <option value="true" data-i18next="preferences.schedule.singleType"></option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <hr />
+    </div>
+    <div class="theme-label">
+      <span data-i18next="preferences.schedule.miniBreaks" data-i18next-single="preferences.schedule.singleBreaks">
       </span>
     </div>
     <div>
-      <p data-i18next="preferences.schedule.miniBreaksInfo">
+      <p data-i18next="preferences.schedule.miniBreaksInfo" data-i18next-single="preferences.schedule.singleBreaksInfo">
       </p>
     </div>
-    <div>
+    <div data-multi-only>
       <input type="checkbox" class="enabletype" value="microbreak" id="enableMiniBreaks">
       <label data-i18next="preferences.schedule.enableMiniBreaks" for="enableMiniBreaks"></label>
     </div>
@@ -238,29 +252,29 @@
     </div>
     <div>
       <input type="checkbox" value="microbreakNotification" id="showNotificationBeforeMiniBreak">
-      <label data-i18next="preferences.schedule.showNotificationBeforeMiniBreak"
+      <label data-i18next="preferences.schedule.showNotificationBeforeMiniBreak" data-i18next-single="preferences.schedule.showNotificationBeforeSingleBreak"
         for="showNotificationBeforeMiniBreak"></label>
     </div>
     <div>
       <input type="checkbox" value="microbreakPostpone" id="enablePostponeMini">
-      <label data-i18next="preferences.schedule.enablePostponeMini" for="enablePostponeMini"></label>
+      <label data-i18next="preferences.schedule.enablePostponeMini" data-i18next-single="preferences.schedule.enablePostponeSingle" for="enablePostponeMini"></label>
     </div>
-    <div>
+    <div data-multi-only>
       <hr />
     </div>
-    <div>
+    <div data-multi-only class="theme-label">
       <span data-i18next="preferences.schedule.longBreaks">
       </span>
     </div>
-    <div>
+    <div data-multi-only>
       <p data-i18next="preferences.schedule.longBreaksInfo">
       </p>
     </div>
-    <div>
+    <div data-multi-only>
       <input type="checkbox" class="enabletype" value="break" id="enableLongBreaks">
       <label data-i18next="preferences.schedule.enableLongBreaks" for="enableLongBreaks"></label>
     </div>
-    <div>
+    <div data-multi-only>
       <label data-i18next="preferences.schedule.breakFor" data-same-width-label for="longBreakFor"></label>
       <input type="range" min="1" max="60" step="1" list="tickmarksLongBreakFor" name="breakDuration"
         data-divisor="60000" id="longBreakFor">
@@ -273,7 +287,7 @@
       </datalist>
       <output data-unit="minutes"></output>
     </div>
-    <div>
+    <div data-multi-only>
       <label data-i18next="preferences.schedule.every" data-same-width-label for="longBreakEvery"></label>
       <input type="range" min="1" max="30" step="1" list="tickmarksLongBreakEvery" name="breakInterval" data-divisor="1"
         id="longBreakEvery">
@@ -287,31 +301,31 @@
       </datalist>
       <output data-unit="minutes"></output>
     </div>
-    <div>
+    <div data-multi-only>
       <input type="checkbox" value="breakNotification" id="showNotificationBeforeLongBreak">
       <label data-i18next="preferences.schedule.showNotificationBeforeLongBreak"
         for="showNotificationBeforeLongBreak"></label>
     </div>
-    <div>
+    <div data-multi-only>
       <input type="checkbox" value="breakPostpone" id="enablePostponeLong">
       <label data-i18next="preferences.schedule.enablePostponeLong" for="enablePostponeLong"></label>
     </div>
     <div data-strict-mode>
       <hr />
     </div>
-    <div data-strict-mode>
+    <div class="theme-label" data-strict-mode>
       <span data-i18next="preferences.schedule.strictMode">
       </span>
     </div>
     <div data-strict-mode>
-      <p data-i18next="preferences.schedule.strictModeInfo">
+      <p data-i18next="preferences.schedule.strictModeInfo" data-i18next-single="preferences.schedule.strictModeInfoSingle">
       </p>
     </div>
     <div data-strict-mode>
       <input type="checkbox" value="microbreakStrictMode" id="enableStrictMini">
-      <label data-i18next="preferences.schedule.enableStrictMini" for="enableStrictMini"></label>
+      <label data-i18next="preferences.schedule.enableStrictMini" data-i18next-single="preferences.schedule.enableStrictSingle" for="enableStrictMini"></label>
     </div>
-    <div data-strict-mode>
+    <div data-multi-only data-strict-mode>
       <input type="checkbox" value="breakStrictMode" id="enableStrictLong">
       <label data-i18next="preferences.schedule.enableStrictLong" for="enableStrictLong"></label>
     </div>
@@ -322,21 +336,21 @@
       <span data-i18next="preferences.schedule.postponing"></span>
     </div>
     <div class="slider-row">
-      <label data-i18next="preferences.schedule.miniPostponeTime" for="miniPostponeTime"></label>
+      <label data-i18next="preferences.schedule.miniPostponeTime" data-i18next-single="preferences.schedule.singlePostponeTime" for="miniPostponeTime"></label>
       <input type="range" min="1" max="10" step="1" name="microbreakPostponeTime" data-divisor="60000" id="miniPostponeTime">
       <output data-unit="minutes"></output>
     </div>
     <div class="slider-row">
-      <label data-i18next="preferences.schedule.miniPostponesLimit" for="miniPostponesLimit"></label>
+      <label data-i18next="preferences.schedule.miniPostponesLimit" data-i18next-single="preferences.schedule.singlePostponesLimit" for="miniPostponesLimit"></label>
       <input type="range" min="1" max="50" step="1" name="microbreakPostponesLimit" data-divisor="1" id="miniPostponesLimit">
       <output data-unit="none"></output>
     </div>
-    <div class="slider-row">
+    <div data-multi-only class="slider-row">
       <label data-i18next="preferences.schedule.longPostponeTime" for="longPostponeTime"></label>
       <input type="range" min="1" max="30" step="1" name="breakPostponeTime" data-divisor="60000" id="longPostponeTime">
       <output data-unit="minutes"></output>
     </div>
-    <div class="slider-row">
+    <div data-multi-only class="slider-row">
       <label data-i18next="preferences.schedule.longPostponesLimit" for="longPostponesLimit"></label>
       <input type="range" min="1" max="10" step="1" name="breakPostponesLimit" data-divisor="1" id="longPostponesLimit">
       <output data-unit="none"></output>
@@ -508,14 +522,14 @@
       <input type="text" class="shortcut-input" name="resetBreaksShortcut" id="resetBreaksShortcut" readonly>
     </div>
     <div class="shortcut">
-      <label data-i18next="preferences.settings.skipToNextScheduledBreak" for="skipToNextScheduledBreakShortcut"></label>
+      <label data-i18next="preferences.settings.skipToNextScheduledBreak" data-i18next-single="preferences.settings.skipToSingleBreak" for="skipToNextScheduledBreakShortcut"></label>
       <input type="text" class="shortcut-input" name="skipToNextScheduledBreakShortcut" id="skipToNextScheduledBreakShortcut" readonly>
     </div>
-    <div class="shortcut">
+    <div class="shortcut" data-multi-only>
       <label data-i18next="preferences.settings.skipToNextMiniBreak" for="skipToNextMiniBreakShortcut"></label>
       <input type="text" class="shortcut-input" name="skipToNextMiniBreakShortcut" id="skipToNextMiniBreakShortcut" readonly>
     </div>
-    <div class="shortcut">
+    <div class="shortcut" data-multi-only>
       <label data-i18next="preferences.settings.skipToNextLongBreak" for="skipToNextLongBreakShortcut"></label>
       <input type="text" class="shortcut-input" name="skipToNextLongBreakShortcut" id="skipToNextLongBreakShortcut" readonly>
     </div>

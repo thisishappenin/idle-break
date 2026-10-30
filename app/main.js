@@ -856,7 +856,7 @@ function checkVersion () {
 }
 
 function startMicrobreakNotification () {
-  showNotification(i18next.t('main.microbreakIn', { seconds: settings.get('microbreakNotificationInterval') / 1000 }))
+  showNotification(i18next.t(settings.get('singleBreakType') ? 'main.singleBreakIn' : 'main.microbreakIn', { seconds: settings.get('microbreakNotificationInterval') / 1000 }))
   log.info('Stretchly: showing Mini break notification')
   breakPlanner.nextBreakAfterNotification()
   updateTray()
@@ -1590,7 +1590,7 @@ function getTrayMenuTemplate () {
   if (idle) {
     if (settings.get('microbreak')) {
       trayMenu.push({
-        label: i18next.t('main.startMicrobreakNow'),
+        label: i18next.t(settings.get('singleBreakType') ? 'main.startSingleBreakNow' : 'main.startMicrobreakNow'),
         click: () => skipToMicrobreak()
       })
     }
@@ -1767,6 +1767,12 @@ ipcMain.on('save-setting', function (event, key, value) {
 
   if (key === 'monitorMeetings') {
     breakPlanner.meetings(value)
+  }
+
+  if (key === 'singleBreakType') {
+    settings.set('microbreak', true)
+    settings.set('break', !value)
+    if (value && breakPlanner.scheduler.reference?.startsWith('startBreak')) breakPlanner.reset()
   }
 
   if (key === 'language') {

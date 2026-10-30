@@ -7,6 +7,7 @@ export default {
   microbreakInterval: 600000,
   breakDuration: 300000,
   breakInterval: 2,
+  singleBreakType: false,
   breakNotification: true,
   microbreakNotification: true,
   breakNotificationInterval: 30000,

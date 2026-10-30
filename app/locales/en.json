@@ -100,13 +100,17 @@
       "trayIconStyleProgress": "Progress to break",
       "trayIconStyleText": "Minutes to break (number only)",
       "breakWindow": "Break window:",
-      "showBreaksAsRegularWindows": "Show breaks as a small window instead of full screen",
+      "customColor": "Custom color",
+      "opacity": "Opacity:",
+      "breakWindowWidth": "Width:",
+      "breakWindowHeight": "Height:",
+      "showBreaksAsRegularWindows": "Use a standalone window (title bar and taskbar button) instead of the themed popup",
       "positionCenter": "Position: center",
       "positionTopLeft": "Position: top left",
       "positionTopRight": "Position: top right",
       "positionBottomLeft": "Position: bottom left",
       "positionBottomRight": "Position: bottom right",
-      "breakWindowAlwaysOnTop": "Keep the small break window on top of other windows"
+      "breakWindowAlwaysOnTop": "Keep the standalone window on top of other windows"
     },
     "about": {
       "tagline": "The break time reminder app",

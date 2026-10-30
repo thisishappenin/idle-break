@@ -286,7 +286,7 @@
     </div>
   </div>
   <div class="theme hidden">
-    <div>
+    <div class="theme-label">
       <span data-i18next="preferences.theme.appearance">
       </span>
     </div>
@@ -315,20 +315,25 @@
       <input type="radio" value="#567890" name="mainColor" id="morningSwim">
       <label data-i18next="preferences.theme.morningSwim" for="morningSwim"></label>
     </div>
+    <div class="custom-color">
+      <input type="color" name="mainColor" id="customColor">
+      <label data-i18next="preferences.theme.customColor" for="customColor"></label>
+    </div>
     <div>
       <input type="checkbox" value="transparentMode" id="enableTransparency">
       <label data-i18next="preferences.theme.transparentMode" for="enableTransparency"></label>
     </div>
     <div>
+      <label data-i18next="preferences.theme.opacity" for="opacity"></label>
+      <input type="range" min="30" max="100" step="5" name="opacity" data-divisor="0.01" id="opacity">
+      <output data-unit="percent"></output>
+    </div>
+    <div>
       <hr>
     </div>
-    <div>
+    <div class="theme-label">
       <span data-i18next="preferences.theme.breakWindow">
       </span>
-    </div>
-    <div>
-      <input type="checkbox" value="showBreaksAsRegularWindows" id="showBreaksAsRegularWindows">
-      <label data-i18next="preferences.theme.showBreaksAsRegularWindows" for="showBreaksAsRegularWindows"></label>
     </div>
     <div>
       <div class="has-select">
@@ -342,13 +347,27 @@
       </div>
     </div>
     <div>
+      <label data-i18next="preferences.theme.breakWindowWidth" for="breakWindowWidth"></label>
+      <input type="range" min="10" max="99" step="1" name="breakWindowWidth" data-divisor="0.01" id="breakWindowWidth">
+      <output data-unit="percent"></output>
+    </div>
+    <div>
+      <label data-i18next="preferences.theme.breakWindowHeight" for="breakWindowHeight"></label>
+      <input type="range" min="10" max="99" step="1" name="breakWindowHeight" data-divisor="0.01" id="breakWindowHeight">
+      <output data-unit="percent"></output>
+    </div>
+    <div>
+      <input type="checkbox" value="showBreaksAsRegularWindows" id="showBreaksAsRegularWindows">
+      <label data-i18next="preferences.theme.showBreaksAsRegularWindows" for="showBreaksAsRegularWindows"></label>
+    </div>
+    <div>
       <input type="checkbox" value="breakWindowAlwaysOnTop" id="breakWindowAlwaysOnTop">
       <label data-i18next="preferences.theme.breakWindowAlwaysOnTop" for="breakWindowAlwaysOnTop"></label>
     </div>
     <div>
       <hr>
     </div>
-    <div>
+    <div class="theme-label">
       <span data-i18next="preferences.theme.sounds">
       </span>
     </div>
@@ -379,7 +398,7 @@
     <div>
       <hr>
     </div>
-    <div>
+    <div class="theme-label">
       <span data-i18next="preferences.theme.trayIcon">
       </span>
     </div>

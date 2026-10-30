@@ -1,6 +1,7 @@
 import HtmlTranslate from './utils/htmlTranslate.js'
 import applyBreakHealthEffect from './utils/breakHealthEffect.js'
 import createRunOnce from './utils/runOnce.js'
+import { isLightColor } from './utils/colorContrast.js'
 import './platform.js'
 
 window.onload = async (event) => {
@@ -60,6 +61,7 @@ window.onload = async (event) => {
   const closeElement = document.querySelector('#close')
   const manualFinishElement = document.querySelector('#finish')
   document.body.classList.add(mainColor.substring(1))
+  if (isLightColor(mainColor)) document.body.classList.add('ffffff')
   document.body.style.backgroundColor = backgroundColor
 
   document.querySelectorAll('.tiptext').forEach(async tt => {

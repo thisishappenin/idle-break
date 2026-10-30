@@ -146,38 +146,21 @@ body[dir=rtl] .schedule > :nth-child(17) {
   grid-column: 2/-2;
 }
 
-.theme > :nth-child(1) {
+.theme > .theme-label {
   align-self: center;
   grid-column: 1/2;
-  grid-row: 1/2;
   padding: 0 16px;
   text-align: right;
 }
 
-body[dir=rtl] .theme > :nth-child(1) {
-  text-align: left
+body[dir=rtl] .theme > .theme-label {
+  text-align: left;
 }
 
-.theme > :nth-child(10) {
-  grid-column: 1/2;
-  grid-row: 9/10;
-  padding: 0 16px;
-  text-align: right;
-}
-
-body[dir=rtl] .theme > :nth-child(10) {
-  text-align: left
-}
-
-.theme > :nth-child(17) {
-  grid-column: 1/2;
-  grid-row: 15/18;
-  padding: 0 16px;
-  text-align: right;
-}
-
-body[dir=rtl] .theme > :nth-child(17) {
-  text-align: left
+.custom-color {
+  align-items: center;
+  display: flex;
+  gap: 8px;
 }
 
 .appearance {

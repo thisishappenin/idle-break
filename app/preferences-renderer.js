@@ -223,6 +223,13 @@ window.onload = async (e) => {
     }
   }
 
+  document.querySelector('#customColor').value = settings.mainColor
+  if (!eventsAttached) {
+    document.querySelector('#customColor').onchange = (event) => {
+      window.settings.saveSettings('mainColor', event.target.value)
+    }
+  }
+
   document.querySelector('#breakWindowPosition').value = settings.breakWindowPosition
   if (!eventsAttached) {
     document.querySelector('#breakWindowPosition').onchange = (event) => {

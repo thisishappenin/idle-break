@@ -115,4 +115,11 @@ describe('breaksPlanner meetings', () => {
     vi.advanceTimersByTime(5000)
     expect(started).to.deep.equal(['startMicrobreak'])
   })
+
+  it('resumes the schedule when idle monitoring is turned off after an idle pause', () => {
+    planner.naturalBreaksManager.emit('clearBreakScheduler')
+    expect(planner.scheduler.reference).to.equal(null)
+    planner.setIdleReset(false)
+    expect(planner.scheduler.reference).to.equal('startMicrobreak')
+  })
 })

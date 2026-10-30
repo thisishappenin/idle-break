@@ -339,6 +339,13 @@ class BreaksPlanner extends EventEmitter {
     }
   }
 
+  setIdleReset (shouldUse) {
+    this.naturalBreaks(shouldUse)
+    if (!shouldUse && !this.isPaused && this.scheduler.reference === null && !this.dndManager.isOnDnd) {
+      this.reset()
+    }
+  }
+
   doNotDisturb (shouldUse) {
     if (shouldUse) {
       this.dndManager.start()

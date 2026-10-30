@@ -1627,7 +1627,7 @@ function getTrayMenuTemplate () {
             units: ['d', 'h', 'm']
           })
         }),
-        accelerator: settings.get(durationShortcuts[minutes]) || null,
+        accelerator: (durationShortcuts[minutes] && settings.get(durationShortcuts[minutes])) || null,
         click: () => pauseBreaks(milliseconds)
       })
     }
@@ -1651,6 +1651,17 @@ function getTrayMenuTemplate () {
   }
 
   trayMenu.push({
+    type: 'separator'
+  }, {
+    label: i18next.t('main.resetWhenIdle'),
+    type: 'checkbox',
+    checked: settings.get('naturalBreaks'),
+    click: (menuItem) => {
+      settings.set('naturalBreaks', menuItem.checked)
+      breakPlanner.setIdleReset(menuItem.checked)
+      updateTray()
+    }
+  }, {
     type: 'separator'
   }, {
     label: i18next.t('main.preferences'),
@@ -1741,7 +1752,7 @@ ipcMain.on('finish-long-break', function (event, shouldPlaySound, manualAwaiting
 
 ipcMain.on('save-setting', function (event, key, value) {
   if (key === 'naturalBreaks') {
-    breakPlanner.naturalBreaks(value)
+    breakPlanner.setIdleReset(value)
   }
 
   if (key === 'monitorDnd') {

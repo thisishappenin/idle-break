@@ -7,6 +7,7 @@
     "idleReset": "Break timer reset after being away",
     "undoIdleReset": "Undo reset",
     "downloadLatestVersion": "Download latest version",
+    "resetWhenIdle": "Reset timer when idle",
     "startMicrobreakNow": "Start a Mini break now",
     "startBreakNow": "Start a Long break now",
     "pauseFor": "Pause for {{duration}}",

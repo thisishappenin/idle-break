@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - option to show a 10-second popup when idle time resets the break timer, with a button to undo the reset
 - global keyboard shortcuts for pausing, resetting and jumping to a break can be set in Preferences
 - tray menu lists Mini/Long break start and pause options directly instead of in submenus; pause durations are editable in Preferences (`pauseDurations`)
+- tray menu checkbox to turn the idle reset on or off
 - "Minutes to break (number only)" tray icon style, without the Stretchly logo
 
 ### Fixed

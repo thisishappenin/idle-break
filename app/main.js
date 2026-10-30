@@ -1581,25 +1581,22 @@ function getTrayMenuTemplate () {
     return trayMenu
   }
 
-  if (!(breakPlanner.isPaused || breakPlanner.dndManager.isOnDnd || breakPlanner.appExclusionsManager.isSchedulerCleared)) {
-    let submenu = []
+  const idle = !(breakPlanner.isPaused || breakPlanner.dndManager.isOnDnd || breakPlanner.appExclusionsManager.isSchedulerCleared)
+  if (idle) {
     if (settings.get('microbreak')) {
-      submenu = submenu.concat([{
-        label: i18next.t('main.toMicrobreak'),
+      trayMenu.push({
+        label: i18next.t('main.startMicrobreakNow'),
         click: () => skipToMicrobreak()
-      }])
+      })
     }
     if (settings.get('break')) {
-      submenu = submenu.concat([{
-        label: i18next.t('main.toBreak'),
+      trayMenu.push({
+        label: i18next.t('main.startBreakNow'),
         click: () => skipToBreak()
-      }])
+      })
     }
     if (settings.get('break') || settings.get('microbreak')) {
-      trayMenu.push({
-        label: i18next.t('main.skipToTheNext'),
-        submenu
-      })
+      trayMenu.push({ type: 'separator' })
     }
   }
 
@@ -1611,51 +1608,43 @@ function getTrayMenuTemplate () {
         updateTray()
       }
     })
-  } else if (!(breakPlanner.dndManager.isOnDnd || breakPlanner.appExclusionsManager.isSchedulerCleared)) {
-    trayMenu.push({
-      label: i18next.t('main.pause'),
-      submenu: [
-        {
-          label: i18next.t('utils.minutes', { count: 30 }),
-          accelerator: settings.get('pauseBreaksFor30MinutesShortcut') || null,
-          click: function () {
-            pauseBreaks(1800 * 1000)
-          }
-        }, {
-          label: i18next.t('main.forHour'),
-          accelerator: settings.get('pauseBreaksFor1HourShortcut') || null,
-          click: function () {
-            pauseBreaks(3600 * 1000)
-          }
-        }, {
-          label: i18next.t('main.for2Hours'),
-          accelerator: settings.get('pauseBreaksFor2HoursShortcut') || null,
-          click: function () {
-            pauseBreaks(3600 * 2 * 1000)
-          }
-        }, {
-          label: i18next.t('main.for5Hours'),
-          accelerator: settings.get('pauseBreaksFor5HoursShortcut') || null,
-          click: function () {
-            pauseBreaks(3600 * 5 * 1000)
-          }
-        }, {
-          label: i18next.t('main.untilMorning'),
-          accelerator: settings.get('pauseBreaksUntilMorningShortcut') || null,
-          click: function () {
-            const untilMorning = new UntilMorning(settings).msToSunrise()
-            pauseBreaks(untilMorning)
-          }
-        }, {
-          type: 'separator'
-        }, {
-          label: i18next.t('main.indefinitely'),
-          click: function () {
-            pauseBreaks(1)
-          }
-        }
-      ]
-    }, {
+  } else if (idle) {
+    const durationShortcuts = {
+      30: 'pauseBreaksFor30MinutesShortcut',
+      60: 'pauseBreaksFor1HourShortcut',
+      120: 'pauseBreaksFor2HoursShortcut',
+      300: 'pauseBreaksFor5HoursShortcut'
+    }
+    for (const minutes of settings.get('pauseDurations')) {
+      const milliseconds = minutes * 60 * 1000
+      trayMenu.push({
+        label: i18next.t('main.pauseFor', {
+          duration: humanizeDuration(milliseconds, {
+            round: true,
+            delimiter: ' ',
+            language: i18next.language.replace('-', '_'),
+            fallbacks: ['en'],
+            units: ['d', 'h', 'm']
+          })
+        }),
+        accelerator: settings.get(durationShortcuts[minutes]) || null,
+        click: () => pauseBreaks(milliseconds)
+      })
+    }
+    if (settings.get('pauseUntilMorningOption')) {
+      trayMenu.push({
+        label: i18next.t('main.pauseUntilMorning'),
+        accelerator: settings.get('pauseBreaksUntilMorningShortcut') || null,
+        click: () => pauseBreaks(new UntilMorning(settings).msToSunrise())
+      })
+    }
+    if (settings.get('pauseIndefinitelyOption')) {
+      trayMenu.push({
+        label: i18next.t('main.pauseIndefinitely'),
+        click: () => pauseBreaks(1)
+      })
+    }
+    trayMenu.push({ type: 'separator' }, {
       label: i18next.t('main.resetBreaks'),
       click: resetBreaks
     })

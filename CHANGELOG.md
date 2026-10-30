@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Appearance tab: custom color picker, opacity slider, break window position (corner of the screen), size and always on top for standalone windows; `breakWindowAlwaysOnTop` is on by default
 - option to show a 10-second popup when idle time resets the break timer, with a button to undo the reset
 - global keyboard shortcuts for pausing, resetting and jumping to a break can be set in Preferences
+- tray menu lists Mini/Long break start and pause options directly instead of in submenus; pause durations are editable in Preferences (`pauseDurations`)
 - "Minutes to break (number only)" tray icon style, without the Stretchly logo
 
 ### Fixed

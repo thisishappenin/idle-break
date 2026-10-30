@@ -223,6 +223,7 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `trayIconStyle` - icon style for menubar: default, time to break, progress to break, or minutes to break as number only (`text`)
 - `breakWindowAlwaysOnTop` - keep windowed breaks on top of other windows
 - `naturalBreaksResetNotification` - show a 10-second popup when idle time resets the break timer, with a button to undo the reset
+- `pauseDurations` - minutes shown as pause options in the tray menu, `pauseUntilMorningOption`, `pauseIndefinitelyOption` - show those extra pause items
 - `monitorMeetings` - on Windows, wait for meetings (microphone in use) to end before showing breaks
 - `breakWindowPosition`, `breakWindowMargin` - with `showBreaksAsRegularWindows`, place break windows in a screen corner
 - `silentNotifications` - enable sounds

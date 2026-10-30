@@ -1,6 +1,7 @@
 import VersionChecker from './utils/versionChecker.js'
 import { setSameWidths } from './utils/sameWidths.js'
 import acceleratorFromEvent from './utils/acceleratorFromEvent.js'
+import { parsePauseDurations, formatPauseDurations } from './utils/pauseDurations.js'
 import HtmlTranslate from './utils/htmlTranslate.js'
 
 import './platform.js'
@@ -238,7 +239,17 @@ window.onload = async (e) => {
     }
   }
 
-  document.querySelectorAll('.shortcut-input').forEach(input => {
+  const pauseDurations = document.querySelector('#pauseDurations')
+  pauseDurations.value = formatPauseDurations(settings.pauseDurations)
+  if (!eventsAttached) {
+    pauseDurations.onchange = () => {
+      const minutes = parsePauseDurations(pauseDurations.value)
+      pauseDurations.value = formatPauseDurations(minutes)
+      window.settings.saveSettings('pauseDurations', minutes)
+    }
+  }
+
+  document.querySelectorAll('.shortcut-input[readonly]').forEach(input => {
     input.value = settings[input.name]
     if (!eventsAttached) {
       input.onkeydown = (event) => {

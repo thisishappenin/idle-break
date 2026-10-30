@@ -223,6 +223,13 @@ window.onload = async (e) => {
     }
   }
 
+  document.querySelector('#breakWindowPosition').value = settings.breakWindowPosition
+  if (!eventsAttached) {
+    document.querySelector('#breakWindowPosition').onchange = (event) => {
+      window.settings.saveSettings('breakWindowPosition', event.target.value)
+    }
+  }
+
   document.querySelectorAll('input[type="range"]').forEach(async range => {
     const divisor = range.dataset.divisor
     const output = range.closest('div').querySelector('output')

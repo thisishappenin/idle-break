@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - CLI command and shortcut to start the last break again
 - `breakWindowPosition` (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) and `breakWindowMargin` advanced preferences to place windowed breaks in a corner of the screen
 - option to wait for meetings to end before showing breaks (Windows, detects microphone use); the break timer keeps counting and idle reset is paused during the meeting
-- `breakWindowAlwaysOnTop` advanced preference (default on) keeps windowed breaks above other windows
+- break window preferences (small window, screen corner, always on top) in the Appearance tab; `breakWindowAlwaysOnTop` is on by default
 - option to show a 10-second popup when idle time resets the break timer, with a button to undo the reset
 - "Minutes to break (number only)" tray icon style, without the Stretchly logo
 

@@ -135,3 +135,55 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
   position: absolute;
   right: 12px;
 }
+
+.breaks > :nth-child(2) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  justify-content: center;
+}
+
+@media (max-height: 320px), (max-width: 480px) {
+  .breaks {
+    grid-template: 72vh 24vh / 12px auto 12px;
+  }
+
+  .breaks > :nth-child(1) > .microbreak-idea,
+  .breaks > :nth-child(1) > .break-idea {
+    font-size: 17px;
+    letter-spacing: 0;
+    line-height: 22px;
+  }
+
+  .breaks > :nth-child(1) > .break-text {
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: 8px;
+  }
+
+  .breaks > :nth-child(1) > progress {
+    margin-top: 10px;
+  }
+
+  #progress-time {
+    font-size: 12px;
+    padding-top: 4px;
+  }
+
+  .breaks > :nth-child(2) {
+    font-size: 14px;
+    gap: 4px 20px;
+    line-height: 16px;
+  }
+
+  .breaks > :nth-child(2) > a img {
+    height: 14px;
+    padding-left: 6px;
+    width: 14px;
+  }
+
+  body[dir=rtl] .breaks > :nth-child(2) > a img {
+    padding-left: 0;
+    padding-right: 6px;
+  }
+}

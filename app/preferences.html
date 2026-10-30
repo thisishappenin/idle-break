@@ -345,6 +345,11 @@
       <input type="range" min="1" max="50" step="1" name="microbreakPostponesLimit" data-divisor="1" id="miniPostponesLimit">
       <output data-unit="none"></output>
     </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.schedule.miniPostponableFor" data-i18next-single="preferences.schedule.singlePostponableFor" for="miniPostponableFor"></label>
+      <input type="range" min="10" max="100" step="10" name="microbreakPostponableDurationPercent" data-divisor="1" id="miniPostponableFor">
+      <output data-unit="percent"></output>
+    </div>
     <div data-multi-only class="slider-row">
       <label data-i18next="preferences.schedule.longPostponeTime" for="longPostponeTime"></label>
       <input type="range" min="1" max="30" step="1" name="breakPostponeTime" data-divisor="60000" id="longPostponeTime">
@@ -354,6 +359,15 @@
       <label data-i18next="preferences.schedule.longPostponesLimit" for="longPostponesLimit"></label>
       <input type="range" min="1" max="10" step="1" name="breakPostponesLimit" data-divisor="1" id="longPostponesLimit">
       <output data-unit="none"></output>
+    </div>
+    <div class="slider-row" data-multi-only>
+      <label data-i18next="preferences.schedule.longPostponableFor" for="longPostponableFor"></label>
+      <input type="range" min="10" max="100" step="10" name="breakPostponableDurationPercent" data-divisor="1" id="longPostponableFor">
+      <output data-unit="percent"></output>
+    </div>
+    <div>
+      <input type="checkbox" value="alwaysShowSkip" id="alwaysShowSkip">
+      <label data-i18next="preferences.schedule.alwaysShowSkip" for="alwaysShowSkip"></label>
     </div>
   </div>
   <div class="theme hidden">

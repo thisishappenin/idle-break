@@ -6,7 +6,7 @@ import './platform.js'
 
 window.onload = async (event) => {
   const [idea, started, duration, strictMode, postpone,
-    postponePercent, backgroundColor, danger, breakHealthMode] = await window.breaks.sendBreakData()
+    postponePercent, backgroundColor, danger, breakHealthMode, alwaysSkip] = await window.breaks.sendBreakData()
 
   document.ondragover = event =>
     event.preventDefault()
@@ -100,7 +100,7 @@ window.onload = async (event) => {
         } else {
           postponeElement.classList.add('hidden')
         }
-        if (window.utils.canSkip(strictMode, postpone, passedPercent, postponePercent)) {
+        if (window.utils.canSkip(strictMode, postpone, passedPercent, postponePercent, alwaysSkip)) {
           closeElement.classList.remove('hidden')
         } else {
           closeElement.classList.add('hidden')
@@ -141,7 +141,7 @@ window.onload = async (event) => {
   window.breaks.onSkipRequest(() => {
     const passed = Date.now() - started
     if (!manualAwaiting && passed < duration &&
-        window.utils.canSkip(strictMode, postpone, passed / duration * 100, postponePercent)) {
+        window.utils.canSkip(strictMode, postpone, passed / duration * 100, postponePercent, alwaysSkip)) {
       skipFromCLI()
     } else {
       __electronLog.info('Stretchly: cannot skip break (source: cli): skipping is not allowed right now')

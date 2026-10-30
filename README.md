@@ -231,6 +231,7 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `microbreakPostponeTime`, `breakPostponeTime` - postpone time (ms), `microbreakPostponesLimit`, `breakPostponesLimit` - postpones allowed per break
 - `naturalBreaksInactivityResetTime` - idle time before the break timer resets (ms)
 - `pauseForSuspendOrLock` - pause breaks while the computer is locked or asleep
+- `alwaysShowSkip` - show Skip next to Postpone during breaks (instead of only after the postpone window), `microbreakPostponableDurationPercent`, `breakPostponableDurationPercent` - how much of the break Postpone stays available
 - `volume` - volume of break sounds
 - `themeSource` - app theme, `trayIconThemeSource` - tray icon light/dark variant
 - `silentNotifications` - enable sounds

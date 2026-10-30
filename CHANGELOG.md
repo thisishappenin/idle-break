@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Break windows can show Postpone and Skip together (on by default), Postpone availability is adjustable in Preferences, and small break popups use a compact layout
 - "Just breaks" option on the Schedule tab to use a single break type instead of Mini and Long breaks
 - Preferences now include postpone time and limits, volume, app theme, tray icon colors, the delay after a call ends, apps that never count as calls, and pausing while locked
 - Meeting detection restarts if its background watcher stops, instead of leaving breaks deferred

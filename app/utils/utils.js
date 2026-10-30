@@ -54,8 +54,9 @@ function canPostpone (postpone, passedPercent, postponePercent) {
 }
 
 // does not consider `postponesLimit`
-function canSkip (strictMode, postpone, passedPercent, postponePercent) {
-  return !((postpone && passedPercent <= postponePercent) || strictMode)
+function canSkip (strictMode, postpone, passedPercent, postponePercent, alwaysSkip = false) {
+  if (strictMode) return false
+  return alwaysSkip || !(postpone && passedPercent <= postponePercent)
 }
 
 function formatKeyboardShortcut (keyboardShortcut) {

@@ -128,6 +128,16 @@ describe('Others', () => {
     })
   })
 
+  describe('canSkip with alwaysSkip', () => {
+    it('allows skipping while postponing is still possible', () => {
+      canSkip(false, true, 20, 30, true).should.equal(true)
+    })
+
+    it('still respects strict mode', () => {
+      canSkip(true, true, 20, 30, true).should.equal(false)
+    })
+  })
+
   describe('canPostpone', () => {
     // postpone, passedPercent, postponePercent
     it('is true when postpone and before postpone percent', () => {

@@ -940,7 +940,7 @@ function startMicrobreak () {
         }
         if (canPostpone(postponable, passedPercent, postponableDurationPercent)) {
           postponeMicrobreak()
-        } else if (canSkip(strictMode, postponable, passedPercent, postponableDurationPercent)) {
+        } else if (canSkip(strictMode, postponable, passedPercent, postponableDurationPercent, settings.get('alwaysShowSkip'))) {
           increaseDanger(1)
           finishMicrobreak(false)
         }
@@ -948,7 +948,7 @@ function startMicrobreak () {
     }
     return [idea, startTime, breakDuration, strictMode,
       postponable, postponableDurationPercent,
-      calculateBackgroundColor(settings.get('miniBreakColor')), danger, settings.get('breakHealthMode')]
+      calculateBackgroundColor(settings.get('miniBreakColor')), danger, settings.get('breakHealthMode'), settings.get('alwaysShowSkip')]
   })
 
   const contentDisplayId = displayManager.getContentDisplayId()
@@ -1110,7 +1110,7 @@ function startBreak () {
         }
         if (canPostpone(postponable, passedPercent, postponableDurationPercent)) {
           postponeBreak()
-        } else if (canSkip(strictMode, postponable, passedPercent, postponableDurationPercent)) {
+        } else if (canSkip(strictMode, postponable, passedPercent, postponableDurationPercent, settings.get('alwaysShowSkip'))) {
           increaseDanger(2)
           finishBreak(false)
         }
@@ -1118,7 +1118,7 @@ function startBreak () {
     }
     return [idea, startTime, breakDuration, strictMode,
       postponable, postponableDurationPercent,
-      calculateBackgroundColor(settings.get('mainColor')), danger, settings.get('breakHealthMode')]
+      calculateBackgroundColor(settings.get('mainColor')), danger, settings.get('breakHealthMode'), settings.get('alwaysShowSkip')]
   })
 
   const contentDisplayId = displayManager.getContentDisplayId()

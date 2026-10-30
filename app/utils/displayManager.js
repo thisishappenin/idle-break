@@ -1,6 +1,8 @@
 import { screen } from 'electron'
 import log from 'electron-log/main.js'
 
+const BREAK_WINDOW_CORNERS = ['top-left', 'top-right', 'bottom-left', 'bottom-right']
+
 class DisplayManager {
   constructor (settings) {
     this.settings = settings
@@ -82,6 +84,27 @@ class DisplayManager {
       y: this.getDisplayY(displayID, height, fullscreen),
       width: fullscreen ? this.getDisplayWidth(displayID) : width,
       height: fullscreen ? this.getDisplayHeight(displayID) : height
+    }
+  }
+
+  get usesCornerPosition () {
+    return BREAK_WINDOW_CORNERS.includes(this.settings.get('breakWindowPosition'))
+  }
+
+  getBreakWindowPosition (displayID = -1, { width = 800, height = 600 } = {}) {
+    if (!this.usesCornerPosition) {
+      return {
+        x: this.getDisplayX(displayID, width, false),
+        y: this.getDisplayY(displayID, height, false)
+      }
+    }
+
+    const position = this.settings.get('breakWindowPosition')
+    const margin = this.settings.get('breakWindowMargin') ?? 0
+    const area = this.getTargetDisplay(displayID).workArea
+    return {
+      x: Math.floor(position.endsWith('left') ? area.x + margin : area.x + area.width - width - margin),
+      y: Math.floor(position.startsWith('top') ? area.y + margin : area.y + area.height - height - margin)
     }
   }
 

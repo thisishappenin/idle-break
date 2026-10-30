@@ -31,6 +31,7 @@ import { registerBreakShortcuts } from './utils/breakShortcuts.js'
 import defaultSettings from './utils/defaultSettings.js'
 import StatusMessages from './utils/statusMessages.js'
 import DisplayManager from './utils/displayManager.js'
+import { readSystemUsesDarkTheme } from './utils/windowsTheme.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -67,8 +68,18 @@ nativeTheme.on('updated', function theThemeHasChanged () {
   if (!gotTheLock || !i18next.isInitialized) {
     return
   }
+  refreshWindowsTheme()
   updateTray()
 })
+
+let windowsUsesDarkTheme = null
+
+async function refreshWindowsTheme () {
+  const usesDark = await readSystemUsesDarkTheme()
+  if (usesDark === null || usesDark === windowsUsesDarkTheme) return
+  windowsUsesDarkTheme = usesDark
+  updateTray()
+}
 
 let microbreakIdeas
 let breakIdeas
@@ -394,9 +405,15 @@ async function initialize (isAppStart = true) {
   if (!breakPlanner) {
     breakPlanner = new BreaksPlanner(settings)
     breakPlanner.nextBreak()
-    breakPlanner.on('startMicrobreakNotification', () => { startMicrobreakNotification() })
-    breakPlanner.on('startBreakNotification', () => { startBreakNotification() })
-    breakPlanner.on('startMicrobreak', () => { startMicrobreak() })
+    breakPlanner.on('startMicrobreakNotification', () => {
+      if (!breakPlanner.deferBreakForMeeting('startMicrobreakNotification')) startMicrobreakNotification()
+    })
+    breakPlanner.on('startBreakNotification', () => {
+      if (!breakPlanner.deferBreakForMeeting('startBreakNotification')) startBreakNotification()
+    })
+    breakPlanner.on('startMicrobreak', () => {
+      if (!breakPlanner.deferBreakForMeeting('startMicrobreak')) startMicrobreak()
+    })
     breakPlanner.on('finishMicrobreak', (shouldPlaySound, shouldPlanNext) => {
       if (settings.get('miniBreakManualFinish')) {
         enterMiniBreakManualContinuation(shouldPlaySound)
@@ -405,7 +422,9 @@ async function initialize (isAppStart = true) {
       decreaseDanger(1)
       finishMicrobreak(shouldPlaySound, shouldPlanNext)
     })
-    breakPlanner.on('startBreak', () => { startBreak() })
+    breakPlanner.on('startBreak', () => {
+      if (!breakPlanner.deferBreakForMeeting('startBreak')) startBreak()
+    })
     breakPlanner.on('finishBreak', (shouldPlaySound, shouldPlanNext) => {
       if (settings.get('longBreakManualFinish')) {
         enterLongBreakManualContinuation(shouldPlaySound)
@@ -422,6 +441,7 @@ async function initialize (isAppStart = true) {
     breakPlanner.clear()
     breakPlanner.appExclusionsManager.reinitialize(settings)
     breakPlanner.doNotDisturb(settings.get('monitorDnd'))
+    breakPlanner.meetings(settings.get('monitorMeetings'))
     breakPlanner.naturalBreaks(settings.get('naturalBreaks'))
     breakPlanner.nextBreak()
   }
@@ -614,7 +634,7 @@ function trayIconUseDarkColors () {
   const source = settings.get('trayIconThemeSource')
   if (source === 'light') return false
   if (source === 'dark') return true
-  if (process.platform === 'win32') return nativeTheme.shouldUseDarkColorsForSystemIntegratedUI
+  if (process.platform === 'win32') return windowsUsesDarkTheme ?? nativeTheme.shouldUseDarkColorsForSystemIntegratedUI
   return nativeTheme.shouldUseDarkColors
 }
 
@@ -811,6 +831,17 @@ function getBlurredBackgroundWindowOptions () {
   }
 }
 
+function placeBreakWindow (win, displayId) {
+  if (win.isDestroyed()) return
+  if (!displayManager.usesCornerPosition) {
+    win.center()
+    return
+  }
+  const [width, height] = win.getSize()
+  const { x, y } = displayManager.getBreakWindowPosition(displayId, { width, height })
+  win.setPosition(x, y)
+}
+
 function startMicrobreak () {
   // don't start another break if break running
   if (microbreakWins) {
@@ -902,8 +933,7 @@ function startMicrobreak () {
       windowOptions.x = displayManager.getDisplayX(localDisplayId, 0, true)
       windowOptions.y = displayManager.getDisplayY(localDisplayId, 0, true)
     } else if (!(settings.get('fullscreen') && process.platform === 'win32')) {
-      windowOptions.x = displayManager.getDisplayX(localDisplayId, windowOptions.width, false)
-      windowOptions.y = displayManager.getDisplayY(localDisplayId, windowOptions.height, false)
+      Object.assign(windowOptions, displayManager.getBreakWindowPosition(localDisplayId, windowOptions))
     }
 
     let microbreakWinLocal = new BrowserWindow(windowOptions)
@@ -940,7 +970,7 @@ function startMicrobreak () {
       }
       if (!settings.get('fullscreen') && process.platform !== 'darwin') {
         setTimeout(() => {
-          microbreakWinLocal.center()
+          placeBreakWindow(microbreakWinLocal, localDisplayId)
         }, 0)
       }
       updateTray()
@@ -1072,8 +1102,7 @@ function startBreak () {
       windowOptions.x = displayManager.getDisplayX(localDisplayId, 0, true)
       windowOptions.y = displayManager.getDisplayY(localDisplayId, 0, true)
     } else if (!(settings.get('fullscreen') && process.platform === 'win32')) {
-      windowOptions.x = displayManager.getDisplayX(localDisplayId, windowOptions.width, false)
-      windowOptions.y = displayManager.getDisplayY(localDisplayId, windowOptions.height, false)
+      Object.assign(windowOptions, displayManager.getBreakWindowPosition(localDisplayId, windowOptions))
     }
 
     let breakWinLocal = new BrowserWindow(windowOptions)
@@ -1111,7 +1140,7 @@ function startBreak () {
 
       if (!settings.get('fullscreen') && process.platform !== 'darwin') {
         setTimeout(() => {
-          breakWinLocal.center()
+          placeBreakWindow(breakWinLocal, localDisplayId)
         }, 0)
       }
       updateTray()
@@ -1414,6 +1443,8 @@ function createPreferencesWindow () {
 }
 
 function updateTray () {
+  if (process.platform === 'win32') refreshWindowsTheme()
+
   if (process.platform === 'darwin') {
     if (app.dock.isVisible) {
       app.dock.hide()
@@ -1675,6 +1706,10 @@ ipcMain.on('save-setting', function (event, key, value) {
 
   if (key === 'monitorDnd') {
     breakPlanner.doNotDisturb(value)
+  }
+
+  if (key === 'monitorMeetings') {
+    breakPlanner.meetings(value)
   }
 
   if (key === 'language') {

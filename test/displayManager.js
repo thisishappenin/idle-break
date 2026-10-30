@@ -6,11 +6,11 @@ import DisplayManager from '../app/utils/displayManager.js'
 vi.mock('electron', () => {
   const mockScreen = {
     getAllDisplays: vi.fn(() => [
-      { id: 0, bounds: { x: 0, y: 0, width: 1920, height: 1080 } },
-      { id: 1, bounds: { x: 1920, y: 0, width: 1440, height: 900 } }
+      { id: 0, bounds: { x: 0, y: 0, width: 1920, height: 1080 }, workArea: { x: 0, y: 0, width: 1920, height: 1040 } },
+      { id: 1, bounds: { x: 1920, y: 0, width: 1440, height: 900 }, workArea: { x: 1920, y: 0, width: 1440, height: 900 } }
     ]),
-    getPrimaryDisplay: vi.fn(() => ({ id: 0, bounds: { x: 0, y: 0, width: 1920, height: 1080 } })),
-    getDisplayNearestPoint: vi.fn(() => ({ id: 0, bounds: { x: 0, y: 0, width: 1920, height: 1080 } })),
+    getPrimaryDisplay: vi.fn(() => ({ id: 0, bounds: { x: 0, y: 0, width: 1920, height: 1080 }, workArea: { x: 0, y: 0, width: 1920, height: 1040 } })),
+    getDisplayNearestPoint: vi.fn(() => ({ id: 0, bounds: { x: 0, y: 0, width: 1920, height: 1080 }, workArea: { x: 0, y: 0, width: 1920, height: 1040 } })),
     getCursorScreenPoint: vi.fn(() => ({ x: 960, y: 540 }))
   }
   return { screen: mockScreen }
@@ -297,6 +297,61 @@ describe('DisplayManager', function () {
         return null
       })
       displayManager.getContentDisplayId().should.equal(-1)
+    })
+  })
+
+  describe('getBreakWindowPosition', function () {
+    const size = { width: 400, height: 200 }
+
+    function withSettings (values) {
+      mockSettings.get.mockImplementation((key) => {
+        if (key === 'allScreens') return true
+        return key in values ? values[key] : null
+      })
+      displayManager = new DisplayManager(mockSettings)
+    }
+
+    it('centers the window when the position is center', function () {
+      withSettings({ breakWindowPosition: 'center' })
+      displayManager.getBreakWindowPosition(0, size).should.deep.equal({ x: 760, y: 440 })
+      displayManager.usesCornerPosition.should.equal(false)
+    })
+
+    it('centers the window when the position is unknown', function () {
+      withSettings({ breakWindowPosition: 'nonsense' })
+      displayManager.getBreakWindowPosition(0, size).should.deep.equal({ x: 760, y: 440 })
+      displayManager.usesCornerPosition.should.equal(false)
+    })
+
+    it('places the window in the bottom left corner above the taskbar', function () {
+      withSettings({ breakWindowPosition: 'bottom-left', breakWindowMargin: 16 })
+      displayManager.getBreakWindowPosition(0, size).should.deep.equal({ x: 16, y: 1040 - 200 - 16 })
+      displayManager.usesCornerPosition.should.equal(true)
+    })
+
+    it('places the window in the bottom right corner', function () {
+      withSettings({ breakWindowPosition: 'bottom-right', breakWindowMargin: 16 })
+      displayManager.getBreakWindowPosition(0, size).should.deep.equal({ x: 1920 - 400 - 16, y: 1040 - 200 - 16 })
+    })
+
+    it('places the window in the top left corner', function () {
+      withSettings({ breakWindowPosition: 'top-left', breakWindowMargin: 16 })
+      displayManager.getBreakWindowPosition(0, size).should.deep.equal({ x: 16, y: 16 })
+    })
+
+    it('places the window in the top right corner', function () {
+      withSettings({ breakWindowPosition: 'top-right', breakWindowMargin: 16 })
+      displayManager.getBreakWindowPosition(0, size).should.deep.equal({ x: 1920 - 400 - 16, y: 16 })
+    })
+
+    it('offsets a corner by the origin of a secondary display', function () {
+      withSettings({ breakWindowPosition: 'bottom-left', breakWindowMargin: 10 })
+      displayManager.getBreakWindowPosition(1, size).should.deep.equal({ x: 1930, y: 900 - 200 - 10 })
+    })
+
+    it('uses no margin when the setting is missing', function () {
+      withSettings({ breakWindowPosition: 'top-left' })
+      displayManager.getBreakWindowPosition(0, size).should.deep.equal({ x: 0, y: 0 })
     })
   })
 })

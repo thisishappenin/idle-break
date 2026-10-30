@@ -12,12 +12,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `currentTimeInBreaksFormat` advanced preference to set the format of current time in breaks, e.g. to show date and weekday
 - `currentTimeInBreaksFontSize` advanced preference to change the clock's font size in breaks
 - CLI command and shortcut to start the last break again
+- `breakWindowPosition` (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) and `breakWindowMargin` advanced preferences to place windowed breaks in a corner of the screen
+- option to wait for meetings to end before showing breaks (Windows, detects microphone use); the break timer keeps counting and idle reset is paused during the meeting
+- "Minutes to break (number only)" tray icon style, without the Stretchly logo
 
 ### Fixed
 - fix debug file and folder links when paths contain HTML special characters
 - fix custom break images when the user data path contains URL special characters
 - fix snap startup crash
 - improve Linux desktop integration
+- Windows tray icon follows light/dark taskbar changes immediately
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed

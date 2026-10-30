@@ -220,7 +220,9 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `allScreens` - show breaks on all screens
 - `language` - language
 - `useMonochromeTrayIcon` - use monochrome icon
-- `trayIconStyle` - icon style for menubar: default, time to break, or progress to break
+- `trayIconStyle` - icon style for menubar: default, time to break, progress to break, or minutes to break as number only (`text`)
+- `monitorMeetings` - on Windows, wait for meetings (microphone in use) to end before showing breaks
+- `breakWindowPosition`, `breakWindowMargin` - with `showBreaksAsRegularWindows`, place break windows in a screen corner
 - `silentNotifications` - enable sounds
 - `monitorDnd` - monitor DND mode
 - `checkNewVersion` - check for new versions
@@ -309,6 +311,9 @@ To have different theme for Mini breaks, set `miniBreakColor` to desired value, 
 In the preferences file, set `naturalBreaksInactivityResetTime` to your preferred value (in milliseconds greater than than 20000ms). This is an idle time length, after which *Stretchly* breaks will be paused until the user resumes activity.
 
 You can also set `naturalBreaksCheckInterval` in milliseconds: how often idle time is checked. A higher number means lower CPU and energy usage, but slightly less responsive detection. Default value is `2000` which is 2 seconds.
+
+#### Meetings
+On Windows, set `monitorMeetings` to `true` to detect meetings by checking whether any app is using the microphone. While a meeting is running, the break timer keeps counting down but the break itself waits until the meeting ends, and idle detection does not reset the timer. `monitorMeetingsCheckInterval` (default `5000` milliseconds) sets how often this is checked. Other platforms are not supported yet.
 
 #### Do Not Disturb check interval
 In the preferences file, set `monitorDndCheckInterval` in milliseconds: how often Do Not Disturb status is checked. A higher number means lower CPU and energy usage, but slightly less responsive detection. On macOS and Linux this check can be relatively expensive, so increasing it can noticeably lower energy usage. Default value is `2000` which is 2 seconds.

@@ -1456,4 +1456,25 @@ describe('appIcon', function () {
     const appIcon = new AppIcon(params)
     appIcon.trayIconFileName.should.equal('tray.png')
   })
+  const textParams = { paused: false, monochrome: false, inverted: false, darkMode: false, platform: 'win32', trayIconStyle: 'text', timeToBreak: 25, reference: 'startMicrobreak' }
+
+  it('trayIconFileName uses the text-only icon on Windows in light mode', function () {
+    new AppIcon(textParams).trayIconFileName.should.equal('trayTextNumber25.ico')
+  })
+
+  it('trayIconFileName uses the light text icon in dark mode', function () {
+    new AppIcon({ ...textParams, darkMode: true }).trayIconFileName.should.equal('trayTextDarkNumber25.ico')
+  })
+
+  it('trayIconFileName uses a template icon for text style on macOS', function () {
+    new AppIcon({ ...textParams, platform: 'darwin' }).trayIconFileName.should.equal('trayMacTextNumber25Template.png')
+  })
+
+  it('trayIconFileName falls back to the regular icon when paused with text style', function () {
+    new AppIcon({ ...textParams, paused: true }).trayIconFileName.should.equal('trayPaused.ico')
+  })
+
+  it('trayIconFileName falls back to the regular icon during a break with text style', function () {
+    new AppIcon({ ...textParams, reference: 'finishBreak' }).trayIconFileName.should.equal('tray.ico')
+  })
 })

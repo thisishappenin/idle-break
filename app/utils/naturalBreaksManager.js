@@ -12,6 +12,7 @@ class NaturalBreaksManager extends EventEmitter {
     this.timer = null
     this.isOnNaturalBreak = false
     this.isSchedulerCleared = false
+    this.isSuspended = false
     if (this.usingNaturalBreaks) {
       this.start()
     }
@@ -47,6 +48,10 @@ class NaturalBreaksManager extends EventEmitter {
   _checkIdleTime () {
     let lastIdleTime = 0
     this.timer = setInterval(() => {
+      if (this.isSuspended) {
+        lastIdleTime = 0
+        return
+      }
       const idleTime = this.idleTime
       if (!this.isOnNaturalBreak && idleTime > 20000) {
         this.isOnNaturalBreak = true

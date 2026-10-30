@@ -3,6 +3,7 @@ import EventEmitter from 'events'
 import NaturalBreaksManager from './utils/naturalBreaksManager.js'
 import DndManager from './utils/dndManager.js'
 import AppExclusionsManager from './utils/appExclusionsManager.js'
+import MeetingManager from './utils/meetingManager.js'
 import log from 'electron-log/main.js'
 
 class BreaksPlanner extends EventEmitter {
@@ -17,6 +18,8 @@ class BreaksPlanner extends EventEmitter {
     this.naturalBreaksManager = new NaturalBreaksManager(settings)
     this.dndManager = new DndManager(settings)
     this.appExclusionsManager = new AppExclusionsManager(settings)
+    this.meetingManager = new MeetingManager(settings)
+    this.deferredBreakEvent = null
 
     this.on('microbreakStarted', (shouldPlaySound) => {
       const interval = this.settings.get('microbreakDuration')
@@ -43,6 +46,19 @@ class BreaksPlanner extends EventEmitter {
         log.info('Stretchly: resuming breaks after idle time')
         this.emit('updateToolTip')
       }
+    })
+
+    this.meetingManager.on('meetingStarted', () => {
+      this.naturalBreaksManager.isSuspended = true
+      log.info('Stretchly: meeting started, breaks will wait until it ends')
+    })
+
+    this.meetingManager.on('meetingFinished', () => {
+      this.naturalBreaksManager.isSuspended = false
+      log.info('Stretchly: meeting finished')
+      const eventName = this.deferredBreakEvent
+      this.deferredBreakEvent = null
+      if (eventName && !this.isPaused) this.emit(eventName)
     })
 
     this.dndManager.on('dndStarted', () => {
@@ -112,6 +128,7 @@ class BreaksPlanner extends EventEmitter {
 
   nextBreak () {
     this.postponesNumber = 0
+    this.deferredBreakEvent = null
     if (this.scheduler) this.scheduler.cancel()
     const shouldBreak = this.settings.get('break')
     const shouldMicrobreak = this.settings.get('microbreak')
@@ -179,6 +196,24 @@ class BreaksPlanner extends EventEmitter {
     this.emit('updateToolTip')
   }
 
+  deferBreakForMeeting (eventName) {
+    if (!this.meetingManager.isInMeeting) return false
+    this.deferredBreakEvent = eventName.replace('Notification', '')
+    log.info(`Stretchly: deferring ${this.deferredBreakEvent} until the meeting ends`)
+    this.emit('updateToolTip')
+    return true
+  }
+
+  meetings (shouldUse) {
+    if (shouldUse) {
+      this.meetingManager.start()
+    } else {
+      this.meetingManager.stop()
+      this.naturalBreaksManager.isSuspended = false
+      this.deferredBreakEvent = null
+    }
+  }
+
   skipToMicrobreak (delay = 100) {
     this.scheduler.cancel()
     const shouldBreak = this.settings.get('break')
@@ -209,6 +244,7 @@ class BreaksPlanner extends EventEmitter {
 
   clear () {
     this.scheduler.cancel()
+    this.deferredBreakEvent = null
     this.breakNumber = 0
     this.postponesNumber = 0
   }
@@ -220,6 +256,7 @@ class BreaksPlanner extends EventEmitter {
     this.naturalBreaksManager.stop()
     this.dndManager.stop()
     this.appExclusionsManager.stop()
+    this.meetingManager.stop()
     if (milliseconds !== 1) {
       this.scheduler = new Scheduler(() => this.emit('resumeBreaks'), milliseconds, 'resumeBreaks')
       this.scheduler.plan()
@@ -235,6 +272,7 @@ class BreaksPlanner extends EventEmitter {
       this.pollersSuspended = false
       if (this.settings.get('naturalBreaks')) this.naturalBreaksManager.start()
       if (this.settings.get('monitorDnd')) this.dndManager.start()
+      if (this.settings.get('monitorMeetings')) this.meetingManager.start()
       this.appExclusionsManager.reinitialize(this.settings)
     }
   }
@@ -285,7 +323,7 @@ class BreaksPlanner extends EventEmitter {
   get timeToNextBreak () {
     if (!this.scheduler) return null
     if (this.scheduler.reference === 'startMicrobreak' || this.scheduler.reference === 'startBreak') {
-      return this.scheduler.timeLeft
+      return Math.max(0, this.scheduler.timeLeft)
     }
     if (this.scheduler.reference === 'startBreakNotification') {
       return this.scheduler.timeLeft + (this.settings.get('breakNotification')

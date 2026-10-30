@@ -30,9 +30,15 @@ class AppIcon {
     if (!(this.paused || this.reference === 'finishMicrobreak' || this.reference === 'finishBreak')) {
       if (this.trayIconStyle === 'progress' && Number.isInteger(this.percentage) && this.percentage >= 0 && this.percentage <= 100) {
         suffixString = `Progress${this.percentage}`
-      } else if (this.trayIconStyle === 'time' && Number.isInteger(this.timeToBreak) && this.timeToBreak >= 0 && this.timeToBreak <= 99) {
+      } else if ((this.trayIconStyle === 'time' || this.trayIconStyle === 'text') && Number.isInteger(this.timeToBreak) && this.timeToBreak >= 0 && this.timeToBreak <= 99) {
         suffixString = `Number${this.timeToBreak}`
       }
+    }
+
+    if (this.trayIconStyle === 'text' && suffixString !== '') {
+      const extString = this.platform === 'win32' ? 'ico' : 'png'
+      if (this.platform === 'darwin') return `trayMacText${suffixString}Template.png`
+      return `trayText${darkModeString}${suffixString}.${extString}`
     }
 
     if (this.monochrome) {

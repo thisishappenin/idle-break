@@ -1,5 +1,6 @@
 import VersionChecker from './utils/versionChecker.js'
 import { setSameWidths } from './utils/sameWidths.js'
+import acceleratorFromEvent from './utils/acceleratorFromEvent.js'
 import HtmlTranslate from './utils/htmlTranslate.js'
 
 import './platform.js'
@@ -236,6 +237,25 @@ window.onload = async (e) => {
       window.settings.saveSettings('trayIconStyle', event.target.value)
     }
   }
+
+  document.querySelectorAll('.shortcut-input').forEach(input => {
+    input.value = settings[input.name]
+    if (!eventsAttached) {
+      input.onkeydown = (event) => {
+        event.preventDefault()
+        if (event.key === 'Backspace' || event.key === 'Delete') {
+          input.value = ''
+          window.settings.saveSettings(input.name, '')
+          return
+        }
+        const accelerator = acceleratorFromEvent(event)
+        if (accelerator) {
+          input.value = accelerator
+          window.settings.saveSettings(input.name, accelerator)
+        }
+      }
+    }
+  })
 
   document.querySelector('#breakWindowPosition').value = settings.breakWindowPosition
   if (!eventsAttached) {

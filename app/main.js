@@ -27,7 +27,7 @@ import AppIcon from './utils/appIcon.js'
 import { UntilMorning } from './utils/untilMorning.js'
 import AutostartManager from './utils/autostartManager.js'
 import Command from './utils/commands.js'
-import { registerBreakShortcuts } from './utils/breakShortcuts.js'
+import { registerBreakShortcuts, setupBreak, shortcuts as breakShortcuts } from './utils/breakShortcuts.js'
 import defaultSettings from './utils/defaultSettings.js'
 import StatusMessages from './utils/statusMessages.js'
 import DisplayManager from './utils/displayManager.js'
@@ -543,10 +543,14 @@ async function initialize (isAppStart = true) {
     log,
     globalShortcut,
     breakPlanner,
-    functions: { pauseBreaks, resumeBreaks, skipToBreak, skipToMicrobreak, resetBreaks, startLastBreakAgain }
+    functions: shortcutFunctions()
   })
 
   updateTray()
+}
+
+function shortcutFunctions () {
+  return { pauseBreaks, resumeBreaks, skipToBreak, skipToMicrobreak, resetBreaks, startLastBreakAgain }
 }
 
 function startI18next () {
@@ -1796,7 +1800,24 @@ ipcMain.on('save-setting', function (event, key, value) {
     log.info('Stretchly: danger reset after disabling breakHealthMode')
   }
 
+  const isBreakShortcut = Object.hasOwn(breakShortcuts, key)
+  if (isBreakShortcut && settings.get(key)) {
+    globalShortcut.unregister(settings.get(key))
+  }
+
   settings.set(key, value)
+
+  if (isBreakShortcut && value) {
+    setupBreak({
+      name: key,
+      shortcutText: value,
+      settings,
+      log,
+      globalShortcut,
+      breakPlanner,
+      functions: shortcutFunctions()
+    })
+  }
 
   updateTray()
 })

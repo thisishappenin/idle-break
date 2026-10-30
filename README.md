@@ -340,6 +340,8 @@ If you want breaks to wait for you to finish them manually instead of automatica
 
 Once enabled, the break behaves normally until it reaches 100%, then the window switches to showing elapsed time since the break started. You must press the Finish button or use the `endBreakShortcut` to close the break.
 
+The pause toggle, reset and skip-to-break shortcuts below can also be set from the Settings tab of Preferences: click the box and press the keys. Shortcuts need Ctrl, Cmd or Alt.
+
 #### Toggle breaks shortcut
 
 Toggling between Pause breaks and running breaks.

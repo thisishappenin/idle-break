@@ -52,6 +52,12 @@
       "monitorIdleTime": "Monitor system idle time (breaks are paused if system is idle).",
       "monitorDnd": "Show breaks even in Do Not Disturb mode",
       "naturalBreaksResetNotification": "Show a popup when idle time resets the break timer (with undo)",
+      "shortcuts": "Global keyboard shortcuts (click a box and press the keys; Backspace clears):",
+      "pauseBreaksToggle": "Pause or resume breaks",
+      "resetBreaks": "Reset the break timer",
+      "skipToNextScheduledBreak": "Jump to the next scheduled break",
+      "skipToNextMiniBreak": "Jump to a Mini break",
+      "skipToNextLongBreak": "Jump to a Long break",
       "monitorMeetings": "Wait for meetings to end before showing breaks (Windows, microphone in use)",
       "language": "Select language:",
       "restoreDefaults": "Restore defaults"

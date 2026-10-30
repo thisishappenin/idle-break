@@ -83,6 +83,19 @@ body > div > :last-child {
   margin-right: 32px;
 }
 
+.shortcut {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.shortcut-input {
+  cursor: pointer;
+  text-align: center;
+  width: 180px;
+}
+
 .schedule {
   display: grid;
   font-size: 13px;

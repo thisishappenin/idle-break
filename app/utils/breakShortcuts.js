@@ -96,6 +96,7 @@ function registerBreakShortcuts ({ settings, log, globalShortcut, breakPlanner, 
 }
 
 export {
+  shortcuts,
   calculateInterval,
   onShortcut,
   registerBreakShortcuts,

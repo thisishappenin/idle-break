@@ -26,6 +26,7 @@ export default {
   breakPostponableDurationPercent: 30,
   mainColor: '#478484',
   miniBreakColor: '#478484',
+  customColor: '#808080',
   transparentMode: false,
   blurredBackground: false,
   opacity: 0.9,

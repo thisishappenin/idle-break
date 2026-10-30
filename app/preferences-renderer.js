@@ -189,6 +189,20 @@ window.onload = async (e) => {
     }
   })
 
+  const customColorRadio = document.querySelector('#customColorRadio')
+  const customColorPicker = document.querySelector('#customColor')
+  customColorRadio.value = settings.customColor
+  customColorPicker.value = settings.customColor
+  customColorRadio.nextElementSibling.style.setProperty('--custom-color', settings.customColor)
+  document.documentElement.style.setProperty('--custom-color', settings.customColor)
+  if (!eventsAttached) {
+    customColorRadio.onclick = () => customColorPicker.click()
+    customColorPicker.onchange = (event) => {
+      window.settings.saveSettings('customColor', event.target.value)
+      window.settings.saveSettings('mainColor', event.target.value)
+    }
+  }
+
   document.querySelectorAll('input[type="radio"]').forEach(radio => {
     let value
     switch (radio.value) {
@@ -220,13 +234,6 @@ window.onload = async (e) => {
   if (!eventsAttached) {
     document.querySelector('#trayIconStyle').onchange = (event) => {
       window.settings.saveSettings('trayIconStyle', event.target.value)
-    }
-  }
-
-  document.querySelector('#customColor').value = settings.mainColor
-  if (!eventsAttached) {
-    document.querySelector('#customColor').onchange = (event) => {
-      window.settings.saveSettings('mainColor', event.target.value)
     }
   }
 

@@ -157,10 +157,17 @@ body[dir=rtl] .theme > .theme-label {
   text-align: left;
 }
 
-.custom-color {
-  align-items: center;
-  display: flex;
-  gap: 8px;
+#customColorRadio + label:before {
+  background: var(--custom-color);
+  color: var(--custom-color);
+}
+
+#customColor {
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 0;
 }
 
 .appearance {

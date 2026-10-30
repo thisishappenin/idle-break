@@ -20,14 +20,17 @@ class BreaksPlanner extends EventEmitter {
     this.appExclusionsManager = new AppExclusionsManager(settings)
     this.meetingManager = new MeetingManager(settings)
     this.deferredBreakEvent = null
+    this.idleSnapshot = null
 
     this.on('microbreakStarted', (shouldPlaySound) => {
+      this.idleSnapshot = null
       const interval = this.settings.get('microbreakDuration')
       this.scheduler = new Scheduler(() => this.emit('finishMicrobreak', shouldPlaySound, true), interval, 'finishMicrobreak')
       this.scheduler.plan()
     })
 
     this.on('breakStarted', (shouldPlaySound) => {
+      this.idleSnapshot = null
       const interval = this.settings.get('breakDuration')
       this.scheduler = new Scheduler(() => this.emit('finishBreak', shouldPlaySound, true), interval, 'finishBreak')
       this.scheduler.plan()
@@ -35,6 +38,11 @@ class BreaksPlanner extends EventEmitter {
 
     this.naturalBreaksManager.on('clearBreakScheduler', () => {
       if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak' && this.scheduler.reference !== null) {
+        this.idleSnapshot = {
+          reference: this.scheduler.reference,
+          timeLeft: this.scheduler.timeLeft,
+          breakNumber: this.breakNumber
+        }
         this.clear()
         log.info('Stretchly: pausing breaks because of idle time')
       }
@@ -44,6 +52,7 @@ class BreaksPlanner extends EventEmitter {
       if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak' && !this.dndManager.isOnDnd) {
         this.reset()
         log.info('Stretchly: resuming breaks after idle time')
+        this.emit('idleReset')
         this.emit('updateToolTip')
       }
     })
@@ -193,6 +202,19 @@ class BreaksPlanner extends EventEmitter {
     }
     this.scheduler = new Scheduler(() => this.emit(eventName), postponeTime, eventName)
     this.scheduler.plan()
+    this.emit('updateToolTip')
+  }
+
+  undoIdleReset () {
+    const snapshot = this.idleSnapshot
+    this.idleSnapshot = null
+    if (!snapshot || this.isPaused || !this.scheduler || !snapshot.reference.startsWith('start')) return
+    this.scheduler.cancel()
+    this.breakNumber = snapshot.breakNumber
+    const eventName = snapshot.reference
+    this.scheduler = new Scheduler(() => this.emit(eventName), Math.max(1000, snapshot.timeLeft), eventName)
+    this.scheduler.plan()
+    log.info('Stretchly: restored break timer after ignoring idle reset')
     this.emit('updateToolTip')
   }
 

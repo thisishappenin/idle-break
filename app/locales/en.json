@@ -4,6 +4,8 @@
     "microbreakIn": "Mini break in $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Long break in $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Resuming breaks",
+    "idleReset": "Break timer reset after being away",
+    "undoIdleReset": "Undo reset",
     "downloadLatestVersion": "Download latest version",
     "toBreak": "Long break",
     "toMicrobreak": "Mini break",
@@ -49,6 +51,7 @@
       "allScreens": "Shows breaks on all monitors",
       "monitorIdleTime": "Monitor system idle time (breaks are paused if system is idle).",
       "monitorDnd": "Show breaks even in Do Not Disturb mode",
+      "naturalBreaksResetNotification": "Show a popup when idle time resets the break timer (with undo)",
       "monitorMeetings": "Wait for meetings to end before showing breaks (Windows, microphone in use)",
       "language": "Select language:",
       "restoreDefaults": "Restore defaults"

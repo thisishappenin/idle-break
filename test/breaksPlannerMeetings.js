@@ -71,4 +71,27 @@ describe('breaksPlanner meetings', () => {
     planner.nextBreak()
     expect(planner.deferredBreakEvent).to.equal(null)
   })
+
+  it('announces when idle time resets the break timer', () => {
+    let announced = false
+    planner.on('idleReset', () => { announced = true })
+    planner.naturalBreaksManager.emit('naturalBreakFinished')
+    expect(announced).to.equal(true)
+  })
+
+  it('restores the remaining time when an idle reset is undone', () => {
+    const before = planner.scheduler.timeLeft
+    planner.naturalBreaksManager.emit('clearBreakScheduler')
+    planner.naturalBreaksManager.emit('naturalBreakFinished')
+    expect(planner.scheduler.timeLeft).to.be.closeTo(60000, 1000)
+    planner.undoIdleReset()
+    expect(planner.scheduler.timeLeft).to.be.closeTo(before, 1000)
+    expect(planner.scheduler.reference).to.equal('startMicrobreak')
+  })
+
+  it('does nothing when there is no idle reset to undo', () => {
+    const scheduler = planner.scheduler
+    planner.undoIdleReset()
+    expect(planner.scheduler).to.equal(scheduler)
+  })
 })

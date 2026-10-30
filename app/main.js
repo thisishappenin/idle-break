@@ -84,6 +84,8 @@ async function refreshWindowsTheme () {
 let microbreakIdeas
 let breakIdeas
 let breakPlanner
+let idleResetWin = null
+let idleResetTimer = null
 let appIcon = null
 let autostartManager = null
 let displayManager = null
@@ -434,6 +436,9 @@ async function initialize (isAppStart = true) {
       finishBreak(shouldPlaySound, shouldPlanNext)
     })
     breakPlanner.on('resumeBreaks', () => { resumeBreaks() })
+    breakPlanner.on('idleReset', () => {
+      if (settings.get('naturalBreaksResetNotification')) createIdleResetWindow()
+    })
     breakPlanner.on('updateToolTip', function () {
       updateTray()
     })
@@ -668,6 +673,46 @@ function windowIconPath () {
   return join(__dirname, '/images/app-icons', windowIconFileName)
 }
 
+function closeIdleResetWindow () {
+  clearTimeout(idleResetTimer)
+  if (idleResetWin && !idleResetWin.isDestroyed()) idleResetWin.destroy()
+  idleResetWin = null
+}
+
+function createIdleResetWindow () {
+  closeIdleResetWindow()
+  const size = { width: 320, height: 96 }
+  idleResetWin = new BrowserWindow({
+    ...size,
+    ...displayManager.getBreakWindowPosition(-1, size),
+    frame: false,
+    resizable: false,
+    skipTaskbar: true,
+    focusable: false,
+    alwaysOnTop: true,
+    show: false,
+    webPreferences: {
+      preload: join(__dirname, './idle-reset-preload.mjs'),
+      sandbox: false
+    }
+  })
+  idleResetWin.setAlwaysOnTop(true, 'pop-up-menu')
+  const query = new URLSearchParams({
+    message: i18next.t('main.idleReset'),
+    undo: i18next.t('main.undoIdleReset')
+  })
+  idleResetWin.loadURL('file://' + join(__dirname, '/idle-reset.html') + '?' + query)
+  idleResetWin.once('ready-to-show', () => idleResetWin.showInactive())
+  idleResetTimer = setTimeout(closeIdleResetWindow, 10000)
+}
+
+ipcMain.on('undo-idle-reset', () => {
+  breakPlanner.undoIdleReset()
+  closeIdleResetWindow()
+})
+
+ipcMain.on('dismiss-idle-reset', closeIdleResetWindow)
+
 function startProcessWin () {
   if (processWin) {
     planVersionCheck()
@@ -856,6 +901,7 @@ function startMicrobreak () {
   const postponable = settings.get('microbreakPostpone') &&
     breakPlanner.postponesNumber < postponesLimit && postponesLimit > 0
   const showBreaksAsRegularWindows = settings.get('showBreaksAsRegularWindows')
+  const keepOnTop = !showBreaksAsRegularWindows || settings.get('breakWindowAlwaysOnTop')
 
   const modalPath = 'file://' + join(__dirname, '/microbreak.html')
   microbreakWins = []
@@ -916,7 +962,7 @@ function startMicrobreak () {
       backgroundColor: calculateBackgroundColor(settings.get('miniBreakColor')),
       skipTaskbar: !showBreaksAsRegularWindows,
       focusable: showBreaksAsRegularWindows,
-      alwaysOnTop: !showBreaksAsRegularWindows,
+      alwaysOnTop: keepOnTop,
       hasShadow: false,
       title: 'Stretchly',
       titleBarStyle: process.platform === 'darwin' ? (showBreaksAsRegularWindows ? 'default' : 'hidden') : undefined,
@@ -982,7 +1028,7 @@ function startMicrobreak () {
     if (!(process.platform === 'darwin' && !showBreaksAsRegularWindows && settings.get('fullscreen'))) {
       microbreakWinLocal.setVisibleOnAllWorkspaces(true)
     }
-    microbreakWinLocal.setAlwaysOnTop(!showBreaksAsRegularWindows, 'pop-up-menu')
+    microbreakWinLocal.setAlwaysOnTop(keepOnTop, 'pop-up-menu')
     if (microbreakWinLocal) {
       microbreakWinLocal.on('close', (e) => {
         if (breakPlanner.scheduler.timeLeft > 0 && settings.get('microbreakStrictMode')) {
@@ -1024,6 +1070,7 @@ function startBreak () {
   const postponable = settings.get('breakPostpone') &&
     breakPlanner.postponesNumber < postponesLimit && postponesLimit > 0
   const showBreaksAsRegularWindows = settings.get('showBreaksAsRegularWindows')
+  const keepOnTop = !showBreaksAsRegularWindows || settings.get('breakWindowAlwaysOnTop')
 
   const modalPath = 'file://' + join(__dirname, '/break.html')
   breakWins = []
@@ -1085,7 +1132,7 @@ function startBreak () {
       backgroundColor: calculateBackgroundColor(settings.get('mainColor')),
       skipTaskbar: !showBreaksAsRegularWindows,
       focusable: showBreaksAsRegularWindows,
-      alwaysOnTop: !showBreaksAsRegularWindows,
+      alwaysOnTop: keepOnTop,
       hasShadow: false,
       title: 'Stretchly',
       titleBarStyle: process.platform === 'darwin' ? (showBreaksAsRegularWindows ? 'default' : 'hidden') : undefined,
@@ -1152,7 +1199,7 @@ function startBreak () {
     if (!(process.platform === 'darwin' && !showBreaksAsRegularWindows && settings.get('fullscreen'))) {
       breakWinLocal.setVisibleOnAllWorkspaces(true)
     }
-    breakWinLocal.setAlwaysOnTop(!showBreaksAsRegularWindows, 'pop-up-menu')
+    breakWinLocal.setAlwaysOnTop(keepOnTop, 'pop-up-menu')
     if (breakWinLocal) {
       breakWinLocal.on('close', (e) => {
         if (breakPlanner.scheduler.timeLeft > 0 && settings.get('breakStrictMode')) {

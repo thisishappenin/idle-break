@@ -1,0 +1,5 @@
+const params = new URLSearchParams(window.location.search)
+document.getElementById('message').textContent = params.get('message')
+const undo = document.getElementById('undo')
+undo.textContent = params.get('undo')
+undo.addEventListener('click', () => window.idleReset.undo())

@@ -136,54 +136,190 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
   right: 12px;
 }
 
+/* Refreshed look: system UI type, solid progress, quiet buttons */
+
+.breaks {
+  --surface-ink: #ffffff;
+  font-family: 'Segoe UI Variable Text', 'Segoe UI', 'Noto Sans Light', 'Noto Sans Arabic Light',
+    'Noto Sans CJK KR Light', 'Noto Sans Devanagari Light',
+    'Noto Sans Gujarati Light', 'Noto Sans Gurmukhi Light', 'Noto Sans Hebrew Light', system-ui, sans-serif;
+}
+
+.ffffff .breaks {
+  --surface-ink: #1b1b1b;
+  color: #1b1b1b;
+}
+
+.breaks > :nth-child(1) > .microbreak-idea,
+.breaks > :nth-child(1) > .break-idea {
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.breaks > :nth-child(1) > .break-text {
+  opacity: 0.8;
+}
+
+.breaks progress {
+  height: 4px;
+  width: min(40vw, 420px);
+}
+
+.breaks progress[value]::-webkit-progress-bar {
+  background: color-mix(in srgb, var(--surface-ink) 20%, transparent);
+  border: 0;
+  border-radius: 2px;
+}
+
+.breaks progress[value]::-webkit-progress-value {
+  background: var(--surface-ink);
+  border-radius: 2px;
+}
+
+#progress-time {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
+}
+
 .breaks > :nth-child(2) {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 32px;
+  gap: 8px 12px;
   justify-content: center;
 }
 
+.breaks > :nth-child(2) > a {
+  align-items: center;
+  background: color-mix(in srgb, var(--surface-ink) 14%, transparent);
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 15px;
+  gap: 8px;
+  line-height: 20px;
+  padding: 8px 16px;
+}
+
+.breaks > :nth-child(2) > a.hidden {
+  display: none;
+}
+
+.breaks > :nth-child(2) > a > * {
+  cursor: pointer;
+}
+
+.breaks > :nth-child(2) > a:hover,
+.ffffff .breaks > :nth-child(2) > a:hover {
+  background: color-mix(in srgb, var(--surface-ink) 26%, transparent);
+  color: inherit;
+}
+
+.breaks > :nth-child(2) > a:active {
+  background: color-mix(in srgb, var(--surface-ink) 34%, transparent);
+}
+
+.breaks > :nth-child(2) > a img,
+body[dir=rtl] .breaks > :nth-child(2) > a img {
+  height: 16px;
+  order: -1;
+  padding: 0;
+  width: 16px;
+}
+
+.breaks > :nth-child(2) > a:hover img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+}
+
+.ffffff .breaks > :nth-child(2) > a img,
+.ffffff .breaks > :nth-child(2) > a:hover img {
+  filter: brightness(0) opacity(0.85);
+}
+
+/* Small corner popups: left-aligned card with the timer draining along the bottom edge */
+
 @media (max-height: 320px), (max-width: 480px) {
+  html {
+    /* a background image stops the body color filling the square window corners */
+    background: linear-gradient(transparent, transparent);
+  }
+
+  body {
+    border-radius: 8px;
+    clip-path: inset(0 round 8px);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, #ffffff 10%, transparent);
+  }
+
   .breaks {
-    grid-template: 72vh 24vh / 12px auto 12px;
+    align-content: space-between;
+    grid-template: 1fr auto / 1fr;
+    justify-items: stretch;
+    padding: 18px 20px 22px;
+  }
+
+  .breaks > * {
+    grid-column: 1;
+  }
+
+  .breaks > :nth-child(1) {
+    text-align: start;
   }
 
   .breaks > :nth-child(1) > .microbreak-idea,
   .breaks > :nth-child(1) > .break-idea {
     font-size: 17px;
-    letter-spacing: 0;
-    line-height: 22px;
+    line-height: 23px;
   }
 
   .breaks > :nth-child(1) > .break-text {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 18px;
-    margin-top: 8px;
+    margin-top: 4px;
   }
 
-  .breaks > :nth-child(1) > progress {
-    margin-top: 10px;
+  .breaks progress {
+    bottom: 0;
+    height: 4px;
+    left: 0;
+    margin: 0;
+    position: fixed;
+    width: 100%;
+  }
+
+  .breaks progress[value]::-webkit-progress-bar,
+  .breaks progress[value]::-webkit-progress-value {
+    border-radius: 0;
   }
 
   #progress-time {
-    font-size: 12px;
-    padding-top: 4px;
+    font-size: 13px;
+    padding-top: 6px;
   }
 
   .breaks > :nth-child(2) {
-    font-size: 14px;
-    gap: 4px 20px;
-    line-height: 16px;
+    gap: 8px;
+    justify-content: flex-start;
   }
 
-  .breaks > :nth-child(2) > a img {
+  .breaks > :nth-child(2) > a {
+    font-size: 13px;
+    gap: 6px;
+    line-height: 16px;
+    padding: 6px 12px;
+  }
+
+  .breaks > :nth-child(2) > a img,
+  body[dir=rtl] .breaks > :nth-child(2) > a img {
     height: 14px;
-    padding-left: 6px;
     width: 14px;
   }
 
-  body[dir=rtl] .breaks > :nth-child(2) > a img {
-    padding-left: 0;
-    padding-right: 6px;
+  .breaks > :nth-child(2) .tiptext {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
   }
 }

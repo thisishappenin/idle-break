@@ -447,3 +447,52 @@ body[dir=rtl] .heart > .authenticate > a {
   padding-right: 0;
   padding-left: 20px;
 }
+
+/* Refreshed navigation */
+.navigation {
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+  border-radius: 0;
+  box-shadow: none;
+  grid-gap: 4px;
+  padding: 0 12px;
+}
+
+.navigation > a > div {
+  border-radius: 6px;
+  margin: 4px 0;
+  height: 49px;
+}
+
+.navigation > a:hover > div {
+  background: var(--nav-active);
+}
+
+.navigation .active {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+
+.navigation .active > div {
+  font-weight: 600;
+}
+
+.custom-message {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.settings,
+.schedule,
+.theme,
+.audio,
+.shortcuts {
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+.appearance > input[type="radio"] + label:before {
+  border-radius: 6px;
+  border-width: 3px;
+}

@@ -422,3 +422,97 @@ hr {
   border: 0 solid rgba(0,0,0,0.20);
   height: 2px;
 }
+
+/* Refreshed controls */
+body {
+  font-family: 'Segoe UI Variable Text', 'Segoe UI', 'Noto Sans Regular', 'Noto Sans Arabic Regular',
+    'Noto Sans CJK KR Regular', 'Noto Sans Devanagari Regular',
+    'Noto Sans Gujarati Regular', 'Noto Sans Gurmukhi Regular',
+    'Noto Sans Hebrew Regular', 'Noto Sans JP Regular', system-ui, sans-serif;
+}
+
+input[type="checkbox"] + label:before {
+  border-radius: 4px;
+  line-height: 14px;
+  vertical-align: -2px;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="radio"]:checked + label:before {
+  color: var(--accent-ink, #ffffff);
+}
+
+input[type="radio"] + label:before {
+  vertical-align: -3px;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+  cursor: pointer;
+}
+
+input[type="range"] {
+  accent-color: var(--accent);
+}
+
+.has-select::before {
+  display: none;
+}
+
+.has-select::after {
+  color: var(--main-color);
+  opacity: 0.6;
+  right: 10px;
+  top: 3px;
+}
+
+body[dir=rtl] .has-select::after {
+  left: 10px;
+}
+
+select {
+  border-radius: 4px;
+  height: 28px;
+  padding: 0 28px 0 10px;
+}
+
+select:hover {
+  background: var(--control-hover);
+}
+
+select:focus-visible,
+button:focus-visible,
+input[type="text"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+button {
+  border-radius: 4px;
+  padding: 5px 14px;
+}
+
+button:hover {
+  background: var(--control-hover);
+}
+
+button:active {
+  background: var(--control-hover);
+  background-image: none;
+  color: inherit;
+  opacity: 0.8;
+}
+
+input[type="text"] {
+  background: var(--control-bg);
+  border: 1px solid var(--control-border);
+  border-radius: 4px;
+  color: var(--main-color);
+  font: inherit;
+  height: 28px;
+  padding: 0 8px;
+}
+
+hr {
+  height: 1px;
+}

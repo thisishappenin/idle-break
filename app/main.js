@@ -86,8 +86,9 @@ async function refreshWindowsTheme () {
 let microbreakIdeas
 let breakIdeas
 let breakPlanner
-let idleResetWin = null
-let idleResetTimer = null
+let toastWin = null
+let toastTimer = null
+let toastAction = null
 let appIcon = null
 let autostartManager = null
 let displayManager = null
@@ -439,7 +440,13 @@ async function initialize (isAppStart = true) {
     })
     breakPlanner.on('resumeBreaks', () => { resumeBreaks() })
     breakPlanner.on('idleReset', () => {
-      if (settings.get('naturalBreaksResetNotification')) createIdleResetWindow()
+      if (settings.get('naturalBreaksResetNotification')) {
+        showToast({
+          message: i18next.t('main.idleReset'),
+          actionLabel: i18next.t('main.undoIdleReset'),
+          onAction: () => breakPlanner.undoIdleReset()
+        })
+      }
     })
     breakPlanner.on('updateToolTip', function () {
       updateTray()
@@ -679,48 +686,53 @@ function windowIconPath () {
   return join(__dirname, '/images/app-icons', windowIconFileName)
 }
 
-function closeIdleResetWindow () {
-  clearTimeout(idleResetTimer)
-  if (idleResetWin && !idleResetWin.isDestroyed()) idleResetWin.destroy()
-  idleResetWin = null
+function closeToast () {
+  clearTimeout(toastTimer)
+  toastAction = null
+  if (toastWin && !toastWin.isDestroyed()) toastWin.destroy()
+  toastWin = null
 }
 
-function createIdleResetWindow () {
-  closeIdleResetWindow()
-  const size = { width: 320, height: 96 }
-  idleResetWin = new BrowserWindow({
+function showToast ({ message, actionLabel, onAction, duration = 10000 }) {
+  closeToast()
+  const size = { width: 340, height: actionLabel ? 104 : 68 }
+  toastWin = new BrowserWindow({
     ...size,
     ...displayManager.getBreakWindowPosition(-1, size),
     frame: false,
     resizable: false,
     transparent: true,
+    backgroundColor: '#00000000',
     hasShadow: false,
     skipTaskbar: true,
     focusable: false,
     alwaysOnTop: true,
     show: false,
     webPreferences: {
-      preload: join(__dirname, './idle-reset-preload.mjs'),
+      preload: join(__dirname, './toast-preload.mjs'),
       sandbox: false
     }
   })
-  idleResetWin.setAlwaysOnTop(true, 'pop-up-menu')
+  toastWin.setAlwaysOnTop(true, 'pop-up-menu')
+  toastAction = onAction ?? null
   const query = new URLSearchParams({
-    message: i18next.t('main.idleReset'),
-    undo: i18next.t('main.undoIdleReset'),
+    message,
+    duration: String(duration),
     background: calculateBackgroundColor(settings.get('mainColor'))
   })
-  idleResetWin.loadURL('file://' + join(__dirname, '/idle-reset.html') + '?' + query)
-  idleResetWin.once('ready-to-show', () => idleResetWin?.showInactive())
-  idleResetTimer = setTimeout(closeIdleResetWindow, 10000)
+  if (actionLabel) query.set('action', actionLabel)
+  toastWin.loadURL('file://' + join(__dirname, '/toast.html') + '?' + query)
+  toastWin.once('ready-to-show', () => toastWin?.showInactive())
+  toastTimer = setTimeout(closeToast, duration)
 }
 
-ipcMain.on('undo-idle-reset', () => {
-  breakPlanner.undoIdleReset()
-  closeIdleResetWindow()
+ipcMain.on('toast-action', () => {
+  const action = toastAction
+  closeToast()
+  action?.()
 })
 
-ipcMain.on('dismiss-idle-reset', closeIdleResetWindow)
+ipcMain.on('toast-dismiss', closeToast)
 
 function startProcessWin () {
   if (processWin) {
@@ -856,14 +868,14 @@ function checkVersion () {
 }
 
 function startMicrobreakNotification () {
-  showNotification(i18next.t(settings.get('singleBreakType') ? 'main.singleBreakIn' : 'main.microbreakIn', { seconds: settings.get('microbreakNotificationInterval') / 1000 }))
+  showNotification(i18next.t(settings.get('singleBreakType') ? 'main.singleBreakIn' : 'main.microbreakIn', { seconds: settings.get('microbreakNotificationInterval') / 1000 }), settings.get('microbreakNotificationInterval'))
   log.info('Stretchly: showing Mini break notification')
   breakPlanner.nextBreakAfterNotification()
   updateTray()
 }
 
 function startBreakNotification () {
-  showNotification(i18next.t('main.breakIn', { seconds: settings.get('breakNotificationInterval') / 1000 }))
+  showNotification(i18next.t('main.breakIn', { seconds: settings.get('breakNotificationInterval') / 1000 }), settings.get('breakNotificationInterval'))
   log.info('Stretchly: showing Long break notification')
   breakPlanner.nextBreakAfterNotification()
   updateTray()
@@ -897,6 +909,7 @@ function placeBreakWindow (win, displayId) {
 }
 
 function startMicrobreak () {
+  closeToast()
   // don't start another break if break running
   if (microbreakWins) {
     log.warn('Stretchly: Mini break already running, not starting Mini break')
@@ -968,7 +981,7 @@ function startMicrobreak () {
       backgroundThrottling: false,
       transparent: !showBreaksAsRegularWindows,
       ...getBlurredBackgroundWindowOptions(),
-      backgroundColor: calculateBackgroundColor(settings.get('miniBreakColor')),
+      backgroundColor: !showBreaksAsRegularWindows && displayManager.usesCornerPosition ? '#00000000' : calculateBackgroundColor(settings.get('miniBreakColor')),
       skipTaskbar: !showBreaksAsRegularWindows,
       focusable: showBreaksAsRegularWindows,
       alwaysOnTop: keepOnTop,
@@ -1067,6 +1080,7 @@ function startMicrobreak () {
 }
 
 function startBreak () {
+  closeToast()
   if (breakWins) {
     log.warn('Stretchly: Long break already running, not starting Long break')
     return
@@ -1138,7 +1152,7 @@ function startBreak () {
       backgroundThrottling: false,
       transparent: !showBreaksAsRegularWindows,
       ...getBlurredBackgroundWindowOptions(),
-      backgroundColor: calculateBackgroundColor(settings.get('mainColor')),
+      backgroundColor: !showBreaksAsRegularWindows && displayManager.usesCornerPosition ? '#00000000' : calculateBackgroundColor(settings.get('mainColor')),
       skipTaskbar: !showBreaksAsRegularWindows,
       focusable: showBreaksAsRegularWindows,
       alwaysOnTop: keepOnTop,
@@ -1719,7 +1733,11 @@ function updateToolTip () {
   }
 }
 
-function showNotification (text) {
+function showNotification (text, duration = 5000) {
+  if (settings.get('themedNotifications')) {
+    showToast({ message: text, duration })
+    return
+  }
   processWin.webContents.send('show-notification',
     text,
     settings.get('silentNotifications')

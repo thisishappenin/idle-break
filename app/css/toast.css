@@ -1,0 +1,93 @@
+:root {
+  --toast-bg: #478484;
+  --toast-ink: #ffffff;
+  --toast-duration: 10000ms;
+}
+
+html {
+  /* a background image stops the body color filling the square window corners */
+  background: linear-gradient(transparent, transparent);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--toast-bg);
+  border-radius: 8px;
+  clip-path: inset(0 round 8px);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #ffffff 10%, transparent);
+  box-sizing: border-box;
+  color: var(--toast-ink);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif;
+  gap: 10px;
+  justify-content: center;
+  padding: 14px 18px 18px;
+  position: relative;
+  user-select: none;
+}
+
+body.light {
+  --toast-ink: #1b1b1b;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+}
+
+button {
+  align-self: flex-start;
+  background: color-mix(in srgb, var(--toast-ink) 14%, transparent);
+  border: 0;
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 6px 12px;
+}
+
+button:hover {
+  background: color-mix(in srgb, var(--toast-ink) 26%, transparent);
+}
+
+button:active {
+  background: color-mix(in srgb, var(--toast-ink) 34%, transparent);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--toast-ink);
+  outline-offset: 2px;
+}
+
+.drain {
+  animation: drain var(--toast-duration) linear forwards;
+  background: var(--toast-ink);
+  bottom: 0;
+  height: 3px;
+  left: 0;
+  position: absolute;
+  transform-origin: left;
+  width: 100%;
+}
+
+@keyframes drain {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drain {
+    display: none;
+  }
+}

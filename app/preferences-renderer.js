@@ -196,7 +196,6 @@ window.onload = async (e) => {
   customColorRadio.value = settings.customColor
   customColorPicker.value = settings.customColor
   customColorRadio.nextElementSibling.style.setProperty('--custom-color', settings.customColor)
-  document.documentElement.style.setProperty('--custom-color', settings.customColor)
   if (!eventsAttached) {
     customColorRadio.onclick = () => customColorPicker.click()
     customColorPicker.onchange = (event) => {

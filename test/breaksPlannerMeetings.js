@@ -122,4 +122,26 @@ describe('breaksPlanner meetings', () => {
     planner.setIdleReset(false)
     expect(planner.scheduler.reference).to.equal('startMicrobreak')
   })
+
+  it('does not defer a break the user started manually during a meeting', () => {
+    planner.meetingManager.isInMeeting = true
+    planner.skipToMicrobreak()
+    expect(planner.deferBreakForMeeting('startMicrobreak')).to.equal(false)
+  })
+
+  it('resumes the timer when a meeting starts after idle time paused it', () => {
+    planner.naturalBreaksManager.emit('clearBreakScheduler')
+    planner.naturalBreaksManager.isSchedulerCleared = true
+    planner.meetingManager.emit('meetingStarted')
+    expect(planner.scheduler.reference).to.equal('startMicrobreak')
+    expect(planner.naturalBreaksManager.isSchedulerCleared).to.equal(false)
+  })
+
+  it('releases idle detection when monitoring stops during a meeting', () => {
+    planner.meetingManager.timer = setInterval(() => {}, 1000)
+    planner.meetingManager.isInMeeting = true
+    planner.naturalBreaksManager.isSuspended = true
+    planner.meetings(false)
+    expect(planner.naturalBreaksManager.isSuspended).to.equal(false)
+  })
 })

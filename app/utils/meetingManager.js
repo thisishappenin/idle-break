@@ -114,6 +114,7 @@ class MeetingManager extends EventEmitter {
 
   stop () {
     if (!this.timer && !this.sessionProcess) return
+    const wasInMeeting = this.isInMeeting
     this.monitorMeetings = false
     this.isInMeeting = false
     clearInterval(this.timer)
@@ -121,6 +122,7 @@ class MeetingManager extends EventEmitter {
     this.sessionProcess?.kill()
     this.sessionProcess = null
     log.info('Stretchly: stopping meeting monitoring')
+    if (wasInMeeting) this.emit('meetingFinished')
   }
 
   _setInMeeting (inMeeting) {

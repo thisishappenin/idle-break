@@ -20,6 +20,7 @@ class BreaksPlanner extends EventEmitter {
     this.appExclusionsManager = new AppExclusionsManager(settings)
     this.meetingManager = new MeetingManager(settings)
     this.deferredBreakEvent = null
+    this.startedManually = false
     this.meetingDelayTimer = null
     this.idleSnapshot = null
 
@@ -60,7 +61,13 @@ class BreaksPlanner extends EventEmitter {
 
     this.meetingManager.on('meetingStarted', () => {
       clearTimeout(this.meetingDelayTimer)
-      this.naturalBreaksManager.isSuspended = true
+      const naturalBreaks = this.naturalBreaksManager
+      naturalBreaks.isSuspended = true
+      if (naturalBreaks.isSchedulerCleared) {
+        naturalBreaks.isSchedulerCleared = false
+        naturalBreaks.isOnNaturalBreak = false
+        naturalBreaks.emit('naturalBreakFinished')
+      }
       log.info('Stretchly: meeting started, breaks will wait until it ends')
     })
 
@@ -68,6 +75,7 @@ class BreaksPlanner extends EventEmitter {
       this.naturalBreaksManager.isSuspended = false
       log.info('Stretchly: meeting finished')
       clearTimeout(this.meetingDelayTimer)
+      if (this.isPaused) return
       this.meetingDelayTimer = setTimeout(() => {
         const eventName = this.deferredBreakEvent
         this.deferredBreakEvent = null
@@ -143,6 +151,7 @@ class BreaksPlanner extends EventEmitter {
   nextBreak () {
     this.postponesNumber = 0
     this.deferredBreakEvent = null
+    this.startedManually = false
     clearTimeout(this.meetingDelayTimer)
     if (this.scheduler) this.scheduler.cancel()
     const shouldBreak = this.settings.get('break')
@@ -225,6 +234,10 @@ class BreaksPlanner extends EventEmitter {
   }
 
   deferBreakForMeeting (eventName) {
+    if (this.startedManually) {
+      this.startedManually = false
+      return false
+    }
     if (!this.meetingManager.isInMeeting) return false
     this.deferredBreakEvent = eventName.replace('Notification', '')
     log.info(`Stretchly: deferring ${this.deferredBreakEvent} until the meeting ends`)
@@ -253,6 +266,7 @@ class BreaksPlanner extends EventEmitter {
         this.breakNumber = 1
       }
     }
+    this.startedManually = true
     this.scheduler = new Scheduler(() => this.emit('startMicrobreak'), delay, 'startMicrobreak')
     this.scheduler.plan()
     this.emit('updateToolTip')
@@ -266,6 +280,7 @@ class BreaksPlanner extends EventEmitter {
       const breakInterval = this.settings.get('breakInterval') + 1
       this.breakNumber = breakInterval
     }
+    this.startedManually = true
     this.scheduler = new Scheduler(() => this.emit('startBreak'), delay, 'startBreak')
     this.scheduler.plan()
     this.emit('updateToolTip')

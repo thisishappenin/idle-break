@@ -73,8 +73,10 @@ nativeTheme.on('updated', function theThemeHasChanged () {
 })
 
 let windowsUsesDarkTheme = null
+let lastWindowsThemeCheck = 0
 
 async function refreshWindowsTheme () {
+  lastWindowsThemeCheck = Date.now()
   const usesDark = await readSystemUsesDarkTheme()
   if (usesDark === null || usesDark === windowsUsesDarkTheme) return
   windowsUsesDarkTheme = usesDark
@@ -706,7 +708,7 @@ function createIdleResetWindow () {
     undo: i18next.t('main.undoIdleReset')
   })
   idleResetWin.loadURL('file://' + join(__dirname, '/idle-reset.html') + '?' + query)
-  idleResetWin.once('ready-to-show', () => idleResetWin.showInactive())
+  idleResetWin.once('ready-to-show', () => idleResetWin?.showInactive())
   idleResetTimer = setTimeout(closeIdleResetWindow, 10000)
 }
 
@@ -1494,7 +1496,7 @@ function createPreferencesWindow () {
 }
 
 function updateTray () {
-  if (process.platform === 'win32') refreshWindowsTheme()
+  if (process.platform === 'win32' && Date.now() - lastWindowsThemeCheck > 60000) refreshWindowsTheme()
 
   if (process.platform === 'darwin') {
     if (app.dock.isVisible) {
@@ -1615,7 +1617,8 @@ function getTrayMenuTemplate () {
       120: 'pauseBreaksFor2HoursShortcut',
       300: 'pauseBreaksFor5HoursShortcut'
     }
-    for (const minutes of settings.get('pauseDurations')) {
+    const pauseDurations = settings.get('pauseDurations')
+    for (const minutes of Array.isArray(pauseDurations) ? pauseDurations : []) {
       const milliseconds = minutes * 60 * 1000
       trayMenu.push({
         label: i18next.t('main.pauseFor', {

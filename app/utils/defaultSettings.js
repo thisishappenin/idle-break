@@ -54,6 +54,7 @@ export default {
   monitorMeetings: false,
   monitorMeetingsCheckInterval: 5000,
   meetingBreakDelay: 5000,
+  monitorMeetingsIgnoreApps: ['screenpipe-app'],
   miniBreakStartSound: 'silence',
   longBreakStartSound: 'silence',
   themeSource: 'system',

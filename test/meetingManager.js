@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest'
 import { expect } from 'chai'
-import { isMicrophoneInUse } from '../app/utils/meetingManager.js'
+import { isMicrophoneInUse, hasMeetingSession } from '../app/utils/meetingManager.js'
 
 const entry = (name, start, stop) => `HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\microphone\\${name}
     Value    REG_SZ    Allow
@@ -30,6 +30,32 @@ describe('meetingManager', () => {
 
     it('ignores apps that never used the microphone', () => {
       expect(isMicrophoneInUse(entry('Zoom', '0x0', '0x0'))).to.equal(false)
+    })
+  })
+
+  describe('hasMeetingSession', () => {
+    it('is true when a call app is capturing audio', () => {
+      expect(hasMeetingSession('ACTIVE|ms-teams')).to.equal(true)
+    })
+
+    it('is false when nothing is capturing', () => {
+      expect(hasMeetingSession('ACTIVE|')).to.equal(false)
+    })
+
+    it('ignores apps on the ignore list', () => {
+      expect(hasMeetingSession('ACTIVE|screenpipe-app', ['screenpipe-app'])).to.equal(false)
+    })
+
+    it('still detects a call when an ignored app is also capturing', () => {
+      expect(hasMeetingSession('ACTIVE|screenpipe-app,ms-teams', ['screenpipe-app'])).to.equal(true)
+    })
+
+    it('matches ignored apps case-insensitively', () => {
+      expect(hasMeetingSession('ACTIVE|ScreenPipe-App', ['screenpipe-app'])).to.equal(false)
+    })
+
+    it('does not treat error lines as meetings', () => {
+      expect(hasMeetingSession('ERROR|boom')).to.equal(false)
     })
   })
 })

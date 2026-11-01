@@ -496,3 +496,72 @@ body[dir=rtl] .heart > .authenticate > a {
   border-radius: 6px;
   border-width: 3px;
 }
+
+/* Keep content readable on wide windows: one centered column, controls next to their labels */
+body > div:not(.navigation):not(.custom-message) {
+  margin-inline: auto;
+  max-width: 820px;
+}
+
+.shortcut {
+  display: grid;
+  grid-template-columns: var(--label-width, 280px) auto;
+  justify-content: start;
+}
+
+.shortcut > input {
+  margin: 0 16px 0 13px;
+}
+
+.shortcut-input {
+  width: 200px;
+}
+
+@media (max-width: 640px) {
+  .theme,
+  .audio,
+  .shortcuts,
+  .schedule {
+    grid-template-columns: 16px auto 16px;
+  }
+
+  .theme > .theme-label,
+  .audio > .theme-label,
+  .shortcuts > .theme-label,
+  .schedule > .theme-label {
+    font-weight: 600;
+    grid-column: 2 / -2;
+    padding: 0;
+    text-align: start;
+  }
+
+  .settings {
+    grid-template-columns: 16px auto 16px;
+  }
+
+  .swatches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .slider-row,
+  .shortcut {
+    grid-template-columns: auto 1fr;
+    justify-content: stretch;
+    row-gap: 6px;
+  }
+
+  .slider-row > label,
+  .shortcut > label {
+    grid-column: 1 / -1;
+  }
+
+  .slider-row > input,
+  .slider-row > input[type="text"],
+  .shortcut > input {
+    margin-inline: 0;
+  }
+
+  .slider-row > output {
+    margin-inline-start: 12px;
+  }
+}

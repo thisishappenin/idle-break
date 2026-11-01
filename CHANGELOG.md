@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Preferences keep a centered, readable column on wide windows and stack labels above controls on narrow ones
 - Refreshed look: flat Windows 11 style controls and navigation in Preferences, rounded corner popups with a draining timer bar, quieter break buttons
 - Break reminders ("Break in 10 seconds") can show as a themed popup instead of a system notification (on by default)
 - Break windows can show Postpone and Skip together (on by default), Postpone availability is adjustable in Preferences, and small break popups use a compact layout

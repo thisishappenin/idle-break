@@ -698,7 +698,7 @@ function showToast ({ message, actionLabel, onAction, duration = 10000 }) {
   const size = { width: 340, height: actionLabel ? 104 : 68 }
   toastWin = new BrowserWindow({
     ...size,
-    ...displayManager.getBreakWindowPosition(-1, size),
+    ...displayManager.getPopupPosition(size),
     frame: false,
     resizable: false,
     transparent: true,

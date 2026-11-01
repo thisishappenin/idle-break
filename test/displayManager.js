@@ -344,6 +344,16 @@ describe('DisplayManager', function () {
       displayManager.getBreakWindowPosition(0, size).should.deep.equal({ x: 1920 - 400 - 16, y: 16 })
     })
 
+    it('puts popups in the same corner as the break window', function () {
+      withSettings({ breakWindowPosition: 'top-left', breakWindowMargin: 16 })
+      displayManager.getPopupPosition(size).should.deep.equal({ x: 16, y: 16 })
+    })
+
+    it('puts popups in the bottom right corner when breaks are centered', function () {
+      withSettings({ breakWindowPosition: 'center', breakWindowMargin: 16 })
+      displayManager.getPopupPosition(size).should.deep.equal({ x: 1920 - 400 - 16, y: 1040 - 200 - 16 })
+    })
+
     it('offsets a corner by the origin of a secondary display', function () {
       withSettings({ breakWindowPosition: 'bottom-left', breakWindowMargin: 10 })
       displayManager.getBreakWindowPosition(1, size).should.deep.equal({ x: 1930, y: 900 - 200 - 10 })

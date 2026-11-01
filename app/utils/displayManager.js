@@ -108,6 +108,16 @@ class DisplayManager {
     }
   }
 
+  getPopupPosition (size) {
+    if (this.usesCornerPosition) return this.getBreakWindowPosition(-1, size)
+    const margin = this.settings.get('breakWindowMargin') ?? 0
+    const area = this.getTargetDisplay(-1).workArea
+    return {
+      x: Math.floor(area.x + area.width - size.width - margin),
+      y: Math.floor(area.y + area.height - size.height - margin)
+    }
+  }
+
   getContentDisplayId () {
     const setting = this.settings.get('breakContentScreen')
     if (setting === 'all') return -1

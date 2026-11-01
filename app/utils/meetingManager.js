@@ -78,13 +78,17 @@ export function isMicrophoneInUse (regOutput) {
   return inUse || flush()
 }
 
-export function hasMeetingSession (line, ignoredApps = []) {
-  if (!line.startsWith('ACTIVE|')) return false
+export function meetingApps (line, ignoredApps = []) {
+  if (!line.startsWith('ACTIVE|')) return []
   const ignored = ignoredApps.map(app => app.toLowerCase())
   return line.slice('ACTIVE|'.length).split(',')
-    .map(name => name.trim().toLowerCase())
+    .map(name => name.trim())
     .filter(Boolean)
-    .some(name => !ignored.some(app => name.includes(app)))
+    .filter(name => !ignored.some(app => name.toLowerCase().includes(app)))
+}
+
+export function hasMeetingSession (line, ignoredApps = []) {
+  return meetingApps(line, ignoredApps).length > 0
 }
 
 class MeetingManager extends EventEmitter {
@@ -96,6 +100,7 @@ class MeetingManager extends EventEmitter {
     this.timer = null
     this.sessionProcess = null
     this.isInMeeting = false
+    this.meetingApps = []
     this._errorLogged = false
     if (this.monitorMeetings) {
       this.start()
@@ -118,6 +123,7 @@ class MeetingManager extends EventEmitter {
     const wasInMeeting = this.isInMeeting
     this.monitorMeetings = false
     this.isInMeeting = false
+    this.meetingApps = []
     clearInterval(this.timer)
     clearTimeout(this.restartTimer)
     this.restartTimer = null
@@ -160,7 +166,10 @@ class MeetingManager extends EventEmitter {
         }
         heardFrom = true
         const ignored = this.settings.get('monitorMeetingsIgnoreApps') ?? []
-        this._setInMeeting(hasMeetingSession(line, ignored))
+        const apps = meetingApps(line, ignored)
+        if (apps.length && !this.isInMeeting) log.info(`Stretchly: microphone in use by ${apps.join(', ')}`)
+        this.meetingApps = apps
+        this._setInMeeting(apps.length > 0)
       }
     })
     const fallBack = (reason) => {

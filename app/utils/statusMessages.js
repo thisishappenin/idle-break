@@ -9,6 +9,8 @@ class StatusMessages {
     this.timeToNextBreak = breakPlanner.timeToNextBreak
     this.isPaused = breakPlanner.isPaused
     this.breakNumber = breakPlanner.breakNumber
+    this.deferredForMeeting = Boolean(breakPlanner.deferredBreakEvent)
+    this.meetingApps = breakPlanner.meetingManager?.meetingApps ?? []
     this.settings = settings
     this.i18next = i18next
     this.humanizeDuration = humanizeDuration
@@ -40,6 +42,12 @@ class StatusMessages {
 
     if (this.appExclusionPause) {
       message += this.i18next.t('statusMessages.paused') + ' - ' + this.i18next.t('statusMessages.appExclusion')
+      return message
+    }
+
+    if (this.deferredForMeeting) {
+      message += this.i18next.t('statusMessages.waitingForCall')
+      if (this.meetingApps.length) message += ` (${this.meetingApps.join(', ')})`
       return message
     }
 

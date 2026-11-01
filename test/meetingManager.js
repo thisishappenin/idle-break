@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest'
 import { expect } from 'chai'
-import { isMicrophoneInUse, hasMeetingSession } from '../app/utils/meetingManager.js'
+import { isMicrophoneInUse, hasMeetingSession, meetingApps } from '../app/utils/meetingManager.js'
 
 const entry = (name, start, stop) => `HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\microphone\\${name}
     Value    REG_SZ    Allow
@@ -52,6 +52,10 @@ describe('meetingManager', () => {
 
     it('matches ignored apps case-insensitively', () => {
       expect(hasMeetingSession('ACTIVE|ScreenPipe-App', ['screenpipe-app'])).to.equal(false)
+    })
+
+    it('lists the apps that count as a call', () => {
+      expect(meetingApps('ACTIVE|screenpipe-app,ms-teams', ['screenpipe-app'])).to.deep.equal(['ms-teams'])
     })
 
     it('does not treat error lines as meetings', () => {

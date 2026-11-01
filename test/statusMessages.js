@@ -24,6 +24,12 @@ describe('StatusMessages', () => {
     expect(message).to.contain('statusMessages.nextLongBreak')
   })
 
+  it('says the break is waiting and which app holds the microphone', () => {
+    const waiting = { ...planner, deferredBreakEvent: 'startMicrobreak', meetingManager: { meetingApps: ['ms-teams'] } }
+    const message = new StatusMessages({ breakPlanner: waiting, settings: settingsWith({}), i18next, humanizeDuration }).trayMessage
+    expect(message).to.equal('statusMessages.waitingForCall (ms-teams)')
+  })
+
   it('just says "Next break" in single break type mode', () => {
     const message = trayMessage(settingsWith({ singleBreakType: true, break: false }))
     expect(message).to.equal('statusMessages.nextSingleBreak utils.inAbout(10 minutes)')

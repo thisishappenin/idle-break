@@ -98,6 +98,12 @@
       <label data-i18next="preferences.settings.naturalBreaksResetNotification" for="naturalBreaksResetNotification"></label>
     </div>
     <div class="slider-row">
+      <label data-i18next="preferences.settings.naturalBreaksResetNotificationMaxIdleTime" for="resetNotificationMaxIdleTime"></label>
+      <input type="range" min="1" max="60" step="1" name="naturalBreaksResetNotificationMaxIdleTime"
+        data-divisor="60000" id="resetNotificationMaxIdleTime">
+      <output data-unit="minutes"></output>
+    </div>
+    <div class="slider-row">
       <label data-i18next="preferences.settings.idleResetTime" for="idleResetTime"></label>
       <input type="range" min="1" max="60" step="1" name="naturalBreaksInactivityResetTime"
         data-divisor="60000" id="idleResetTime">

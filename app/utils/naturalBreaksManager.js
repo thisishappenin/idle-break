@@ -66,7 +66,7 @@ class NaturalBreaksManager extends EventEmitter {
         this.isOnNaturalBreak = false
         if (lastIdleTime > this.settings.get('naturalBreaksInactivityResetTime')) {
           this.isSchedulerCleared = false
-          this.emit('naturalBreakFinished')
+          this.emit('naturalBreakFinished', lastIdleTime)
         }
       }
       if (this.isOnNaturalBreak && idleTime > this.settings.get('naturalBreaksInactivityResetTime')) {

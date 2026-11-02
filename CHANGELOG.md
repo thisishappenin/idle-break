@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Preferences now include postpone time and limits, volume, app theme, tray icon colors, the delay after a call ends, apps that never count as calls, and pausing while locked
 - Meeting detection restarts if its background watcher stops, instead of leaving breaks deferred
 - Preferences slider for the idle time before the break timer resets
+- The idle reset popup is skipped after a long absence (10 minutes by default, adjustable in Preferences)
 - Idle reset popup follows the selected theme color and transparency
 - Preferences: appearance swatches shown in a compact grid, with separate Sounds and Shortcuts tabs (shortcuts tab also holds the tray pause menu options)
 - CLI commands to postpone, skip and finish the current break

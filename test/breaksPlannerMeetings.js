@@ -20,6 +20,7 @@ const settings = {
     monitorMeetingsCheckInterval: 5000,
     meetingBreakDelay: 5000,
     naturalBreaks: false,
+    naturalBreaksResetNotificationMaxIdleTime: 600000,
     monitorDnd: false
   })[key]
 }
@@ -83,6 +84,22 @@ describe('breaksPlanner meetings', () => {
     planner.on('idleReset', () => { announced = true })
     planner.naturalBreaksManager.emit('naturalBreakFinished')
     expect(announced).to.equal(true)
+  })
+
+  it('announces an idle reset after a short absence', () => {
+    let announced = false
+    planner.on('idleReset', () => { announced = true })
+    planner.naturalBreaksManager.emit('naturalBreakFinished', 600000)
+    expect(announced).to.equal(true)
+  })
+
+  it('does not announce an idle reset after a long absence but still resets', () => {
+    let announced = false
+    planner.on('idleReset', () => { announced = true })
+    planner.naturalBreaksManager.emit('clearBreakScheduler')
+    planner.naturalBreaksManager.emit('naturalBreakFinished', 600001)
+    expect(announced).to.equal(false)
+    expect(planner.scheduler.timeLeft).to.be.closeTo(60000, 1000)
   })
 
   it('restores the remaining time when an idle reset is undone', () => {

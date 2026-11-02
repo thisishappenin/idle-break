@@ -53,6 +53,7 @@ export default {
   monitorDnd: true,
   monitorDndCheckInterval: 2000,
   naturalBreaksResetNotification: false,
+  naturalBreaksResetNotificationMaxIdleTime: 600000,
   themedNotifications: true,
   monitorMeetings: false,
   monitorMeetingsCheckInterval: 5000,

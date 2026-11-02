@@ -50,11 +50,13 @@ class BreaksPlanner extends EventEmitter {
       }
     })
 
-    this.naturalBreaksManager.on('naturalBreakFinished', () => {
+    this.naturalBreaksManager.on('naturalBreakFinished', (idleTime) => {
       if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak' && !this.dndManager.isOnDnd) {
         this.reset()
         log.info('Stretchly: resuming breaks after idle time')
-        this.emit('idleReset')
+        if (!(idleTime > this.settings.get('naturalBreaksResetNotificationMaxIdleTime'))) {
+          this.emit('idleReset')
+        }
         this.emit('updateToolTip')
       }
     })

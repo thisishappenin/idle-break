@@ -138,6 +138,10 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
 
 /* Refreshed look: system UI type, solid progress, quiet buttons */
 
+picture {
+  display: contents;
+}
+
 .breaks {
   --surface-ink: #ffffff;
   font-family: 'Segoe UI Variable Text', 'Segoe UI', 'Noto Sans Light', 'Noto Sans Arabic Light',
@@ -289,17 +293,12 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
   }
 
   .breaks progress {
-    bottom: 0;
+    bottom: 5px;
     height: 4px;
-    left: 0;
+    left: 12px;
     margin: 0;
     position: fixed;
-    width: 100%;
-  }
-
-  .breaks progress[value]::-webkit-progress-bar,
-  .breaks progress[value]::-webkit-progress-value {
-    border-radius: 0;
+    width: calc(100% - 24px);
   }
 
   #progress-time {
@@ -321,7 +320,8 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
     border-radius: 4px;
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--surface-ink) 18%, transparent);
     flex-direction: column;
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: 400;
     gap: 4px;
     height: 56px;
     justify-content: center;

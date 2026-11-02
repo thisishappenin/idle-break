@@ -75,12 +75,13 @@ button:focus-visible {
 .drain {
   animation: drain var(--toast-duration) linear forwards;
   background: var(--toast-ink);
-  bottom: 0;
+  border-radius: 2px;
+  bottom: 5px;
   height: 3px;
-  left: 0;
+  left: 12px;
   position: absolute;
   transform-origin: left;
-  width: 100%;
+  width: calc(100% - 24px);
 }
 
 @keyframes drain {

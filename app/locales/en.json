@@ -160,6 +160,8 @@
       "trayIconStyleProgress": "Progress to break",
       "trayIconStyleText": "Minutes to break (number only)",
       "preview": "Preview",
+      "previewPopup": "Show popup now",
+      "previewPopupHint": "The real popup appears on your screen for a few seconds whenever you change a colour, transparency, size or position setting here.",
       "trayIconFont": "Font for the number (Windows, number-only style):",
       "trayIconFontBuiltIn": "Built-in pictures (no custom font)",
       "trayIconFontSize": "Number size:",

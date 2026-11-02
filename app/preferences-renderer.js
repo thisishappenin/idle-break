@@ -4,7 +4,7 @@ import acceleratorFromEvent from './utils/acceleratorFromEvent.js'
 import { isLightColor } from './utils/colorContrast.js'
 import { parsePauseDurations, formatPauseDurations } from './utils/pauseDurations.js'
 import HtmlTranslate from './utils/htmlTranslate.js'
-import { isCompactWindow, previewWindowStyle, trayPreviewSize } from './utils/themePreview.js'
+import { trayPreviewSize } from './utils/themePreview.js'
 import { drawTrayNumber } from './utils/trayNumberDrawer.js'
 
 import './platform.js'
@@ -12,38 +12,8 @@ import './platform.js'
 const versionChecker = new VersionChecker()
 let eventsAttached = false
 let themePreviewAttached = false
+const liveSliders = ['breakWindowWidth', 'breakWindowHeight', 'opacity']
 let trayPreviewRequest = 0
-
-function selectedMainColor () {
-  const checked = document.querySelector('input[name="mainColor"]:checked')
-  if (!checked) return document.querySelector('#customColor').value
-  return checked.id === 'customColorRadio' ? document.querySelector('#customColor').value : checked.value
-}
-
-function updateWindowPreview () {
-  const screenBox = document.querySelector('#previewScreen')
-  screenBox.style.aspectRatio = `${window.screen.width} / ${window.screen.height}`
-  const transparent = document.querySelector('#enableTransparency').checked
-  const fullscreen = document.querySelector('#fullscreen').checked
-  const width = fullscreen ? 100 : document.querySelector('#breakWindowWidth').value
-  const height = fullscreen ? 100 : document.querySelector('#breakWindowHeight').value
-  const { outline, ...style } = previewWindowStyle({
-    color: selectedMainColor(),
-    opacity: transparent ? document.querySelector('#opacity').value / 100 : 1,
-    width,
-    height,
-    position: fullscreen ? 'center' : document.querySelector('#breakWindowPosition').value || 'center'
-  })
-  const box = document.querySelector('#previewWindow')
-  box.classList.toggle('compact', isCompactWindow({
-    screenWidth: window.screen.width,
-    screenHeight: window.screen.height,
-    width,
-    height
-  }))
-  Object.assign(box.style, style)
-  box.style.setProperty('--preview-outline', outline)
-}
 
 async function updateTrayPreview () {
   const request = ++trayPreviewRequest
@@ -77,7 +47,6 @@ async function updateTrayPreview () {
 }
 
 function updateThemePreview () {
-  updateWindowPreview()
   updateTrayPreview()
 }
 
@@ -379,6 +348,7 @@ window.onload = async (e) => {
         window.settings.saveSettings(range.name, range.value * divisor)
       }
       range.oninput = async event => {
+        if (liveSliders.includes(range.name)) window.settings.saveSettings(range.name, range.value * divisor)
         output.innerHTML = await window.utils.formatUnitAndValue(unit, range.value)
         document.querySelector('#longBreakEvery').closest('div').querySelector('output')
           .innerHTML = await window.i18next.t('utils.minutes', { count: parseInt(realBreakInterval()) })
@@ -389,6 +359,7 @@ window.onload = async (e) => {
   updateThemePreview()
   if (!themePreviewAttached) {
     themePreviewAttached = true
+    document.querySelector('#previewPopup').onclick = () => window.stretchly.previewBreak()
     document.addEventListener('input', updateThemePreview)
     document.addEventListener('change', updateThemePreview)
   }

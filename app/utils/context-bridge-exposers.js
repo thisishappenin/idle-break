@@ -102,7 +102,8 @@ function exposeStretchly () {
     openPreferences: () => ipcRenderer.send('open-preferences'),
     playSound: (name) => ipcRenderer.send('play-sound', name),
     showDebug: () => ipcRenderer.invoke('show-debug'),
-    updateTray: () => ipcRenderer.send('update-tray')
+    updateTray: () => ipcRenderer.send('update-tray'),
+    previewBreak: () => ipcRenderer.send('preview-break')
   })
 }
 

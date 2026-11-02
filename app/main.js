@@ -960,7 +960,124 @@ function placeBreakWindow (win, displayId) {
   win.setPosition(x, y)
 }
 
+const BREAK_PREVIEW_KEYS = ['mainColor', 'miniBreakColor', 'transparentMode', 'opacity', 'breakWindowWidth', 'breakWindowHeight', 'breakWindowPosition', 'showBreaksAsRegularWindows', 'fullscreen', 'blurredBackground']
+const BREAK_PREVIEW_RESIZE_KEYS = ['breakWindowWidth', 'breakWindowHeight', 'breakWindowPosition']
+const BREAK_PREVIEW_DURATION = 4000
+const BREAK_PREVIEW_SECONDS_ELAPSED = 13
+let breakPreviewWin = null
+let breakPreviewCloseTimer = null
+let breakPreviewCreateTimer = null
+let breakPreviewHandlerAdded = false
+let breakPreviewLoadedListener = null
+
+function breakPreviewDisplayId () {
+  const contentDisplayId = displayManager.getContentDisplayId()
+  return contentDisplayId !== -1 ? contentDisplayId : 0
+}
+
+function breakPreviewBounds (displayId) {
+  if (settings.get('fullscreen') && process.platform !== 'darwin') {
+    return {
+      width: displayManager.getDisplayWidth(displayId),
+      height: displayManager.getDisplayHeight(displayId),
+      x: displayManager.getDisplayX(displayId, 0, true),
+      y: displayManager.getDisplayY(displayId, 0, true)
+    }
+  }
+  const size = {
+    width: Math.floor(displayManager.getDisplayWidth(displayId) * settings.get('breakWindowWidth')),
+    height: Math.floor(displayManager.getDisplayHeight(displayId) * settings.get('breakWindowHeight'))
+  }
+  return { ...size, ...displayManager.getBreakWindowPosition(displayId, size) }
+}
+
+function destroyBreakPreview () {
+  if (breakPreviewLoadedListener) {
+    ipcMain.off('mini-break-loaded', breakPreviewLoadedListener)
+    breakPreviewLoadedListener = null
+  }
+  if (breakPreviewHandlerAdded) {
+    ipcMain.removeHandler('send-mini-break-data')
+    breakPreviewHandlerAdded = false
+  }
+  if (breakPreviewWin && !breakPreviewWin.isDestroyed()) breakPreviewWin.destroy()
+  breakPreviewWin = null
+}
+
+function closeBreakPreview () {
+  clearTimeout(breakPreviewCloseTimer)
+  clearTimeout(breakPreviewCreateTimer)
+  breakPreviewCloseTimer = null
+  breakPreviewCreateTimer = null
+  destroyBreakPreview()
+}
+
+function createBreakPreview () {
+  if (microbreakWins || breakWins) return
+  destroyBreakPreview()
+  const showBreaksAsRegularWindows = settings.get('showBreaksAsRegularWindows')
+  const color = calculateBackgroundColor(settings.get('miniBreakColor'))
+  const idea = settings.get('ideas') ? microbreakIdeas.randomElement : ['']
+
+  ipcMain.handle('send-mini-break-data', () => [
+    idea, Date.now() - BREAK_PREVIEW_SECONDS_ELAPSED * 1000, 5 * 60 * 1000, false,
+    true, 100, color, 0, false, true
+  ])
+  breakPreviewHandlerAdded = true
+
+  const win = new BrowserWindow({
+    ...breakPreviewBounds(breakPreviewDisplayId()),
+    autoHideMenuBar: true,
+    icon: windowIconPath(),
+    resizable: false,
+    frame: showBreaksAsRegularWindows,
+    show: false,
+    backgroundThrottling: false,
+    transparent: !showBreaksAsRegularWindows,
+    ...getBlurredBackgroundWindowOptions(),
+    backgroundColor: !showBreaksAsRegularWindows && displayManager.usesCornerPosition ? '#00000000' : color,
+    skipTaskbar: true,
+    focusable: false,
+    alwaysOnTop: true,
+    hasShadow: false,
+    title: 'Stretchly',
+    webPreferences: {
+      preload: join(__dirname, './microbreak-preload.mjs'),
+      sandbox: false
+    }
+  })
+  breakPreviewWin = win
+  win.setIgnoreMouseEvents(true)
+  win.on('closed', () => {
+    if (breakPreviewWin === win) breakPreviewWin = null
+  })
+
+  breakPreviewLoadedListener = (event) => {
+    if (event.sender !== win.webContents) return
+    ipcMain.off('mini-break-loaded', breakPreviewLoadedListener)
+    breakPreviewLoadedListener = null
+    if (!win.isDestroyed()) win.showInactive()
+  }
+  ipcMain.on('mini-break-loaded', breakPreviewLoadedListener)
+  win.loadURL('file://' + join(__dirname, '/microbreak.html'))
+}
+
+function showBreakPreview (resizeOnly = false) {
+  if (microbreakWins || breakWins || !processWin) return
+  clearTimeout(breakPreviewCloseTimer)
+  breakPreviewCloseTimer = setTimeout(closeBreakPreview, BREAK_PREVIEW_DURATION)
+  if (resizeOnly && breakPreviewWin && !breakPreviewWin.isDestroyed()) {
+    breakPreviewWin.setBounds(breakPreviewBounds(breakPreviewDisplayId()))
+    return
+  }
+  clearTimeout(breakPreviewCreateTimer)
+  breakPreviewCreateTimer = setTimeout(createBreakPreview, 150)
+}
+
+ipcMain.on('preview-break', () => showBreakPreview())
+
 function startMicrobreak () {
+  closeBreakPreview()
   closeToast()
   // don't start another break if break running
   if (microbreakWins) {
@@ -1132,6 +1249,7 @@ function startMicrobreak () {
 }
 
 function startBreak () {
+  closeBreakPreview()
   closeToast()
   if (breakWins) {
     log.warn('Stretchly: Long break already running, not starting Long break')
@@ -1916,6 +2034,10 @@ ipcMain.on('save-setting', function (event, key, value) {
   }
 
   settings.set(key, value)
+
+  if (BREAK_PREVIEW_KEYS.includes(key)) {
+    showBreakPreview(BREAK_PREVIEW_RESIZE_KEYS.includes(key))
+  }
 
   if (isBreakShortcut && value) {
     setupBreak({

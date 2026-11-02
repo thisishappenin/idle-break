@@ -6,8 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Theme page shows a live preview of the break window (colour, transparency, size and position) and of the number-only tray icon, updating as you change settings
-- Corner popups and reminder popups get a dark outline on light themes, so a white popup stays visible over a white window
+- Changing a break window colour, transparency, size or position on the Theme page briefly shows the real popup on your screen (sliders update it as you drag), with a "Show popup now" button. The page also previews the number-only tray icon
+- Corner popups and reminder popups get a dark outline on light themes, and their timer bar is inset so the popup colour shows around it, keeping both visible over a white window
 - On Windows, the number-only tray icon is drawn at your display scale in a font and size you choose in Preferences (bundled DejaVu Sans by default), with smoothing you can turn off
 - Tray menu items to shorten or extend the next work session in 5 minute steps, for that one session only. The menu opens again after each press so you can use them several times
 - Compact break popups show a large m:ss countdown with square Postpone and Skip buttons beside it, and fit in much smaller windows
@@ -50,6 +50,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- Postpone and Skip in small popups use bolder, pixel-aligned icons and a regular-weight label so they stay sharp
 - macOS Ventura (13) or later is now required
 - macOS app bundles are now ad-hoc signed
 - updated many translations

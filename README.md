@@ -412,7 +412,7 @@ To show the Welcome window again on the next start, change `"isFirstRun"` to `tr
 To specify how solid the break window should be when Theme transparency is enabled, set the value of `opacity` from `0` to `1` (which is in turn 0 to 100%). If you want the break window to have a blurred background, set the value of `blurredBackground` to `true` (for macOS only).
 
 #### Break window size [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
-To specify the size of the break window, set the value of `breakWindowHeight` and `breakWindowWidth` from `0` to `0.99` (which is in turn 0 to 99% of the size of the screen). Don't set 100% as that's fullscreen.
+To specify the size of the break window, set the value of `breakWindowHeight` and `breakWindowWidth` from `0` to `0.99` (which is in turn 0 to 99% of the size of the screen). Don't set 100% as that's fullscreen. The window is never made smaller than 360 by 120 pixels, so its text always fits, however small the monitor.
 
 #### Make Stretchly show breaks as regular windows [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences) ![Not Reliable](https://img.shields.io/badge/Not_Reliable-β-yellow)
 

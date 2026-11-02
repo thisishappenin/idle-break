@@ -25,6 +25,7 @@ import IdeasLoader from './utils/ideasLoader.js'
 import BreaksPlanner from './breaksPlanner.js'
 import AppIcon from './utils/appIcon.js'
 import TrayNumberIcons from './utils/trayNumberIcons.js'
+import { breakWindowSize } from './utils/breakWindowSize.js'
 import { UntilMorning } from './utils/untilMorning.js'
 import AutostartManager from './utils/autostartManager.js'
 import Command from './utils/commands.js'
@@ -970,6 +971,15 @@ let breakPreviewCreateTimer = null
 let breakPreviewHandlerAdded = false
 let breakPreviewLoadedListener = null
 
+function breakWindowSizeFor (displayId) {
+  return breakWindowSize({
+    displayWidth: displayManager.getDisplayWidth(displayId),
+    displayHeight: displayManager.getDisplayHeight(displayId),
+    widthRatio: settings.get('breakWindowWidth'),
+    heightRatio: settings.get('breakWindowHeight')
+  })
+}
+
 function breakPreviewDisplayId () {
   const contentDisplayId = displayManager.getContentDisplayId()
   return contentDisplayId !== -1 ? contentDisplayId : 0
@@ -984,10 +994,7 @@ function breakPreviewBounds (displayId) {
       y: displayManager.getDisplayY(displayId, 0, true)
     }
   }
-  const size = {
-    width: Math.floor(displayManager.getDisplayWidth(displayId) * settings.get('breakWindowWidth')),
-    height: Math.floor(displayManager.getDisplayHeight(displayId) * settings.get('breakWindowHeight'))
-  }
+  const size = breakWindowSizeFor(displayId)
   return { ...size, ...displayManager.getBreakWindowPosition(displayId, size) }
 }
 
@@ -1140,8 +1147,7 @@ function startMicrobreak () {
   for (let localDisplayId = 0; localDisplayId < displayManager.getDisplayCount(); localDisplayId++) {
     const isBlank = useContentScreen && localDisplayId !== contentDisplayId
     const windowOptions = {
-      width: Math.floor(displayManager.getDisplayWidth(localDisplayId) * settings.get('breakWindowWidth')),
-      height: Math.floor(displayManager.getDisplayHeight(localDisplayId) * settings.get('breakWindowHeight')),
+      ...breakWindowSizeFor(localDisplayId),
       autoHideMenuBar: true,
       icon: windowIconPath(),
       resizable: false,
@@ -1312,8 +1318,7 @@ function startBreak () {
   for (let localDisplayId = 0; localDisplayId < displayManager.getDisplayCount(); localDisplayId++) {
     const isBlank = useContentScreen && localDisplayId !== contentDisplayId
     const windowOptions = {
-      width: Math.floor(displayManager.getDisplayWidth(localDisplayId) * settings.get('breakWindowWidth')),
-      height: Math.floor(displayManager.getDisplayHeight(localDisplayId) * settings.get('breakWindowHeight')),
+      ...breakWindowSizeFor(localDisplayId),
       autoHideMenuBar: true,
       icon: windowIconPath(),
       resizable: false,

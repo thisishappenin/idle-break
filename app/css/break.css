@@ -28,7 +28,7 @@ body {
     'Noto Sans Gujarati Light', 'Noto Sans Gurmukhi Light',
     'Noto Sans Hebrew Light';
   font-weight: 300;
-  grid-template: 85vh 10vh / 100px auto 100px;
+  grid-template: 85vh 10vh / clamp(16px, 5vw, 100px) minmax(0, 1fr) clamp(16px, 5vw, 100px);
   justify-items: center;
   min-height: 100%;
 }
@@ -46,27 +46,43 @@ body.break-health-mode {
   text-align: center;
 }
 
+.breaks > :nth-child(1) {
+  max-height: 85vh;
+  overflow: hidden;
+}
+
 .breaks > :nth-child(1) > progress {
-  margin-top: 50px;
+  margin-top: min(50px, 5vh);
+}
+
+.breaks > :nth-child(1) >  .microbreak-idea,
+.breaks > :nth-child(1) >  .break-idea,
+.breaks > :nth-child(1) >  .break-text {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
 }
 
 .breaks > :nth-child(1) >  .microbreak-idea {
-  font-size: 30px;
+  -webkit-line-clamp: 4;
+  font-size: min(30px, 5vh);
   letter-spacing: 0.44px;
-  line-height: 46px;
+  line-height: 1.53;
 }
 
 .breaks > :nth-child(1) >  .break-idea {
-  font-size: 36px;
+  -webkit-line-clamp: 4;
+  font-size: min(36px, 6vh);
   letter-spacing: 0.52px;
-  line-height: 49px;
+  line-height: 1.36;
 }
 
 .breaks > :nth-child(1) >  .break-text {
-  font-size: 24px;
+  -webkit-line-clamp: 3;
+  font-size: min(24px, 4vh);
   letter-spacing: 0.35px;
-  line-height: 33px;
-  margin-top: 60px;
+  line-height: 1.375;
+  margin-top: min(60px, 6vh);
 }
 
 .breaks > :nth-child(2) {
@@ -282,11 +298,13 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
 
   .breaks > :nth-child(1) > .microbreak-idea,
   .breaks > :nth-child(1) > .break-idea {
+    -webkit-line-clamp: 2;
     font-size: 14px;
     line-height: 19px;
   }
 
   .breaks > :nth-child(1) > .break-text {
+    -webkit-line-clamp: 1;
     font-size: 12px;
     line-height: 16px;
     margin-top: 2px;
@@ -323,11 +341,13 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
     font-size: 12px;
     font-weight: 400;
     gap: 4px;
+    box-sizing: border-box;
     height: 56px;
     justify-content: center;
     line-height: 13px;
-    padding: 0;
-    width: 56px;
+    min-width: 56px;
+    padding: 0 8px;
+    white-space: nowrap;
   }
 
   .breaks > :nth-child(2) > a:hover,

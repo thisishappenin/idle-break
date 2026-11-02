@@ -17,9 +17,9 @@ class TrayNumberIcons {
     mkdirSync(directory, { recursive: true })
   }
 
-  keyFor ({ text, font, dark, crisp }) {
+  keyFor ({ text, font, dark, crisp, heightRatio }) {
     const fontHash = createHash('sha1').update(font).digest('hex').slice(0, 8)
-    return `n${text}-${dark ? 'dark' : 'light'}-${crisp ? 'crisp' : 'smooth'}-${fontHash}`
+    return `n${text}-${dark ? 'dark' : 'light'}-${crisp ? 'crisp' : 'smooth'}-h${Math.round(heightRatio * 100)}-${fontHash}`
   }
 
   pathFor (request) {
@@ -32,10 +32,10 @@ class TrayNumberIcons {
     return null
   }
 
-  async create (key, { text, font, dark, crisp }) {
+  async create (key, { text, font, dark, crisp, heightRatio }) {
     try {
       const color = dark ? [255, 255, 255] : [0, 0, 0]
-      const frames = await this.render({ text, fontFamily: font, color, crisp })
+      const frames = await this.render({ text, fontFamily: font, color, crisp, heightRatio })
       if (!frames) return
       const path = join(this.directory, `${key}.ico`)
       await writeFile(path, encodeIco(frames.map(({ size, rgba }) => ({ size, rgba: Buffer.from(rgba) }))))

@@ -700,7 +700,8 @@ function drawnTrayNumberPath (number, useDarkColors) {
     text: String(number),
     font,
     dark: useDarkColors,
-    crisp: settings.get('trayIconCrispDigits')
+    crisp: settings.get('trayIconCrispDigits'),
+    heightRatio: settings.get('trayIconFontSize')
   })
 }
 
@@ -1515,6 +1516,25 @@ function pauseBreaks (milliseconds) {
   updateTray()
 }
 
+const SESSION_ADJUST_MS = 5 * 60 * 1000
+let trayMenuPosition = null
+
+function reopenTrayMenu () {
+  if (!appIcon || !settings.get('trayMenuStaysOpen')) return
+  const position = trayMenuPosition ?? screen.getCursorScreenPoint()
+  setTimeout(() => {
+    appIcon?.popUpContextMenu(Menu.buildFromTemplate(getTrayMenuTemplate()), position)
+  }, 100)
+}
+
+function adjustWorkSession (milliseconds) {
+  if (breakPlanner.adjustWorkSession(milliseconds)) {
+    log.info(`Stretchly: ${milliseconds < 0 ? 'shortening' : 'extending'} the next work session by ${Math.abs(milliseconds) / 60000} minutes`)
+  }
+  updateTray()
+  reopenTrayMenu()
+}
+
 function resumeBreaks (notify = true) {
   if (breakPlanner.dndManager.isOnDnd) {
     log.info('Stretchly: not resuming breaks because in Do Not Disturb')
@@ -1534,9 +1554,6 @@ function createPreferencesWindow () {
     return
   }
   const modalPath = 'file://' + join(__dirname, '/preferences.html')
-  const maxHeight = screen
-    .getDisplayNearestPoint(screen.getCursorScreenPoint())
-    .workAreaSize.height * 0.9
   preferencesWin = new BrowserWindow({
     autoHideMenuBar: true,
     show: false,
@@ -1544,7 +1561,6 @@ function createPreferencesWindow () {
     icon: windowIconPath(),
     width: 600,
     height: 530,
-    maxHeight: Math.round(maxHeight),
     x: displayManager.getDisplayX(-1, 600),
     y: displayManager.getDisplayY(-1, 530),
     backgroundColor: '#EDEDED',
@@ -1583,7 +1599,11 @@ function updateTray () {
         createPreferencesWindow()
       })
       appIcon.on('click', () => {
+        trayMenuPosition = screen.getCursorScreenPoint()
         appIcon.popUpContextMenu(Menu.buildFromTemplate(currentTrayMenuTemplate))
+      })
+      appIcon.on('right-click', () => {
+        trayMenuPosition = screen.getCursorScreenPoint()
       })
     }
     if (!trayUpdateIntervalObj) {
@@ -1663,6 +1683,15 @@ function getTrayMenuTemplate () {
       trayMenu.push({
         label: i18next.t('main.startBreakNow'),
         click: () => skipToBreak()
+      })
+    }
+    if (breakPlanner.scheduler?.reference?.startsWith('start')) {
+      trayMenu.push({
+        label: i18next.t('main.shortenWorkSession', { minutes: SESSION_ADJUST_MS / 60000 }),
+        click: () => adjustWorkSession(-SESSION_ADJUST_MS)
+      }, {
+        label: i18next.t('main.extendWorkSession', { minutes: SESSION_ADJUST_MS / 60000 }),
+        click: () => adjustWorkSession(SESSION_ADJUST_MS)
       })
     }
     if (settings.get('break') || settings.get('microbreak')) {
@@ -2017,7 +2046,7 @@ ipcMain.on('open-sync-preferences', () => {
 })
 
 ipcMain.handle('current-settings', (event) => {
-  return settings.store
+  return { ...defaultSettings, ...settings.store }
 })
 
 ipcMain.handle('restore-remote-settings', (event, remoteSettings) => {
@@ -2052,7 +2081,8 @@ ipcMain.handle('get-window-bounds', (event) => {
 
 ipcMain.on('set-window-size', (event, width, height) => {
   const win = BrowserWindow.fromWebContents(event.sender)
-  win.setSize(width, height)
+  const { workAreaSize } = screen.getDisplayMatching(win.getBounds())
+  win.setSize(width, Math.min(height, Math.round(workAreaSize.height * 0.9)))
 })
 
 ipcMain.handle('get-version', (event) => {

@@ -4,7 +4,7 @@ import acceleratorFromEvent from './utils/acceleratorFromEvent.js'
 import { isLightColor } from './utils/colorContrast.js'
 import { parsePauseDurations, formatPauseDurations } from './utils/pauseDurations.js'
 import HtmlTranslate from './utils/htmlTranslate.js'
-import { previewWindowStyle, trayPreviewSize } from './utils/themePreview.js'
+import { isCompactWindow, previewWindowStyle, trayPreviewSize } from './utils/themePreview.js'
 import { drawTrayNumber } from './utils/trayNumberDrawer.js'
 
 import './platform.js'
@@ -24,14 +24,23 @@ function updateWindowPreview () {
   const screenBox = document.querySelector('#previewScreen')
   screenBox.style.aspectRatio = `${window.screen.width} / ${window.screen.height}`
   const transparent = document.querySelector('#enableTransparency').checked
+  const fullscreen = document.querySelector('#fullscreen').checked
+  const width = fullscreen ? 100 : document.querySelector('#breakWindowWidth').value
+  const height = fullscreen ? 100 : document.querySelector('#breakWindowHeight').value
   const { outline, ...style } = previewWindowStyle({
     color: selectedMainColor(),
     opacity: transparent ? document.querySelector('#opacity').value / 100 : 1,
-    width: document.querySelector('#breakWindowWidth').value,
-    height: document.querySelector('#breakWindowHeight').value,
-    position: document.querySelector('#breakWindowPosition').value || 'center'
+    width,
+    height,
+    position: fullscreen ? 'center' : document.querySelector('#breakWindowPosition').value || 'center'
   })
   const box = document.querySelector('#previewWindow')
+  box.classList.toggle('compact', isCompactWindow({
+    screenWidth: window.screen.width,
+    screenHeight: window.screen.height,
+    width,
+    height
+  }))
   Object.assign(box.style, style)
   box.style.setProperty('--preview-outline', outline)
 }
@@ -46,9 +55,10 @@ async function updateTrayPreview () {
   const ratio = window.devicePixelRatio
   const size = trayPreviewSize(ratio)
   const crisp = document.querySelector('#trayIconCrispDigits').checked
+  const heightRatio = document.querySelector('#trayIconFontSize').value / 100
   for (const [selector, color] of [['.preview-taskbar-light', [0, 0, 0]], ['.preview-taskbar-dark', [255, 255, 255]]]) {
     try {
-      const [{ rgba }] = await drawTrayNumber({ text: '15', fontFamily: font, color, crisp, sizes: [size] })
+      const [{ rgba }] = await drawTrayNumber({ text: '15', fontFamily: font, color, crisp, heightRatio, sizes: [size] })
       if (request !== trayPreviewRequest) return
       const image = new window.ImageData(rgba, size, size)
       const [actual, zoom] = document.querySelectorAll(`${selector} canvas`)
@@ -379,9 +389,8 @@ window.onload = async (e) => {
   updateThemePreview()
   if (!themePreviewAttached) {
     themePreviewAttached = true
-    const theme = document.querySelector('.theme')
-    theme.addEventListener('input', updateThemePreview)
-    theme.addEventListener('change', updateThemePreview)
+    document.addEventListener('input', updateThemePreview)
+    document.addEventListener('change', updateThemePreview)
   }
 
   document.querySelectorAll('.sounds img').forEach(preview => {

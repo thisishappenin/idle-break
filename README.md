@@ -223,7 +223,9 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `useMonochromeTrayIcon` - use monochrome icon
 - `trayIconStyle` - icon style for menubar: default, time to break, progress to break, or minutes to break as number only (`text`)
 - `trayIconFont` - on Windows, the font used to draw the number in the `text` tray icon style. The default `DejaVu Sans` is bundled with *Stretchly*; Preferences list a few common Windows fonts, and the preferences file accepts the name of any installed font. An empty value uses the built-in pictures instead
-- `trayIconCrispDigits` - draw the tray number with pure pixels instead of smoothed edges (on by default)
+- `trayIconFontSize` - height of the tray number as a fraction of the icon, from `0.3` to `1` (default `0.5`)
+- `trayIconCrispDigits` - draw the tray number with pure pixels instead of smoothed edges (off by default)
+- `trayMenuStaysOpen` - after shortening or extending the work session from the tray menu, open the menu again in the same place so you can press the item several times (on by default)
 - `breakWindowAlwaysOnTop` - keep windowed breaks on top of other windows
 - `naturalBreaksResetNotification` - show a 10-second popup when idle time resets the break timer, with a button to undo the reset
 - `naturalBreaksResetNotificationMaxIdleTime` - milliseconds of idle time after which that popup is skipped because the break was long enough to need no explanation, default `600000` (10 minutes)

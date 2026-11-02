@@ -222,6 +222,14 @@ class BreaksPlanner extends EventEmitter {
     this.emit('updateToolTip')
   }
 
+  adjustWorkSession (milliseconds) {
+    const reference = this.scheduler?.reference
+    if (this.isPaused || !reference?.startsWith('start')) return false
+    const adjusted = this.scheduler.adjust(milliseconds)
+    if (adjusted) this.emit('updateToolTip')
+    return adjusted
+  }
+
   undoIdleReset () {
     const snapshot = this.idleSnapshot
     this.idleSnapshot = null

@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest'
 import { expect } from 'chai'
-import { previewWindowStyle, trayPreviewSize } from '../app/utils/themePreview.js'
+import { isCompactWindow, previewWindowStyle, trayPreviewSize } from '../app/utils/themePreview.js'
 
 const base = { color: '#478484', opacity: 1, width: 85, height: 60, position: 'center' }
 
@@ -41,6 +41,14 @@ describe('themePreview', () => {
 
   it('passes the opacity through', () => {
     expect(previewWindowStyle({ ...base, opacity: 0.6 }).opacity).to.equal('0.6')
+  })
+
+  it('uses the compact layout when the window is small, like the real popup', () => {
+    const screen = { screenWidth: 1920, screenHeight: 1080 }
+    expect(isCompactWindow({ ...screen, width: 25, height: 40 })).to.equal(true)
+    expect(isCompactWindow({ ...screen, width: 80, height: 29 })).to.equal(true)
+    expect(isCompactWindow({ ...screen, width: 85, height: 85 })).to.equal(false)
+    expect(isCompactWindow({ ...screen, width: 100, height: 100 })).to.equal(false)
   })
 
   it('previews the tray image size closest to the display scale', () => {

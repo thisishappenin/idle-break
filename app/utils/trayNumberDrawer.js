@@ -4,7 +4,6 @@ export const ICON_SIZES = [16, 20, 24, 32, 40, 48]
 const SUPERSAMPLE = 8
 const CRISP_THRESHOLD = 0.45
 const REFERENCE_FONT_SIZE = 100
-const HEIGHT_RATIO = 13 / 16
 const TWO_DIGIT_WIDTH_RATIO = 15 / 16
 
 let bundledFontLoaded = null
@@ -22,7 +21,7 @@ function measure (ctx, text, fontSize, fontFamily) {
   return ctx.measureText(text)
 }
 
-function drawNumber ({ text, fontFamily, color, size, crisp }) {
+function drawNumber ({ text, fontFamily, color, size, crisp, heightRatio }) {
   const big = size * SUPERSAMPLE
   const canvas = document.createElement('canvas')
   canvas.width = big
@@ -31,7 +30,7 @@ function drawNumber ({ text, fontFamily, color, size, crisp }) {
 
   const digit = measure(ctx, '0', REFERENCE_FONT_SIZE, fontFamily)
   const digitHeight = digit.actualBoundingBoxAscent + digit.actualBoundingBoxDescent
-  const targetHeight = Math.round(size * HEIGHT_RATIO)
+  const targetHeight = Math.max(4, Math.round(size * heightRatio))
   const fontSize = REFERENCE_FONT_SIZE * (targetHeight * SUPERSAMPLE) / digitHeight
 
   const twoDigits = measure(ctx, '00', fontSize, fontFamily)
@@ -75,11 +74,11 @@ function drawNumber ({ text, fontFamily, color, size, crisp }) {
   return rgba
 }
 
-export async function drawTrayNumber ({ text, fontFamily, color, crisp = true, sizes = ICON_SIZES }) {
+export async function drawTrayNumber ({ text, fontFamily, color, crisp = false, heightRatio = 0.5, sizes = ICON_SIZES }) {
   if (fontFamily === BUNDLED_FONT) await loadBundledFont()
   await document.fonts.load(`bold 100px "${fontFamily}"`, text)
   return sizes.map(size => ({
     size,
-    rgba: drawNumber({ text, fontFamily, color, size, crisp })
+    rgba: drawNumber({ text, fontFamily, color, size, crisp, heightRatio })
   }))
 }

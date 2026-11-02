@@ -32,6 +32,10 @@ export function previewWindowStyle ({ color, opacity, width, height, position })
   return style
 }
 
+export function isCompactWindow ({ screenWidth, screenHeight, width, height }) {
+  return (screenWidth * width) / 100 <= 480 || (screenHeight * height) / 100 <= 320
+}
+
 export function trayPreviewSize (devicePixelRatio) {
   const wanted = 16 * devicePixelRatio
   return ICON_SIZES.reduce((best, size) =>

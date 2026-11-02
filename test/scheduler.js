@@ -64,6 +64,53 @@ describe('scheduler', function () {
       }, 200)
     }))
 
+  it('adjust moves the time left by the given amount', () => {
+    vi.useFakeTimers()
+    try {
+      const schedule = new Scheduler(() => {}, 60000)
+      schedule.plan()
+      vi.advanceTimersByTime(10000)
+      schedule.adjust(-20000).should.equal(true)
+      schedule.timeLeft.should.be.within(29000, 30000)
+      schedule.adjust(5000)
+      schedule.timeLeft.should.be.within(34000, 35000)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('adjust fires the function at the adjusted time', () => {
+    vi.useFakeTimers()
+    try {
+      let fired = false
+      const schedule = new Scheduler(() => { fired = true }, 60000)
+      schedule.plan()
+      schedule.adjust(-50000)
+      vi.advanceTimersByTime(9000)
+      fired.should.equal(false)
+      vi.advanceTimersByTime(1500)
+      fired.should.equal(true)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('adjust never goes below the minimum', () => {
+    vi.useFakeTimers()
+    try {
+      const schedule = new Scheduler(() => {}, 60000)
+      schedule.plan()
+      schedule.adjust(-1000000)
+      schedule.timeLeft.should.be.within(0, 1000)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('adjust does nothing when not planned', () => {
+    new Scheduler(() => {}, 1000).adjust(1000).should.equal(false)
+  })
+
   it('it kinda gets the time left', () =>
     new Promise((resolve) => {
       const time = 100

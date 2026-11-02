@@ -22,6 +22,15 @@ class Scheduler {
     this.timer = setTimeout(this.func, this.timeLeft)
   }
 
+  adjust (milliseconds, minimum = 1000) {
+    if (this.timer === null) return false
+    const timeLeft = this.timeLeft
+    clearTimeout(this.timer)
+    this.delay = Math.max(minimum, timeLeft + milliseconds)
+    this.plan()
+    return true
+  }
+
   cancel () {
     clearTimeout(this.timer)
     this.timer = null

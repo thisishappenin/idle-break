@@ -8,7 +8,7 @@ import TrayNumberIcons from '../app/utils/trayNumberIcons.js'
 vi.mock('electron-log/main.js', () => ({ default: { error: () => {}, info: () => {} } }))
 
 const frames = [{ size: 16, rgba: new Uint8ClampedArray(16 * 16 * 4) }]
-const request = { text: '15', font: 'DejaVu Sans', dark: false, crisp: true }
+const request = { text: '15', font: 'DejaVu Sans', dark: false, crisp: true, heightRatio: 0.5 }
 const settle = () => new Promise(resolve => setTimeout(resolve, 20))
 
 describe('trayNumberIcons', () => {
@@ -48,7 +48,8 @@ describe('trayNumberIcons', () => {
       text: '15',
       fontFamily: 'DejaVu Sans',
       color: [255, 255, 255],
-      crisp: false
+      crisp: false,
+      heightRatio: 0.5
     })
   })
 
@@ -66,8 +67,9 @@ describe('trayNumberIcons', () => {
     icons.pathFor({ ...request, dark: true })
     icons.pathFor({ ...request, font: 'Segoe UI' })
     icons.pathFor({ ...request, text: '14' })
+    icons.pathFor({ ...request, heightRatio: 0.6 })
     await settle()
-    expect(render.mock.calls.length).to.equal(4)
+    expect(render.mock.calls.length).to.equal(5)
   })
 
   it('tries again later when the renderer is not ready', async () => {

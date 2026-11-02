@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Theme page shows a live preview of the break window (colour, transparency, size and position) and of the number-only tray icon, updating as you change settings
 - Corner popups and reminder popups get a dark outline on light themes, so a white popup stays visible over a white window
-- On Windows, the number-only tray icon is drawn at your display scale in a font you choose in Preferences (bundled DejaVu Sans by default), so the digits are taller and sharper
+- On Windows, the number-only tray icon is drawn at your display scale in a font and size you choose in Preferences (bundled DejaVu Sans by default), with smoothing you can turn off
+- Tray menu items to shorten or extend the next work session in 5 minute steps, for that one session only. The menu opens again after each press so you can use them several times
 - Compact break popups show a large m:ss countdown with square Postpone and Skip buttons beside it, and fit in much smaller windows
 - The tray shows when a break is waiting for the microphone to be free and which app is using it, and the log names that app
 - Reminder and idle popups go to the bottom right corner when break windows are centered, instead of the middle of the screen
@@ -39,6 +40,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - "Minutes to break (number only)" tray icon style, without the Stretchly logo
 
 ### Fixed
+- Preferences window can be maximised to the full screen height instead of stopping short
+- Preferences shows default values for settings that have not been saved yet
 - fix debug file and folder links when paths contain HTML special characters
 - fix custom break images when the user data path contains URL special characters
 - fix snap startup crash

@@ -387,6 +387,7 @@
     <div class="theme-preview" aria-hidden="true">
       <div class="preview-screen" id="previewScreen">
         <div class="preview-window" id="previewWindow">
+          <span class="preview-idea">Look into the distance</span>
           <span class="preview-time">4:47</span>
           <span class="preview-buttons"><i></i><i></i></span>
         </div>
@@ -515,6 +516,11 @@
           <option value="" data-i18next="preferences.theme.trayIconFontBuiltIn"></option>
         </select>
       </div>
+    </div>
+    <div>
+      <label data-i18next="preferences.theme.trayIconFontSize" for="trayIconFontSize"></label>
+      <input type="range" min="30" max="100" step="5" name="trayIconFontSize" data-divisor="0.01" id="trayIconFontSize">
+      <output data-unit="percent"></output>
     </div>
     <div>
       <input type="checkbox" value="trayIconCrispDigits" id="trayIconCrispDigits">

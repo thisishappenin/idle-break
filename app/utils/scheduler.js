@@ -4,9 +4,15 @@ class Scheduler {
     this.delay = delay
     this.func = func
     this.reference = reference
+    this.remaining = null
+  }
+
+  get held () {
+    return this.remaining !== null
   }
 
   get timeLeft () {
+    if (this.held) return this.remaining
     if (this.timer === null) return false
     return this.now + this.delay - Date.now()
   }
@@ -22,7 +28,27 @@ class Scheduler {
     this.timer = setTimeout(this.func, this.timeLeft)
   }
 
+  hold () {
+    if (this.timer === null || this.held) return false
+    this.remaining = this.timeLeft
+    clearTimeout(this.timer)
+    this.timer = null
+    return true
+  }
+
+  release () {
+    if (!this.held) return false
+    this.delay = this.remaining
+    this.remaining = null
+    this.plan()
+    return true
+  }
+
   adjust (milliseconds, minimum = 1000) {
+    if (this.held) {
+      this.remaining = Math.max(minimum, this.remaining + milliseconds)
+      return true
+    }
     if (this.timer === null) return false
     const timeLeft = this.timeLeft
     clearTimeout(this.timer)
@@ -34,6 +60,7 @@ class Scheduler {
   cancel () {
     clearTimeout(this.timer)
     this.timer = null
+    this.remaining = null
     this.reference = null
     this.func = null
   }

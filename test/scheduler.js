@@ -111,6 +111,65 @@ describe('scheduler', function () {
     new Scheduler(() => {}, 1000).adjust(1000).should.equal(false)
   })
 
+  it('hold freezes the time left until release', () => {
+    vi.useFakeTimers()
+    try {
+      let fired = false
+      const schedule = new Scheduler(() => { fired = true }, 60000, 'startMicrobreak')
+      schedule.plan()
+      vi.advanceTimersByTime(10000)
+      schedule.hold().should.equal(true)
+      schedule.held.should.equal(true)
+      vi.advanceTimersByTime(120000)
+      fired.should.equal(false)
+      schedule.timeLeft.should.be.within(49000, 50000)
+      schedule.reference.should.equal('startMicrobreak')
+      schedule.release().should.equal(true)
+      schedule.held.should.equal(false)
+      vi.advanceTimersByTime(49000)
+      fired.should.equal(false)
+      vi.advanceTimersByTime(1500)
+      fired.should.equal(true)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('adjust changes the time left while held', () => {
+    vi.useFakeTimers()
+    try {
+      const schedule = new Scheduler(() => {}, 60000)
+      schedule.plan()
+      schedule.hold()
+      schedule.adjust(-20000).should.equal(true)
+      schedule.timeLeft.should.equal(40000)
+      schedule.adjust(-100000)
+      schedule.timeLeft.should.equal(1000)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('cancel clears a hold', () => {
+    vi.useFakeTimers()
+    try {
+      const schedule = new Scheduler(() => {}, 60000)
+      schedule.plan()
+      schedule.hold()
+      schedule.cancel()
+      schedule.held.should.equal(false)
+      schedule.timeLeft.should.equal(false)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('hold and release do nothing when not planned or not held', () => {
+    const schedule = new Scheduler(() => {}, 60000)
+    schedule.hold().should.equal(false)
+    schedule.release().should.equal(false)
+  })
+
   it('it kinda gets the time left', () =>
     new Promise((resolve) => {
       const time = 100

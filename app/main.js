@@ -1478,7 +1478,7 @@ function finishMicrobreak (shouldPlaySound = true, shouldPlanNext = true) {
   microbreakWins = breakComplete(shouldPlaySound, microbreakWins, 'mini')
   log.info(`Stretchly: finishing Mini break (shouldPlanNext: ${shouldPlanNext})`)
   if (shouldPlanNext) {
-    breakPlanner.nextBreak()
+    breakPlanner.nextBreakAfterBreak()
   } else {
     breakPlanner.clear()
   }
@@ -1489,7 +1489,7 @@ function finishBreak (shouldPlaySound = true, shouldPlanNext = true) {
   breakWins = breakComplete(shouldPlaySound, breakWins, 'long')
   log.info(`Stretchly: finishing Long break (shouldPlanNext: ${shouldPlanNext})`)
   if (shouldPlanNext) {
-    breakPlanner.nextBreak()
+    breakPlanner.nextBreakAfterBreak()
   } else {
     breakPlanner.clear()
   }

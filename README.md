@@ -327,6 +327,8 @@ To have different theme for Mini breaks, set `miniBreakColor` to desired value, 
 #### Natural breaks inactivity time [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
 In the preferences file, set `naturalBreaksInactivityResetTime` to your preferred value (in milliseconds greater than than 20000ms). This is an idle time length, after which *Stretchly* breaks will be paused until the user resumes activity.
 
+When idle time monitoring is on and a break ends while you are away, *Stretchly* keeps the countdown to the next break at its full length (still shown in the tray) and starts counting down only when you use the computer again. The "timer reset" popup is not shown if a break happened while you were away.
+
 You can also set `naturalBreaksCheckInterval` in milliseconds: how often idle time is checked. A higher number means lower CPU and energy usage, but slightly less responsive detection. Default value is `2000` which is 2 seconds.
 
 #### Meetings

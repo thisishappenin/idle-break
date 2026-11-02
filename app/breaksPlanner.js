@@ -6,6 +6,8 @@ import AppExclusionsManager from './utils/appExclusionsManager.js'
 import MeetingManager from './utils/meetingManager.js'
 import log from 'electron-log/main.js'
 
+const USAGE_IDLE_LIMIT = 5000
+
 class BreaksPlanner extends EventEmitter {
   constructor (settings) {
     super()
@@ -23,6 +25,8 @@ class BreaksPlanner extends EventEmitter {
     this.startedManually = false
     this.meetingDelayTimer = null
     this.idleSnapshot = null
+    this.usageTimer = null
+    this.lastBreakFinishedAt = null
 
     this.on('microbreakStarted', (shouldPlaySound) => {
       this.idleSnapshot = null
@@ -39,6 +43,10 @@ class BreaksPlanner extends EventEmitter {
     })
 
     this.naturalBreaksManager.on('clearBreakScheduler', () => {
+      if (this.isHoldingForUsage) {
+        this.naturalBreaksManager.isSchedulerCleared = false
+        return
+      }
       if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak' && this.scheduler.reference !== null) {
         this.idleSnapshot = {
           reference: this.scheduler.reference,
@@ -51,6 +59,11 @@ class BreaksPlanner extends EventEmitter {
     })
 
     this.naturalBreaksManager.on('naturalBreakFinished', (idleTime) => {
+      if (this.isHoldingForUsage) {
+        this.resumeAfterUsage()
+        return
+      }
+      if (this.breakFinishedDuringIdle(idleTime)) return
       if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak' && !this.dndManager.isOnDnd) {
         this.reset()
         log.info('Stretchly: resuming breaks after idle time')
@@ -150,7 +163,49 @@ class BreaksPlanner extends EventEmitter {
     })
   }
 
+  breakFinishedDuringIdle (idleTime) {
+    if (!(idleTime > 0) || this.lastBreakFinishedAt === null) return false
+    return Date.now() - this.lastBreakFinishedAt < idleTime + USAGE_IDLE_LIMIT
+  }
+
+  get isHoldingForUsage () {
+    return this.usageTimer !== null && this.scheduler?.held === true
+  }
+
+  stopUsageWatch () {
+    clearInterval(this.usageTimer)
+    this.usageTimer = null
+  }
+
+  nextBreakAfterBreak () {
+    this.lastBreakFinishedAt = Date.now()
+    this.nextBreak()
+    const manager = this.naturalBreaksManager
+    if (manager.usingNaturalBreaks && manager.idleTime >= USAGE_IDLE_LIMIT && this.scheduler.hold()) {
+      log.info('Stretchly: waiting for usage before counting down to the next break')
+      this.usageTimer = setInterval(() => this.checkUsage(), this.settings.get('naturalBreaksCheckInterval'))
+      this.emit('updateToolTip')
+    }
+  }
+
+  checkUsage () {
+    if (!this.scheduler?.held) {
+      this.stopUsageWatch()
+    } else if (this.naturalBreaksManager.idleTime < USAGE_IDLE_LIMIT) {
+      this.resumeAfterUsage()
+    }
+  }
+
+  resumeAfterUsage () {
+    this.stopUsageWatch()
+    if (this.scheduler?.release()) {
+      log.info('Stretchly: usage detected, counting down to the next break')
+      this.emit('updateToolTip')
+    }
+  }
+
   nextBreak () {
+    this.stopUsageWatch()
     this.postponesNumber = 0
     this.deferredBreakEvent = null
     this.startedManually = false
@@ -297,6 +352,7 @@ class BreaksPlanner extends EventEmitter {
   }
 
   clear () {
+    this.stopUsageWatch()
     this.scheduler.cancel()
     this.deferredBreakEvent = null
     clearTimeout(this.meetingDelayTimer)

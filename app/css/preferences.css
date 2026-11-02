@@ -565,3 +565,88 @@ body > div:not(.navigation):not(.custom-message) {
     margin-inline-start: 12px;
   }
 }
+
+.theme > .theme-preview {
+  background: var(--main-bg-color);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  padding-bottom: 8px;
+  position: sticky;
+  top: 56px;
+  z-index: 5;
+}
+
+.preview-screen {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 14px, rgba(0, 0, 0, 0.09) 14px 16px),
+    #f4f4f4;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  width: 220px;
+}
+
+.preview-window {
+  align-items: center;
+  box-shadow: inset 0 0 0 1px var(--preview-outline);
+  box-sizing: border-box;
+  container-type: size;
+  display: flex;
+  gap: 6%;
+  justify-content: center;
+  position: absolute;
+}
+
+.preview-time {
+  font-size: min(38cqh, 14cqw);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.preview-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.preview-buttons i {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent);
+  height: min(30cqh, 9cqw);
+  width: min(30cqh, 9cqw);
+}
+
+.preview-tray {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+}
+
+.preview-tray.hidden {
+  display: none;
+}
+
+.preview-taskbar {
+  align-items: center;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  border-radius: 4px;
+  display: flex;
+  gap: 10px;
+  padding: 4px 10px;
+}
+
+.preview-taskbar-light {
+  background: #f3f3f3;
+}
+
+.preview-taskbar-dark {
+  background: #202020;
+}
+
+.preview-zoom,
+.preview-actual {
+  image-rendering: pixelated;
+}

@@ -246,7 +246,11 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
   body {
     border-radius: 8px;
     clip-path: inset(0 round 8px);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, #ffffff 10%, transparent);
+    box-shadow: inset 0 0 0 1px var(--popup-outline, color-mix(in srgb, #ffffff 10%, transparent));
+  }
+
+  body.ffffff {
+    --popup-outline: color-mix(in srgb, #000000 30%, transparent);
   }
 
   .breaks {

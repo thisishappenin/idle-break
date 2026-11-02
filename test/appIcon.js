@@ -1477,4 +1477,23 @@ describe('appIcon', function () {
   it('trayIconFileName falls back to the regular icon during a break with text style', function () {
     new AppIcon({ ...textParams, reference: 'finishBreak' }).trayIconFileName.should.equal('tray.ico')
   })
+
+  it('textNumber is the minutes to break for the text style', function () {
+    new AppIcon(textParams).textNumber.should.equal(25)
+    new AppIcon({ ...textParams, timeToBreak: 0 }).textNumber.should.equal(0)
+  })
+
+  it('textNumber is null for other tray styles', function () {
+    ;(new AppIcon({ ...textParams, trayIconStyle: 'time' }).textNumber === null).should.equal(true)
+  })
+
+  it('textNumber is null when paused or during a break', function () {
+    ;(new AppIcon({ ...textParams, paused: true }).textNumber === null).should.equal(true)
+    ;(new AppIcon({ ...textParams, reference: 'finishMicrobreak' }).textNumber === null).should.equal(true)
+  })
+
+  it('textNumber is null when the number does not fit two digits', function () {
+    ;(new AppIcon({ ...textParams, timeToBreak: 100 }).textNumber === null).should.equal(true)
+    ;(new AppIcon({ ...textParams, timeToBreak: undefined }).textNumber === null).should.equal(true)
+  })
 })

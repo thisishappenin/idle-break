@@ -4,11 +4,72 @@ import acceleratorFromEvent from './utils/acceleratorFromEvent.js'
 import { isLightColor } from './utils/colorContrast.js'
 import { parsePauseDurations, formatPauseDurations } from './utils/pauseDurations.js'
 import HtmlTranslate from './utils/htmlTranslate.js'
+import { previewWindowStyle, trayPreviewSize } from './utils/themePreview.js'
+import { drawTrayNumber } from './utils/trayNumberDrawer.js'
 
 import './platform.js'
 
 const versionChecker = new VersionChecker()
 let eventsAttached = false
+let themePreviewAttached = false
+let trayPreviewRequest = 0
+
+function selectedMainColor () {
+  const checked = document.querySelector('input[name="mainColor"]:checked')
+  if (!checked) return document.querySelector('#customColor').value
+  return checked.id === 'customColorRadio' ? document.querySelector('#customColor').value : checked.value
+}
+
+function updateWindowPreview () {
+  const screenBox = document.querySelector('#previewScreen')
+  screenBox.style.aspectRatio = `${window.screen.width} / ${window.screen.height}`
+  const transparent = document.querySelector('#enableTransparency').checked
+  const { outline, ...style } = previewWindowStyle({
+    color: selectedMainColor(),
+    opacity: transparent ? document.querySelector('#opacity').value / 100 : 1,
+    width: document.querySelector('#breakWindowWidth').value,
+    height: document.querySelector('#breakWindowHeight').value,
+    position: document.querySelector('#breakWindowPosition').value || 'center'
+  })
+  const box = document.querySelector('#previewWindow')
+  Object.assign(box.style, style)
+  box.style.setProperty('--preview-outline', outline)
+}
+
+async function updateTrayPreview () {
+  const request = ++trayPreviewRequest
+  const tray = document.querySelector('#previewTray')
+  const font = document.querySelector('#trayIconFont').value
+  const visible = document.querySelector('#trayIconStyle').value === 'text' && font !== ''
+  tray.classList.toggle('hidden', !visible)
+  if (!visible) return
+  const ratio = window.devicePixelRatio
+  const size = trayPreviewSize(ratio)
+  const crisp = document.querySelector('#trayIconCrispDigits').checked
+  for (const [selector, color] of [['.preview-taskbar-light', [0, 0, 0]], ['.preview-taskbar-dark', [255, 255, 255]]]) {
+    try {
+      const [{ rgba }] = await drawTrayNumber({ text: '15', fontFamily: font, color, crisp, sizes: [size] })
+      if (request !== trayPreviewRequest) return
+      const image = new window.ImageData(rgba, size, size)
+      const [actual, zoom] = document.querySelectorAll(`${selector} canvas`)
+      for (const [canvas, cssSize] of [[actual, size / ratio], [zoom, 64]]) {
+        canvas.width = size
+        canvas.height = size
+        canvas.style.width = `${cssSize}px`
+        canvas.style.height = `${cssSize}px`
+        canvas.getContext('2d').putImageData(image, 0, 0)
+      }
+    } catch (exception) {
+      console.error(exception)
+      tray.classList.add('hidden')
+    }
+  }
+}
+
+function updateThemePreview () {
+  updateWindowPreview()
+  updateTrayPreview()
+}
 
 window.onload = async (e) => {
   const bounds = await window.stretchly.getWindowBounds()
@@ -314,6 +375,14 @@ window.onload = async (e) => {
       }
     }
   })
+
+  updateThemePreview()
+  if (!themePreviewAttached) {
+    themePreviewAttached = true
+    const theme = document.querySelector('.theme')
+    theme.addEventListener('input', updateThemePreview)
+    theme.addEventListener('change', updateThemePreview)
+  }
 
   document.querySelectorAll('.sounds img').forEach(preview => {
     if (!eventsAttached) {

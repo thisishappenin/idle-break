@@ -24,6 +24,7 @@ import {
 import IdeasLoader from './utils/ideasLoader.js'
 import BreaksPlanner from './breaksPlanner.js'
 import AppIcon from './utils/appIcon.js'
+import TrayNumberIcons from './utils/trayNumberIcons.js'
 import { UntilMorning } from './utils/untilMorning.js'
 import AutostartManager from './utils/autostartManager.js'
 import Command from './utils/commands.js'
@@ -656,6 +657,53 @@ function trayIconUseDarkColors () {
   return nativeTheme.shouldUseDarkColors
 }
 
+let trayNumberIcons = null
+let trayIconRequestId = 0
+const trayIconRequests = new Map()
+
+ipcMain.on('tray-icon-rendered', (event, id, result) => {
+  const request = trayIconRequests.get(id)
+  if (!request) return
+  trayIconRequests.delete(id)
+  clearTimeout(request.timeout)
+  if (result?.error) {
+    request.reject(new Error(result.error))
+  } else {
+    request.resolve(result?.frames ?? null)
+  }
+})
+
+function renderTrayIcon (request) {
+  if (!processWin || processWin.isDestroyed() || processWin.webContents.isLoading()) {
+    return Promise.resolve(null)
+  }
+  return new Promise((resolve, reject) => {
+    const id = ++trayIconRequestId
+    const timeout = setTimeout(() => {
+      trayIconRequests.delete(id)
+      resolve(null)
+    }, 5000)
+    trayIconRequests.set(id, { resolve, reject, timeout })
+    processWin.webContents.send('render-tray-icon', id, request)
+  })
+}
+
+function drawnTrayNumberPath (number, useDarkColors) {
+  const font = settings.get('trayIconFont')
+  if (process.platform !== 'win32' || number === null || !font) return null
+  trayNumberIcons ??= new TrayNumberIcons({
+    directory: join(app.getPath('userData'), 'tray-icons'),
+    render: renderTrayIcon,
+    onReady: updateTray
+  })
+  return trayNumberIcons.pathFor({
+    text: String(number),
+    font,
+    dark: useDarkColors,
+    crisp: settings.get('trayIconCrispDigits')
+  })
+}
+
 function trayIconPath () {
   const useDarkColors = trayIconUseDarkColors()
   const params = {
@@ -673,7 +721,10 @@ function trayIconPath () {
     percentage: breakPlanner.progressPercentage,
     reference: breakPlanner.scheduler.reference
   }
-  const trayIconFileName = new AppIcon(params).trayIconFileName
+  const icon = new AppIcon(params)
+  const drawnPath = drawnTrayNumberPath(icon.textNumber, useDarkColors)
+  if (drawnPath) return drawnPath
+  const trayIconFileName = icon.trayIconFileName
   const pathToTrayIcon = join(__dirname, '/images/app-icons/', trayIconFileName)
   return pathToTrayIcon
 }

@@ -382,6 +382,27 @@
   </div>
   <div class="theme hidden">
     <div class="theme-label">
+      <span data-i18next="preferences.theme.preview"></span>
+    </div>
+    <div class="theme-preview" aria-hidden="true">
+      <div class="preview-screen" id="previewScreen">
+        <div class="preview-window" id="previewWindow">
+          <span class="preview-time">4:47</span>
+          <span class="preview-buttons"><i></i><i></i></span>
+        </div>
+      </div>
+      <div class="preview-tray" id="previewTray">
+        <div class="preview-taskbar preview-taskbar-light">
+          <canvas class="preview-actual"></canvas>
+          <canvas class="preview-zoom"></canvas>
+        </div>
+        <div class="preview-taskbar preview-taskbar-dark">
+          <canvas class="preview-actual"></canvas>
+          <canvas class="preview-zoom"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="theme-label">
       <span data-i18next="preferences.theme.appearance">
       </span>
     </div>
@@ -478,6 +499,26 @@
           <option value="text" data-i18next="preferences.theme.trayIconStyleText"></option>
         </select>
       </div>
+    </div>
+    <div>
+      <label data-i18next="preferences.theme.trayIconFont" for="trayIconFont"></label>
+      <div class="has-select">
+        <select name="trayIconFont" id="trayIconFont" data-setting>
+          <option value="DejaVu Sans">DejaVu Sans</option>
+          <option value="Segoe UI">Segoe UI</option>
+          <option value="Arial">Arial</option>
+          <option value="Verdana">Verdana</option>
+          <option value="Tahoma">Tahoma</option>
+          <option value="Calibri">Calibri</option>
+          <option value="Consolas">Consolas</option>
+          <option value="Bahnschrift">Bahnschrift</option>
+          <option value="" data-i18next="preferences.theme.trayIconFontBuiltIn"></option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <input type="checkbox" value="trayIconCrispDigits" id="trayIconCrispDigits">
+      <label data-i18next="preferences.theme.trayIconCrispDigits" for="trayIconCrispDigits"></label>
     </div>
     <div>
       <input type="radio" value="false" name="useMonochromeTrayIcon" id="colour">

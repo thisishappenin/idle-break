@@ -21,6 +21,15 @@ class AppIcon {
     this.reference = reference
   }
 
+  get textNumber () {
+    if (this.trayIconStyle !== 'text' || this.paused || this.reference === 'finishMicrobreak' || this.reference === 'finishBreak') {
+      return null
+    }
+    return Number.isInteger(this.timeToBreak) && this.timeToBreak >= 0 && this.timeToBreak <= 99
+      ? this.timeToBreak
+      : null
+  }
+
   get trayIconFileName () {
     const pausedString = this.paused ? 'Paused' : ''
     const invertedMonochromeString = this.inverted ? 'Inverted' : ''

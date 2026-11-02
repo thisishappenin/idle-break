@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Theme page shows a live preview of the break window (colour, transparency, size and position) and of the number-only tray icon, updating as you change settings
+- Corner popups and reminder popups get a dark outline on light themes, so a white popup stays visible over a white window
+- On Windows, the number-only tray icon is drawn at your display scale in a font you choose in Preferences (bundled DejaVu Sans by default), so the digits are taller and sharper
 - Compact break popups show a large m:ss countdown with square Postpone and Skip buttons beside it, and fit in much smaller windows
 - The tray shows when a break is waiting for the microphone to be free and which app is using it, and the log names that app
 - Reminder and idle popups go to the bottom right corner when break windows are centered, instead of the middle of the screen

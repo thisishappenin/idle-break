@@ -87,6 +87,8 @@ export default {
   screen: 'primary',
   breakContentScreen: 'all',
   trayIconStyle: 'default',
+  trayIconFont: 'DejaVu Sans',
+  trayIconCrispDigits: true,
   currentTimeInBreaks: false,
   currentTimeInBreaksFontSize: 28,
   currentTimeInBreaksFormat: 'tt',

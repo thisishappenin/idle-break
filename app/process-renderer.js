@@ -1,4 +1,5 @@
 import VersionChecker from './utils/versionChecker.js'
+import { drawTrayNumber } from './utils/trayNumberDrawer.js'
 
 window.onload = async (e) => {
   window.stretchly.onPlaySound(async (file, volume) => {
@@ -10,6 +11,15 @@ window.onload = async (e) => {
     const audio = new Audio(source)
     audio.volume = volume
     audio.play().catch(exception => __electronLog.error(exception))
+  })
+
+  window.stretchly.onRenderTrayIcon(async (id, request) => {
+    try {
+      window.stretchly.trayIconRendered(id, { frames: await drawTrayNumber(request) })
+    } catch (exception) {
+      __electronLog.error(exception)
+      window.stretchly.trayIconRendered(id, { error: String(exception) })
+    }
   })
 
   window.stretchly.onShowNotification(async (text, silent) => {

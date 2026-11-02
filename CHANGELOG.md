@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Compact break popups center their content and show Postpone and Skip as two equal boxed buttons side by side, styled like Windows notification buttons
 - The tray shows when a break is waiting for the microphone to be free and which app is using it, and the log names that app
 - Reminder and idle popups go to the bottom right corner when break windows are centered, instead of the middle of the screen
 - Preferences keep a centered, readable column on wide windows and stack labels above controls on narrow ones

@@ -36,10 +36,10 @@
     "syncPreferences": "Sync Preferences"
   },
   "break": {
-    "postpone": "Postpone this break",
-    "skip": "Skip this break",
+    "postpone": "Postpone",
+    "skip": "Skip",
     "title": "Time to take a break!",
-    "finish": "Finish this break"
+    "finish": "Finish"
   },
   "preferences": {
     "title": "Stretchly Preferences",

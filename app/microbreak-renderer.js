@@ -2,6 +2,7 @@ import HtmlTranslate from './utils/htmlTranslate.js'
 import applyBreakHealthEffect from './utils/breakHealthEffect.js'
 import createRunOnce from './utils/runOnce.js'
 import { isLightColor } from './utils/colorContrast.js'
+import formatClock from './utils/formatClock.js'
 import './platform.js'
 
 window.onload = async (event) => {
@@ -56,6 +57,7 @@ window.onload = async (event) => {
 
   const progress = document.querySelector('#progress')
   const progressTime = document.querySelector('#progress-time')
+  const compactLayout = window.matchMedia('(max-height: 320px), (max-width: 480px)')
   const postponeElement = document.querySelector('#postpone')
   const closeElement = document.querySelector('#close')
   const manualFinishElement = document.querySelector('#finish')
@@ -107,7 +109,9 @@ window.onload = async (event) => {
         }
         progress.value = (100 - passedPercent) * progress.max / 100
         if (secondChanged) {
-          progressTime.innerHTML = await window.utils.formatTimeRemaining(duration - passed, locale)
+          progressTime.innerHTML = compactLayout.matches
+            ? formatClock(duration - passed)
+            : await window.utils.formatTimeRemaining(duration - passed, locale)
         }
       }
     } else {

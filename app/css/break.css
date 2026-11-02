@@ -250,11 +250,11 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
   }
 
   .breaks {
-    align-content: center;
-    gap: 14px;
-    grid-template: auto auto / 1fr;
+    align-items: center;
+    gap: 6px 16px;
+    grid-template: auto / 1fr auto;
     justify-items: stretch;
-    padding: 16px 20px 20px;
+    padding: 12px 14px 16px 18px;
   }
 
   .breaks > :nth-child(1) > .microbreak-idea:empty,
@@ -264,23 +264,24 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
   }
 
   .breaks > * {
-    grid-column: 1;
+    grid-column: auto;
   }
 
   .breaks > :nth-child(1) {
+    min-width: 0;
     text-align: start;
   }
 
   .breaks > :nth-child(1) > .microbreak-idea,
   .breaks > :nth-child(1) > .break-idea {
-    font-size: 17px;
-    line-height: 23px;
+    font-size: 14px;
+    line-height: 19px;
   }
 
   .breaks > :nth-child(1) > .break-text {
-    font-size: 13px;
-    line-height: 18px;
-    margin-top: 4px;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 2px;
   }
 
   .breaks progress {
@@ -298,26 +299,31 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
   }
 
   #progress-time {
-    font-size: 13px;
-    padding-top: 6px;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 40px;
+    opacity: 1;
+    padding-top: 0;
   }
 
   .breaks > :nth-child(2) {
     flex-wrap: nowrap;
-    gap: 8px;
-    justify-content: stretch;
+    gap: 6px;
   }
 
   .breaks > :nth-child(2) > a {
     background: color-mix(in srgb, var(--surface-ink) 8%, transparent);
     border-radius: 4px;
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--surface-ink) 18%, transparent);
-    flex: 1 1 0;
-    font-size: 14px;
+    flex-direction: column;
+    font-size: 11px;
+    gap: 4px;
+    height: 56px;
     justify-content: center;
-    line-height: 18px;
-    min-height: 40px;
-    padding: 0 12px;
+    line-height: 13px;
+    padding: 0;
+    width: 56px;
   }
 
   .breaks > :nth-child(2) > a:hover,
@@ -325,14 +331,10 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
     background: color-mix(in srgb, var(--surface-ink) 16%, transparent);
   }
 
-  .breaks > :nth-child(2) > a img {
-    display: none;
-  }
-
   .breaks > :nth-child(2) > a img,
   body[dir=rtl] .breaks > :nth-child(2) > a img {
-    height: 14px;
-    width: 14px;
+    height: 18px;
+    width: 18px;
   }
 
   .breaks > :nth-child(2) .tiptext {

@@ -76,17 +76,19 @@ body > div > :last-child {
 .slider-row {
   align-items: center;
   display: grid;
-  grid-template-columns: var(--label-width, 200px) auto 1fr;
+  grid-template-columns: 1fr auto;
+  row-gap: 6px;
 }
 
-.settings .slider-row {
-  --label-width: 280px;
+.slider-row > label {
+  grid-column: 1 / -1;
 }
 
 .slider-row > input[type="text"] {
   box-sizing: border-box;
-  margin: 0 16px 0 13px;
-  width: 200px;
+  grid-column: 1 / -1;
+  margin: 0;
+  width: 100%;
 }
 
 .shortcut-input {
@@ -95,63 +97,12 @@ body > div > :last-child {
   width: 180px;
 }
 
-.schedule {
-  display: grid;
-  font-size: 13px;
-  grid-gap: 16px 0;
-  grid-template: auto / 25% auto 16px;
-  letter-spacing: -0.08px;
-  padding-top: 86px;
-}
-
-.schedule > div {
-  grid-column: 2/-2;
-}
-
-.schedule > div > p {
-  margin: 0;
-  max-width: 280px;
-}
 
 
-.settings,
-.theme,
-.audio,
-.shortcuts {
-  display: grid;
-  font-size: 13px;
-  grid-gap: 16px 0;
-  grid-template: auto / 25% auto 16px;
-  letter-spacing: -0.08px;
-  padding-top: 86px;
-}
 
-.settings > div,
-.theme > div,
-.audio > div,
-.shortcuts > div {
-  grid-column: 2/-2;
-}
 
-.settings > .theme-label,
-.theme > .theme-label,
-.audio > .theme-label,
-.shortcuts > .theme-label,
-.schedule > .theme-label {
-  align-self: start;
-  padding-top: 2px;
-  grid-column: 1/2;
-  padding: 0 16px;
-  text-align: right;
-}
 
-body[dir=rtl] .settings > .theme-label,
-body[dir=rtl] .schedule > .theme-label,
-body[dir=rtl] .theme > .theme-label,
-body[dir=rtl] .audio > .theme-label,
-body[dir=rtl] .shortcuts > .theme-label {
-  text-align: left;
-}
+
 
 #customColorRadio + label:before {
   background: var(--custom-color);
@@ -186,10 +137,6 @@ body[dir=rtl] .shortcuts > .theme-label {
   min-width: 260px;
 }
 
-.theme > .theme-label:first-child {
-  align-self: start;
-  padding-top: 10px;
-}
 
 .swatches > .appearance > input[type="radio"] + label:before {
   margin: 0;
@@ -483,7 +430,7 @@ body[dir=rtl] .heart > .authenticate > a {
 /* Keep content readable on wide windows: one centered column, controls next to their labels */
 body > div:not(.navigation):not(.custom-message) {
   margin-inline: auto;
-  max-width: 820px;
+  max-width: 1120px;
 }
 
 .shortcut {
@@ -500,54 +447,19 @@ body > div:not(.navigation):not(.custom-message) {
   width: 200px;
 }
 
-@media (max-width: 640px) {
-  .settings,
-  .theme,
-  .audio,
-  .shortcuts,
-  .schedule {
-    grid-template-columns: 16px auto 16px;
-  }
-
-  .settings > .theme-label,
-  .theme > .theme-label,
-  .audio > .theme-label,
-  .shortcuts > .theme-label,
-  .schedule > .theme-label {
-    font-weight: 600;
-    grid-column: 2 / -2;
-    padding: 0;
-    text-align: start;
-  }
-
-  .swatches {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .slider-row,
-  .shortcut {
-    grid-template-columns: auto 1fr;
-    justify-content: stretch;
-    row-gap: 6px;
-  }
-
-  .slider-row > label,
-  .shortcut > label {
-    grid-column: 1 / -1;
-  }
-
-  .slider-row > input,
-  .slider-row > input[type="text"],
-  .shortcut > input {
-    margin-inline: 0;
-  }
-
-  .slider-row > output {
-    margin-inline-start: 12px;
+@media (max-width: 860px) {
+  .pref-columns {
+    column-count: 1;
   }
 }
 
-.theme > .theme-preview {
+@media (max-width: 640px) {
+  .swatches {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.theme-preview {
   align-items: flex-start;
   background: var(--main-bg-color);
   display: flex;
@@ -607,4 +519,62 @@ body > div:not(.navigation):not(.custom-message) {
 
 .tray-number-only.hidden {
   display: none;
+}
+
+/* Tabs: sections flow in two columns on wide windows, one column on narrow ones */
+.settings,
+.schedule,
+.theme,
+.audio,
+.shortcuts {
+  box-sizing: border-box;
+  font-size: 13px;
+  letter-spacing: -0.08px;
+  padding: 80px 24px 24px;
+}
+
+.pref-columns {
+  column-count: 2;
+  column-gap: 40px;
+}
+
+.pref-section {
+  break-inside: avoid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.pref-section > .theme-label {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  text-align: start;
+}
+
+.pref-section > div > p,
+.pref-section p {
+  margin: 0;
+}
+
+.pref-section .has-select {
+  min-width: 260px;
+}
+
+.theme > .preview-section {
+  background: var(--main-bg-color);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  position: sticky;
+  top: 56px;
+  z-index: 5;
+}
+
+.shortcut {
+  grid-template-columns: 1fr auto;
+}
+
+.shortcut > input {
+  margin: 0;
 }

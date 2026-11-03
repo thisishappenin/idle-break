@@ -1,8 +1,8 @@
 import { BrowserWindow, ipcMain, nativeTheme, screen } from 'electron'
 import { trayPanelPosition } from './trayPanelPosition.js'
 
-const WIDTH = 300
-const MIN_HEIGHT = 120
+const WIDTH = 280
+const MIN_HEIGHT = 100
 const REOPEN_GUARD = 250
 
 class TrayPanel {
@@ -29,7 +29,7 @@ class TrayPanel {
     ipcMain.on('tray-panel-height', (event, height) => {
       if (!this.isPanel(event) || !Number.isFinite(height)) return
       const area = screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).workArea
-      this.win.setSize(WIDTH, Math.round(Math.min(Math.max(height, MIN_HEIGHT), area.height - 16)))
+      this.win.setContentSize(WIDTH, Math.round(Math.min(Math.max(height, MIN_HEIGHT), area.height - 16)))
       if (this.visible) this.place()
     })
   }
@@ -119,7 +119,9 @@ class TrayPanel {
 
   push () {
     if (this.win && !this.win.isDestroyed() && this.loaded) {
-      this.win.webContents.send('tray-panel-state', this.getState())
+      const state = this.getState()
+      this.win.setBackgroundColor(state.themeColor || (nativeTheme.shouldUseDarkColors ? '#202020' : '#f3f3f3'))
+      this.win.webContents.send('tray-panel-state', state)
     }
   }
 

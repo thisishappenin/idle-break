@@ -391,7 +391,7 @@ window.onload = async (e) => {
     }
   })
 
-  document.querySelector('.settings > div > button').onclick = (event) => {
+  document.querySelector('#restoreDefaults').onclick = (event) => {
     window.stretchly.restoreDefaults()
   }
 

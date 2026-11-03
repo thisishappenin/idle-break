@@ -18,7 +18,8 @@ export function buildTrayPanelState ({
   pauseIndefinitely,
   idleEnabled,
   contributor,
-  meeting
+  meeting,
+  themeColor
 }) {
   const start = []
   if (!locked && canAct && hasMicrobreak) {
@@ -32,6 +33,7 @@ export function buildTrayPanelState ({
   return {
     locked,
     newVersion: !locked && newVersion,
+    themeColor: themeColor || null,
     meeting: !locked && meeting ? { apps: meeting.apps, waiting: Boolean(meeting.waiting) } : null,
     status: statusLines,
     countdown: {
@@ -47,7 +49,10 @@ export function buildTrayPanelState ({
       ? {
           options: pauseDurations.map(minutes => ({
             minutes,
-            label: t('main.pauseFor', { duration: formatDuration(minutes * 60 * 1000) })
+            label: t('main.pauseFor', { duration: formatDuration(minutes * 60 * 1000) }),
+            short: minutes >= 60 && minutes % 60 === 0
+              ? t('main.trayPanelHours', { hours: minutes / 60 })
+              : t('main.trayPanelMinutes', { minutes })
           })),
           morning: Boolean(pauseUntilMorning),
           indefinitely: Boolean(pauseIndefinitely)

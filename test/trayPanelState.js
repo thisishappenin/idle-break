@@ -2,7 +2,7 @@ import { describe, it } from 'vitest'
 import { expect } from 'chai'
 import { buildTrayPanelState } from '../app/utils/trayPanelState.js'
 
-const t = (key, options = {}) => (options.minutes !== undefined ? `${key}:${options.minutes}` : options.duration ? `${key}:${options.duration}` : key)
+const t = (key, options = {}) => (options.minutes !== undefined ? `${key}:${options.minutes}` : options.hours !== undefined ? `${key}:${options.hours}h` : options.duration ? `${key}:${options.duration}` : key)
 
 const base = {
   t,
@@ -97,5 +97,17 @@ describe('trayPanelState', () => {
 
   it('does not report a meeting in strict mode', () => {
     expect(buildTrayPanelState({ ...base, locked: true, meeting: { apps: [], waiting: false } }).meeting).to.equal(null)
+  })
+
+  it('gives each pause option a short label for compact buttons', () => {
+    const { pause } = buildTrayPanelState({ ...base, pauseDurations: [5, 30, 60, 120, 90] })
+    expect(pause.options.map(option => option.short)).to.deep.equal([
+      'main.trayPanelMinutes:5', 'main.trayPanelMinutes:30', 'main.trayPanelHours:1h', 'main.trayPanelHours:2h', 'main.trayPanelMinutes:90'
+    ])
+  })
+
+  it('passes the chosen theme colour on, or null when not using it', () => {
+    expect(buildTrayPanelState({ ...base, themeColor: '#478484' }).themeColor).to.equal('#478484')
+    expect(buildTrayPanelState(base).themeColor).to.equal(null)
   })
 })

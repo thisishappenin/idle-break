@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - "Minutes to break (number only)" tray icon style, without the Stretchly logo
 
 ### Fixed
+- The tray panel no longer leaves an empty strip at the bottom; it resizes to its content
 - Time spent in a meeting is not counted as time away, so a call you sat through without touching the computer no longer cancels the countdown or the break waiting for it when it ends
 - The break countdown restarts when you return after a break during a long absence (for example a lock), instead of staying stuck at 0
 - Popups no longer shrink below a size that fits their content on small monitors (360x120), long idea text is trimmed instead of overlapping the countdown, Postpone and Skip grow to fit longer translated labels, and mid-size break windows no longer push their buttons off screen
@@ -56,6 +57,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- Preferences open wider by default and lay each tab out in two columns, so they scroll much less; on narrow windows they fall back to one column
+- The tray panel is more compact (short pause buttons, one-line session stepper) and follows the Appearance colour chosen on the Theme tab
 - Preferences are grouped into labelled sections: Settings is split into General, Breaks, When you are away, Calls and Do Not Disturb and Defaults; the break window display options (window or full screen, all monitors) moved to Theme next to the window size and position; the tray number font, size and smoothing only show for the number-only tray style on Windows
 - The idle time option now says what it does: the countdown pauses while you are away and restarts from the beginning when you return
 - The tray panel no longer repeats the time to the next break under the countdown

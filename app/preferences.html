@@ -60,602 +60,612 @@
     </a>
   </nav>
   <div class="settings">
-    <div class="theme-label">
-      <span data-i18next="preferences.settings.general"></span>
-    </div>
-    <div class="store-hidden portable-hidden">
-      <input type="checkbox" value="openAtLogin" id="openAtLogin">
-      <label data-i18next="preferences.settings.openAtLogin" for="openAtLogin"></label>
-    </div>
-    <div>
-      <label data-i18next="preferences.settings.language" for="language"></label>
-      <div class="has-select">
-        <select name="language" id="language">
-          <!--Keep languages in the alphabet order-->
-          <option value="ajp">اللهجة الأردنية</option>
-          <option value="bg">Български</option>
-          <option value="be">Беларуская мова</option>
-          <option value="bn">বাংলা</option>
-          <option value="ca">Català</option>
-          <option value="cs">Čeština</option>
-          <option value="da">Dansk</option>
-          <option value="de">Deutsch</option>
-          <option value="el">Ελληνικά</option>
-          <option value="en">English</option>
-          <option value="eo">Esperanto</option>
-          <option value="es">Español</option>
-          <option value="et">Eesti keel</option>
-          <option value="fa">فارسی</option>
-          <option value="fi">Suomi</option>
-          <option value="fil">Wikang Filipino</option>
-          <option value="fr">Français</option>
-          <option value="gl">Galego</option>
-          <option value="gu">ગુજરાતી</option>
-          <option value="he">עברית</option>
-          <option value="hi">हिन्दी</option>
-          <option value="hu">Magyar</option>
-          <option value="id">Bahasa Indonesia</option>
-          <option value="it">Italiano</option>
-          <option value="ja">日本語</option>
-          <option value="ko">한국어</option>
-          <option value="lt">Lietuvių</option>
-          <option value="lv">Latviešu</option>
-          <option value="mk">Македонски</option>
-          <option value="nb-NO">Bokmål</option>
-          <option value="nl">Nederlands</option>
-          <option value="np">नेपाली</option>
-          <option value="pl">Polski</option>
-          <option value="pt">Português</option>
-          <option value="pt-BR">Brasileiro</option>
-          <option value="pu">ਪੰਜਾਬੀ</option>
-          <option value="ro">Română</option>
-          <option value="ru">Русский</option>
-          <option value="si">සිංහල</option>
-          <option value="sk">Slovenčina</option>
-          <option value="sl">Slovenščina</option>
-          <option value="sr">српски језик</option>
-          <option value="sv">Svenska</option>
-          <option value="ta">தமிழ்</option>
-          <option value="th">ภาษาไทย</option>
-          <option value="tr">Türkçe</option>
-          <option value="uk">Українська</option>
-          <option value="vi">Tiếng Việt</option>
-          <option value="yi">ייִדיש</option>
-          <option value="zh-CN">简体中文</option>
-          <option value="zh-TW">正體中文</option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.settings.breaks"></span>
-    </div>
-    <div>
-      <input type="checkbox" value="ideas" id="showIdeas">
-      <label data-i18next="preferences.settings.showIdeas" for="showIdeas"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="themedNotifications" id="themedNotifications">
-      <label data-i18next="preferences.settings.themedNotifications" for="themedNotifications"></label>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.settings.away"></span>
-    </div>
-    <div>
-      <input type="checkbox" value="naturalBreaks" id="monitorIdleTime">
-      <label data-i18next="preferences.settings.monitorIdleTime" for="monitorIdleTime"></label>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.settings.idleResetTime" for="idleResetTime"></label>
-      <input type="range" min="1" max="60" step="1" name="naturalBreaksInactivityResetTime"
-        data-divisor="60000" id="idleResetTime">
-      <output data-unit="minutes"></output>
-    </div>
-    <div>
-      <input type="checkbox" value="naturalBreaksResetNotification" id="naturalBreaksResetNotification">
-      <label data-i18next="preferences.settings.naturalBreaksResetNotification" for="naturalBreaksResetNotification"></label>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.settings.naturalBreaksResetNotificationMaxIdleTime" for="resetNotificationMaxIdleTime"></label>
-      <input type="range" min="1" max="60" step="1" name="naturalBreaksResetNotificationMaxIdleTime"
-        data-divisor="60000" id="resetNotificationMaxIdleTime">
-      <output data-unit="minutes"></output>
-    </div>
-    <div>
-      <input type="checkbox" value="pauseForSuspendOrLock" id="pauseForSuspendOrLock">
-      <label data-i18next="preferences.settings.pauseForSuspendOrLock" for="pauseForSuspendOrLock"></label>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.settings.calls"></span>
-    </div>
-    <div>
-      <input type="checkbox" value="monitorMeetings" id="monitorMeetings">
-      <label data-i18next="preferences.settings.monitorMeetings" for="monitorMeetings"></label>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.settings.meetingBreakDelay" for="meetingBreakDelay"></label>
-      <input type="range" min="0" max="60" step="5" name="meetingBreakDelay" data-divisor="1000" id="meetingBreakDelay">
-      <output data-unit="seconds"></output>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.settings.monitorMeetingsIgnoreApps" for="monitorMeetingsIgnoreApps"></label>
-      <input type="text" id="monitorMeetingsIgnoreApps">
-    </div>
-    <div>
-      <input type="checkbox" class="negative" value="monitorDnd" id="monitorDnd">
-      <label data-i18next="preferences.settings.monitorDnd" for="monitorDnd"></label>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.settings.defaults"></span>
-    </div>
-    <div>
-      <button type="button" data-i18next="preferences.settings.restoreDefaults"></button>
+    <div class="pref-columns">
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.settings.general"></span>
+            </div>
+            <div class="store-hidden portable-hidden">
+              <input type="checkbox" value="openAtLogin" id="openAtLogin">
+              <label data-i18next="preferences.settings.openAtLogin" for="openAtLogin"></label>
+            </div>
+            <div>
+              <label data-i18next="preferences.settings.language" for="language"></label>
+              <div class="has-select">
+                <select name="language" id="language">
+                  <!--Keep languages in the alphabet order-->
+                  <option value="ajp">اللهجة الأردنية</option>
+                  <option value="bg">Български</option>
+                  <option value="be">Беларуская мова</option>
+                  <option value="bn">বাংলা</option>
+                  <option value="ca">Català</option>
+                  <option value="cs">Čeština</option>
+                  <option value="da">Dansk</option>
+                  <option value="de">Deutsch</option>
+                  <option value="el">Ελληνικά</option>
+                  <option value="en">English</option>
+                  <option value="eo">Esperanto</option>
+                  <option value="es">Español</option>
+                  <option value="et">Eesti keel</option>
+                  <option value="fa">فارسی</option>
+                  <option value="fi">Suomi</option>
+                  <option value="fil">Wikang Filipino</option>
+                  <option value="fr">Français</option>
+                  <option value="gl">Galego</option>
+                  <option value="gu">ગુજરાતી</option>
+                  <option value="he">עברית</option>
+                  <option value="hi">हिन्दी</option>
+                  <option value="hu">Magyar</option>
+                  <option value="id">Bahasa Indonesia</option>
+                  <option value="it">Italiano</option>
+                  <option value="ja">日本語</option>
+                  <option value="ko">한국어</option>
+                  <option value="lt">Lietuvių</option>
+                  <option value="lv">Latviešu</option>
+                  <option value="mk">Македонски</option>
+                  <option value="nb-NO">Bokmål</option>
+                  <option value="nl">Nederlands</option>
+                  <option value="np">नेपाली</option>
+                  <option value="pl">Polski</option>
+                  <option value="pt">Português</option>
+                  <option value="pt-BR">Brasileiro</option>
+                  <option value="pu">ਪੰਜਾਬੀ</option>
+                  <option value="ro">Română</option>
+                  <option value="ru">Русский</option>
+                  <option value="si">සිංහල</option>
+                  <option value="sk">Slovenčina</option>
+                  <option value="sl">Slovenščina</option>
+                  <option value="sr">српски језик</option>
+                  <option value="sv">Svenska</option>
+                  <option value="ta">தமிழ்</option>
+                  <option value="th">ภาษาไทย</option>
+                  <option value="tr">Türkçe</option>
+                  <option value="uk">Українська</option>
+                  <option value="vi">Tiếng Việt</option>
+                  <option value="yi">ייִדיש</option>
+                  <option value="zh-CN">简体中文</option>
+                  <option value="zh-TW">正體中文</option>
+                </select>
+              </div>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.settings.breaks"></span>
+            </div>
+            <div>
+              <input type="checkbox" value="ideas" id="showIdeas">
+              <label data-i18next="preferences.settings.showIdeas" for="showIdeas"></label>
+            </div>
+            <div>
+              <input type="checkbox" value="themedNotifications" id="themedNotifications">
+              <label data-i18next="preferences.settings.themedNotifications" for="themedNotifications"></label>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.settings.away"></span>
+            </div>
+            <div>
+              <input type="checkbox" value="naturalBreaks" id="monitorIdleTime">
+              <label data-i18next="preferences.settings.monitorIdleTime" for="monitorIdleTime"></label>
+            </div>
+            <div class="slider-row">
+              <label data-i18next="preferences.settings.idleResetTime" for="idleResetTime"></label>
+              <input type="range" min="1" max="60" step="1" name="naturalBreaksInactivityResetTime"
+                data-divisor="60000" id="idleResetTime">
+              <output data-unit="minutes"></output>
+            </div>
+            <div>
+              <input type="checkbox" value="naturalBreaksResetNotification" id="naturalBreaksResetNotification">
+              <label data-i18next="preferences.settings.naturalBreaksResetNotification" for="naturalBreaksResetNotification"></label>
+            </div>
+            <div class="slider-row">
+              <label data-i18next="preferences.settings.naturalBreaksResetNotificationMaxIdleTime" for="resetNotificationMaxIdleTime"></label>
+              <input type="range" min="1" max="60" step="1" name="naturalBreaksResetNotificationMaxIdleTime"
+                data-divisor="60000" id="resetNotificationMaxIdleTime">
+              <output data-unit="minutes"></output>
+            </div>
+            <div>
+              <input type="checkbox" value="pauseForSuspendOrLock" id="pauseForSuspendOrLock">
+              <label data-i18next="preferences.settings.pauseForSuspendOrLock" for="pauseForSuspendOrLock"></label>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.settings.calls"></span>
+            </div>
+            <div>
+              <input type="checkbox" value="monitorMeetings" id="monitorMeetings">
+              <label data-i18next="preferences.settings.monitorMeetings" for="monitorMeetings"></label>
+            </div>
+            <div class="slider-row">
+              <label data-i18next="preferences.settings.meetingBreakDelay" for="meetingBreakDelay"></label>
+              <input type="range" min="0" max="60" step="5" name="meetingBreakDelay" data-divisor="1000" id="meetingBreakDelay">
+              <output data-unit="seconds"></output>
+            </div>
+            <div class="slider-row">
+              <label data-i18next="preferences.settings.monitorMeetingsIgnoreApps" for="monitorMeetingsIgnoreApps"></label>
+              <input type="text" id="monitorMeetingsIgnoreApps">
+            </div>
+            <div>
+              <input type="checkbox" class="negative" value="monitorDnd" id="monitorDnd">
+              <label data-i18next="preferences.settings.monitorDnd" for="monitorDnd"></label>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.settings.defaults"></span>
+            </div>
+            <div>
+              <button type="button" id="restoreDefaults" data-i18next="preferences.settings.restoreDefaults"></button>
+            </div>
+      </section>
     </div>
   </div>
   <div class="schedule hidden">
-    <div class="theme-label">
-      <span data-i18next="preferences.schedule.breakTypes"></span>
-    </div>
-    <div>
-      <div class="has-select">
-        <select name="singleBreakType" id="singleBreakType">
-          <option value="false" data-i18next="preferences.schedule.miniAndLong"></option>
-          <option value="true" data-i18next="preferences.schedule.singleType"></option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.schedule.miniBreaks" data-i18next-single="preferences.schedule.singleBreaks">
-      </span>
-    </div>
-    <div>
-      <p data-i18next="preferences.schedule.miniBreaksInfo" data-i18next-single="preferences.schedule.singleBreaksInfo">
-      </p>
-    </div>
-    <div data-multi-only>
-      <input type="checkbox" class="enabletype" value="microbreak" id="enableMiniBreaks">
-      <label data-i18next="preferences.schedule.enableMiniBreaks" for="enableMiniBreaks"></label>
-    </div>
-    <div>
-      <label data-i18next="preferences.schedule.breakFor" data-same-width-label for="miniBreakFor"></label>
-      <input type="range" min="10" max="600" step="10" list="tickmarksMiniBreakFor" name="microbreakDuration"
-        data-divisor="1000" id="miniBreakFor">
-      <datalist id="tickmarksMiniBreakFor">
-        <option value="10"></option>
-        <option value="20"></option>
-        <option value="30"></option>
-        <option value="40"></option>
-        <option value="50"></option>
-        <option value="60"></option>
-        <option value="80"></option>
-        <option value="120"></option>
-        <option value="180"></option>
-        <option value="240"></option>
-        <option value="300"></option>
-        <option value="360"></option>
-        <option value="420"></option>
-        <option value="480"></option>
-        <option value="540"></option>
-        <option value="600"></option>
-      </datalist>
-      <output data-unit="seconds"></output>
-    </div>
-    <div>
-      <label data-i18next="preferences.schedule.every" data-same-width-label for="miniBreakEvery"></label>
-      <input type="range" min="5" max="65" step="5" list="tickmarksMiniBreakEvery" name="microbreakInterval"
-        data-divisor="60000" id="miniBreakEvery">
-      <datalist id="tickmarksMiniBreakEvery">
-        <option value="10"></option>
-        <option value="20"></option>
-        <option value="30"></option>
-        <option value="40"></option>
-        <option value="50"></option>
-        <option value="60"></option>
-      </datalist>
-      <output data-unit="minutes"></output>
-    </div>
-    <div>
-      <input type="checkbox" value="microbreakNotification" id="showNotificationBeforeMiniBreak">
-      <label data-i18next="preferences.schedule.showNotificationBeforeMiniBreak" data-i18next-single="preferences.schedule.showNotificationBeforeSingleBreak"
-        for="showNotificationBeforeMiniBreak"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="microbreakPostpone" id="enablePostponeMini">
-      <label data-i18next="preferences.schedule.enablePostponeMini" data-i18next-single="preferences.schedule.enablePostponeSingle" for="enablePostponeMini"></label>
-    </div>
-    <div data-multi-only>
-      <hr />
-    </div>
-    <div data-multi-only class="theme-label">
-      <span data-i18next="preferences.schedule.longBreaks">
-      </span>
-    </div>
-    <div data-multi-only>
-      <p data-i18next="preferences.schedule.longBreaksInfo">
-      </p>
-    </div>
-    <div data-multi-only>
-      <input type="checkbox" class="enabletype" value="break" id="enableLongBreaks">
-      <label data-i18next="preferences.schedule.enableLongBreaks" for="enableLongBreaks"></label>
-    </div>
-    <div data-multi-only>
-      <label data-i18next="preferences.schedule.breakFor" data-same-width-label for="longBreakFor"></label>
-      <input type="range" min="1" max="60" step="1" list="tickmarksLongBreakFor" name="breakDuration"
-        data-divisor="60000" id="longBreakFor">
-      <datalist id="tickmarksLongBreakFor">
-        <option value="10"></option>
-        <option value="20"></option>
-        <option value="30"></option>
-        <option value="40"></option>
-        <option value="50"></option>
-      </datalist>
-      <output data-unit="minutes"></output>
-    </div>
-    <div data-multi-only>
-      <label data-i18next="preferences.schedule.every" data-same-width-label for="longBreakEvery"></label>
-      <input type="range" min="1" max="30" step="1" list="tickmarksLongBreakEvery" name="breakInterval" data-divisor="1"
-        id="longBreakEvery">
-      <datalist id="tickmarksLongBreakEvery">
-        <option value="5"></option>
-        <option value="10"></option>
-        <option value="15"></option>
-        <option value="20"></option>
-        <option value="25"></option>
-        <option value="30"></option>
-      </datalist>
-      <output data-unit="minutes"></output>
-    </div>
-    <div data-multi-only>
-      <input type="checkbox" value="breakNotification" id="showNotificationBeforeLongBreak">
-      <label data-i18next="preferences.schedule.showNotificationBeforeLongBreak"
-        for="showNotificationBeforeLongBreak"></label>
-    </div>
-    <div data-multi-only>
-      <input type="checkbox" value="breakPostpone" id="enablePostponeLong">
-      <label data-i18next="preferences.schedule.enablePostponeLong" for="enablePostponeLong"></label>
-    </div>
-    <div data-strict-mode>
-      <hr />
-    </div>
-    <div class="theme-label" data-strict-mode>
-      <span data-i18next="preferences.schedule.strictMode">
-      </span>
-    </div>
-    <div data-strict-mode>
-      <p data-i18next="preferences.schedule.strictModeInfo" data-i18next-single="preferences.schedule.strictModeInfoSingle">
-      </p>
-    </div>
-    <div data-strict-mode>
-      <input type="checkbox" value="microbreakStrictMode" id="enableStrictMini">
-      <label data-i18next="preferences.schedule.enableStrictMini" data-i18next-single="preferences.schedule.enableStrictSingle" for="enableStrictMini"></label>
-    </div>
-    <div data-multi-only data-strict-mode>
-      <input type="checkbox" value="breakStrictMode" id="enableStrictLong">
-      <label data-i18next="preferences.schedule.enableStrictLong" for="enableStrictLong"></label>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.schedule.postponing"></span>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.schedule.miniPostponeTime" data-i18next-single="preferences.schedule.singlePostponeTime" for="miniPostponeTime"></label>
-      <input type="range" min="1" max="10" step="1" name="microbreakPostponeTime" data-divisor="60000" id="miniPostponeTime">
-      <output data-unit="minutes"></output>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.schedule.miniPostponesLimit" data-i18next-single="preferences.schedule.singlePostponesLimit" for="miniPostponesLimit"></label>
-      <input type="range" min="1" max="50" step="1" name="microbreakPostponesLimit" data-divisor="1" id="miniPostponesLimit">
-      <output data-unit="none"></output>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.schedule.miniPostponableFor" data-i18next-single="preferences.schedule.singlePostponableFor" for="miniPostponableFor"></label>
-      <input type="range" min="10" max="100" step="10" name="microbreakPostponableDurationPercent" data-divisor="1" id="miniPostponableFor">
-      <output data-unit="percent"></output>
-    </div>
-    <div data-multi-only class="slider-row">
-      <label data-i18next="preferences.schedule.longPostponeTime" for="longPostponeTime"></label>
-      <input type="range" min="1" max="30" step="1" name="breakPostponeTime" data-divisor="60000" id="longPostponeTime">
-      <output data-unit="minutes"></output>
-    </div>
-    <div data-multi-only class="slider-row">
-      <label data-i18next="preferences.schedule.longPostponesLimit" for="longPostponesLimit"></label>
-      <input type="range" min="1" max="10" step="1" name="breakPostponesLimit" data-divisor="1" id="longPostponesLimit">
-      <output data-unit="none"></output>
-    </div>
-    <div class="slider-row" data-multi-only>
-      <label data-i18next="preferences.schedule.longPostponableFor" for="longPostponableFor"></label>
-      <input type="range" min="10" max="100" step="10" name="breakPostponableDurationPercent" data-divisor="1" id="longPostponableFor">
-      <output data-unit="percent"></output>
-    </div>
-    <div>
-      <input type="checkbox" value="alwaysShowSkip" id="alwaysShowSkip">
-      <label data-i18next="preferences.schedule.alwaysShowSkip" for="alwaysShowSkip"></label>
+    <div class="pref-columns">
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.schedule.breakTypes"></span>
+            </div>
+            <div>
+              <div class="has-select">
+                <select name="singleBreakType" id="singleBreakType">
+                  <option value="false" data-i18next="preferences.schedule.miniAndLong"></option>
+                  <option value="true" data-i18next="preferences.schedule.singleType"></option>
+                </select>
+              </div>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.schedule.miniBreaks" data-i18next-single="preferences.schedule.singleBreaks">
+              </span>
+            </div>
+            <div>
+              <p data-i18next="preferences.schedule.miniBreaksInfo" data-i18next-single="preferences.schedule.singleBreaksInfo">
+              </p>
+            </div>
+            <div data-multi-only>
+              <input type="checkbox" class="enabletype" value="microbreak" id="enableMiniBreaks">
+              <label data-i18next="preferences.schedule.enableMiniBreaks" for="enableMiniBreaks"></label>
+            </div>
+            <div>
+              <label data-i18next="preferences.schedule.breakFor" data-same-width-label for="miniBreakFor"></label>
+              <input type="range" min="10" max="600" step="10" list="tickmarksMiniBreakFor" name="microbreakDuration"
+                data-divisor="1000" id="miniBreakFor">
+              <datalist id="tickmarksMiniBreakFor">
+                <option value="10"></option>
+                <option value="20"></option>
+                <option value="30"></option>
+                <option value="40"></option>
+                <option value="50"></option>
+                <option value="60"></option>
+                <option value="80"></option>
+                <option value="120"></option>
+                <option value="180"></option>
+                <option value="240"></option>
+                <option value="300"></option>
+                <option value="360"></option>
+                <option value="420"></option>
+                <option value="480"></option>
+                <option value="540"></option>
+                <option value="600"></option>
+              </datalist>
+              <output data-unit="seconds"></output>
+            </div>
+            <div>
+              <label data-i18next="preferences.schedule.every" data-same-width-label for="miniBreakEvery"></label>
+              <input type="range" min="5" max="65" step="5" list="tickmarksMiniBreakEvery" name="microbreakInterval"
+                data-divisor="60000" id="miniBreakEvery">
+              <datalist id="tickmarksMiniBreakEvery">
+                <option value="10"></option>
+                <option value="20"></option>
+                <option value="30"></option>
+                <option value="40"></option>
+                <option value="50"></option>
+                <option value="60"></option>
+              </datalist>
+              <output data-unit="minutes"></output>
+            </div>
+            <div>
+              <input type="checkbox" value="microbreakNotification" id="showNotificationBeforeMiniBreak">
+              <label data-i18next="preferences.schedule.showNotificationBeforeMiniBreak" data-i18next-single="preferences.schedule.showNotificationBeforeSingleBreak"
+                for="showNotificationBeforeMiniBreak"></label>
+            </div>
+            <div>
+              <input type="checkbox" value="microbreakPostpone" id="enablePostponeMini">
+              <label data-i18next="preferences.schedule.enablePostponeMini" data-i18next-single="preferences.schedule.enablePostponeSingle" for="enablePostponeMini"></label>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div data-multi-only class="theme-label">
+              <span data-i18next="preferences.schedule.longBreaks">
+              </span>
+            </div>
+            <div data-multi-only>
+              <p data-i18next="preferences.schedule.longBreaksInfo">
+              </p>
+            </div>
+            <div data-multi-only>
+              <input type="checkbox" class="enabletype" value="break" id="enableLongBreaks">
+              <label data-i18next="preferences.schedule.enableLongBreaks" for="enableLongBreaks"></label>
+            </div>
+            <div data-multi-only>
+              <label data-i18next="preferences.schedule.breakFor" data-same-width-label for="longBreakFor"></label>
+              <input type="range" min="1" max="60" step="1" list="tickmarksLongBreakFor" name="breakDuration"
+                data-divisor="60000" id="longBreakFor">
+              <datalist id="tickmarksLongBreakFor">
+                <option value="10"></option>
+                <option value="20"></option>
+                <option value="30"></option>
+                <option value="40"></option>
+                <option value="50"></option>
+              </datalist>
+              <output data-unit="minutes"></output>
+            </div>
+            <div data-multi-only>
+              <label data-i18next="preferences.schedule.every" data-same-width-label for="longBreakEvery"></label>
+              <input type="range" min="1" max="30" step="1" list="tickmarksLongBreakEvery" name="breakInterval" data-divisor="1"
+                id="longBreakEvery">
+              <datalist id="tickmarksLongBreakEvery">
+                <option value="5"></option>
+                <option value="10"></option>
+                <option value="15"></option>
+                <option value="20"></option>
+                <option value="25"></option>
+                <option value="30"></option>
+              </datalist>
+              <output data-unit="minutes"></output>
+            </div>
+            <div data-multi-only>
+              <input type="checkbox" value="breakNotification" id="showNotificationBeforeLongBreak">
+              <label data-i18next="preferences.schedule.showNotificationBeforeLongBreak"
+                for="showNotificationBeforeLongBreak"></label>
+            </div>
+            <div data-multi-only>
+              <input type="checkbox" value="breakPostpone" id="enablePostponeLong">
+              <label data-i18next="preferences.schedule.enablePostponeLong" for="enablePostponeLong"></label>
+            </div>
+      </section>
+      <section class="pref-section" data-strict-mode>
+            <div class="theme-label" data-strict-mode>
+              <span data-i18next="preferences.schedule.strictMode">
+              </span>
+            </div>
+            <div data-strict-mode>
+              <p data-i18next="preferences.schedule.strictModeInfo" data-i18next-single="preferences.schedule.strictModeInfoSingle">
+              </p>
+            </div>
+            <div data-strict-mode>
+              <input type="checkbox" value="microbreakStrictMode" id="enableStrictMini">
+              <label data-i18next="preferences.schedule.enableStrictMini" data-i18next-single="preferences.schedule.enableStrictSingle" for="enableStrictMini"></label>
+            </div>
+            <div data-multi-only data-strict-mode>
+              <input type="checkbox" value="breakStrictMode" id="enableStrictLong">
+              <label data-i18next="preferences.schedule.enableStrictLong" for="enableStrictLong"></label>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.schedule.postponing"></span>
+            </div>
+            <div class="slider-row">
+              <label data-i18next="preferences.schedule.miniPostponeTime" data-i18next-single="preferences.schedule.singlePostponeTime" for="miniPostponeTime"></label>
+              <input type="range" min="1" max="10" step="1" name="microbreakPostponeTime" data-divisor="60000" id="miniPostponeTime">
+              <output data-unit="minutes"></output>
+            </div>
+            <div class="slider-row">
+              <label data-i18next="preferences.schedule.miniPostponesLimit" data-i18next-single="preferences.schedule.singlePostponesLimit" for="miniPostponesLimit"></label>
+              <input type="range" min="1" max="50" step="1" name="microbreakPostponesLimit" data-divisor="1" id="miniPostponesLimit">
+              <output data-unit="none"></output>
+            </div>
+            <div class="slider-row">
+              <label data-i18next="preferences.schedule.miniPostponableFor" data-i18next-single="preferences.schedule.singlePostponableFor" for="miniPostponableFor"></label>
+              <input type="range" min="10" max="100" step="10" name="microbreakPostponableDurationPercent" data-divisor="1" id="miniPostponableFor">
+              <output data-unit="percent"></output>
+            </div>
+            <div data-multi-only class="slider-row">
+              <label data-i18next="preferences.schedule.longPostponeTime" for="longPostponeTime"></label>
+              <input type="range" min="1" max="30" step="1" name="breakPostponeTime" data-divisor="60000" id="longPostponeTime">
+              <output data-unit="minutes"></output>
+            </div>
+            <div data-multi-only class="slider-row">
+              <label data-i18next="preferences.schedule.longPostponesLimit" for="longPostponesLimit"></label>
+              <input type="range" min="1" max="10" step="1" name="breakPostponesLimit" data-divisor="1" id="longPostponesLimit">
+              <output data-unit="none"></output>
+            </div>
+            <div class="slider-row" data-multi-only>
+              <label data-i18next="preferences.schedule.longPostponableFor" for="longPostponableFor"></label>
+              <input type="range" min="10" max="100" step="10" name="breakPostponableDurationPercent" data-divisor="1" id="longPostponableFor">
+              <output data-unit="percent"></output>
+            </div>
+            <div>
+              <input type="checkbox" value="alwaysShowSkip" id="alwaysShowSkip">
+              <label data-i18next="preferences.schedule.alwaysShowSkip" for="alwaysShowSkip"></label>
+            </div>
+      </section>
     </div>
   </div>
   <div class="theme hidden">
-    <div class="theme-label">
-      <span data-i18next="preferences.theme.preview"></span>
-    </div>
-    <div class="theme-preview">
-      <div class="preview-popup">
-        <p data-i18next="preferences.theme.previewPopupHint"></p>
-        <button type="button" id="previewPopup" data-i18next="preferences.theme.previewPopup"></button>
-      </div>
-      <div class="preview-tray" id="previewTray">
-        <div class="preview-taskbar preview-taskbar-light">
-          <canvas class="preview-actual"></canvas>
-          <canvas class="preview-zoom"></canvas>
-        </div>
-        <div class="preview-taskbar preview-taskbar-dark">
-          <canvas class="preview-actual"></canvas>
-          <canvas class="preview-zoom"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.theme.appearance">
-      </span>
-    </div>
-    <div class="swatches">
-      <div class="appearance">
-        <input type="radio" value="#478484" name="mainColor" id="greenClouds">
-        <label data-i18next="preferences.theme.greenClouds" for="greenClouds"></label>
-      </div>
-      <div class="appearance">
-        <input type="radio" value="#633738" name="mainColor" id="autumnBeBlessed">
-        <label data-i18next="preferences.theme.autumnBeBlessed" for="autumnBeBlessed"></label>
-      </div>
-
-      <div class="appearance">
-        <input type="radio" value="#ffffff" name="mainColor" id="snowWhite">
-        <label data-i18next="preferences.theme.snowWhite" for="snowWhite"></label>
-      </div>
-      <div class="appearance">
-        <input type="radio" value="#1D1F21" name="mainColor" id="graphiteCrystal">
-        <label data-i18next="preferences.theme.graphiteCrystal" for="graphiteCrystal"></label>
-      </div>
-      <div class="appearance">
-        <input type="radio" value="#A49898" name="mainColor" id="coffeeKisses">
-        <label data-i18next="preferences.theme.coffeeKisses" for="coffeeKisses"></label>
-      </div>
-      <div class="appearance">
-        <input type="radio" value="#567890" name="mainColor" id="morningSwim">
-        <label data-i18next="preferences.theme.morningSwim" for="morningSwim"></label>
-      </div>
-      <div class="appearance">
-        <input type="radio" value="#808080" name="mainColor" id="customColorRadio">
-        <label data-i18next="preferences.theme.customColor" for="customColorRadio"></label>
-        <input type="color" id="customColor" tabindex="-1">
-      </div>
-    </div>
-    <div>
-      <input type="checkbox" value="transparentMode" id="enableTransparency">
-      <label data-i18next="preferences.theme.transparentMode" for="enableTransparency"></label>
-    </div>
-    <div>
-      <label data-i18next="preferences.theme.opacity" for="opacity"></label>
-      <input type="range" min="30" max="100" step="5" name="opacity" data-divisor="0.01" id="opacity">
-      <output data-unit="percent"></output>
-    </div>
-    <div>
-      <hr>
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.theme.breakWindow">
-      </span>
-    </div>
-    <div>
-      <span data-i18next="preferences.settings.showBreaksIn"></span>
-    </div>
-    <div class="display-mode">
-      <input type="radio" value="false" name="fullscreen" id="window">
-      <label data-i18next="preferences.settings.window" for="window"></label>
-      <input type="radio" value="true" name="fullscreen" id="fullscreen">
-      <label data-i18next="preferences.settings.fullscreen" for="fullscreen"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="allScreens" id="allScreens">
-      <label data-i18next="preferences.settings.allScreens" for="allScreens"></label>
-    </div>
-    <div>
-      <div class="has-select">
-        <select name="breakWindowPosition" id="breakWindowPosition" data-setting>
-          <option value="center" data-i18next="preferences.theme.positionCenter"></option>
-          <option value="top-left" data-i18next="preferences.theme.positionTopLeft"></option>
-          <option value="top-right" data-i18next="preferences.theme.positionTopRight"></option>
-          <option value="bottom-left" data-i18next="preferences.theme.positionBottomLeft"></option>
-          <option value="bottom-right" data-i18next="preferences.theme.positionBottomRight"></option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <label data-i18next="preferences.theme.breakWindowWidth" for="breakWindowWidth"></label>
-      <input type="range" min="10" max="99" step="1" name="breakWindowWidth" data-divisor="0.01" id="breakWindowWidth">
-      <output data-unit="percent"></output>
-    </div>
-    <div>
-      <label data-i18next="preferences.theme.breakWindowHeight" for="breakWindowHeight"></label>
-      <input type="range" min="10" max="99" step="1" name="breakWindowHeight" data-divisor="0.01" id="breakWindowHeight">
-      <output data-unit="percent"></output>
-    </div>
-    <div>
-      <input type="checkbox" value="showBreaksAsRegularWindows" id="showBreaksAsRegularWindows">
-      <label data-i18next="preferences.theme.showBreaksAsRegularWindows" for="showBreaksAsRegularWindows"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="breakWindowAlwaysOnTop" id="breakWindowAlwaysOnTop">
-      <label data-i18next="preferences.theme.breakWindowAlwaysOnTop" for="breakWindowAlwaysOnTop"></label>
-    </div>
-    <div>
-      <hr>
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.theme.trayIcon">
-      </span>
-    </div>
-    <div>
-      <div class="has-select">
-        <select name="trayIconStyle" id="trayIconStyle" data-setting>
-          <option value="default" data-i18next="preferences.theme.trayIconStyleDefault"></option>
-          <option value="time" data-i18next="preferences.theme.trayIconStyleTime"></option>
-          <option value="progress" data-i18next="preferences.theme.trayIconStyleProgress"></option>
-          <option value="text" data-i18next="preferences.theme.trayIconStyleText"></option>
-        </select>
-      </div>
-    </div>
-    <div class="tray-number-only">
-      <label data-i18next="preferences.theme.trayIconFont" for="trayIconFont"></label>
-      <div class="has-select">
-        <select name="trayIconFont" id="trayIconFont" data-setting>
-          <option value="DejaVu Sans">DejaVu Sans</option>
-          <option value="Segoe UI">Segoe UI</option>
-          <option value="Arial">Arial</option>
-          <option value="Verdana">Verdana</option>
-          <option value="Tahoma">Tahoma</option>
-          <option value="Calibri">Calibri</option>
-          <option value="Consolas">Consolas</option>
-          <option value="Bahnschrift">Bahnschrift</option>
-          <option value="" data-i18next="preferences.theme.trayIconFontBuiltIn"></option>
-        </select>
-      </div>
-    </div>
-    <div class="tray-number-only">
-      <label data-i18next="preferences.theme.trayIconFontSize" for="trayIconFontSize"></label>
-      <input type="range" min="30" max="100" step="5" name="trayIconFontSize" data-divisor="0.01" id="trayIconFontSize">
-      <output data-unit="percent"></output>
-    </div>
-    <div class="tray-number-only">
-      <input type="checkbox" value="trayIconCrispDigits" id="trayIconCrispDigits">
-      <label data-i18next="preferences.theme.trayIconCrispDigits" for="trayIconCrispDigits"></label>
-    </div>
-    <div>
-      <input type="radio" value="false" name="useMonochromeTrayIcon" id="colour">
-      <label data-i18next="preferences.theme.colour" for="colour"></label>
-    </div>
-    <div>
-      <input type="radio" value="true" name="useMonochromeTrayIcon" id="monochrome">
-      <label data-i18next="preferences.theme.monochrome" for="monochrome"></label>
-    </div>
-    <div>
-      <div class="has-select">
-        <select name="trayIconThemeSource" id="trayIconThemeSource" data-setting>
-          <option value="system" data-i18next="preferences.theme.trayIconThemeSystem"></option>
-          <option value="light" data-i18next="preferences.theme.trayIconThemeLight"></option>
-          <option value="dark" data-i18next="preferences.theme.trayIconThemeDark"></option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <hr>
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.theme.appTheme"></span>
-    </div>
-    <div>
-      <div class="has-select">
-        <select name="themeSource" id="themeSource" data-setting>
-          <option value="system" data-i18next="preferences.theme.appThemeSystem"></option>
-          <option value="light" data-i18next="preferences.theme.appThemeLight"></option>
-          <option value="dark" data-i18next="preferences.theme.appThemeDark"></option>
-        </select>
-      </div>
+    <section class="pref-section preview-section">
+          <div class="theme-label">
+            <span data-i18next="preferences.theme.preview"></span>
+          </div>
+          <div class="theme-preview">
+            <div class="preview-popup">
+              <p data-i18next="preferences.theme.previewPopupHint"></p>
+              <button type="button" id="previewPopup" data-i18next="preferences.theme.previewPopup"></button>
+            </div>
+            <div class="preview-tray" id="previewTray">
+              <div class="preview-taskbar preview-taskbar-light">
+                <canvas class="preview-actual"></canvas>
+                <canvas class="preview-zoom"></canvas>
+              </div>
+              <div class="preview-taskbar preview-taskbar-dark">
+                <canvas class="preview-actual"></canvas>
+                <canvas class="preview-zoom"></canvas>
+              </div>
+            </div>
+          </div>
+    </section>
+    <div class="pref-columns">
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.theme.appearance">
+              </span>
+            </div>
+            <div class="swatches">
+              <div class="appearance">
+                <input type="radio" value="#478484" name="mainColor" id="greenClouds">
+                <label data-i18next="preferences.theme.greenClouds" for="greenClouds"></label>
+              </div>
+              <div class="appearance">
+                <input type="radio" value="#633738" name="mainColor" id="autumnBeBlessed">
+                <label data-i18next="preferences.theme.autumnBeBlessed" for="autumnBeBlessed"></label>
+              </div>
+  
+              <div class="appearance">
+                <input type="radio" value="#ffffff" name="mainColor" id="snowWhite">
+                <label data-i18next="preferences.theme.snowWhite" for="snowWhite"></label>
+              </div>
+              <div class="appearance">
+                <input type="radio" value="#1D1F21" name="mainColor" id="graphiteCrystal">
+                <label data-i18next="preferences.theme.graphiteCrystal" for="graphiteCrystal"></label>
+              </div>
+              <div class="appearance">
+                <input type="radio" value="#A49898" name="mainColor" id="coffeeKisses">
+                <label data-i18next="preferences.theme.coffeeKisses" for="coffeeKisses"></label>
+              </div>
+              <div class="appearance">
+                <input type="radio" value="#567890" name="mainColor" id="morningSwim">
+                <label data-i18next="preferences.theme.morningSwim" for="morningSwim"></label>
+              </div>
+              <div class="appearance">
+                <input type="radio" value="#808080" name="mainColor" id="customColorRadio">
+                <label data-i18next="preferences.theme.customColor" for="customColorRadio"></label>
+                <input type="color" id="customColor" tabindex="-1">
+              </div>
+            </div>
+            <div>
+              <input type="checkbox" value="transparentMode" id="enableTransparency">
+              <label data-i18next="preferences.theme.transparentMode" for="enableTransparency"></label>
+            </div>
+            <div>
+              <label data-i18next="preferences.theme.opacity" for="opacity"></label>
+              <input type="range" min="30" max="100" step="5" name="opacity" data-divisor="0.01" id="opacity">
+              <output data-unit="percent"></output>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.theme.breakWindow">
+              </span>
+            </div>
+            <div>
+              <span data-i18next="preferences.settings.showBreaksIn"></span>
+            </div>
+            <div class="display-mode">
+              <input type="radio" value="false" name="fullscreen" id="window">
+              <label data-i18next="preferences.settings.window" for="window"></label>
+              <input type="radio" value="true" name="fullscreen" id="fullscreen">
+              <label data-i18next="preferences.settings.fullscreen" for="fullscreen"></label>
+            </div>
+            <div>
+              <input type="checkbox" value="allScreens" id="allScreens">
+              <label data-i18next="preferences.settings.allScreens" for="allScreens"></label>
+            </div>
+            <div>
+              <div class="has-select">
+                <select name="breakWindowPosition" id="breakWindowPosition" data-setting>
+                  <option value="center" data-i18next="preferences.theme.positionCenter"></option>
+                  <option value="top-left" data-i18next="preferences.theme.positionTopLeft"></option>
+                  <option value="top-right" data-i18next="preferences.theme.positionTopRight"></option>
+                  <option value="bottom-left" data-i18next="preferences.theme.positionBottomLeft"></option>
+                  <option value="bottom-right" data-i18next="preferences.theme.positionBottomRight"></option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label data-i18next="preferences.theme.breakWindowWidth" for="breakWindowWidth"></label>
+              <input type="range" min="10" max="99" step="1" name="breakWindowWidth" data-divisor="0.01" id="breakWindowWidth">
+              <output data-unit="percent"></output>
+            </div>
+            <div>
+              <label data-i18next="preferences.theme.breakWindowHeight" for="breakWindowHeight"></label>
+              <input type="range" min="10" max="99" step="1" name="breakWindowHeight" data-divisor="0.01" id="breakWindowHeight">
+              <output data-unit="percent"></output>
+            </div>
+            <div>
+              <input type="checkbox" value="showBreaksAsRegularWindows" id="showBreaksAsRegularWindows">
+              <label data-i18next="preferences.theme.showBreaksAsRegularWindows" for="showBreaksAsRegularWindows"></label>
+            </div>
+            <div>
+              <input type="checkbox" value="breakWindowAlwaysOnTop" id="breakWindowAlwaysOnTop">
+              <label data-i18next="preferences.theme.breakWindowAlwaysOnTop" for="breakWindowAlwaysOnTop"></label>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.theme.trayIcon">
+              </span>
+            </div>
+            <div>
+              <div class="has-select">
+                <select name="trayIconStyle" id="trayIconStyle" data-setting>
+                  <option value="default" data-i18next="preferences.theme.trayIconStyleDefault"></option>
+                  <option value="time" data-i18next="preferences.theme.trayIconStyleTime"></option>
+                  <option value="progress" data-i18next="preferences.theme.trayIconStyleProgress"></option>
+                  <option value="text" data-i18next="preferences.theme.trayIconStyleText"></option>
+                </select>
+              </div>
+            </div>
+            <div class="tray-number-only">
+              <label data-i18next="preferences.theme.trayIconFont" for="trayIconFont"></label>
+              <div class="has-select">
+                <select name="trayIconFont" id="trayIconFont" data-setting>
+                  <option value="DejaVu Sans">DejaVu Sans</option>
+                  <option value="Segoe UI">Segoe UI</option>
+                  <option value="Arial">Arial</option>
+                  <option value="Verdana">Verdana</option>
+                  <option value="Tahoma">Tahoma</option>
+                  <option value="Calibri">Calibri</option>
+                  <option value="Consolas">Consolas</option>
+                  <option value="Bahnschrift">Bahnschrift</option>
+                  <option value="" data-i18next="preferences.theme.trayIconFontBuiltIn"></option>
+                </select>
+              </div>
+            </div>
+            <div class="tray-number-only">
+              <label data-i18next="preferences.theme.trayIconFontSize" for="trayIconFontSize"></label>
+              <input type="range" min="30" max="100" step="5" name="trayIconFontSize" data-divisor="0.01" id="trayIconFontSize">
+              <output data-unit="percent"></output>
+            </div>
+            <div class="tray-number-only">
+              <input type="checkbox" value="trayIconCrispDigits" id="trayIconCrispDigits">
+              <label data-i18next="preferences.theme.trayIconCrispDigits" for="trayIconCrispDigits"></label>
+            </div>
+            <div>
+              <input type="radio" value="false" name="useMonochromeTrayIcon" id="colour">
+              <label data-i18next="preferences.theme.colour" for="colour"></label>
+            </div>
+            <div>
+              <input type="radio" value="true" name="useMonochromeTrayIcon" id="monochrome">
+              <label data-i18next="preferences.theme.monochrome" for="monochrome"></label>
+            </div>
+            <div>
+              <div class="has-select">
+                <select name="trayIconThemeSource" id="trayIconThemeSource" data-setting>
+                  <option value="system" data-i18next="preferences.theme.trayIconThemeSystem"></option>
+                  <option value="light" data-i18next="preferences.theme.trayIconThemeLight"></option>
+                  <option value="dark" data-i18next="preferences.theme.trayIconThemeDark"></option>
+                </select>
+              </div>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.theme.appTheme"></span>
+            </div>
+            <div>
+              <div class="has-select">
+                <select name="themeSource" id="themeSource" data-setting>
+                  <option value="system" data-i18next="preferences.theme.appThemeSystem"></option>
+                  <option value="light" data-i18next="preferences.theme.appThemeLight"></option>
+                  <option value="dark" data-i18next="preferences.theme.appThemeDark"></option>
+                </select>
+              </div>
+            </div>
+      </section>
     </div>
   </div>
   <div class="shortcuts hidden">
-    <div class="theme-label">
-      <span data-i18next="preferences.shortcutsTab.trayMenu"></span>
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.pauseDurations" for="pauseDurations"></label>
-      <input type="text" class="shortcut-input" id="pauseDurations">
-    </div>
-    <div>
-      <input type="checkbox" value="pauseUntilMorningOption" id="pauseUntilMorningOption">
-      <label data-i18next="preferences.settings.pauseUntilMorningOption" for="pauseUntilMorningOption"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="pauseIndefinitelyOption" id="pauseIndefinitelyOption">
-      <label data-i18next="preferences.settings.pauseIndefinitelyOption" for="pauseIndefinitelyOption"></label>
-    </div>
-    <div>
-      <hr />
-    </div>
-    <div class="theme-label">
-      <span data-i18next="preferences.shortcutsTab.keys"></span>
-    </div>
-    <div>
-      <p data-i18next="preferences.shortcutsTab.hint"></p>
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.pauseBreaksToggle" for="pauseBreaksToggleShortcut"></label>
-      <input type="text" class="shortcut-input" name="pauseBreaksToggleShortcut" id="pauseBreaksToggleShortcut" readonly>
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.resetBreaks" for="resetBreaksShortcut"></label>
-      <input type="text" class="shortcut-input" name="resetBreaksShortcut" id="resetBreaksShortcut" readonly>
-    </div>
-    <div class="shortcut">
-      <label data-i18next="preferences.settings.skipToNextScheduledBreak" data-i18next-single="preferences.settings.skipToSingleBreak" for="skipToNextScheduledBreakShortcut"></label>
-      <input type="text" class="shortcut-input" name="skipToNextScheduledBreakShortcut" id="skipToNextScheduledBreakShortcut" readonly>
-    </div>
-    <div class="shortcut" data-multi-only>
-      <label data-i18next="preferences.settings.skipToNextMiniBreak" for="skipToNextMiniBreakShortcut"></label>
-      <input type="text" class="shortcut-input" name="skipToNextMiniBreakShortcut" id="skipToNextMiniBreakShortcut" readonly>
-    </div>
-    <div class="shortcut" data-multi-only>
-      <label data-i18next="preferences.settings.skipToNextLongBreak" for="skipToNextLongBreakShortcut"></label>
-      <input type="text" class="shortcut-input" name="skipToNextLongBreakShortcut" id="skipToNextLongBreakShortcut" readonly>
+    <div class="pref-columns">
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.shortcutsTab.trayMenu"></span>
+            </div>
+            <div class="shortcut">
+              <label data-i18next="preferences.settings.pauseDurations" for="pauseDurations"></label>
+              <input type="text" class="shortcut-input" id="pauseDurations">
+            </div>
+            <div>
+              <input type="checkbox" value="pauseUntilMorningOption" id="pauseUntilMorningOption">
+              <label data-i18next="preferences.settings.pauseUntilMorningOption" for="pauseUntilMorningOption"></label>
+            </div>
+            <div>
+              <input type="checkbox" value="pauseIndefinitelyOption" id="pauseIndefinitelyOption">
+              <label data-i18next="preferences.settings.pauseIndefinitelyOption" for="pauseIndefinitelyOption"></label>
+            </div>
+      </section>
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.shortcutsTab.keys"></span>
+            </div>
+            <div>
+              <p data-i18next="preferences.shortcutsTab.hint"></p>
+            </div>
+            <div class="shortcut">
+              <label data-i18next="preferences.settings.pauseBreaksToggle" for="pauseBreaksToggleShortcut"></label>
+              <input type="text" class="shortcut-input" name="pauseBreaksToggleShortcut" id="pauseBreaksToggleShortcut" readonly>
+            </div>
+            <div class="shortcut">
+              <label data-i18next="preferences.settings.resetBreaks" for="resetBreaksShortcut"></label>
+              <input type="text" class="shortcut-input" name="resetBreaksShortcut" id="resetBreaksShortcut" readonly>
+            </div>
+            <div class="shortcut">
+              <label data-i18next="preferences.settings.skipToNextScheduledBreak" data-i18next-single="preferences.settings.skipToSingleBreak" for="skipToNextScheduledBreakShortcut"></label>
+              <input type="text" class="shortcut-input" name="skipToNextScheduledBreakShortcut" id="skipToNextScheduledBreakShortcut" readonly>
+            </div>
+            <div class="shortcut" data-multi-only>
+              <label data-i18next="preferences.settings.skipToNextMiniBreak" for="skipToNextMiniBreakShortcut"></label>
+              <input type="text" class="shortcut-input" name="skipToNextMiniBreakShortcut" id="skipToNextMiniBreakShortcut" readonly>
+            </div>
+            <div class="shortcut" data-multi-only>
+              <label data-i18next="preferences.settings.skipToNextLongBreak" for="skipToNextLongBreakShortcut"></label>
+              <input type="text" class="shortcut-input" name="skipToNextLongBreakShortcut" id="skipToNextLongBreakShortcut" readonly>
+            </div>
+      </section>
     </div>
   </div>
   <div class="audio hidden">
-    <div class="theme-label">
-      <span data-i18next="preferences.theme.sounds">
-      </span>
-    </div>
-    <div>
-      <input type="checkbox" class="negative" value="silentNotifications" id="enableSounds">
-      <label data-i18next="preferences.theme.enableSounds" for="enableSounds"></label>
-    </div>
-    <div>
-      <label data-i18next="preferences.theme.volume" for="volume"></label>
-      <input type="range" min="5" max="100" step="5" name="volume" data-divisor="0.01" id="volume">
-      <output data-unit="percent"></output>
-    </div>
-    <div class="sounds">
-      <input type="radio" value="crystal-glass" name="longBreakAudio" id="crystalGlass">
-      <label data-i18next="preferences.theme.crystalGlass" for="crystalGlass"></label>
-      <img src="images/preferences/speaker.png" data-has-dark-version alt="Play sound">
-    </div>
-    <div class="sounds">
-      <input type="radio" value="wind-chime" name="longBreakAudio" id="windChime">
-      <label data-i18next="preferences.theme.windChime" for="windChime"></label>
-      <img src="images/preferences/speaker.png" data-has-dark-version alt="Play sound">
-    </div>
-    <div class="sounds">
-      <input type="radio" value="tic-toc" name="longBreakAudio" id="ticToc">
-      <label data-i18next="preferences.theme.ticToc" for="ticToc"></label>
-      <img src="images/preferences/speaker.png" data-has-dark-version alt="Play sound">
-    </div>
-    <div class="sounds">
-      <input type="radio" value="reverie" name="longBreakAudio" id="reverie">
-      <label data-i18next="preferences.theme.reverie" for="reverie"></label>
-      <img src="images/preferences/speaker.png" data-has-dark-version alt="Play sound">
+    <div class="pref-columns">
+      <section class="pref-section">
+            <div class="theme-label">
+              <span data-i18next="preferences.theme.sounds">
+              </span>
+            </div>
+            <div>
+              <input type="checkbox" class="negative" value="silentNotifications" id="enableSounds">
+              <label data-i18next="preferences.theme.enableSounds" for="enableSounds"></label>
+            </div>
+            <div>
+              <label data-i18next="preferences.theme.volume" for="volume"></label>
+              <input type="range" min="5" max="100" step="5" name="volume" data-divisor="0.01" id="volume">
+              <output data-unit="percent"></output>
+            </div>
+            <div class="sounds">
+              <input type="radio" value="crystal-glass" name="longBreakAudio" id="crystalGlass">
+              <label data-i18next="preferences.theme.crystalGlass" for="crystalGlass"></label>
+              <img src="images/preferences/speaker.png" data-has-dark-version alt="Play sound">
+            </div>
+            <div class="sounds">
+              <input type="radio" value="wind-chime" name="longBreakAudio" id="windChime">
+              <label data-i18next="preferences.theme.windChime" for="windChime"></label>
+              <img src="images/preferences/speaker.png" data-has-dark-version alt="Play sound">
+            </div>
+            <div class="sounds">
+              <input type="radio" value="tic-toc" name="longBreakAudio" id="ticToc">
+              <label data-i18next="preferences.theme.ticToc" for="ticToc"></label>
+              <img src="images/preferences/speaker.png" data-has-dark-version alt="Play sound">
+            </div>
+            <div class="sounds">
+              <input type="radio" value="reverie" name="longBreakAudio" id="reverie">
+              <label data-i18next="preferences.theme.reverie" for="reverie"></label>
+              <img src="images/preferences/speaker.png" data-has-dark-version alt="Play sound">
+            </div>
+      </section>
     </div>
   </div>
   <div class="about hidden">

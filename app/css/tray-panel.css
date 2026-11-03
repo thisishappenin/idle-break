@@ -24,6 +24,19 @@
   }
 }
 
+/* The Appearance colour chosen in Preferences, like the break popups and reminders */
+:root.themed {
+  --bg: var(--theme-bg);
+  --ink: var(--theme-ink);
+  --muted: color-mix(in srgb, var(--ink) 72%, transparent);
+  --line: color-mix(in srgb, var(--ink) 20%, transparent);
+  --control: color-mix(in srgb, var(--ink) 10%, transparent);
+  --control-hover: color-mix(in srgb, var(--ink) 18%, transparent);
+  --control-border: color-mix(in srgb, var(--ink) 22%, transparent);
+  --accent: var(--ink);
+  --accent-ink: var(--bg);
+}
+
 html,
 body {
   background: var(--bg);
@@ -35,7 +48,7 @@ body {
   color: var(--ink);
   cursor: default;
   font-family: 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 12.5px;
   user-select: none;
 }
 
@@ -43,19 +56,19 @@ main {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 14px;
+  gap: 8px;
+  padding: 10px 12px;
 }
 
 section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 section + section {
   border-top: 1px solid var(--line);
-  padding-top: 12px;
+  padding-top: 8px;
 }
 
 .countdown {
@@ -66,26 +79,25 @@ section + section {
 }
 
 .countdown .time {
-  font-size: 34px;
+  font-size: 26px;
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   letter-spacing: -0.5px;
-  line-height: 40px;
+  line-height: 30px;
 }
 
-.countdown .caption,
-.muted {
+.countdown .caption {
   color: var(--muted);
 }
 
 .status {
   color: var(--muted);
-  line-height: 18px;
+  line-height: 16px;
 }
 
 .title {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.4px;
   text-transform: uppercase;
@@ -94,12 +106,12 @@ section + section {
 .stepper {
   align-items: center;
   display: grid;
-  gap: 8px;
-  grid-template-columns: 56px 1fr 56px;
+  gap: 6px;
+  grid-template-columns: 52px 1fr 52px;
 }
 
 .stepper .value {
-  font-size: 18px;
+  font-size: 16px;
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   text-align: center;
@@ -108,13 +120,13 @@ section + section {
 button {
   background: var(--control);
   border: 1px solid var(--control-border);
-  border-radius: 6px;
+  border-radius: 5px;
   color: inherit;
   cursor: pointer;
   font: inherit;
-  line-height: 18px;
-  padding: 7px 12px;
-  text-align: start;
+  line-height: 16px;
+  padding: 5px 8px;
+  text-align: center;
 }
 
 button:hover {
@@ -128,10 +140,9 @@ input:focus-visible + .switch-track {
 }
 
 .stepper button {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  padding: 8px 0;
-  text-align: center;
+  padding: 5px 0;
 }
 
 .primary {
@@ -145,20 +156,26 @@ input:focus-visible + .switch-track {
   filter: brightness(1.08);
 }
 
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
+.grid2,
 .chips {
   display: grid;
   gap: 6px;
+}
+
+.grid2 {
   grid-template-columns: 1fr 1fr;
 }
 
+.grid2 > :only-child {
+  grid-column: 1 / -1;
+}
+
+.chips {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .chips button {
-  text-align: center;
+  padding-inline: 2px;
 }
 
 .switch {
@@ -176,24 +193,24 @@ input:focus-visible + .switch-track {
 
 .switch-track {
   background: var(--control-border);
-  border-radius: 10px;
+  border-radius: 9px;
   flex: none;
-  height: 20px;
+  height: 18px;
   position: relative;
   transition: background 120ms;
-  width: 38px;
+  width: 34px;
 }
 
 .switch-track::after {
   background: var(--control);
   border-radius: 50%;
   content: '';
-  height: 14px;
+  height: 12px;
   left: 3px;
   position: absolute;
   top: 3px;
   transition: transform 120ms;
-  width: 14px;
+  width: 12px;
 }
 
 .switch input:checked + .switch-track {
@@ -202,33 +219,17 @@ input:focus-visible + .switch-track {
 
 .switch input:checked + .switch-track::after {
   background: var(--accent-ink);
-  transform: translateX(18px);
-}
-
-.footer {
-  display: grid;
-  gap: 6px;
-  grid-template-columns: 1fr 1fr;
-}
-
-.footer button {
-  text-align: center;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-  }
+  transform: translateX(16px);
 }
 
 .meeting {
   align-items: center;
   background: color-mix(in srgb, #d13438 16%, transparent);
-  border-radius: 6px;
+  border-radius: 5px;
   display: flex;
   font-weight: 600;
   gap: 8px;
-  padding: 6px 10px;
+  padding: 4px 8px;
 }
 
 .meeting .dot {
@@ -237,4 +238,10 @@ input:focus-visible + .switch-track {
   flex: none;
   height: 8px;
   width: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }

@@ -226,6 +226,7 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `trayIconFontSize` - height of the tray number as a fraction of the icon, from `0.3` to `1` (default `0.5`)
 - `trayIconCrispDigits` - draw the tray number with pure pixels instead of smoothed edges (off by default)
 - `trayPanel` - on Windows and macOS, left-clicking the tray icon opens a small panel with the countdown, buttons to shorten or extend the next work session by 5 minutes, start or pause breaks, the idle reset switch, Preferences and Quit; right-click opens the usual menu. Set to `false` to use only the menu (on by default)
+- `trayPanelThemeColor` - the tray panel uses the Appearance colour chosen on the Theme tab, like the break popups; set to `false` to follow only the light or dark app theme (on by default)
 - `trayMenuStaysOpen` - after shortening or extending the work session from the tray menu, open the menu again in the same place so you can press the item several times (on by default)
 - `breakWindowAlwaysOnTop` - keep windowed breaks on top of other windows
 - `naturalBreaksResetNotification` - show a 10-second popup when idle time resets the break timer, with a button to undo the reset

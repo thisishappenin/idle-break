@@ -16,6 +16,7 @@
     "trayPanelWorkSession": "Work session",
     "trayPanelThisSessionOnly": "Applies to the next break only",
     "trayPanelMinutes": "{{minutes}} min",
+    "trayPanelHours": "{{hours}} h",
     "trayPanelPause": "Pause breaks",
     "shortenWorkSession": "Shorten work session by {{minutes}} minutes",
     "extendWorkSession": "Extend work session by {{minutes}} minutes",

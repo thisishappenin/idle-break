@@ -1717,7 +1717,8 @@ function trayPanelState () {
     pauseUntilMorning: settings.get('pauseUntilMorningOption'),
     pauseIndefinitely: settings.get('pauseIndefinitelyOption'),
     idleEnabled: settings.get('naturalBreaks'),
-    contributor: Boolean(global.isContributor)
+    contributor: Boolean(global.isContributor),
+    themeColor: settings.get('trayPanelThemeColor') ? settings.get('mainColor') : null
   })
 }
 
@@ -1803,14 +1804,16 @@ function createPreferencesWindow () {
     return
   }
   const modalPath = 'file://' + join(__dirname, '/preferences.html')
+  const preferencesWidth = Math.min(1040, screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).workArea.width - 40)
   preferencesWin = new BrowserWindow({
     autoHideMenuBar: true,
     show: false,
     backgroundThrottling: false,
     icon: windowIconPath(),
-    width: 600,
+    width: preferencesWidth,
     height: 530,
-    x: displayManager.getDisplayX(-1, 600),
+    minWidth: 520,
+    x: displayManager.getDisplayX(-1, preferencesWidth),
     y: displayManager.getDisplayY(-1, 530),
     backgroundColor: '#EDEDED',
     webPreferences: {

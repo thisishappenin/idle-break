@@ -1,4 +1,5 @@
 import formatClock from './utils/formatClock.js'
+import { isLightColor } from './utils/colorContrast.js'
 
 const panel = document.querySelector('#panel')
 let state = null
@@ -37,9 +38,22 @@ function section (...children) {
   return el('section', {}, ...children.filter(Boolean))
 }
 
+function applyTheme () {
+  const root = document.documentElement
+  root.classList.toggle('themed', Boolean(state.themeColor))
+  if (state.themeColor) {
+    root.style.setProperty('--theme-bg', state.themeColor)
+    root.style.setProperty('--theme-ink', isLightColor(state.themeColor) ? '#1b1b1b' : '#ffffff')
+  } else {
+    root.style.removeProperty('--theme-bg')
+    root.style.removeProperty('--theme-ink')
+  }
+}
+
 function render () {
   const { labels } = state
   const focused = document.activeElement?.dataset?.key
+  applyTheme()
   panel.replaceChildren()
 
   const ms = remaining()
@@ -61,36 +75,39 @@ function render () {
   }
 
   if (state.adjust) {
-    panel.append(section(
-      el('div', { class: 'title', text: labels.workSession }),
-      el('div', { class: 'stepper' },
-        button('shorten', `−${state.adjust.step}`, () => send('adjust', { direction: 'shorten' })),
-        el('span', { class: 'value', id: 'minutes', text: minutesText(ms) }),
-        button('extend', `+${state.adjust.step}`, () => send('adjust', { direction: 'extend' }))),
-      el('div', { class: 'muted', text: labels.thisSessionOnly })
-    ))
-    const [shorten, extend] = panel.querySelectorAll('.stepper button')
+    const shorten = button('shorten', `\u2212${state.adjust.step}`, () => send('adjust', { direction: 'shorten' }))
+    const extend = button('extend', `+${state.adjust.step}`, () => send('adjust', { direction: 'extend' }))
     shorten.setAttribute('aria-label', state.adjust.shorten)
     shorten.title = state.adjust.shorten
     extend.setAttribute('aria-label', state.adjust.extend)
     extend.title = state.adjust.extend
+    panel.append(section(el('div', { class: 'stepper', title: `${labels.workSession}: ${labels.thisSessionOnly}` },
+      shorten,
+      el('span', { class: 'value', id: 'minutes', text: minutesText(ms) }),
+      extend)))
   }
 
-  if (state.start.length) {
-    panel.append(section(el('div', { class: 'list' },
-      ...state.start.map(item => button(item.type, item.label, () => send(item.type))))))
-  }
+  const actions = [
+    ...state.start.map(item => button(item.type, item.label, () => send(item.type))),
+    state.reset && button('reset', labels.resetBreaks, () => send('reset'))
+  ].filter(Boolean)
+  if (state.paused) actions.push(button('resume', labels.resume, () => send('resume'), 'primary'))
+  if (actions.length) panel.append(section(el('div', { class: 'grid2' }, ...actions)))
 
-  if (state.paused) {
-    panel.append(section(button('resume', labels.resume, () => send('resume'), 'primary')))
-  } else if (state.pause) {
+  if (state.pause) {
+    const extras = [
+      state.pause.morning && button('morning', labels.pauseUntilMorning, () => send('pauseUntilMorning')),
+      state.pause.indefinitely && button('indefinitely', labels.pauseIndefinitely, () => send('pauseIndefinitely'))
+    ].filter(Boolean)
     panel.append(section(
       el('div', { class: 'title', text: labels.pause }),
-      el('div', { class: 'chips' },
-        ...state.pause.options.map(option => button(`pause-${option.minutes}`, option.label, () => send('pause', { minutes: option.minutes })))),
-      state.pause.morning && button('morning', labels.pauseUntilMorning, () => send('pauseUntilMorning')),
-      state.pause.indefinitely && button('indefinitely', labels.pauseIndefinitely, () => send('pauseIndefinitely')),
-      state.reset && button('reset', labels.resetBreaks, () => send('reset'))
+      el('div', { class: 'chips' }, ...state.pause.options.map(option => {
+        const chip = button(`pause-${option.minutes}`, option.short, () => send('pause', { minutes: option.minutes }))
+        chip.title = option.label
+        chip.setAttribute('aria-label', option.label)
+        return chip
+      })),
+      extras.length > 0 && el('div', { class: 'grid2' }, ...extras)
     ))
   }
 
@@ -103,10 +120,10 @@ function render () {
   }
 
   const footer = [section(
-    state.contributor && el('div', { class: 'list' },
+    state.contributor && el('div', { class: 'grid2' },
       button('contributor', labels.contributorPreferences, () => send('contributorPreferences')),
       button('sync', labels.syncPreferences, () => send('syncPreferences'))),
-    el('div', { class: 'footer' },
+    el('div', { class: 'grid2' },
       button('preferences', labels.preferences, () => send('preferences')),
       button('quit', labels.quit, () => send('quit')))
   )]
@@ -141,4 +158,5 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') send('close')
 })
 setInterval(tick, 1000)
+new window.ResizeObserver(reportHeight).observe(panel)
 window.trayPanel.ready()

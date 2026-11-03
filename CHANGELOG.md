@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Left-clicking the tray icon (Windows and macOS) opens a small panel that stays open while you use it: the countdown, 5 minute shorten and extend buttons, start and pause options, the idle reset switch, Preferences and Quit. Right-click still opens the menu
 - Changing a break window colour, transparency, size or position on the Theme page briefly shows the real popup on your screen (sliders update it as you drag), with a "Show popup now" button. The page also previews the number-only tray icon
 - Corner popups and reminder popups get a dark outline on light themes, and their timer bar is inset so the popup colour shows around it, keeping both visible over a white window
 - On Windows, the number-only tray icon is drawn at your display scale in a font and size you choose in Preferences (bundled DejaVu Sans by default), with smoothing you can turn off

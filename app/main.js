@@ -25,6 +25,8 @@ import IdeasLoader from './utils/ideasLoader.js'
 import BreaksPlanner from './breaksPlanner.js'
 import AppIcon from './utils/appIcon.js'
 import TrayNumberIcons from './utils/trayNumberIcons.js'
+import TrayPanel from './utils/trayPanel.js'
+import { buildTrayPanelState } from './utils/trayPanelState.js'
 import { breakWindowSize } from './utils/breakWindowSize.js'
 import { UntilMorning } from './utils/untilMorning.js'
 import AutostartManager from './utils/autostartManager.js'
@@ -1650,12 +1652,133 @@ function reopenTrayMenu () {
   }, 100)
 }
 
-function adjustWorkSession (milliseconds) {
+function changeWorkSession (milliseconds) {
   if (breakPlanner.adjustWorkSession(milliseconds)) {
     log.info(`Stretchly: ${milliseconds < 0 ? 'shortening' : 'extending'} the next work session by ${Math.abs(milliseconds) / 60000} minutes`)
   }
   updateTray()
+}
+
+function adjustWorkSession (milliseconds) {
+  changeWorkSession(milliseconds)
   reopenTrayMenu()
+}
+
+let trayPanel = null
+
+function usesTrayPanel () {
+  return settings.get('trayPanel') && process.platform !== 'linux'
+}
+
+function getTrayPanel () {
+  trayPanel ??= new TrayPanel({
+    pagePath: join(__dirname, '/tray-panel.html'),
+    preloadPath: join(__dirname, './tray-panel-preload.mjs'),
+    getState: trayPanelState,
+    onAction: handleTrayPanelAction
+  })
+  return trayPanel
+}
+
+function trayPanelState () {
+  const reference = breakPlanner.scheduler?.reference
+  const scheduled = Boolean(reference?.startsWith('start'))
+  const pauseDurations = settings.get('pauseDurations')
+  return buildTrayPanelState({
+    t: (key, options) => i18next.t(key, options),
+    formatDuration: (milliseconds) => humanizeDuration(milliseconds, {
+      round: true,
+      delimiter: ' ',
+      language: i18next.language.replace('-', '_'),
+      fallbacks: ['en'],
+      units: ['d', 'h', 'm']
+    }),
+    statusLines: new StatusMessages({
+      breakPlanner,
+      settings,
+      i18next,
+      humanizeDuration
+    }).trayMessage.split('\n').filter(Boolean),
+    locked: isTrayMenuLocked(),
+    newVersion: !settings.get('disableAppUpdateFeatures') && Boolean(global.isNewVersion),
+    paused: breakPlanner.isPaused,
+    canAct: !(breakPlanner.isPaused || breakPlanner.dndManager.isOnDnd || breakPlanner.appExclusionsManager.isSchedulerCleared),
+    hasMicrobreak: settings.get('microbreak'),
+    hasBreak: settings.get('break'),
+    singleBreakType: settings.get('singleBreakType'),
+    canAdjust: scheduled,
+    timeToNextBreak: scheduled ? breakPlanner.timeToNextBreak : null,
+    countdownRunning: scheduled && !breakPlanner.scheduler.held,
+    sessionStepMinutes: SESSION_ADJUST_MS / 60000,
+    pauseDurations: Array.isArray(pauseDurations) ? pauseDurations : [],
+    pauseUntilMorning: settings.get('pauseUntilMorningOption'),
+    pauseIndefinitely: settings.get('pauseIndefinitelyOption'),
+    idleEnabled: settings.get('naturalBreaks'),
+    contributor: Boolean(global.isContributor)
+  })
+}
+
+function handleTrayPanelAction (action) {
+  if (action?.type === 'close') {
+    trayPanel.hide()
+    return
+  }
+  if (isTrayMenuLocked()) return
+  const hideAfter = () => trayPanel.hide()
+  switch (action?.type) {
+    case 'adjust':
+      changeWorkSession(action.direction === 'shorten' ? -SESSION_ADJUST_MS : SESSION_ADJUST_MS)
+      break
+    case 'startMicrobreak':
+      hideAfter()
+      skipToMicrobreak()
+      break
+    case 'startBreak':
+      hideAfter()
+      skipToBreak()
+      break
+    case 'pause':
+      if ((settings.get('pauseDurations') || []).includes(action.minutes)) pauseBreaks(action.minutes * 60 * 1000)
+      break
+    case 'pauseUntilMorning':
+      pauseBreaks(new UntilMorning(settings).msToSunrise())
+      break
+    case 'pauseIndefinitely':
+      pauseBreaks(1)
+      break
+    case 'resume':
+      resumeBreaks(false)
+      updateTray()
+      break
+    case 'reset':
+      resetBreaks()
+      break
+    case 'toggleIdle':
+      settings.set('naturalBreaks', Boolean(action.value))
+      breakPlanner.setIdleReset(Boolean(action.value))
+      updateTray()
+      break
+    case 'preferences':
+      hideAfter()
+      createPreferencesWindow()
+      break
+    case 'contributorPreferences':
+      hideAfter()
+      createContributorSettingsWindow()
+      break
+    case 'syncPreferences':
+      hideAfter()
+      createSyncPreferencesWindow()
+      break
+    case 'download':
+      hideAfter()
+      shell.openExternal('https://hovancik.net/stretchly/downloads')
+      break
+    case 'quit':
+      app.quit()
+      break
+  }
+  trayPanel.refresh()
 }
 
 function resumeBreaks (notify = true) {
@@ -1721,12 +1844,22 @@ function updateTray () {
       appIcon.on('double-click', () => {
         createPreferencesWindow()
       })
-      appIcon.on('click', () => {
+      appIcon.on('click', (event, bounds) => {
         trayMenuPosition = screen.getCursorScreenPoint()
-        appIcon.popUpContextMenu(Menu.buildFromTemplate(currentTrayMenuTemplate))
+        if (usesTrayPanel()) {
+          getTrayPanel().toggle(bounds?.width > 0 ? bounds : appIcon.getBounds())
+        } else {
+          appIcon.popUpContextMenu(Menu.buildFromTemplate(currentTrayMenuTemplate))
+        }
       })
       appIcon.on('right-click', () => {
         trayMenuPosition = screen.getCursorScreenPoint()
+        if (usesTrayPanel()) {
+          trayPanel?.hide()
+          if (process.platform === 'darwin') {
+            appIcon.popUpContextMenu(Menu.buildFromTemplate(currentTrayMenuTemplate))
+          }
+        }
       })
     }
     if (!trayUpdateIntervalObj) {
@@ -1743,11 +1876,20 @@ function updateTray () {
 
     const newTrayMenuTemplate = getTrayMenuTemplate()
     if (JSON.stringify(newTrayMenuTemplate) !== JSON.stringify(currentTrayMenuTemplate)) {
-      const trayMenu = Menu.buildFromTemplate(newTrayMenuTemplate)
-      appIcon.setContextMenu(trayMenu)
+      if (!(usesTrayPanel() && process.platform === 'darwin')) {
+        appIcon.setContextMenu(Menu.buildFromTemplate(newTrayMenuTemplate))
+      }
       currentTrayMenuTemplate = newTrayMenuTemplate
     }
+    trayPanel?.refresh()
   }
+}
+
+function isTrayMenuLocked () {
+  return (breakPlanner.scheduler.reference === 'finishMicrobreak' && settings.get('microbreakStrictMode') &&
+    !settings.get('showTrayMenuInStrictMode')) ||
+    (breakPlanner.scheduler.reference === 'finishBreak' && settings.get('breakStrictMode') &&
+    !settings.get('showTrayMenuInStrictMode'))
 }
 
 function getTrayMenuTemplate () {
@@ -1785,11 +1927,7 @@ function getTrayMenuTemplate () {
     })
   }
 
-  if ((breakPlanner.scheduler.reference === 'finishMicrobreak' && settings.get('microbreakStrictMode') &&
-        !settings.get('showTrayMenuInStrictMode')) ||
-      (breakPlanner.scheduler.reference === 'finishBreak' && settings.get('breakStrictMode') &&
-      !settings.get('showTrayMenuInStrictMode'))
-  ) {
+  if (isTrayMenuLocked()) {
     // empty menu, we are in strict mode
     return trayMenu
   }

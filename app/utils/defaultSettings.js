@@ -91,6 +91,7 @@ export default {
   trayIconCrispDigits: false,
   trayIconFontSize: 0.5,
   trayMenuStaysOpen: true,
+  trayPanel: true,
   currentTimeInBreaks: false,
   currentTimeInBreaksFontSize: 28,
   currentTimeInBreaksFormat: 'tt',

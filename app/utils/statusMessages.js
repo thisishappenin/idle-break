@@ -10,10 +10,32 @@ class StatusMessages {
     this.isPaused = breakPlanner.isPaused
     this.breakNumber = breakPlanner.breakNumber
     this.deferredForMeeting = Boolean(breakPlanner.deferredBreakEvent)
+    this.inMeeting = Boolean(breakPlanner.meetingManager?.isInMeeting)
     this.meetingApps = breakPlanner.meetingManager?.meetingApps ?? []
     this.settings = settings
     this.i18next = i18next
     this.humanizeDuration = humanizeDuration
+  }
+
+  get countingDown () {
+    return !this.isPaused && !this.doNotDisturb && !this.appExclusionPause && !this.deferredForMeeting &&
+      Boolean(this.reference?.startsWith('start'))
+  }
+
+  get panelLines () {
+    const lines = this.trayMessage.split('\n').filter(Boolean)
+    return this.countingDown ? lines.slice(1) : lines
+  }
+
+  get meetingMessage () {
+    if (!this.inMeeting) return ''
+    const apps = this.meetingApps.length ? ` (${this.meetingApps.join(', ')})` : ''
+    return this.i18next.t('statusMessages.inMeeting') + apps
+  }
+
+  get tooltipMessage () {
+    const meeting = this.deferredForMeeting ? '' : this.meetingMessage
+    return [this.trayMessage, meeting].filter(Boolean).join('\n')
   }
 
   get trayMessage () {

@@ -17,7 +17,8 @@ export function buildTrayPanelState ({
   pauseUntilMorning,
   pauseIndefinitely,
   idleEnabled,
-  contributor
+  contributor,
+  meeting
 }) {
   const start = []
   if (!locked && canAct && hasMicrobreak) {
@@ -31,6 +32,7 @@ export function buildTrayPanelState ({
   return {
     locked,
     newVersion: !locked && newVersion,
+    meeting: !locked && meeting ? { apps: meeting.apps, waiting: Boolean(meeting.waiting) } : null,
     status: statusLines,
     countdown: {
       ms: Number.isFinite(timeToNextBreak) ? timeToNextBreak : null,
@@ -55,6 +57,7 @@ export function buildTrayPanelState ({
     idle: locked ? null : { enabled: Boolean(idleEnabled) },
     contributor: !locked && Boolean(contributor),
     labels: {
+      inMeeting: t('statusMessages.inMeeting'),
       nextBreakIn: t('main.trayPanelNextBreakIn'),
       workSession: t('main.trayPanelWorkSession'),
       thisSessionOnly: t('main.trayPanelThisSessionOnly'),

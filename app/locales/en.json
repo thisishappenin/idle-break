@@ -302,6 +302,7 @@
     "nextMiniBreak": "Next Mini break",
     "nextSingleBreak": "Next break",
     "waitingForCall": "Break waiting for the microphone to be free",
+    "inMeeting": "In a meeting",
     "afterMiniBreak_one": "after {{count}} Mini break",
     "afterMiniBreak_other": "after {{count}} Mini breaks",
     "resuming": "Resuming"

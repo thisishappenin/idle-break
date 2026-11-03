@@ -88,4 +88,14 @@ describe('trayPanelState', () => {
     expect(buildTrayPanelState({ ...base, idleEnabled: false }).idle.enabled).to.equal(false)
     expect(buildTrayPanelState({ ...base, contributor: true }).contributor).to.equal(true)
   })
+
+  it('reports a meeting and whether a break is waiting for it', () => {
+    expect(buildTrayPanelState(base).meeting).to.equal(null)
+    expect(buildTrayPanelState({ ...base, meeting: { apps: ['ms-teams'], waiting: false } }).meeting).to.deep.equal({ apps: ['ms-teams'], waiting: false })
+    expect(buildTrayPanelState({ ...base, meeting: { apps: [], waiting: true } }).meeting.waiting).to.equal(true)
+  })
+
+  it('does not report a meeting in strict mode', () => {
+    expect(buildTrayPanelState({ ...base, locked: true, meeting: { apps: [], waiting: false } }).meeting).to.equal(null)
+  })
 })

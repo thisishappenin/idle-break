@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- The tray panel and the tray tooltip show when you are in a meeting (with the app using the microphone), and update as soon as the call starts or ends
 - Left-clicking the tray icon (Windows and macOS) opens a small panel that stays open while you use it: the countdown, 5 minute shorten and extend buttons, start and pause options, the idle reset switch, Preferences and Quit. Right-click still opens the menu
 - Changing a break window colour, transparency, size or position on the Theme page briefly shows the real popup on your screen (sliders update it as you drag), with a "Show popup now" button. The page also previews the number-only tray icon
 - Corner popups and reminder popups get a dark outline on light themes, and their timer bar is inset so the popup colour shows around it, keeping both visible over a white window
@@ -54,6 +55,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- The tray panel no longer repeats the time to the next break under the countdown
 - The tray tooltip shows only the status (for example the time to the next break) and drops the app name line above it
 - After a break ends while you are away, the countdown to the next break stays at its full length in the tray and only starts when you use the computer again (needs idle time monitoring)
 - Postpone and Skip in small popups use bolder, pixel-aligned icons and a regular-weight label so they stay sharp

@@ -43,7 +43,11 @@ function render () {
   panel.replaceChildren()
 
   const ms = remaining()
+  const meeting = state.meeting && el('div', { class: 'meeting' },
+    el('span', { class: 'dot' }),
+    el('span', { text: labels.inMeeting + (state.meeting.apps.length && !state.meeting.waiting ? ` \u00b7 ${state.meeting.apps.join(', ')}` : '') }))
   const header = section(
+    meeting,
     ms !== null && el('div', { class: 'countdown' },
       el('span', { class: 'caption', text: labels.nextBreakIn }),
       el('span', { class: 'time', id: 'time', text: formatClock(ms) })),

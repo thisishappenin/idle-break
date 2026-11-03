@@ -34,4 +34,42 @@ describe('StatusMessages', () => {
     const message = trayMessage(settingsWith({ singleBreakType: true, break: false }))
     expect(message).to.equal('statusMessages.nextSingleBreak utils.inAbout(10 minutes)')
   })
+
+  describe('panel and tooltip lines', () => {
+    const lines = (breakPlanner, values = {}) => new StatusMessages({ breakPlanner, settings: settingsWith(values), i18next, humanizeDuration })
+
+    it('leaves out the next break line in the panel because the countdown already shows it', () => {
+      const status = lines(planner)
+      expect(status.trayMessage.split('\n').length).to.equal(2)
+      expect(status.panelLines).to.deep.equal([status.trayMessage.split('\n')[1]])
+    })
+
+    it('has no extra lines when only one break type is used', () => {
+      expect(lines(planner, { break: false }).panelLines).to.deep.equal([])
+    })
+
+    it('keeps the status when paused or waiting for a call', () => {
+      const paused = { ...planner, isPaused: true, scheduler: { reference: 'resumeBreaks', timeLeft: 600000 } }
+      expect(lines(paused).panelLines).to.deep.equal([lines(paused).trayMessage])
+      const waiting = { ...planner, deferredBreakEvent: 'startMicrobreak', meetingManager: { isInMeeting: true, meetingApps: ['ms-teams'] } }
+      expect(lines(waiting).panelLines).to.deep.equal(['statusMessages.waitingForCall (ms-teams)'])
+    })
+
+    it('says when the user is in a meeting, with the apps', () => {
+      const inMeeting = { ...planner, meetingManager: { isInMeeting: true, meetingApps: ['ms-teams'] } }
+      expect(lines(inMeeting).meetingMessage).to.equal('statusMessages.inMeeting (ms-teams)')
+      expect(lines(inMeeting).tooltipMessage.split('\n').pop()).to.equal('statusMessages.inMeeting (ms-teams)')
+    })
+
+    it('says nothing about a meeting when there is none', () => {
+      const status = lines({ ...planner, meetingManager: { isInMeeting: false, meetingApps: [] } })
+      expect(status.meetingMessage).to.equal('')
+      expect(status.tooltipMessage).to.equal(status.trayMessage)
+    })
+
+    it('does not repeat the meeting in the tooltip when a break is already waiting for it', () => {
+      const waiting = { ...planner, deferredBreakEvent: 'startMicrobreak', meetingManager: { isInMeeting: true, meetingApps: ['ms-teams'] } }
+      expect(lines(waiting).tooltipMessage).to.equal('statusMessages.waitingForCall (ms-teams)')
+    })
+  })
 })

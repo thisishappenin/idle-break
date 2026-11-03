@@ -84,11 +84,13 @@ class BreaksPlanner extends EventEmitter {
         naturalBreaks.emit('naturalBreakFinished')
       }
       log.info('Stretchly: meeting started, breaks will wait until it ends')
+      this.emit('updateToolTip')
     })
 
     this.meetingManager.on('meetingFinished', () => {
       this.naturalBreaksManager.isSuspended = false
       log.info('Stretchly: meeting finished')
+      this.emit('updateToolTip')
       clearTimeout(this.meetingDelayTimer)
       if (this.isPaused) return
       this.meetingDelayTimer = setTimeout(() => {

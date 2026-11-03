@@ -1698,7 +1698,10 @@ function trayPanelState () {
       settings,
       i18next,
       humanizeDuration
-    }).trayMessage.split('\n').filter(Boolean),
+    }).panelLines,
+    meeting: breakPlanner.meetingManager.isInMeeting
+      ? { apps: breakPlanner.meetingManager.meetingApps, waiting: Boolean(breakPlanner.deferredBreakEvent) }
+      : null,
     locked: isTrayMenuLocked(),
     newVersion: !settings.get('disableAppUpdateFeatures') && Boolean(global.isNewVersion),
     paused: breakPlanner.isPaused,
@@ -2064,7 +2067,7 @@ function updateToolTip () {
     settings,
     i18next,
     humanizeDuration
-  }).trayMessage
+  }).tooltipMessage
   if (appIcon) {
     appIcon.setToolTip(message !== '' ? message : i18next.t('main.toolTipHeader'))
   }

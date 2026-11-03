@@ -326,7 +326,7 @@ Filenames can contain letters (`a-z`, `A-Z`), numbers, dots, underscores, and hy
 To have different theme for Mini breaks, set `miniBreakColor` to desired value, ie `#123456`.
 
 #### Natural breaks inactivity time [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
-In the preferences file, set `naturalBreaksInactivityResetTime` to your preferred value (in milliseconds greater than than 20000ms). This is an idle time length, after which *Stretchly* breaks will be paused until the user resumes activity.
+In the preferences file, set `naturalBreaksInactivityResetTime` to your preferred value (in milliseconds greater than than 20000ms). This is an idle time length, after which the break countdown is paused until the user resumes activity, and then starts again from the beginning (time away counts as a break).
 
 When idle time monitoring is on and a break ends while you are away, *Stretchly* keeps the countdown to the next break at its full length (still shown in the tray) and starts counting down only when you use the computer again. The "timer reset" popup is not shown if a break happened while you were away.
 

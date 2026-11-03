@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- The idle time option now says what it does: the countdown pauses while you are away and restarts from the beginning when you return
 - The tray panel no longer repeats the time to the next break under the countdown
 - The tray tooltip shows only the status (for example the time to the next break) and drops the app name line above it
 - After a break ends while you are away, the countdown to the next break stays at its full length in the tray and only starts when you use the computer again (needs idle time monitoring)

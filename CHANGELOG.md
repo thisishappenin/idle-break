@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- Preferences are grouped into labelled sections: Settings is split into General, Breaks, When you are away, Calls and Do Not Disturb and Defaults; the break window display options (window or full screen, all monitors) moved to Theme next to the window size and position; the tray number font, size and smoothing only show for the number-only tray style on Windows
 - The idle time option now says what it does: the countdown pauses while you are away and restarts from the beginning when you return
 - The tray panel no longer repeats the time to the next break under the countdown
 - The tray tooltip shows only the status (for example the time to the next break) and drops the app name line above it

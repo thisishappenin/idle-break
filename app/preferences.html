@@ -60,74 +60,12 @@
     </a>
   </nav>
   <div class="settings">
+    <div class="theme-label">
+      <span data-i18next="preferences.settings.general"></span>
+    </div>
     <div class="store-hidden portable-hidden">
       <input type="checkbox" value="openAtLogin" id="openAtLogin">
       <label data-i18next="preferences.settings.openAtLogin" for="openAtLogin"></label>
-    </div>
-    <div>
-      <span data-i18next="preferences.settings.showBreaksIn"></span>
-    </div>
-    <div>
-      <input type="radio" value="false" name="fullscreen" id="window">
-      <label data-i18next="preferences.settings.window" for="window"></label>
-      <input type="radio" value="true" name="fullscreen" id="fullscreen">
-      <label data-i18next="preferences.settings.fullscreen" for="fullscreen"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="ideas" id="showIdeas">
-      <label data-i18next="preferences.settings.showIdeas" for="showIdeas"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="allScreens" id="allScreens">
-      <label data-i18next="preferences.settings.allScreens" for="allScreens"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="naturalBreaks" id="monitorIdleTime">
-      <label data-i18next="preferences.settings.monitorIdleTime" for="monitorIdleTime"></label>
-    </div>
-    <div>
-      <input type="checkbox" class="negative" value="monitorDnd" id="monitorDnd">
-      <label data-i18next="preferences.settings.monitorDnd" for="monitorDnd"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="themedNotifications" id="themedNotifications">
-      <label data-i18next="preferences.settings.themedNotifications" for="themedNotifications"></label>
-    </div>
-    <div>
-      <input type="checkbox" value="naturalBreaksResetNotification" id="naturalBreaksResetNotification">
-      <label data-i18next="preferences.settings.naturalBreaksResetNotification" for="naturalBreaksResetNotification"></label>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.settings.naturalBreaksResetNotificationMaxIdleTime" for="resetNotificationMaxIdleTime"></label>
-      <input type="range" min="1" max="60" step="1" name="naturalBreaksResetNotificationMaxIdleTime"
-        data-divisor="60000" id="resetNotificationMaxIdleTime">
-      <output data-unit="minutes"></output>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.settings.idleResetTime" for="idleResetTime"></label>
-      <input type="range" min="1" max="60" step="1" name="naturalBreaksInactivityResetTime"
-        data-divisor="60000" id="idleResetTime">
-      <output data-unit="minutes"></output>
-    </div>
-    <div>
-      <input type="checkbox" value="monitorMeetings" id="monitorMeetings">
-      <label data-i18next="preferences.settings.monitorMeetings" for="monitorMeetings"></label>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.settings.meetingBreakDelay" for="meetingBreakDelay"></label>
-      <input type="range" min="0" max="60" step="5" name="meetingBreakDelay" data-divisor="1000" id="meetingBreakDelay">
-      <output data-unit="seconds"></output>
-    </div>
-    <div class="slider-row">
-      <label data-i18next="preferences.settings.monitorMeetingsIgnoreApps" for="monitorMeetingsIgnoreApps"></label>
-      <input type="text" id="monitorMeetingsIgnoreApps">
-    </div>
-    <div>
-      <input type="checkbox" value="pauseForSuspendOrLock" id="pauseForSuspendOrLock">
-      <label data-i18next="preferences.settings.pauseForSuspendOrLock" for="pauseForSuspendOrLock"></label>
-    </div>
-    <div>
-      <hr />
     </div>
     <div>
       <label data-i18next="preferences.settings.language" for="language"></label>
@@ -190,6 +128,76 @@
     </div>
     <div>
       <hr />
+    </div>
+    <div class="theme-label">
+      <span data-i18next="preferences.settings.breaks"></span>
+    </div>
+    <div>
+      <input type="checkbox" value="ideas" id="showIdeas">
+      <label data-i18next="preferences.settings.showIdeas" for="showIdeas"></label>
+    </div>
+    <div>
+      <input type="checkbox" value="themedNotifications" id="themedNotifications">
+      <label data-i18next="preferences.settings.themedNotifications" for="themedNotifications"></label>
+    </div>
+    <div>
+      <hr />
+    </div>
+    <div class="theme-label">
+      <span data-i18next="preferences.settings.away"></span>
+    </div>
+    <div>
+      <input type="checkbox" value="naturalBreaks" id="monitorIdleTime">
+      <label data-i18next="preferences.settings.monitorIdleTime" for="monitorIdleTime"></label>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.settings.idleResetTime" for="idleResetTime"></label>
+      <input type="range" min="1" max="60" step="1" name="naturalBreaksInactivityResetTime"
+        data-divisor="60000" id="idleResetTime">
+      <output data-unit="minutes"></output>
+    </div>
+    <div>
+      <input type="checkbox" value="naturalBreaksResetNotification" id="naturalBreaksResetNotification">
+      <label data-i18next="preferences.settings.naturalBreaksResetNotification" for="naturalBreaksResetNotification"></label>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.settings.naturalBreaksResetNotificationMaxIdleTime" for="resetNotificationMaxIdleTime"></label>
+      <input type="range" min="1" max="60" step="1" name="naturalBreaksResetNotificationMaxIdleTime"
+        data-divisor="60000" id="resetNotificationMaxIdleTime">
+      <output data-unit="minutes"></output>
+    </div>
+    <div>
+      <input type="checkbox" value="pauseForSuspendOrLock" id="pauseForSuspendOrLock">
+      <label data-i18next="preferences.settings.pauseForSuspendOrLock" for="pauseForSuspendOrLock"></label>
+    </div>
+    <div>
+      <hr />
+    </div>
+    <div class="theme-label">
+      <span data-i18next="preferences.settings.calls"></span>
+    </div>
+    <div>
+      <input type="checkbox" value="monitorMeetings" id="monitorMeetings">
+      <label data-i18next="preferences.settings.monitorMeetings" for="monitorMeetings"></label>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.settings.meetingBreakDelay" for="meetingBreakDelay"></label>
+      <input type="range" min="0" max="60" step="5" name="meetingBreakDelay" data-divisor="1000" id="meetingBreakDelay">
+      <output data-unit="seconds"></output>
+    </div>
+    <div class="slider-row">
+      <label data-i18next="preferences.settings.monitorMeetingsIgnoreApps" for="monitorMeetingsIgnoreApps"></label>
+      <input type="text" id="monitorMeetingsIgnoreApps">
+    </div>
+    <div>
+      <input type="checkbox" class="negative" value="monitorDnd" id="monitorDnd">
+      <label data-i18next="preferences.settings.monitorDnd" for="monitorDnd"></label>
+    </div>
+    <div>
+      <hr />
+    </div>
+    <div class="theme-label">
+      <span data-i18next="preferences.settings.defaults"></span>
     </div>
     <div>
       <button type="button" data-i18next="preferences.settings.restoreDefaults"></button>
@@ -453,6 +461,19 @@
       </span>
     </div>
     <div>
+      <span data-i18next="preferences.settings.showBreaksIn"></span>
+    </div>
+    <div class="display-mode">
+      <input type="radio" value="false" name="fullscreen" id="window">
+      <label data-i18next="preferences.settings.window" for="window"></label>
+      <input type="radio" value="true" name="fullscreen" id="fullscreen">
+      <label data-i18next="preferences.settings.fullscreen" for="fullscreen"></label>
+    </div>
+    <div>
+      <input type="checkbox" value="allScreens" id="allScreens">
+      <label data-i18next="preferences.settings.allScreens" for="allScreens"></label>
+    </div>
+    <div>
       <div class="has-select">
         <select name="breakWindowPosition" id="breakWindowPosition" data-setting>
           <option value="center" data-i18next="preferences.theme.positionCenter"></option>
@@ -498,7 +519,7 @@
         </select>
       </div>
     </div>
-    <div>
+    <div class="tray-number-only">
       <label data-i18next="preferences.theme.trayIconFont" for="trayIconFont"></label>
       <div class="has-select">
         <select name="trayIconFont" id="trayIconFont" data-setting>
@@ -514,12 +535,12 @@
         </select>
       </div>
     </div>
-    <div>
+    <div class="tray-number-only">
       <label data-i18next="preferences.theme.trayIconFontSize" for="trayIconFontSize"></label>
       <input type="range" min="30" max="100" step="5" name="trayIconFontSize" data-divisor="0.01" id="trayIconFontSize">
       <output data-unit="percent"></output>
     </div>
-    <div>
+    <div class="tray-number-only">
       <input type="checkbox" value="trayIconCrispDigits" id="trayIconCrispDigits">
       <label data-i18next="preferences.theme.trayIconCrispDigits" for="trayIconCrispDigits"></label>
     </div>

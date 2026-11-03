@@ -60,7 +60,7 @@
       "heart": "Love Stretchly"
     },
     "shortcutsTab": {
-      "trayMenu": "Tray menu:",
+      "trayMenu": "Tray menu and panel:",
       "keys": "Shortcuts:",
       "hint": "Click a box and press the keys. Backspace clears it. Shortcuts need Ctrl, Cmd or Alt."
     },
@@ -71,6 +71,11 @@
       "fullscreen": "Full screen",
       "showIdeas": "Show exercise tips during breaks",
       "allScreens": "Shows breaks on all monitors",
+      "general": "General:",
+      "breaks": "Breaks:",
+      "away": "When you are away:",
+      "calls": "Calls and Do Not Disturb:",
+      "defaults": "Defaults:",
       "monitorIdleTime": "Reset the break timer when I am away (monitors system idle time; the countdown pauses while you are away and starts again from the beginning when you return).",
       "monitorDnd": "Show breaks even in Do Not Disturb mode",
       "meetingBreakDelay": "Wait after a call ends:",
@@ -164,7 +169,7 @@
       "trayIconStyleTime": "Time to break",
       "trayIconStyleProgress": "Progress to break",
       "trayIconStyleText": "Minutes to break (number only)",
-      "preview": "Preview",
+      "preview": "Preview:",
       "previewPopup": "Show popup now",
       "previewPopupHint": "The real popup appears on your screen for a few seconds whenever you change a colour, transparency, size or position setting here.",
       "trayIconFont": "Font for the number (Windows, number-only style):",

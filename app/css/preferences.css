@@ -62,27 +62,6 @@ body > div > :last-child {
   z-index: 9;
 }
 
-.settings {
-  display: grid;
-  font-size: 13px;
-  grid-gap: 20px 0;
-  grid-template: auto / 89px auto 16px;
-  letter-spacing: -0.08px;
-  padding-top: 86px;
-}
-
-.settings > div {
-  grid-column: 2/-2;
-}
-
-.settings > :nth-child(3) {
-  padding-left: 80px;
-}
-
-.settings > :nth-child(3) > label {
-  margin-right: 32px;
-}
-
 .single-break-type [data-multi-only] {
   display: none;
 }
@@ -135,6 +114,7 @@ body > div > :last-child {
 }
 
 
+.settings,
 .theme,
 .audio,
 .shortcuts {
@@ -146,12 +126,14 @@ body > div > :last-child {
   padding-top: 86px;
 }
 
+.settings > div,
 .theme > div,
 .audio > div,
 .shortcuts > div {
   grid-column: 2/-2;
 }
 
+.settings > .theme-label,
 .theme > .theme-label,
 .audio > .theme-label,
 .shortcuts > .theme-label,
@@ -163,6 +145,7 @@ body > div > :last-child {
   text-align: right;
 }
 
+body[dir=rtl] .settings > .theme-label,
 body[dir=rtl] .schedule > .theme-label,
 body[dir=rtl] .theme > .theme-label,
 body[dir=rtl] .audio > .theme-label,
@@ -518,6 +501,7 @@ body > div:not(.navigation):not(.custom-message) {
 }
 
 @media (max-width: 640px) {
+  .settings,
   .theme,
   .audio,
   .shortcuts,
@@ -525,6 +509,7 @@ body > div:not(.navigation):not(.custom-message) {
     grid-template-columns: 16px auto 16px;
   }
 
+  .settings > .theme-label,
   .theme > .theme-label,
   .audio > .theme-label,
   .shortcuts > .theme-label,
@@ -533,10 +518,6 @@ body > div:not(.navigation):not(.custom-message) {
     grid-column: 2 / -2;
     padding: 0;
     text-align: start;
-  }
-
-  .settings {
-    grid-template-columns: 16px auto 16px;
   }
 
   .swatches {
@@ -618,4 +599,12 @@ body > div:not(.navigation):not(.custom-message) {
 .preview-zoom,
 .preview-actual {
   image-rendering: pixelated;
+}
+
+.display-mode label {
+  margin-right: 24px;
+}
+
+.tray-number-only.hidden {
+  display: none;
 }

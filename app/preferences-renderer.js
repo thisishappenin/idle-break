@@ -46,7 +46,14 @@ async function updateTrayPreview () {
   }
 }
 
+function updateTrayOptionVisibility () {
+  const numberOnly = document.querySelector('#trayIconStyle').value === 'text' &&
+    document.body.classList.contains('win32')
+  document.querySelectorAll('.tray-number-only').forEach(row => row.classList.toggle('hidden', !numberOnly))
+}
+
 function updateThemePreview () {
+  updateTrayOptionVisibility()
   updateTrayPreview()
 }
 

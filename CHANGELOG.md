@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - "Minutes to break (number only)" tray icon style, without the Stretchly logo
 
 ### Fixed
+- The break countdown restarts when you return after a break during a long absence (for example a lock), instead of staying stuck at 0
 - Popups no longer shrink below a size that fits their content on small monitors (360x120), long idea text is trimmed instead of overlapping the countdown, Postpone and Skip grow to fit longer translated labels, and mid-size break windows no longer push their buttons off screen
 - The "timer reset" popup no longer appears when a break happened while you were away
 - Preferences window can be maximised to the full screen height instead of stopping short

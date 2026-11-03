@@ -63,11 +63,11 @@ class BreaksPlanner extends EventEmitter {
         this.resumeAfterUsage()
         return
       }
-      if (this.breakFinishedDuringIdle(idleTime)) return
+      const breakDuringIdle = this.breakFinishedDuringIdle(idleTime)
       if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak' && !this.dndManager.isOnDnd) {
         this.reset()
         log.info('Stretchly: resuming breaks after idle time')
-        if (!(idleTime > this.settings.get('naturalBreaksResetNotificationMaxIdleTime'))) {
+        if (!breakDuringIdle && !(idleTime > this.settings.get('naturalBreaksResetNotificationMaxIdleTime'))) {
           this.emit('idleReset')
         }
         this.emit('updateToolTip')

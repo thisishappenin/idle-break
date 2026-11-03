@@ -122,6 +122,38 @@ describe('breaksPlanner waiting for usage after a break', () => {
     expect(announced).to.equal(false)
   })
 
+  it('restarts the countdown when the user returns after a break, a lock and an idle pause', () => {
+    let announced = false
+    planner.on('idleReset', () => { announced = true })
+    idle = 30000
+    planner.nextBreakAfterBreak()
+    planner.pause(1)
+    vi.advanceTimersByTime(20 * MINUTE)
+    planner.resume()
+    planner.naturalBreaksManager.emit('clearBreakScheduler')
+    expect(planner.scheduler.reference).to.equal(null)
+    vi.advanceTimersByTime(3 * MINUTE)
+    planner.naturalBreaksManager.emit('naturalBreakFinished', 23 * MINUTE)
+    expect(planner.scheduler.reference).to.equal('startMicrobreak')
+    expect(planner.scheduler.timeLeft).to.be.closeTo(40 * MINUTE, 1000)
+    expect(announced).to.equal(false)
+  })
+
+  it('restarts the countdown without a popup when a break happened during a short absence', () => {
+    let announced = false
+    planner.on('idleReset', () => { announced = true })
+    idle = 30000
+    planner.nextBreakAfterBreak()
+    planner.naturalBreaksManager.emit('clearBreakScheduler')
+    planner.naturalBreaksManager.isSchedulerCleared = true
+    vi.advanceTimersByTime(7 * MINUTE)
+    planner.resumeAfterUsage()
+    planner.clear()
+    planner.naturalBreaksManager.emit('naturalBreakFinished', 7 * MINUTE)
+    expect(planner.scheduler.reference).to.equal('startMicrobreak')
+    expect(announced).to.equal(false)
+  })
+
   it('still announces a reset when the idle time had no break', () => {
     let announced = false
     planner.on('idleReset', () => { announced = true })

@@ -2059,18 +2059,14 @@ function getTrayMenuTemplate () {
 }
 
 function updateToolTip () {
-  let trayMessage = i18next.t('main.toolTipHeader')
   const message = new StatusMessages({
     breakPlanner,
     settings,
     i18next,
     humanizeDuration
   }).trayMessage
-  if (message !== '') {
-    trayMessage += '\n\n' + message
-  }
   if (appIcon) {
-    appIcon.setToolTip(trayMessage)
+    appIcon.setToolTip(message !== '' ? message : i18next.t('main.toolTipHeader'))
   }
 }
 

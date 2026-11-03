@@ -19,6 +19,7 @@ class NaturalBreaksManager extends EventEmitter {
     this.isOnNaturalBreak = false
     this.isSchedulerCleared = false
     this.isSuspended = false
+    this.ignoreIdleBefore = null
     if (this.usingNaturalBreaks) {
       this.start()
     }
@@ -45,7 +46,8 @@ class NaturalBreaksManager extends EventEmitter {
 
   get idleTime () {
     if (this.usingNaturalBreaks) {
-      return (powerMonitor.getSystemIdleTime() || desktopIdle?.getIdleTime() || 0) * 1000
+      const idle = (powerMonitor.getSystemIdleTime() || desktopIdle?.getIdleTime() || 0) * 1000
+      return this.ignoreIdleBefore === null ? idle : Math.min(idle, Date.now() - this.ignoreIdleBefore)
     } else {
       return 0
     }

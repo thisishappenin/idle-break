@@ -88,6 +88,7 @@ class BreaksPlanner extends EventEmitter {
     })
 
     this.meetingManager.on('meetingFinished', () => {
+      this.naturalBreaksManager.ignoreIdleBefore = Date.now()
       this.naturalBreaksManager.isSuspended = false
       log.info('Stretchly: meeting finished')
       this.emit('updateToolTip')

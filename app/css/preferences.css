@@ -524,6 +524,12 @@ body > div:not(.navigation):not(.custom-message) {
   color: var(--muted, #5d5d5d);
 }
 
+.theme-hint {
+  color: var(--muted, #5d5d5d);
+  font-size: 12px;
+  margin: 2px 0 10px;
+}
+
 .color-option {
   align-items: center;
   display: flex;

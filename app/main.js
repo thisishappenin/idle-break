@@ -21,6 +21,7 @@ import {
   minutesRemaining, insideWindowsPortable
 } from './utils/utils.js'
 import { migrateLegacyUserData } from './utils/legacyUserData.js'
+import { DISPLAY_PROFILE_KEYS, displayProfileKey, saveDisplayProfile, applyDisplayProfile } from './utils/displayProfiles.js'
 import IdeasLoader from './utils/ideasLoader.js'
 import BreaksPlanner from './breaksPlanner.js'
 import AppIcon from './utils/appIcon.js'
@@ -114,6 +115,7 @@ let updateChecker
 let currentTrayIconPath = null
 let currentTrayMenuTemplate = null
 let trayUpdateIntervalObj = null
+let displayChangesWatched = false
 
 if (insideWindowsPortable()) {
   const portableDataPath = join(process.env.PORTABLE_EXECUTABLE_DIR, 'Data')
@@ -480,6 +482,8 @@ async function initialize (isAppStart = true) {
     }
   }
   displayManager = new DisplayManager(settings)
+  syncDisplayProfile()
+  watchDisplayChanges()
 
   try {
     await startI18next()
@@ -903,6 +907,25 @@ function startBreakNotification () {
   updateTray()
 }
 
+function currentDisplayProfileKey () {
+  return displayProfileKey(displayManager.getTargetDisplay(-1))
+}
+
+function syncDisplayProfile () {
+  if (!displayManager || !applyDisplayProfile(settings, currentDisplayProfileKey())) return false
+  log.info(`Stretchly: using the saved break window size for screen ${currentDisplayProfileKey()}`)
+  preferencesWin?.webContents.send('translate')
+  return true
+}
+
+function watchDisplayChanges () {
+  if (displayChangesWatched) return
+  displayChangesWatched = true
+  for (const event of ['display-added', 'display-removed', 'display-metrics-changed']) {
+    screen.on(event, syncDisplayProfile)
+  }
+}
+
 function placeBreakWindow (win, displayId) {
   if (win.isDestroyed()) return
   if (!displayManager.usesCornerPosition) {
@@ -1038,6 +1061,7 @@ ipcMain.on('preview-break', () => showBreakPreview())
 function startMicrobreak () {
   closeBreakPreview()
   closeToast()
+  syncDisplayProfile()
   // don't start another break if break running
   if (microbreakWins) {
     log.warn('Stretchly: Mini break already running, not starting Mini break')
@@ -1188,6 +1212,7 @@ function startMicrobreak () {
 function startBreak () {
   closeBreakPreview()
   closeToast()
+  syncDisplayProfile()
   if (breakWins) {
     log.warn('Stretchly: Long break already running, not starting Long break')
     return
@@ -2073,6 +2098,10 @@ ipcMain.on('save-setting', function (event, key, value) {
   }
 
   settings.set(key, value)
+
+  if (DISPLAY_PROFILE_KEYS.includes(key)) {
+    saveDisplayProfile(settings, currentDisplayProfileKey())
+  }
 
   if (key === 'pauseWhileUsing' && !breakPlanner.isPaused) {
     const wasPaused = breakPlanner.appExclusionsManager.isSchedulerCleared

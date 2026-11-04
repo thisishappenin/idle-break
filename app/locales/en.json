@@ -190,6 +190,7 @@
       "positionTopRight": "Position: top right",
       "positionBottomLeft": "Position: bottom left",
       "positionBottomRight": "Position: bottom right",
+      "perScreenHint": "Position and size are remembered for each screen resolution and switch automatically when you change screens.",
       "breakWindowAlwaysOnTop": "Keep standalone window on top"
     },
     "about": {

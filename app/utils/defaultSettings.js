@@ -66,6 +66,7 @@ export default {
   breakWindowHeight: 0.85,
   breakWindowPosition: 'center',
   breakWindowMargin: 16,
+  breakWindowProfiles: {},
   breakWindowAlwaysOnTop: true,
   checkNewVersion: true,
   breakIdeas: defaultBreakIdeas,

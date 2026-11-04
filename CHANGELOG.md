@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- The break window position and size are remembered for each screen resolution and switch automatically when you change screens, for example between a laptop and a widescreen monitor
 - Setting to pause the break countdown while an app or website is in front (Settings tab, Windows): list app names or words from the window title, such as a website name, and the countdown waits until you switch away. A break that is already running is not interrupted
 - Optional custom colour for the countdown in the break popup and the tray panel (Theme tab, under Opacity), and a separate custom colour for the number in the Windows tray icon (Theme tab, Menubar section)
 - The tray panel and the tray tooltip show when you are in a meeting (with the app using the microphone), and update as soon as the call starts or ends

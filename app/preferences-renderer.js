@@ -122,6 +122,7 @@ window.onload = async (e) => {
 
   window.stretchly.onTranslate(async () => {
     new HtmlTranslate(document).translate()
+    document.querySelector('#breakWindowPosition').value = (await window.settings.currentSettings()).breakWindowPosition
     document.querySelectorAll('input[type="range"]').forEach(async range => {
       const settings = await window.settings.currentSettings()
       const divisor = range.dataset.divisor

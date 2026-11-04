@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - застосунок для нагадування про перерви",
+    "toolTipHeader": "Idle Break - застосунок для нагадування про перерви",
     "microbreakIn": "Маленька перерва за $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Довга перерва за $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Роботу відновлено",
@@ -14,7 +14,7 @@
     "untilMorning": "до ранку",
     "indefinitely": "на невизначений термін",
     "resetBreaks": "Скинути перерви",
-    "quitStretchly": "Вихід з Stretchly",
+    "quitStretchly": "Вихід з Idle Break",
     "preferences": "Параметри",
     "restoreDefaults": "Скинути налаштування",
     "syncPreferences": "Синхронізація налаштувань",
@@ -109,7 +109,7 @@
       "fullscreen": "На повний екран",
       "window": "Вікні",
       "showBreaksIn": "Показувати перерви у:",
-      "openAtLogin": "Запускати Stretchly при вході в систему"
+      "openAtLogin": "Запускати Idle Break при вході в систему"
     },
     "nav": {
       "heart": "Підтримати Stretchly",
@@ -118,7 +118,7 @@
       "schedule": "Розклад",
       "settings": "Налаштування"
     },
-    "title": "Налаштування Stretchly"
+    "title": "Налаштування Idle Break"
   },
   "process": {
     "newVersionAvailable": "Доступна нова версія!"
@@ -128,7 +128,7 @@
     "getStarted": "Почати",
     "openPreferences": "Відкрити налаштування",
     "viewTutorial": "Переглянути інструкцію",
-    "title": "Вітаємо в Stretchly"
+    "title": "Вітаємо в Idle Break"
   },
   "contributorPreferences": {
     "0": "Перший монітор",
@@ -189,7 +189,7 @@
     "currentTimeInBreaks": "Поточний час",
     "showCurrentTimeInBreaks": "Показати поточний місцевий час у вікні перерви",
     "showTrayIcon": "Показати значок у треї",
-    "toShowTrayIcon": "Показати значок Stretchly в треї"
+    "toShowTrayIcon": "Показати значок Idle Break в треї"
   },
   "statusMessages": {
     "resuming": "Продовжуємо",

@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - Pauze herinnering app",
+    "toolTipHeader": "Idle Break - Pauze herinnering app",
     "microbreakIn": "Mini pauze in $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Lange pauze in $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Pauzes hervatten",
@@ -16,7 +16,7 @@
     "untilMorning": "voor morgen",
     "indefinitely": "voor onbepaalde tijd",
     "resetBreaks": "Reset pauzes",
-    "quitStretchly": "Stop Stretchly",
+    "quitStretchly": "Stop Idle Break",
     "warning": "Dit zal de standaardinstellingen herstellen en al je wijzigingen gaan verloren.",
     "continue": "Doorgaan",
     "cancel": "Annuleer",
@@ -31,7 +31,7 @@
     "title": "Tijd voor een pauze!"
   },
   "preferences": {
-    "title": "Stretchly Instellingen",
+    "title": "Idle Break Instellingen",
     "nav": {
       "settings": "Instellingen",
       "schedule": "Schema",
@@ -40,7 +40,7 @@
       "heart": "Waardeer Stretchly"
     },
     "settings": {
-      "openAtLogin": "Start Stretchly automatisch tijdens het inloggen",
+      "openAtLogin": "Start Idle Break automatisch tijdens het inloggen",
       "showBreaksIn": "Toon pauzes in:",
       "window": "Venster",
       "fullscreen": "Volledig Scherm",
@@ -173,7 +173,7 @@
     "currentTimeInBreaks": "Huidige tijd",
     "showCurrentTimeInBreaks": "Toon huidige tijd in pauze scherm",
     "showTrayIcon": "Laat een icoon in het menu zien",
-    "toShowTrayIcon": "Laat het Stretchly icoon in de menubar zien"
+    "toShowTrayIcon": "Laat het Idle Break icoon in de menubar zien"
   },
   "utils": {
     "none_one": "{{count}}",
@@ -195,7 +195,7 @@
     "newVersionAvailable": "Nieuwe versie beschikbaar!"
   },
   "welcome": {
-    "title": "Welkom bij Stretchly",
+    "title": "Welkom bij Idle Break",
     "breakTimeReminderApp": "Pauze herinnering app",
     "viewTutorial": "Bekijk Tutorial",
     "openPreferences": "Open Instellingen",

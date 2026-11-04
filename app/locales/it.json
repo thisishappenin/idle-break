@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - L'app che ti ricorda quando prenderti una pausa",
+    "toolTipHeader": "Idle Break - L'app che ti ricorda quando prenderti una pausa",
     "microbreakIn": "Mini-Pausa fra $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Pausa fra $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Riattiva pause",
@@ -16,7 +16,7 @@
     "untilMorning": "Fino al mattino",
     "indefinitely": "Indefinitamente",
     "resetBreaks": "Azzera le pause",
-    "quitStretchly": "Esci da Stretchly",
+    "quitStretchly": "Esci da Idle Break",
     "restoreDefaults": "Ripristina impostazioni",
     "warning": "Questo ripristinerà le impostazioni predefinite dell'app e tutte le impostazioni personalizzate andranno perse.",
     "continue": "Continua",
@@ -31,7 +31,7 @@
     "title": "È ora di fare una pausa!"
   },
   "preferences": {
-    "title": "Impostazioni Stretchly",
+    "title": "Impostazioni Idle Break",
     "nav": {
       "settings": "Impostazioni",
       "schedule": "Programmazione",
@@ -40,7 +40,7 @@
       "heart": "Mi piace Stretchly"
     },
     "settings": {
-      "openAtLogin": "Avvia Stretchly all'avvio del sistema",
+      "openAtLogin": "Avvia Idle Break all'avvio del sistema",
       "showBreaksIn": "Mostra le pause:",
       "window": "In finestra",
       "fullscreen": "A tutto schermo",
@@ -173,7 +173,7 @@
     "currentTimeInBreaks": "Ora attuale",
     "showCurrentTimeInBreaks": "Mostra l'ora locale corrente nella finestra di pausa",
     "showTrayIcon": "Mostra l'icona della barra dei menu",
-    "toShowTrayIcon": "Mostra l'icona Stretchly nella barra dei menu"
+    "toShowTrayIcon": "Mostra l'icona Idle Break nella barra dei menu"
   },
   "utils": {
     "none_one": "{{count}}",
@@ -201,7 +201,7 @@
     "newVersionAvailable": "È disponibile una nuova versione!"
   },
   "welcome": {
-    "title": "Benvenuto/a in Stretchly",
+    "title": "Benvenuto/a in Idle Break",
     "breakTimeReminderApp": "L'app che ti ricorda quando prenderti una pausa",
     "viewTutorial": "Visualizza il tutorial",
     "openPreferences": "Impostazioni",

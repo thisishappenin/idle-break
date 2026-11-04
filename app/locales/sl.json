@@ -6,7 +6,7 @@
     "continue": "Nadaljuj",
     "warning": "To bo ponastavilo na privzete nastavitve in vse vaše nastavitve bodo izgubljene.",
     "restoreDefaults": "Ponastavi nastavitve",
-    "quitStretchly": "Izhod iz Stretchly",
+    "quitStretchly": "Izhod iz Idle Break",
     "resetBreaks": "Ponastavi premore",
     "indefinitely": "Trajno",
     "untilMorning": "Do jutra",
@@ -19,7 +19,7 @@
     "downloadLatestVersion": "Prenesi najnovejšo verzijo",
     "breakIn": "Dolg premor čez $t(utils.seconds, {'count': {{seconds}} })",
     "microbreakIn": "Mini premor čez $t(utils.seconds, {'count': {{seconds}} })",
-    "toolTipHeader": "Stretchly - Opomnik za odmor",
+    "toolTipHeader": "Idle Break - Opomnik za odmor",
     "contributorPreferences": "Nastavitve podpornikov",
     "pause": "Zaustavi premore",
     "resume": "Nadaljuj premor",
@@ -43,7 +43,7 @@
     "openPreferences": "Odpri nastavitve",
     "viewTutorial": "Ogled vodiča",
     "breakTimeReminderApp": "Aplikacija za opomnike o premorih",
-    "title": "Dobrodošli v Stretchly"
+    "title": "Dobrodošli v Idle Break"
   },
   "process": {
     "newVersionAvailable": "Nova različica na voljo!"
@@ -136,7 +136,7 @@
     "currentTimeInBreaks": "Trenutni čas",
     "showCurrentTimeInBreaks": "Prikaži trenutni lokalni čas v oknu premora",
     "showTrayIcon": "Pokaži ikono v opravilni vrstici",
-    "toShowTrayIcon": "Pokaži Stretchly ikono v opravilni vrstici"
+    "toShowTrayIcon": "Pokaži Idle Break ikono v opravilni vrstici"
   },
   "preferences": {
     "heart": {
@@ -215,7 +215,7 @@
       "fullscreen": "Cel zaslon",
       "window": "Okno",
       "showBreaksIn": "Prikaz premora:",
-      "openAtLogin": "Zaženi Stretchly ob vpisu v sistem"
+      "openAtLogin": "Zaženi Idle Break ob vpisu v sistem"
     },
     "nav": {
       "heart": "Ljubim Stretchly",
@@ -224,7 +224,7 @@
       "schedule": "Urnik",
       "settings": "Nastavitve"
     },
-    "title": "Nastavitve Stretchly"
+    "title": "Nastavitve Idle Break"
   },
   "break": {
     "title": "Čas za premor!",

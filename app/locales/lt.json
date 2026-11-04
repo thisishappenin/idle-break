@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - prisimink pertraukėles",
+    "toolTipHeader": "Idle Break - prisimink pertraukėles",
     "resumingBreaks": "Pertraukėlė tęsiasi",
     "downloadLatestVersion": "Atsisiųsti naujausią versiją",
     "skipToTheNext": "Praleisti iki kitos",
@@ -12,7 +12,7 @@
     "untilMorning": "iki rytojaus",
     "indefinitely": "neribotam laikui",
     "resetBreaks": "Atstatyti pertraukėles",
-    "quitStretchly": "Išjungti Stretchly",
+    "quitStretchly": "Išjungti Idle Break",
     "preferences": "Nuostatos",
     "syncPreferences": "Sinchronizavimo nuostatos",
     "contributorPreferences": "Nuostatos rėmėjams",
@@ -117,7 +117,7 @@
     "newVersionAvailable": "Pasiekiama nauja versija!"
   },
   "welcome": {
-    "title": "Jus sveikina Stretchly",
+    "title": "Jus sveikina Idle Break",
     "breakTimeReminderApp": "Prisimink pertraukėles",
     "viewTutorial": "Peržiūrėti pamoką",
     "openPreferences": "Atverti nuostatas",
@@ -182,7 +182,7 @@
     "currentTimeInBreaks": "Dabartinis laikas",
     "showCurrentTimeInBreaks": "Rodyti vietinį laiką pertraukos lange",
     "showTrayIcon": "Rodyti meniu juostos ženkliuką",
-    "toShowTrayIcon": "Rodyti Stretchly ženkliuką meniu juostoje"
+    "toShowTrayIcon": "Rodyti Idle Break ženkliuką meniu juostoje"
   },
   "statusMessages": {
     "nextLongBreak": "Kita ilgoji pertrauka",

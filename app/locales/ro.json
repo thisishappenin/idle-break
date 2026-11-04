@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - Aplicația care-ți aduce aminte să iei o pauză",
+    "toolTipHeader": "Idle Break - Aplicația care-ți aduce aminte să iei o pauză",
     "resumingBreaks": "Reluarea pauzelor",
     "downloadLatestVersion": "Descarcă noua versiune",
     "skipToTheNext": "Sari la următoarea",
@@ -12,7 +12,7 @@
     "untilMorning": "Pânā dimineaţă",
     "indefinitely": "Nelimitat",
     "resetBreaks": "Resetează pauzele",
-    "quitStretchly": "Ieși din Stretchly",
+    "quitStretchly": "Ieși din Idle Break",
     "preferences": "Preferințe",
     "syncPreferences": "Sincronizează preferințele",
     "cancel": "Anulează",
@@ -74,7 +74,7 @@
       "desc1": "Este dovedit științific că luarea pauzelor regulate atunci când utilizați un computer este important pentru bunăstare fizică și mentală.",
       "desc2": "Stretchly este gratuit. Dar vă puteți oferi sprijinul donând și ajutându-ne să continuăm să îmbunătățim Stretchly și să lansăm alte programe gratuite."
     },
-    "title": "Preferințele Stretchly",
+    "title": "Preferințele Idle Break",
     "nav": {
       "settings": "Setări",
       "schedule": "Program",
@@ -83,7 +83,7 @@
       "heart": "Iubește Stretchly"
     },
     "settings": {
-      "openAtLogin": "Porniți Stretchly automat când vă conectați",
+      "openAtLogin": "Porniți Idle Break automat când vă conectați",
       "showBreaksIn": "Arată pauzele in:",
       "window": "Fereastră",
       "fullscreen": "Ecran complet",
@@ -122,7 +122,7 @@
     "viewTutorial": "Vezi tutorialul",
     "openPreferences": "Deschide preferințele",
     "getStarted": "Start",
-    "title": "Bun venit la Stretchly"
+    "title": "Bun venit la Idle Break"
   },
   "contributorPreferences": {
     "title": "Preferințele colaboratorilor",
@@ -181,7 +181,7 @@
     "dark": "Întunecat",
     "system": "Rețea",
     "showTrayIcon": "Afișează pictograma meniului",
-    "toShowTrayIcon": "Afișează pictograma Stretchly in bara de meniu",
+    "toShowTrayIcon": "Afișează pictograma Idle Break in bara de meniu",
     "currentTimeInBreaks": "Timpul actual",
     "showCurrentTimeInBreaks": "Arată timpul actual in fereastra de pauză"
   },

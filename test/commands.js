@@ -57,7 +57,7 @@ describe('commands', () => {
 
   it('lists the last command in help', () => {
     const cmd = new Command(['help'], '1.2.3')
-    cmd.cmdHelp().should.include('stretchly last')
+    cmd.cmdHelp().should.include('idlebreak last')
   })
 
   it('parses a number duration as the number of minutes to pause', () => {

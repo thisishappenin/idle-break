@@ -211,7 +211,7 @@
       "learnMore": "Et rohkem teada saada Stretchly funktsioonidest, vaata õpetust, laadi alla uusim versioon või võta meiega ühendust toe saamiseks, ",
       "janH": "Jan Hovancik"
     },
-    "title": "Stretchly Seaded",
+    "title": "Idle Break Seaded",
     "heart": {
       "becomeContributor": "Hakka toetajaks",
       "desc1": "On teaduslikult tõestatud, et arvutit kasutades on regulaarsed pausid olulised nii sinu füüsilise kui ka vaimse heaolu jaoks.",
@@ -229,7 +229,7 @@
       "allScreens": "Kuvab pause kõigil ekraanidel",
       "restoreDefaults": "Taasta vaikeseadistused",
       "monitorIdleTime": "Monitoorib süsteemi passiivset aega (pausid on peatatud, kui süsteem on passiivne).",
-      "openAtLogin": "Käivita Stretchly automaatselt sisselogimisel",
+      "openAtLogin": "Käivita Idle Break automaatselt sisselogimisel",
       "showIdeas": "Näita pauside ajal harjutuste soovitusi",
       "fullscreen": "Täisekraanil",
       "showBreaksIn": "Pause näidatakse:"
@@ -262,7 +262,7 @@
     "dark": "Tume",
     "2": "Kolmas monitor",
     "longBreaks": "Pikad pausid:",
-    "toShowTrayIcon": "Kuva Stretchly ikoon süsteemisalves",
+    "toShowTrayIcon": "Kuva Idle Break ikoon süsteemisalves",
     "naturalBreaksInfo": "Kui peamistes eelistustes on süsteemi passiivsuse jälgimine lubatud, saate määrata, mis aja möödudes pausid peatada.",
     "timeToBreakInTray": "Aeg paus teha",
     "3": "Neljas monitor",
@@ -479,8 +479,8 @@
     "cancel": "Katkesta",
     "toMicrobreak": "Lühike paus",
     "contributorPreferences": "Kaasautorite eelistused",
-    "quitStretchly": "Sulge Stretchly",
-    "toolTipHeader": "Stretchly - Puhkehetkede meeldetuletusrakendus",
+    "quitStretchly": "Sulge Idle Break",
+    "toolTipHeader": "Idle Break - Puhkehetkede meeldetuletusrakendus",
     "breakIn": "Pika pausini on jäänud $t(utils.seconds, {'count': {{seconds}} })",
     "resetBreaks": "Lähtesta pausid",
     "resumingBreaks": "Pauside jätkamine",
@@ -505,7 +505,7 @@
   },
   "welcome": {
     "getStarted": "Alusta",
-    "title": "Teretulemast Stretchlysse",
+    "title": "Teretulemast Idle Breaksse",
     "viewTutorial": "Vaata õpetust",
     "breakTimeReminderApp": "Puhkepauside meeldetuletuse rakendus",
     "openPreferences": "Ava seaded"

@@ -1,6 +1,6 @@
 {
-  "name": "Stretchly",
-  "desktopName": "net.hovancik.Stretchly",
+  "name": "idle-break",
+  "productName": "Idle Break",
   "version": "1.22.1",
   "description": "The break time reminder app",
   "main": "app/main.js",
@@ -25,7 +25,7 @@
     "url": "git+https://github.com/thisishappenin/stretchly.git"
   },
   "keywords": [
-    "Stretchly",
+    "Idle Break",
     "break",
     "time",
     "reminder"
@@ -37,8 +37,8 @@
   },
   "homepage": "https://github.com/thisishappenin/stretchly",
   "build": {
-    "appId": "net.hovancik.stretchly",
-    "productName": "Stretchly",
+    "appId": "io.github.thisishappenin.idlebreak",
+    "productName": "Idle Break",
     "win": {
       "target": [
         "nsis",

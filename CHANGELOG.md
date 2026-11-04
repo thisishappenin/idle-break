@@ -58,6 +58,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- Renamed the app to Idle Break: new name, installer, Windows app ID and command line command (`idlebreak`). It keeps its data in `%APPDATA%\Idle Break` and copies your settings, images and sounds from the old `%APPDATA%\Stretchly` folder the first time it starts
 - Break popups on ultrawide monitors are sized as if the display were 16:9, so a percentage size no longer makes them stretch across a very wide screen
 - Removed code, files and dependencies that only served the Microsoft Store, Flatpak, Snap, macOS, Linux and Wayland (autostart, Do Not Disturb detection, tray icon images, packaging files, the blurred background option)
 - The Microsoft Store (appx) package is no longer built, and the README no longer carries macOS, Linux and Wayland notes

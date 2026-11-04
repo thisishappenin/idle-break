@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly – Die Pausen-Erinnerungs-App",
+    "toolTipHeader": "Idle Break – Die Pausen-Erinnerungs-App",
     "microbreakIn": "Mini-Pause in $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Lange Pause in $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Pausen fortsetzen",
@@ -16,7 +16,7 @@
     "untilMorning": "Bis zum Morgen",
     "indefinitely": "Unbegrenzt",
     "resetBreaks": "Pausen zurücksetzen",
-    "quitStretchly": "Stretchly beenden",
+    "quitStretchly": "Idle Break beenden",
     "restoreDefaults": "Standardeinstellungen wiederherstellen",
     "warning": "Dadurch werden die Anwendungsstandardeinstellungen wiederhergestellt und alle deine Einstellungen gehen verloren.",
     "continue": "Fortsetzen",
@@ -32,7 +32,7 @@
     "finish": "Beende diese Pause"
   },
   "preferences": {
-    "title": "Stretchly-Einstellungen",
+    "title": "Idle Break-Einstellungen",
     "nav": {
       "settings": "Einstellungen",
       "schedule": "Zeitplanung",
@@ -41,7 +41,7 @@
       "heart": "Stretchly gefällt mir"
     },
     "settings": {
-      "openAtLogin": "Stretchly automatisch bei der Anmeldung starten",
+      "openAtLogin": "Idle Break automatisch bei der Anmeldung starten",
       "showBreaksIn": "Pausen anzeigen in:",
       "window": "Fenster",
       "fullscreen": "Vollbild",
@@ -175,7 +175,7 @@
     "showTimeToBreakInTray": "Zeige Zeit bis zur nächsten Pause im Taskleistensymbol",
     "currentTimeInBreaks": "Aktuelle Uhrzeit",
     "showTrayIcon": "Menüleistensymbol anzeigen",
-    "toShowTrayIcon": "Stretchly-Symbol in Menüleiste anzeigen"
+    "toShowTrayIcon": "Idle Break-Symbol in Menüleiste anzeigen"
   },
   "utils": {
     "none_one": "{{count}}",
@@ -198,7 +198,7 @@
     "newVersionAvailable": "Neue Version ist verfügbar!"
   },
   "welcome": {
-    "title": "Willkommen bei Stretchly",
+    "title": "Willkommen bei Idle Break",
     "breakTimeReminderApp": "Die App zur Pausenerinnerung",
     "viewTutorial": "Tutorial anzeigen",
     "openPreferences": "Einstellungen öffnen",

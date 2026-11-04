@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - O aplicativo para lembrá-lo de fazer pausas",
+    "toolTipHeader": "Idle Break - O aplicativo para lembrá-lo de fazer pausas",
     "microbreakIn": "Mini Pausa em $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Pausa Longa em $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Retomando pausas",
@@ -16,7 +16,7 @@
     "untilMorning": "Até de manhã",
     "indefinitely": "Indefinidamente",
     "resetBreaks": "Redefinir Pausas",
-    "quitStretchly": "Sair do Stretchly",
+    "quitStretchly": "Sair do Idle Break",
     "restoreDefaults": "Restaurar padrões",
     "warning": "Os padrões do aplicativo serão restaurados e todas as suas configurações serão perdidas.",
     "continue": "Continuar",
@@ -31,7 +31,7 @@
     "title": "É hora de fazer uma pausa!"
   },
   "preferences": {
-    "title": "Preferências do Stretchly",
+    "title": "Preferências do Idle Break",
     "nav": {
       "settings": "Configurações",
       "schedule": "Agenda",
@@ -40,7 +40,7 @@
       "heart": "Amo Stretchly"
     },
     "settings": {
-      "openAtLogin": "Iniciar Stretchly automaticamente quando fizer login",
+      "openAtLogin": "Iniciar Idle Break automaticamente quando fizer login",
       "showBreaksIn": "Mostrar as pausas em:",
       "window": "Janela",
       "fullscreen": "Tela Cheia",
@@ -172,7 +172,7 @@
     "currentTimeInBreaks": "Tempo atual",
     "showCurrentTimeInBreaks": "Mostrar a hora local atual na janela de pausa",
     "showTrayIcon": "Mostrar ícone da barra de menus",
-    "toShowTrayIcon": "Mostrar o ícone do Stretchly na barra de menus"
+    "toShowTrayIcon": "Mostrar o ícone do Idle Break na barra de menus"
   },
   "utils": {
     "none_one": "{{count}}",
@@ -200,7 +200,7 @@
     "newVersionAvailable": "Nova versão disponível!"
   },
   "welcome": {
-    "title": "Bem-vindo ao Stretchly",
+    "title": "Bem-vindo ao Idle Break",
     "breakTimeReminderApp": "O aplicativo para lembrá-lo de fazer pausas",
     "viewTutorial": "Veja o Tutorial",
     "openPreferences": "Abrir Preferências",

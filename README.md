@@ -1,10 +1,10 @@
-# Stretchly [![Awesome Humane Tech](https://raw.githubusercontent.com/humanetech-community/awesome-humane-tech/main/humane-tech-badge.svg?sanitize=true)](https://github.com/humanetech-community/awesome-humane-tech) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+# Idle Break [![Awesome Humane Tech](https://raw.githubusercontent.com/humanetech-community/awesome-humane-tech/main/humane-tech-badge.svg?sanitize=true)](https://github.com/humanetech-community/awesome-humane-tech) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-<img src="stretchly_128x128.png" align="right" alt="Stretchly logo">
+<img src="stretchly_128x128.png" align="right" alt="Idle Break logo">
 
 > **The break time reminder app**
 
-*Stretchly* is a Windows [Electron](https://www.electronjs.org/) app that reminds you to take breaks when working on your computer.
+*Idle Break* is a Windows [Electron](https://www.electronjs.org/) app that reminds you to take breaks when working on your computer.
 
 ## About this app
 
@@ -73,14 +73,14 @@ Download the installer or the portable version from the [Releases](https://githu
 
 > **Note:** Chocolatey, winget and the Microsoft Store install the *original* Stretchly, not this app.
 
-You can install *Stretchly* for all users silently by running this as administrator:
+You can install *Idle Break* for all users silently by running this as administrator:
 ```cmd
 installer.exe /S /allusers
 ```
 
 ### Running from source
 
-To run *Stretchly* from source you will need [Node.js](https://nodejs.org/), ideally the one specified in `package.json`. Clone the repo, run `npm install` and then simply run `npm start` to start *Stretchly*.
+To run *Idle Break* from source you will need [Node.js](https://nodejs.org/), ideally the one specified in `package.json`. Clone the repo, run `npm install` and then simply run `npm start` to start *Idle Break*.
 
 ### Custom installer
 
@@ -88,11 +88,11 @@ You can create a custom installer by running `npm run pack` or `npm run dist` af
 
 ## Default behavior
 
-When you run *Stretchly* for the first time, you are presented with a Welcome window that allows you to change the language, review the preferences, view the online tutorial or simply continue with the default preferences.
+When you run *Idle Break* for the first time, you are presented with a Welcome window that allows you to change the language, review the preferences, view the online tutorial or simply continue with the default preferences.
 
 <img src="welcome.png" height="340">
 
-*Stretchly* itself lives in your tray, only displaying a reminder window from time to time, which contains an idea for a break.
+*Idle Break* itself lives in your tray, only displaying a reminder window from time to time, which contains an idea for a break.
 
 <img src="minibreak.png" height="340">
 
@@ -108,25 +108,25 @@ When a break starts, you can postpone it once for 2 minutes (Mini breaks) or 5 m
 
 <img src="skip.png" height="340">
 
-Clicking the *Stretchly* icon in your tray area will display the current status of breaks, provide menu items with extra functionality, and link to the Preferences.
+Clicking the *Idle Break* icon in your tray area will display the current status of breaks, provide menu items with extra functionality, and link to the Preferences.
 
 <img src="tray.png" height="140">
 
-*Stretchly* is monitoring your idle time, so when you are idle for 5 minutes, breaks will be paused until you return.
+*Idle Break* is monitoring your idle time, so when you are idle for 5 minutes, breaks will be paused until you return.
 
-*Stretchly* is also monitoring Do Not Disturb mode, so breaks are paused when DnD mode is On.
+*Idle Break* is also monitoring Do Not Disturb mode, so breaks are paused when DnD mode is On.
 
-*Stretchly* follows the theme of your system and is also available in dark mode.
+*Idle Break* follows the theme of your system and is also available in dark mode.
 
 <img src="dark.png" height="340">
 
-### Interact with stretchly from command line
+### Interact with Idle Break from command line
 
-When a Stretchly instance is running, the `stretchly` command can be use to interact with it from the command line.
+When an Idle Break instance is running, the `idlebreak` command can be use to interact with it from the command line.
 
-The regular Windows installer adds `stretchly` to PATH, so commands can be run from a new terminal without specifying the full executable path.
+The regular Windows installer adds `idlebreak` to PATH, so commands can be run from a new terminal without specifying the full executable path.
 
-Type `stretchly help` to get a list of all commands and options available as well as some examples.
+Type `idlebreak help` to get a list of all commands and options available as well as some examples.
 
 ## Preferences
 
@@ -134,7 +134,7 @@ Most of the preferences can be customized by clicking on the "Preferences" item 
 
 <img src="preferences.png" height="340">
 
-Preferences are divided into multiple categories and you are encouraged to take some time to make *Stretchly* your own by customizing them.
+Preferences are divided into multiple categories and you are encouraged to take some time to make *Idle Break* your own by customizing them.
 
 You can also Restore the defaults to return to the default preferences state.
 
@@ -142,9 +142,9 @@ You can also Restore the defaults to return to the default preferences state.
 
 While the most of the preferences can be edited via the app, some options and values are not available to make the app easy to understand and setup.
 
-All preferences are saved in a JSON file, so you can set Stretchly in the way you need. Use the `Ctrl/Cmd + D` shortcut while viewing the About section of Preferences, to show debug info and display a clickable link to the preferences file.
+All preferences are saved in a JSON file, so you can set Idle Break in the way you need. Use the `Ctrl/Cmd + D` shortcut while viewing the About section of Preferences, to show debug info and display a clickable link to the preferences file.
 
-It's recommended to Quit *Stretchly* before editing the preferences file.
+It's recommended to Quit *Idle Break* before editing the preferences file.
 
 To make sure that all works as expected, it's always good idea to check that format of the preferences file is correct, ie. by using [jsonformatter](https://jsonformatter.curiousconcept.com/).
 
@@ -152,7 +152,7 @@ After you make changes to preferences files, some of the values being shown in P
 
 Some of the extra preferences are available in Contributor Preferences for [Contributors](#contributor-preferences). Those are marked by [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences) badge.
 
-Preferences marked with ![Not Reliable](https://img.shields.io/badge/Not_Reliable-β-yellow) might not work correctly and might break *Stretchly*. Use at own risk.
+Preferences marked with ![Not Reliable](https://img.shields.io/badge/Not_Reliable-β-yellow) might not work correctly and might break *Idle Break*. Use at own risk.
 
 **Note:** Before 1.0, Mini breaks and Long breaks were called Microbreaks and Breaks, respectively. To keep the upgrade smooth they still use that name in preferences file and in code.
 
@@ -183,7 +183,7 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `language` - language
 - `useMonochromeTrayIcon` - use monochrome icon
 - `trayIconStyle` - icon style for menubar: default, time to break, progress to break, or minutes to break as number only (`text`)
-- `trayIconFont` - on Windows, the font used to draw the number in the `text` tray icon style. The default `DejaVu Sans` is bundled with *Stretchly*; Preferences list a few common Windows fonts, and the preferences file accepts the name of any installed font. An empty value uses the built-in pictures instead
+- `trayIconFont` - on Windows, the font used to draw the number in the `text` tray icon style. The default `DejaVu Sans` is bundled with *Idle Break*; Preferences list a few common Windows fonts, and the preferences file accepts the name of any installed font. An empty value uses the built-in pictures instead
 - `trayIconFontSize` - height of the tray number as a fraction of the icon, from `0.3` to `1` (default `0.5`)
 - `trayIconCrispDigits` - draw the tray number with pure pixels instead of smoothed edges (off by default)
 - `trayPanel` - left-clicking the tray icon opens a small panel with the countdown, buttons to shorten or extend the next work session by 5 minutes, start or pause breaks, the idle reset switch, Preferences and Quit; right-click opens the usual menu. Set to `false` to use only the menu (on by default)
@@ -212,7 +212,7 @@ Here are the preferences editable via the app. If values in the app does not sui
 #### Editing break ideas
 In the preferences file, change `useIdeasFromSettings: false,` to `useIdeasFromSettings: true,` and edit `breakIdeas` and `microbreakIdeas`.
 
-Note that when a new *Stretchly* version with new break ideas is out, your custom ideas will not be overwritten. You can reset break ideas to the latest defaults when you "Restore defaults" from Preferences window.
+Note that when a new *Idle Break* version with new break ideas is out, your custom ideas will not be overwritten. You can reset break ideas to the latest defaults when you "Restore defaults" from Preferences window.
 
 ##### Using HTML in break ideas
 You can use simple HTML formatting in custom break ideas to enhance their appearance:
@@ -238,7 +238,7 @@ You can use simple HTML formatting in custom break ideas to enhance their appear
 
 **Using local images:**
 
-Place your images in the `images` folder inside Stretchly's user data directory (see Preferences → About → Debug info for the exact location). Then reference them by filename only:
+Place your images in the `images` folder inside Idle Break's user data directory (see Preferences → About → Debug info for the exact location). Then reference them by filename only:
 
 ```json
 "breakIdeas": [
@@ -250,7 +250,7 @@ Place your images in the `images` folder inside Stretchly's user data directory 
 ```
 Supported image formats: PNG, JPEG, WebP, GIF. Only images from the local `images` folder are allowed - remote URLs will be blocked for security.
 
-Stretchly sanitizes all HTML to keep break windows secure by removing any unsupported tags or unsafe content.
+Idle Break sanitizes all HTML to keep break windows secure by removing any unsupported tags or unsafe content.
 
 #### Editing break notification interval [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
 In the preferences file, change `breakNotificationInterval: 30000,` to whatever value you want. 30000 is 30 seconds. Same goes for Mini breaks.
@@ -278,7 +278,7 @@ To play different sound for Mini breaks, set `miniBreakAudio` to desired value (
 
 #### Custom sounds
 
-To use your own sounds, put WAV files in the `audio` folder inside Stretchly's user data directory. Open it from Preferences → About by pressing `Ctrl/Cmd + D` and clicking `audioFolder`.
+To use your own sounds, put WAV files in the `audio` folder inside Idle Break's user data directory. Open it from Preferences → About by pressing `Ctrl/Cmd + D` and clicking `audioFolder`.
 
 To replace a sound from Preferences, name your file `crystal-glass.wav`, `wind-chime.wav`, `tic-toc.wav`, or `reverie.wav`. For example, save it as `crystal-glass.wav` and select Crystal Glass. Stretchly will use your file whenever that sound plays, including previews. Delete the file to get the original sound back.
 
@@ -292,7 +292,7 @@ To have different theme for Mini breaks, set `miniBreakColor` to desired value, 
 #### Natural breaks inactivity time [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
 In the preferences file, set `naturalBreaksInactivityResetTime` to your preferred value (in milliseconds greater than than 20000ms). This is an idle time length, after which the break countdown is paused until the user resumes activity, and then starts again from the beginning (time away counts as a break).
 
-When idle time monitoring is on and a break ends while you are away, *Stretchly* keeps the countdown to the next break at its full length (still shown in the tray) and starts counting down only when you use the computer again. The "timer reset" popup is not shown if a break happened while you were away.
+When idle time monitoring is on and a break ends while you are away, *Idle Break* keeps the countdown to the next break at its full length (still shown in the tray) and starts counting down only when you use the computer again. The "timer reset" popup is not shown if a break happened while you were away.
 
 You can also set `naturalBreaksCheckInterval` in milliseconds: how often idle time is checked. A higher number means lower CPU and energy usage, but slightly less responsive detection. Default value is `2000` which is 2 seconds.
 
@@ -358,7 +358,7 @@ If you'd like to disable the shortcut, set value to empty string `""`. That's th
 
 #### Start last break again shortcut
 
-In the preferences file, set `startLastBreakAgainShortcut` to your preferred value. Like the `stretchly last` command, it starts the last Mini or Long break again, with the same idea, even if that break was skipped or postponed. It does nothing while a break is running or breaks are paused. We do not validate this input, so please check [Electron's documentation](https://www.electronjs.org/docs/latest/tutorial/keyboard-shortcuts#accelerators) for available values for key and modifier. When a given accelerator is already taken by other applications, this call will silently fail. This behavior is intended by operating systems, since they don't want applications to fight for global shortcuts.
+In the preferences file, set `startLastBreakAgainShortcut` to your preferred value. Like the `idlebreak last` command, it starts the last Mini or Long break again, with the same idea, even if that break was skipped or postponed. It does nothing while a break is running or breaks are paused. We do not validate this input, so please check [Electron's documentation](https://www.electronjs.org/docs/latest/tutorial/keyboard-shortcuts#accelerators) for available values for key and modifier. When a given accelerator is already taken by other applications, this call will silently fail. This behavior is intended by operating systems, since they don't want applications to fight for global shortcuts.
 
 If you'd like to disable the shortcut, set value to empty string `""`. That's the default value as well.
 
@@ -379,9 +379,9 @@ To specify how solid the break window should be when Theme transparency is enabl
 #### Break window size [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
 To specify the size of the break window, set the value of `breakWindowHeight` and `breakWindowWidth` from `0` to `0.99` (which is in turn 0 to 99% of the size of the screen). Don't set 100% as that's fullscreen. The window is never made smaller than 360 by 120 pixels, so its text always fits, however small the monitor.
 
-#### Make Stretchly show breaks as regular windows [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences) ![Not Reliable](https://img.shields.io/badge/Not_Reliable-β-yellow)
+#### Make Idle Break show breaks as regular windows [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences) ![Not Reliable](https://img.shields.io/badge/Not_Reliable-β-yellow)
 
-If you want Stretchly breaks to act as regular windows (have a titlebar, turn off always on top, be minimizable and focusable) set `showBreaksAsRegularWindows` to `true`.
+If you want Idle Break breaks to act as regular windows (have a titlebar, turn off always on top, be minimizable and focusable) set `showBreaksAsRegularWindows` to `true`.
 
 #### Show break countdown only on one screen
 
@@ -396,7 +396,7 @@ This option has no effect when `allScreens` is `false` or when `showBreaksAsRegu
 
 #### Pause/resume breaks based on running programs
 
-By editing `appExclusions` in the preferences file, you can automatically control when Stretchly breaks are paused.
+By editing `appExclusions` in the preferences file, you can automatically control when Idle Break breaks are paused.
 
 To pause breaks while any of the listed programs are running, use `"rule": "pause"`:
 
@@ -428,7 +428,7 @@ To allow breaks only while at least one listed program is running, use `"rule": 
 ]
 ```
 
-You can specify multiple rules in `appExclusions`. Stretchly uses only the first rule marked `"active": true`; all later rules are ignored, even if the selected rule matches no running program. Both `pause` and `resume` rules can be present in the file, but they are not combined.
+You can specify multiple rules in `appExclusions`. Idle Break uses only the first rule marked `"active": true`; all later rules are ignored, even if the selected rule matches no running program. Both `pause` and `resume` rules can be present in the file, but they are not combined.
 
 Within the selected rule, any matching entry in `commands` is enough. Commands should be case sensitive, but seems like this is not consistent across platforms. Therefore, sometimes, going all lowercase might be needed (this was noticed on Windows). Commands can also be substrings, meaning a rule containing "exe" will trigger when there's any running processes that contains "exe" in its name or cmd properties.
 
@@ -456,9 +456,9 @@ To change how the time is shown, set `currentTimeInBreaksFormat` to a [Luxon for
 Inspired by the screen-edge vignette used in video games to indicate low health, this mode adds a visual indicator around the edges of your break screen. The effect starts subtle and grows more intense each time you skip or postpone a break, and fades back down when you let breaks complete naturally. To enable it, set `breakHealthMode` to `true`.
 
 #### Hide menubar/tray icon [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
-To hide Stretchly icon in menubar/tray, set the value of `showTrayIcon` from `true` to `false`.
+To hide Idle Break icon in menubar/tray, set the value of `showTrayIcon` from `true` to `false`.
 
-Note that this will disable graphical way of opening Stretchly Preferences. To access Preferences, you will have to use command line options (ie: `stretchly preferences`).
+Note that this will disable graphical way of opening Idle Break Preferences. To access Preferences, you will have to use command line options (ie: `idlebreak preferences`).
 
 #### Show tray menu in Strict Mode
 If you want to show tray menu even while in Strict mode, set `showTrayMenuInStrictMode` to `true`.
@@ -469,7 +469,7 @@ If you want to show custom message in Preferences, set `customPreferencesMessage
 This might be useful for corporate installations.
 
 #### Disable app update functionality
-If you want to disable functionality around app updates, set `disableAppUpdateFeatures` to `true`. This will make Stretchly not to check for new versions and hide related elements from the app. This value takes preference over `checkNewVersion` and `notifyNewVersion`.
+If you want to disable functionality around app updates, set `disableAppUpdateFeatures` to `true`. This will make Idle Break not to check for new versions and hide related elements from the app. This value takes preference over `checkNewVersion` and `notifyNewVersion`.
 
 This might be useful for corporate installations.
 
@@ -541,7 +541,7 @@ You won't be able to chat on Discord.*
 
 ## Getting help
 
-For setup and usage, see the [tutorial](https://hovancik.net/stretchly/about), [Preferences](#preferences), and [Advanced Preferences](#advanced-preferences).
+For setup and usage, see the [original Stretchly tutorial](https://hovancik.net/stretchly/about), [Preferences](#preferences), and [Advanced Preferences](#advanced-preferences).
 
 Check [Known issues](#known-issues) and [existing issues](https://github.com/thisishappenin/stretchly/issues?q=is%3Aissue) before opening a [bug report](https://github.com/thisishappenin/stretchly/issues/new?template=bug_report.yml) or [feature request](https://github.com/thisishappenin/stretchly/issues/new?template=feature_request.yml). Please complete the relevant template.
 
@@ -560,31 +560,30 @@ Issues and Pull Requests are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Now you can clone the repo with `git clone https://github.com/thisishappenin/stretchly.git`. Change to the new created directory and run `npm i` to install node packages needed. If your system is running Python 3.12 and newer, you also need to install `setuptools`, for example with `pip install setuptools`, as `distutils` have been [deprecated](https://docs.python.org/3/library/distutils.html).
 
-Alternatively, open the repo in the included [Dev Container](https://containers.dev/) (`.devcontainer`). It is a minimal, hardened environment (non-root user, all Linux capabilities dropped, no forwarded ports) for editing code and running tests, which makes it a good fit for LLM coding agents. It is not meant for running the Stretchly GUI.
+Alternatively, open the repo in the included [Dev Container](https://containers.dev/) (`.devcontainer`). It is a minimal, hardened environment (non-root user, all Linux capabilities dropped, no forwarded ports) for editing code and running tests, which makes it a good fit for LLM coding agents. It is not meant for running the Idle Break GUI.
 
 Read on.
 
 ### Debugging
 
-You can use Stretchly's built-in debug shortcut by pressing `Ctrl/Cmd + D` in the About section to show information such as:
+You can use Idle Break's built-in debug shortcut by pressing `Ctrl/Cmd + D` in the About section to show information such as:
   - Location of the Preferences and Log file (Clicking on file location will open it),
   - Debug information for break planner
 
 You can copy debug information to the clipboard.
 
-If you start *Stretchly* in development mode with the `npm run dev` command, it makes it possible to debug the application in your browser on `http://localhost:9222`.
+If you start *Idle Break* in development mode with the `npm run dev` command, it makes it possible to debug the application in your browser on `http://localhost:9222`.
 
 ### Logging
 
-*Stretchly* uses `[log](https://github.com/megahertz/electron-log)` package for some extra logging.
+*Idle Break* uses `[log](https://github.com/megahertz/electron-log)` package for some extra logging.
 Format as following:
 - `System: my message` for messages regarding Operating System, ie: `System: resume or unlock`
-- `Stretchly: my message` for messages regarding *Stretchly*
+- `Stretchly: my message` for messages regarding *Idle Break* (the prefix still uses the original name)
 
 ### Translations
 
-You can help to translate Stretchly on [Weblate](https://hosted.weblate.org/engage/stretchly). Consider joining with your Github account to be correctly credited.
-[![Translation status](https://hosted.weblate.org/widgets/stretchly/-/stretchly/horizontal-auto.svg)](https://hosted.weblate.org/engage/stretchly/)
+The translations come from the original [Stretchly](https://hosted.weblate.org/engage/stretchly) project, where they are maintained on Weblate. Text changes made in this app are not sent back there, so some strings may not be translated.
 
 
 ## Known issues
@@ -596,7 +595,7 @@ You can help to translate Stretchly on [Weblate](https://hosted.weblate.org/enga
 ## Contributors
 
 - Jan Hovancik, @hovancik, [hovancik.net](https://hovancik.net)
-- Martina Mocinecova, (pre-1.0 *Stretchly* logo), color schemes
+- Martina Mocinecova, (pre-1.0 *Idle Break* logo), color schemes
 - Jason Barry, @JCBarry, [jcbarry.com](http://jcbarry.com)
 - Alex Alekseyenko, @alexalekseyenko
 - Sean Manton, @sxmanton

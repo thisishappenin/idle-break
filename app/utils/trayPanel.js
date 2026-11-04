@@ -90,7 +90,7 @@ class TrayPanel {
       alwaysOnTop: true,
       hasShadow: true,
       roundedCorners: true,
-      title: 'Stretchly',
+      title: 'Idle Break',
       backgroundColor: nativeTheme.shouldUseDarkColors ? '#202020' : '#f3f3f3',
       webPreferences: {
         preload: this.preloadPath,

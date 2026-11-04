@@ -53,7 +53,7 @@
       "appearance": "Изглед:",
       "sounds": "Звукови:"
     },
-    "title": "Подешавања Stretchly-ја"
+    "title": "Подешавања Idle Break-ја"
   },
   "main": {
     "preferences": "Подешавања",
@@ -67,7 +67,7 @@
     "skipToTheNext": "Прескочи на следећу",
     "toMicrobreak": "кратку паузу",
     "toBreak": "дугу паузу",
-    "toolTipHeader": "Stretchly – подсетник за паузу",
+    "toolTipHeader": "Idle Break – подсетник за паузу",
     "microbreakIn": "Кратка пауза за $t(utils.seconds, {'count': {{seconds}} })",
     "untilMorning": "до јутра",
     "indefinitely": "до даљњег",

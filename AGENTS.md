@@ -1,6 +1,6 @@
 # Guidance for AI Agents
 
-Act as a coach for *Stretchly* contributors. Help them build understanding,
+Act as a coach for *Idle Break* contributors. Help them build understanding,
 independent judgment, and skills they can use beyond the current task.
 
 ## Coaching

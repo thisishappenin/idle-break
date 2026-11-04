@@ -77,7 +77,7 @@
       "fullscreen": "Layar penuh",
       "window": "Jendela",
       "showBreaksIn": "Tampilkan istirahat di:",
-      "openAtLogin": "Jalankan Stretchly secara otomatis saat masuk"
+      "openAtLogin": "Jalankan Idle Break secara otomatis saat masuk"
     },
     "nav": {
       "heart": "Suka Stretchly",
@@ -86,7 +86,7 @@
       "schedule": "Jadwal",
       "settings": "Pengaturan"
     },
-    "title": "Preferensi Stretchly"
+    "title": "Preferensi Idle Break"
   },
   "statusMessages": {
     "resuming": "Melanjutkan",
@@ -104,7 +104,7 @@
     "openPreferences": "Buka Preferensi",
     "viewTutorial": "Lihat Tutorial",
     "breakTimeReminderApp": "Aplikasi pengingat waktu istirahat",
-    "title": "Selamat datang di Stretchly"
+    "title": "Selamat datang di Idle Break"
   },
   "process": {
     "newVersionAvailable": "Versi baru tersedia!"
@@ -185,7 +185,7 @@
     "currentTimeInBreaks": "Waktu saat ini",
     "showCurrentTimeInBreaks": "Tampilkan waktu lokal saat ini di jendela istirahat",
     "showTrayIcon": "Tampilkan ikon tray",
-    "toShowTrayIcon": "Tampilkan ikon Stretchly di tray"
+    "toShowTrayIcon": "Tampilkan ikon Idle Break di tray"
   },
   "main": {
     "syncPreferences": "Sinkronisasi Preferensi",
@@ -195,7 +195,7 @@
     "continue": "Lanjutkan",
     "warning": "Ini akan memulihkan pengaturan awal aplikasi dan semua pengaturan Anda akan hilang.",
     "restoreDefaults": "Pulihkan pengaturan awal",
-    "quitStretchly": "Keluar dari Stretchly",
+    "quitStretchly": "Keluar dari Idle Break",
     "resetBreaks": "Atur ulang istirahat",
     "indefinitely": "Tanpa batas waktu",
     "untilMorning": "Hingga pagi",
@@ -211,7 +211,7 @@
     "resumingBreaks": "Melanjutkan istirahat",
     "breakIn": "Istirahat panjang dalam $t(utils.seconds, {'count': {{seconds}} })",
     "microbreakIn": "Istirahat mini dalam $t(utils.seconds, {'count': {{seconds}} })",
-    "toolTipHeader": "Stretchly - Aplikasi pengingat waktu istirahat"
+    "toolTipHeader": "Idle Break - Aplikasi pengingat waktu istirahat"
   },
   "break": {
     "title": "Saatnya beristirahat!",

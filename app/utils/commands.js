@@ -39,7 +39,7 @@ const allCommands = {
     description: 'Show this help message'
   },
   version: {
-    description: 'Show current Stretchly version'
+    description: 'Show current Idle Break version'
   },
   logs: {
     description: 'Show location of logs file'
@@ -83,55 +83,55 @@ const allCommands = {
 }
 
 const allExamples = [{
-  cmd: 'stretchly pause',
+  cmd: 'idlebreak pause',
   description: 'Pause breaks indefinitely'
 },
 {
-  cmd: 'stretchly pause -d 60',
+  cmd: 'idlebreak pause -d 60',
   description: 'Pause breaks for one hour'
 },
 {
-  cmd: 'stretchly pause -d 1h',
+  cmd: 'idlebreak pause -d 1h',
   description: 'Pause breaks for one hour'
 },
 {
-  cmd: 'stretchly pause -d 1h20m',
+  cmd: 'idlebreak pause -d 1h20m',
   description: 'Pause breaks for one hour and twenty minutes'
 },
 {
-  cmd: 'stretchly postpone',
+  cmd: 'idlebreak postpone',
   description: 'Postpone the currently running break using existing preferences'
 },
 {
-  cmd: 'stretchly skip',
+  cmd: 'idlebreak skip',
   description: 'Skip the currently running break using existing preferences'
 },
 {
-  cmd: 'stretchly finish',
+  cmd: 'idlebreak finish',
   description: 'Finish the break after its countdown in Manual Finish mode'
 },
 {
-  cmd: 'stretchly mini -T "Stretch up!"',
+  cmd: 'idlebreak mini -T "Stretch up!"',
   description: 'Start a Mini break, with the title "Stretch up!"'
 },
 {
-  cmd: 'stretchly long -T "Stretch up!" --noskip',
+  cmd: 'idlebreak long -T "Stretch up!" --noskip',
   description: 'Set the next break\'s title to "Stretch up!"'
 },
 {
-  cmd: 'stretchly long -T "Stretch up!" -t "Go stretch!"',
+  cmd: 'idlebreak long -T "Stretch up!" -t "Go stretch!"',
   description: 'Start a long break, with the title "Stretch up!" and text "Go stretch!"'
 },
 {
-  cmd: 'stretchly long -w 20m -T "Stretch up!"',
+  cmd: 'idlebreak long -w 20m -T "Stretch up!"',
   description: 'Wait 20 minutes, then start a long break with the title set to "Stretch up!"'
 },
 {
-  cmd: 'stretchly last',
+  cmd: 'idlebreak last',
   description: 'Start the last break again, with the same idea'
 },
 {
-  cmd: 'stretchly preferences',
+  cmd: 'idlebreak preferences',
   description: 'Open Preferences window'
 }]
 
@@ -269,14 +269,14 @@ class Command {
   cmdHelp () {
     let i = 0
     const options = '[options]'
-    let part = `Usage: stretchly <command> ${options}\n\nCommands:`
+    let part = `Usage: idlebreak <command> ${options}\n\nCommands:`
 
     const cmds = Object.keys(this.supported).map(key => `${key}${this.supported[key].options === undefined ? '' : ` ${options}`}`)
     const longuest = cmds.reduce((acc, cur) => acc > cur.length ? acc : cur.length, 0)
 
     part = Object.keys(this.supported).reduce((acc, key) => {
       const padding = longuest - cmds[i].length
-      const line = `stretchly ${cmds[i]}${' '.repeat(padding)} ${this.supported[key].description}`
+      const line = `idlebreak ${cmds[i]}${' '.repeat(padding)} ${this.supported[key].description}`
       i++
       return `${acc}\n\t${line}`
     }, part)

@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - приложение, което напомня да си почивате",
+    "toolTipHeader": "Idle Break - приложение, което напомня да си почивате",
     "microbreakIn": "Кратка почивка след $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Дълга почивка след $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Почивките се възобновяват",
@@ -32,7 +32,7 @@
     "finish": "Завършване на тази почивка"
   },
   "preferences": {
-    "title": "Предпочитания на Stretchly",
+    "title": "Предпочитания на Idle Break",
     "nav": {
       "settings": "Настройки",
       "schedule": "График",
@@ -41,7 +41,7 @@
       "heart": "Обичам Stretchly"
     },
     "settings": {
-      "openAtLogin": "Автоматично стартиране на Stretchly",
+      "openAtLogin": "Автоматично стартиране на Idle Break",
       "showBreaksIn": "Почивките се показват:",
       "window": "в прозорец",
       "fullscreen": "на цял екран",
@@ -179,7 +179,7 @@
     "currentTimeInBreaks": "Текущо време",
     "showCurrentTimeInBreaks": "Показване на текущото време в прозореца за почивка",
     "showTrayIcon": "Показване на иконка в системната област",
-    "toShowTrayIcon": "Показване на иконката на Stretchly в системната област"
+    "toShowTrayIcon": "Показване на иконката на Idle Break в системната област"
   },
   "utils": {
     "none_one": "{{count}}",
@@ -202,7 +202,7 @@
     "newVersionAvailable": "Налична е нова версия!"
   },
   "welcome": {
-    "title": "Добре дошли в Stretchly",
+    "title": "Добре дошли в Idle Break",
     "breakTimeReminderApp": "Приложението, което напомня да си почивате",
     "viewTutorial": "Преглед на обучението",
     "openPreferences": "Отваряне на настройките",
@@ -421,7 +421,7 @@
     },
     "aas": {
       "title": "Повторение",
-      "text": "Изградихте ли своя ритъм със Stretchly? Не спирайте, за да се борите по-ефикасно с ефектите на продължителното седене."
+      "text": "Изградихте ли своя ритъм със Idle Break? Не спирайте, за да се борите по-ефикасно с ефектите на продължителното седене."
     },
     "aat": {
       "title": "Китка и предмишница",

@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly – appen för pauspåminnelser",
+    "toolTipHeader": "Idle Break – appen för pauspåminnelser",
     "microbreakIn": "Kort paus om $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Lång paus om $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Återupptar pauser",
@@ -16,7 +16,7 @@
     "untilMorning": "Till morgonen",
     "indefinitely": "Tills vidare",
     "resetBreaks": "Återställ pauser",
-    "quitStretchly": "Avsluta Stretchly",
+    "quitStretchly": "Avsluta Idle Break",
     "restoreDefaults": "Återställ till standardvärden",
     "warning": "Detta återställer appens standardvärden. Alla dina inställningar går förlorade.",
     "continue": "Fortsätt",
@@ -32,7 +32,7 @@
     "finish": "Avsluta pausen"
   },
   "preferences": {
-    "title": "Stretchly-inställningar",
+    "title": "Idle Break-inställningar",
     "nav": {
       "settings": "Inställningar",
       "schedule": "Schema",
@@ -41,7 +41,7 @@
       "heart": "Älska Stretchly"
     },
     "settings": {
-      "openAtLogin": "Starta Stretchly automatiskt när du loggar in",
+      "openAtLogin": "Starta Idle Break automatiskt när du loggar in",
       "showBreaksIn": "Visa pauser i:",
       "window": "Fönster",
       "fullscreen": "Helskärm",
@@ -178,7 +178,7 @@
     "showCurrentTimeInBreaks": "Visa aktuell lokal tid i pausfönster",
     "showBreaksAsRegularWindowsInfo": "När detta är aktiverat kan pausfönstren få fokus, de ligger inte längre alltid överst och visas även i aktivitetsfältet.",
     "showTrayIcon": "Visa ikonen i systemfältet eller menyraden",
-    "toShowTrayIcon": "Visa Stretchly-ikonen i systemfältet eller menyraden"
+    "toShowTrayIcon": "Visa Idle Break-ikonen i systemfältet eller menyraden"
   },
   "utils": {
     "none_one": "{{count}}",
@@ -201,7 +201,7 @@
     "newVersionAvailable": "Ny version är tillgänglig!"
   },
   "welcome": {
-    "title": "Välkommen till Stretchly",
+    "title": "Välkommen till Idle Break",
     "breakTimeReminderApp": "Appen för pauspåminnelser",
     "viewTutorial": "Visa handledning",
     "openPreferences": "Öppna inställningar",
@@ -396,7 +396,7 @@
     },
     "aas": {
       "title": "Upprepa",
-      "text": "Har du hittat en Stretchly-rutin som passar dig? Upprepa den gärna flera gånger för att bättre motverka effekterna av långvarigt sittande."
+      "text": "Har du hittat en Idle Break-rutin som passar dig? Upprepa den gärna flera gånger för att bättre motverka effekterna av långvarigt sittande."
     },
     "aat": {
       "title": "Handleder och underarmar",

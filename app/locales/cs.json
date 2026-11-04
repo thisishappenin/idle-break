@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly – Pamatuje na přestávky za vás",
+    "toolTipHeader": "Idle Break – Pamatuje na přestávky za vás",
     "microbreakIn": "Krátká přestávka za $t(utils.seconds, {'count': {{seconds}}, 'context': 'in' })",
     "breakIn": "Dlouhá přestávka za $t(utils.seconds, {'count': {{seconds}}, 'context': 'in' })",
     "resumingBreaks": "Obnovení přestávek",
@@ -16,7 +16,7 @@
     "untilMorning": "Do rána",
     "indefinitely": "Na neurčito",
     "resetBreaks": "Resetovat přestávky",
-    "quitStretchly": "Ukončit Stretchly",
+    "quitStretchly": "Ukončit Idle Break",
     "restoreDefaults": "Obnovit výchozí nastavení",
     "areYouSure": "Tato akce obnoví výchozí nastavení a všechny vaše změny se ztratí.",
     "continue": "Pokračovat",
@@ -33,7 +33,7 @@
     "finish": "Dokončit tuto přestávku"
   },
   "preferences": {
-    "title": "Nastavení Stretchly",
+    "title": "Nastavení Idle Break",
     "nav": {
       "settings": "Nastavení",
       "schedule": "Časování",
@@ -42,7 +42,7 @@
       "heart": "Podpořit Stretchly"
     },
     "settings": {
-      "openAtLogin": "Spustit Stretchly automaticky po přihlášení",
+      "openAtLogin": "Spustit Idle Break automaticky po přihlášení",
       "showBreaksIn": "Zobrazovat přestávky jako:",
       "window": "Okno",
       "fullscreen": "Celá obrazovka",
@@ -180,7 +180,7 @@
     "timeToBreakInTray": "Čas do přestávky",
     "showTimeToBreakInTray": "Zobrazit čas do další přestávky v ikoně",
     "showTrayIcon": "Ikona v systémové liště",
-    "toShowTrayIcon": "Zobrazit ikonu Stretchly v systémové liště"
+    "toShowTrayIcon": "Zobrazit ikonu Idle Break v systémové liště"
   },
   "utils": {
     "none_one": "{{count}}",
@@ -211,7 +211,7 @@
     "newVersionAvailable": "Je dostupná nová verze!"
   },
   "welcome": {
-    "title": "Vítejte ve Stretchly",
+    "title": "Vítejte ve Idle Break",
     "breakTimeReminderApp": "Pamatuje na přestávky za vás",
     "viewTutorial": "Prohlédnout si Návod",
     "openPreferences": "Otevřít Nastavení",

@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - Aplicación para notificar cuándo hacer descansos",
+    "toolTipHeader": "Idle Break - Aplicación para notificar cuándo hacer descansos",
     "microbreakIn": "Descanso corto en $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Descanso largo en $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Reanudando descansos",
@@ -16,7 +16,7 @@
     "untilMorning": "Hasta la mañana",
     "indefinitely": "Indefinidamente",
     "resetBreaks": "Restablecer descansos",
-    "quitStretchly": "Salir de Stretchly",
+    "quitStretchly": "Salir de Idle Break",
     "restoreDefaults": "Restaurar valores predeterminados",
     "warning": "Esto restaurará los valores predeterminados de la aplicación y se perderán todas sus configuraciones.",
     "continue": "Continuar",
@@ -32,7 +32,7 @@
     "finish": "Termina este descanso"
   },
   "preferences": {
-    "title": "Configuración de Stretchly",
+    "title": "Configuración de Idle Break",
     "nav": {
       "settings": "Configuraciones",
       "schedule": "Horario",
@@ -41,7 +41,7 @@
       "heart": "Me encanta Stretchly"
     },
     "settings": {
-      "openAtLogin": "Iniciar Stretchly automáticamente al iniciar sesión",
+      "openAtLogin": "Iniciar Idle Break automáticamente al iniciar sesión",
       "showBreaksIn": "Muestra descansos en:",
       "window": "Ventana",
       "fullscreen": "Pantalla Completa",
@@ -179,7 +179,7 @@
     "currentTimeInBreaks": "Hora actual",
     "showCurrentTimeInBreaks": "Mostrar la hora local actual en la ventana de descanso",
     "showTrayIcon": "Mostrar icono en la bandeja del sistema",
-    "toShowTrayIcon": "Mostrar el icono de Stretchly en la bandeja del sistema"
+    "toShowTrayIcon": "Mostrar el icono de Idle Break en la bandeja del sistema"
   },
   "utils": {
     "none_one": "{{count}}",
@@ -208,7 +208,7 @@
     "newVersionAvailable": "¡Nueva versión disponible!"
   },
   "welcome": {
-    "title": "Bienvenido a Stretchly",
+    "title": "Bienvenido a Idle Break",
     "breakTimeReminderApp": "Aplicación para notificar cuándo hacer descansos",
     "viewTutorial": "Ver tutorial",
     "openPreferences": "Abrir configuración",

@@ -73,7 +73,7 @@
     "showTimeToBreakInTray": "Vis tid igjen til neste pause i menylinjeikonet",
     "currentTimeInBreaks": "Nåværende tid",
     "showCurrentTimeInBreaks": "Vis nåværende lokal tid i pausevindu",
-    "toShowTrayIcon": "Vis ikon for Stretchly i menylinjen"
+    "toShowTrayIcon": "Vis ikon for Idle Break i menylinjen"
   },
   "preferences": {
     "heart": {
@@ -148,7 +148,7 @@
       "fullscreen": "Fullskjerm",
       "window": "Vindu",
       "showBreaksIn": "Viser pauser i:",
-      "openAtLogin": "Start Stretchly automatisk ved innlogging"
+      "openAtLogin": "Start Idle Break automatisk ved innlogging"
     },
     "nav": {
       "heart": "Elsker Stretchly",
@@ -157,7 +157,7 @@
       "schedule": "Timeplan",
       "settings": "Innstillinger"
     },
-    "title": "Stretchly-innstillinger"
+    "title": "Idle Break-innstillinger"
   },
   "statusMessages": {
     "afterMiniBreak_one": "etter {{count}} minipause",
@@ -175,7 +175,7 @@
     "openPreferences": "Åpne innstillinger",
     "viewTutorial": "Vis veiledning",
     "breakTimeReminderApp": "Pausepåminnelsesprogrammet",
-    "title": "Velkommen til Stretchly"
+    "title": "Velkommen til Idle Break"
   },
   "process": {
     "newVersionAvailable": "Ny versjon tilgjengelig!"
@@ -193,7 +193,7 @@
     "continue": "Fortsett",
     "warning": "Dette vil gjenopprette programforvalgene og alle dine innstillinger vil gå tapt.",
     "restoreDefaults": "Tilbakestill forvalg",
-    "quitStretchly": "Avslutt Stretchly",
+    "quitStretchly": "Avslutt Idle Break",
     "resetBreaks": "Tilbakestill pauser",
     "indefinitely": "På ubestemt tid",
     "forHour": "Én time",
@@ -209,7 +209,7 @@
     "resumingBreaks": "Gjenopptar pauser",
     "breakIn": "Lang pause om $t(utils.seconds, {'count': {{seconds}} })",
     "microbreakIn": "Minipause om $t(utils.seconds, {'count': {{seconds}} })",
-    "toolTipHeader": "Stretchly - Pausepåminnelsesprogrammet"
+    "toolTipHeader": "Idle Break - Pausepåminnelsesprogrammet"
   },
   "miniBreakIdeas": {
     "aao": {

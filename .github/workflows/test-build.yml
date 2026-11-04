@@ -24,6 +24,6 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v6
       with:
-        name: stretchly-windows-${{ github.run_id }}
+        name: idle-break-windows-${{ github.run_id }}
         path: dist/*.*
         retention-days: ${{ env.RETENTION_DAYS }}

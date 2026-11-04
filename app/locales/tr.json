@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - Mola hatırlatıcı uygulama",
+    "toolTipHeader": "Idle Break - Mola hatırlatıcı uygulama",
     "resumingBreaks": "Molalara devam ediliyor",
     "downloadLatestVersion": "Son sürümü indir",
     "skipToTheNext": "Bir sonrakine geç",
@@ -12,7 +12,7 @@
     "untilMorning": "Sabaha kadar",
     "indefinitely": "Sonsuza kadar",
     "resetBreaks": "Molaları sıfırla",
-    "quitStretchly": "Stretchly'den çık",
+    "quitStretchly": "Idle Break'den çık",
     "preferences": "Tercihler",
     "syncPreferences": "Ayarları Eşzamanla",
     "contributorPreferences": "Destekçi Ayarları",
@@ -69,7 +69,7 @@
       "fullscreen": "Tam Ekran",
       "window": "Pencere",
       "showBreaksIn": "Molaları Gör:",
-      "openAtLogin": "Giriş yapıldığında Stretchly'i otomatik başlat",
+      "openAtLogin": "Giriş yapıldığında Idle Break'i otomatik başlat",
       "language": "Dili seç:",
       "restoreDefaults": "Varsayılanı geri yükle",
       "monitorDnd": "Rahatsız Etme modundayken de molaları göster",
@@ -82,7 +82,7 @@
       "schedule": "Zamanla",
       "settings": "Ayarlar"
     },
-    "title": "Stretchly Ayarları",
+    "title": "Idle Break Ayarları",
     "schedule": {
       "miniBreaksInfo": "Mini Molalar, esneme ve rahatlama şansı vermek için düzenli olarak yapılan kısa molalardır.",
       "enableMiniBreaks": "Mini Molaları Etkinleştir",
@@ -117,7 +117,7 @@
     "newVersionAvailable": "Yeni sürüm çıktı!"
   },
   "welcome": {
-    "title": "Stretchly'ye hoş geldiniz",
+    "title": "Idle Break'ye hoş geldiniz",
     "breakTimeReminderApp": "Mola hatırlatıcı uygulama",
     "viewTutorial": "Kılavuzu Aç",
     "openPreferences": "Seçenekleri aç",
@@ -182,7 +182,7 @@
     "currentTimeInBreaks": "Geçerli saat",
     "showCurrentTimeInBreaks": "Mola penceresinde geçerli yerel saati göster",
     "showTrayIcon": "Menü çubuğu simgesini göster",
-    "toShowTrayIcon": "Menü çubuğunda Stretchly simgesini göster"
+    "toShowTrayIcon": "Menü çubuğunda Idle Break simgesini göster"
   },
   "utils": {
     "none_one": "{{count}}",

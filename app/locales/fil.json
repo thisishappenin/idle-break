@@ -17,9 +17,9 @@
     "indefinitely": "Walang Katapusan",
     "continue": "Ipagpatuloy",
     "skipToTheNext": "Lumaktaw sa susunod",
-    "toolTipHeader": "Stretchly - Ang app para sa pagpapaalala ng pagpahinga",
+    "toolTipHeader": "Idle Break - Ang app para sa pagpapaalala ng pagpahinga",
     "cancel": "Bawiin",
-    "quitStretchly": "Itigil ang Stretchly",
+    "quitStretchly": "Itigil ang Idle Break",
     "downloadLatestVersion": "I-download ang kasalukuyang version",
     "preferences": "Mga Kagustuhan",
     "contributorPreferences": "Mga Kagustuhan para sa Contributor",
@@ -98,7 +98,7 @@
       "longBreaksInfo": "Ang Matagalang Pahinga ay minsan lang ginagawa, pero ng matagalan, na nagpapahintulot sa iyo ng matagalang pahinga sa trabaho.",
       "enablePostponeLong": "Paganahin ang Pagpapaliban para sa Matagalang Pahinga"
     },
-    "title": "Mga Kagustuhan para sa Stretchly",
+    "title": "Mga Kagustuhan para sa Idle Break",
     "nav": {
       "theme": "Tema",
       "heart": "Mahalin ang Stretchly",
@@ -186,7 +186,7 @@
     "newVersionAvailable": "Bagong bersyon ay magagamit!"
   },
   "welcome": {
-    "title": "Welcome sa Stretchly",
+    "title": "Welcome sa Idle Break",
     "breakTimeReminderApp": "Ang app ng paalala sa oras ng pahinga",
     "viewTutorial": "Tingnan ang Tutorial",
     "openPreferences": "Buksan ang Mga Kagustuhan",

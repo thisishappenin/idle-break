@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - Taukomuistutussovellus",
+    "toolTipHeader": "Idle Break - Taukomuistutussovellus",
     "microbreakIn": "Minitauko $t(utils.seconds, {'count': {{seconds}} }) kuluttua",
     "breakIn": "Pitkä tauko $t(utils.seconds, {'count': {{seconds}} }) kuluttua",
     "resumingBreaks": "Jatketaan taukoja",
@@ -16,7 +16,7 @@
     "untilMorning": "Aamuun saakka",
     "indefinitely": "Toistaiseksi",
     "resetBreaks": "Nollaa tauot",
-    "quitStretchly": "Lopeta Stretchly",
+    "quitStretchly": "Lopeta Idle Break",
     "restoreDefaults": "Palauta oletusasetukset",
     "warning": "Tämä palauttaa sovelluksen oletusasetukset ja tekemäsi muutokset menetetään.",
     "continue": "Jatka",
@@ -31,16 +31,16 @@
     "title": "Aika pitää tauko!"
   },
   "preferences": {
-    "title": "Stretchly asetukset",
+    "title": "Idle Break asetukset",
     "nav": {
       "settings": "Asetukset",
       "schedule": "Aikataulu",
       "theme": "Teema",
-      "about": "Stretchlystä",
+      "about": "Idle Breakstä",
       "heart": "Rakasta Stretchlyä"
     },
     "settings": {
-      "openAtLogin": "Käynnistä Stretchly automaattisesti sisäänkirjautumisen yhteydessä.",
+      "openAtLogin": "Käynnistä Idle Break automaattisesti sisäänkirjautumisen yhteydessä.",
       "showBreaksIn": "Näytä tauot:",
       "window": "Ikkunassa",
       "fullscreen": "Koko näytöllä",
@@ -186,7 +186,7 @@
     "newVersionAvailable": "Uusi verio on saatavilla!"
   },
   "welcome": {
-    "title": "Tervetuloa Stretchlyyn",
+    "title": "Tervetuloa Idle Breakyn",
     "breakTimeReminderApp": "Taukomuistutusaplikaatio",
     "viewTutorial": "Katso tutoriaali",
     "openPreferences": "Avaa asetukset",

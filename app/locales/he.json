@@ -29,7 +29,7 @@
       "showIdeas": "הצגת הצעות לתרגילים בזמן ההפסקות",
       "fullscreen": "על כל המסך",
       "window": "בתוך חלון",
-      "openAtLogin": "הפעלת Stretchly באופן אוטומטי בעת הכניסה"
+      "openAtLogin": "הפעלת Idle Break באופן אוטומטי בעת הכניסה"
     },
     "nav": {
       "heart": "תמיכה ב־Stretchly",
@@ -38,7 +38,7 @@
       "schedule": "תזמונים",
       "settings": "הגדרות"
     },
-    "title": "ההעדפות של Stretchly",
+    "title": "ההעדפות של Idle Break",
     "about": {
       "dot": ".",
       "developedBy": "פותח על ידי",
@@ -102,7 +102,7 @@
     "continue": "אישור",
     "warning": "פעולה זו תחזיר את ההגדרות לברירת המחדל וכל ההגדרות ששינית יבוטלו.",
     "restoreDefaults": "איפוס ההגדרות",
-    "quitStretchly": "יציאה מ־Stretchly",
+    "quitStretchly": "יציאה מ־Idle Break",
     "resetBreaks": "איפוס ההפסקות",
     "indefinitely": "לתמיד",
     "untilMorning": "עד הבוקר",
@@ -118,7 +118,7 @@
     "breakIn": "הפסקה ארוכה בעוד $t(utils.seconds, {'count': {{seconds}} })",
     "microbreakIn": "הפסקה קצרה בעוד $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "חידוש ההפסקות",
-    "toolTipHeader": "‏Stretchly - היישום שמזכיר לך לקחת הפסקה"
+    "toolTipHeader": "‏Idle Break - היישום שמזכיר לך לקחת הפסקה"
   },
   "contributorPreferences": {
     "0": "הצג הראשון",
@@ -179,7 +179,7 @@
     "currentTimeInBreaks": "השעה הנוכחית",
     "showCurrentTimeInBreaks": "הצגת השעה המקומית הנוכחית בחלון ההפסקה",
     "showTrayIcon": "הצגת סמל בשורת המערכת",
-    "toShowTrayIcon": "הצגת הסמל של Stretchly בשורת המערכת"
+    "toShowTrayIcon": "הצגת הסמל של Idle Break בשורת המערכת"
   },
   "statusMessages": {
     "resuming": "מתחדש",
@@ -198,7 +198,7 @@
     "openPreferences": "פתיחת ההעדפות",
     "viewTutorial": "הצגת מדריך",
     "breakTimeReminderApp": "היישום שמזכיר לך לקחת הפסקה",
-    "title": "ברוך בואך אל Stretchly"
+    "title": "ברוך בואך אל Idle Break"
   },
   "process": {
     "newVersionAvailable": "גרסה חדשה זמינה!"

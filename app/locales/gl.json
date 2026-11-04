@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - A aplicación para lembrar acougar",
+    "toolTipHeader": "Idle Break - A aplicación para lembrar acougar",
     "microbreakIn": "Descanso breve en $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Descanso longo en $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "A retomar os descansos",
@@ -16,7 +16,7 @@
     "untilMorning": "Ata mañá",
     "indefinitely": "Indefinidamente",
     "resetBreaks": "Restituír descansos",
-    "quitStretchly": "Saír de Stretchly",
+    "quitStretchly": "Saír de Idle Break",
     "restoreDefaults": "Restituír opcións por defecto",
     "warning": "Isto vai restituír as opcións por defecto da aplicación e perderás as que teñas configuradas.",
     "continue": "Continuar",
@@ -31,7 +31,7 @@
     "title": "Tempo de acougar!"
   },
   "preferences": {
-    "title": "Configuración de Stretchly",
+    "title": "Configuración de Idle Break",
     "nav": {
       "settings": "Configuración",
       "schedule": "Horario",
@@ -40,7 +40,7 @@
       "heart": "Encántame Stretchly"
     },
     "settings": {
-      "openAtLogin": "Abrir Stretchly automáticamente ao iniciar sesión",
+      "openAtLogin": "Abrir Idle Break automáticamente ao iniciar sesión",
       "showBreaksIn": "Amosar descansos:",
       "window": "Nunha ventá",
       "fullscreen": "A pantalla completa",
@@ -191,7 +191,7 @@
     "newVersionAvailable": "Nova versión dispoñíbel!"
   },
   "welcome": {
-    "title": "Benvido a Stretchly",
+    "title": "Benvido a Idle Break",
     "breakTimeReminderApp": "A aplicación para lembrar acougar",
     "viewTutorial": "Ver titorial",
     "openPreferences": "Configurar",

@@ -17,7 +17,7 @@
     "cancel": "Скасаваць",
     "toMicrobreak": "Кароткі перапынак",
     "quitStretchly": "Выйсьці",
-    "toolTipHeader": "Stretchly - Праграма напамінаў пра перапынкі",
+    "toolTipHeader": "Idle Break - Праграма напамінаў пра перапынкі",
     "breakIn": "Доўгі перапынак праз $t(utils.seconds, {'count': {{seconds}} })",
     "resetBreaks": "Скінуць таймер перапынкаў",
     "resumingBreaks": "Аднаўленне перапынкаў",
@@ -70,7 +70,7 @@
       "enablePostponeLong": "Дазволіць адкладаць доўгія перапынкі",
       "enableMiniBreaks": "Уключыць кароткія перапынкі"
     },
-    "title": "Параметры Stretchly",
+    "title": "Параметры Idle Break",
     "settings": {
       "language": "Выбраць мову:",
       "window": "Акно",
@@ -78,7 +78,7 @@
       "allScreens": "Паказваць перапынкі на ўсіх маніторах",
       "restoreDefaults": "Аднавіць прадвызначаныя налады",
       "monitorIdleTime": "Сачыць за прастоем сістэмы (парапынкі на паўзе, калі сістэма не выкарыстоўваецца).",
-      "openAtLogin": "Аўтаматычна запусціць Stretchly пры ўваходзе ў сістэму",
+      "openAtLogin": "Аўтаматычна запусціць Idle Break пры ўваходзе ў сістэму",
       "showIdeas": "Паказваць парады фізічных практыкаванняў падчас перапынкаў",
       "fullscreen": "На ўвесь экран",
       "showBreaksIn": "Паказваць перапынкі як:"
@@ -288,7 +288,7 @@
     "dark": "Цёмны",
     "2": "Трэці манітор",
     "longBreaks": "Доўгія перапынкі:",
-    "toShowTrayIcon": "Паказваць значок Stretchly ў панелі меню",
+    "toShowTrayIcon": "Паказваць значок Idle Break ў панелі меню",
     "naturalBreaksInfo": "Калі маніторынг часу прастою ўключаны ў галоўных параметрах, вы можаце вызначыць, праз які час перапынкі мусяць быць пастаўлены на паўзу.",
     "timeToBreakInTray": "Час зрабіць перапынак",
     "3": "Чацвёрты манітор",
@@ -365,7 +365,7 @@
   },
   "welcome": {
     "getStarted": "Пачаць",
-    "title": "Вітаем у Stretchly",
+    "title": "Вітаем у Idle Break",
     "viewTutorial": "Глядзець інструкцыю",
     "breakTimeReminderApp": "Праграма напамінаў пра перапынкі",
     "openPreferences": "Адкрыць параметры"

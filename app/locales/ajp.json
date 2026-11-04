@@ -12,7 +12,7 @@
     "cancel": "إلغاء",
     "syncPreferences": "مزامنة التفضيلات",
     "toBreak": "إستراحة مطوّلة",
-    "toolTipHeader": "Stretchly - تطبيق التذكير لأخذ الإستراحات",
+    "toolTipHeader": "Idle Break - تطبيق التذكير لأخذ الإستراحات",
     "breakIn": "إستراحة مطوّلة خلال $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "إستكمال الإستراحة",
     "downloadLatestVersion": "تحميل أحدث إصدار",
@@ -92,7 +92,7 @@
       "contributorPreferences": "تفضيلات المساهم",
       "syncPreferences": "تفضيلات المزامنة"
     },
-    "title": "تفضيلات Stretchly",
+    "title": "تفضيلات Idle Break",
     "nav": {
       "settings": "الإعدادات",
       "schedule": "تحديد موعد",
@@ -101,7 +101,7 @@
       "theme": "السمة"
     },
     "settings": {
-      "openAtLogin": "بدء تشغيل Stretchly تلقائياً عند الدخول للنظام",
+      "openAtLogin": "بدء تشغيل Idle Break تلقائياً عند الدخول للنظام",
       "showBreaksIn": "إظهار الإستراحة خلال:",
       "showIdeas": "إظهار معلومات عن تمارين خلال الإستراحات",
       "allScreens": "إظهار الإستراحات على جميع الشاشات",
@@ -192,7 +192,7 @@
     "elapsed": "{{count}} انقضى"
   },
   "welcome": {
-    "title": "مرحبا بك في Stretchly",
+    "title": "مرحبا بك في Idle Break",
     "breakTimeReminderApp": "تطبيق التذكير لأخذ الإستراحات",
     "viewTutorial": "عرض البرنامج التعليمي",
     "openPreferences": "افتح التفضيلات",

@@ -124,7 +124,7 @@
       "fullscreen": "เต็มจอ",
       "window": "หน้าต่าง",
       "showBreaksIn": "แสดงการพักในรูปแบบ:",
-      "openAtLogin": "เริ่ม Stretchly อัตโนมัติเมื่อล็อกอิน"
+      "openAtLogin": "เริ่ม Idle Break อัตโนมัติเมื่อล็อกอิน"
     },
     "nav": {
       "heart": "รัก Stretchly จัง",
@@ -133,7 +133,7 @@
       "schedule": "ตารางเวลา",
       "settings": "ตั้งค่า"
     },
-    "title": "การตั้งค่า Stretchly"
+    "title": "การตั้งค่า Idle Break"
   },
   "break": {
     "title": "ได้เวลาพักแล้วจ้า!",
@@ -149,7 +149,7 @@
     "continue": "ต่อ",
     "warning": "ตัวเลือกนี้จะคืนค่าตั้งต้นและการตั้งค่าทั้งหมดของคุณจะถูกลบทิ้ง",
     "restoreDefaults": "คืนค่าตั้งต้น",
-    "quitStretchly": "ออกจาก Stretchly",
+    "quitStretchly": "ออกจาก Idle Break",
     "resetBreaks": "รีเซ็ตการพัก",
     "indefinitely": "ไม่มีกำหนด",
     "untilMorning": "จนถึงเช้า",
@@ -165,14 +165,14 @@
     "downloadLatestVersion": "ดาวน์โหลดเวอร์ชั่นล่าสุด",
     "breakIn": "พักใหญ่ใน $t(utils.seconds, {'count': {{seconds}} })",
     "microbreakIn": "พักย่อยใน $t(utils.seconds, {'count': {{seconds}} })",
-    "toolTipHeader": "Stretchly - แอปสำหรับเตือนเวลาพัก"
+    "toolTipHeader": "Idle Break - แอปสำหรับเตือนเวลาพัก"
   },
   "welcome": {
     "getStarted": "เริ่มกันเลย",
     "breakTimeReminderApp": "แอพช่วยเตือนเมื่อถึงเวลาพัก",
     "openPreferences": "เปิดการปรับตั้งค่า",
     "viewTutorial": "ชมการใช้งาน",
-    "title": "ยินดีต้อนรับสู่ Stretchly"
+    "title": "ยินดีต้อนรับสู่ Idle Break"
   },
   "statusMessages": {
     "indefinitely": "ไม่สิ้นสุด",

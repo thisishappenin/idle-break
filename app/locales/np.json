@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - ब्रेक समय रिमाइन्डर एप्लिकेशन",
+    "toolTipHeader": "Idle Break - ब्रेक समय रिमाइन्डर एप्लिकेशन",
     "microbreakIn": "अर्को छोटो ब्रेक पुनः $t(utils.seconds, {'count': {{seconds}} }) मा सुरु हुन्छ । ",
     "breakIn": "अर्को लामो ब्रेक पुनः $t(utils.seconds, {'count': {{seconds}} }) मा सुरु हुन्छ ।",
     "resumingBreaks": "पुनः ब्रेक सुरु गर्दै ।",
@@ -30,7 +30,7 @@
     "title": "ब्रेक लिन समय भयो ।"
   },
   "preferences": {
-    "title": "Stretchly प्राथमिकताहरू",
+    "title": "Idle Break प्राथमिकताहरू",
     "nav": {
       "settings": "सेटिंग्स",
       "schedule": "तालिका",
@@ -39,7 +39,7 @@
       "heart": "Stretchly लाई माया पठाउनुहोस्"
     },
     "settings": {
-      "openAtLogin": "लग ईन गर्ने बखत स्वचालित रूपमा Stretchly शुरू गर्नुहोस् ।",
+      "openAtLogin": "लग ईन गर्ने बखत स्वचालित रूपमा Idle Break शुरू गर्नुहोस् ।",
       "showBreaksIn": "ब्रेक कसरी प्रस्तुत गर्ने:",
       "window": "विन्डो",
       "fullscreen": "फूल स्क्रीन",
@@ -163,7 +163,7 @@
     "newVersionAvailable": "नयाँ संस्करण उपलब्ध छ!"
   },
   "welcome": {
-    "title": "Stretchly मा तपाईंको स्वागत छ । ",
+    "title": "Idle Break मा तपाईंको स्वागत छ । ",
     "breakTimeReminderApp": "ब्रेक समय रिमाइन्डर एप्लिकेशन",
     "viewTutorial": "ट्यूटोरियल हेर्नुहोस्",
     "openPreferences": "प्राथमिकताहरू खोल्नुहोस्",

@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - 休息提醒应用",
+    "toolTipHeader": "Idle Break - 休息提醒应用",
     "microbreakIn": "距离下次小憩约 $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "距离下次休息约 $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "正在恢复休息",
@@ -16,7 +16,7 @@
     "untilMorning": "直至早晨",
     "indefinitely": "无限期",
     "resetBreaks": "重置休息",
-    "quitStretchly": "退出 Stretchly",
+    "quitStretchly": "退出 Idle Break",
     "restoreDefaults": "还原至默认值",
     "warning": "即将恢复默认值，所有已有设置会被清除。",
     "continue": "继续",
@@ -32,7 +32,7 @@
     "finish": "完成本次休息"
   },
   "preferences": {
-    "title": "Stretchly 偏好设置",
+    "title": "Idle Break 偏好设置",
     "nav": {
       "settings": "设置",
       "schedule": "计划",
@@ -41,7 +41,7 @@
       "heart": "喜欢 Stretchly"
     },
     "settings": {
-      "openAtLogin": "登录后自动启动 Stretchly",
+      "openAtLogin": "登录后自动启动 Idle Break",
       "showBreaksIn": "休息提示画面：",
       "window": "窗口",
       "fullscreen": "全屏",
@@ -179,7 +179,7 @@
     "showCurrentTimeInBreaks": "在休息画面显示当前时间",
     "currentTimeInBreaks": "当前时间",
     "showTrayIcon": "显示托盘图标",
-    "toShowTrayIcon": "在托盘中显示 Stretchly 图标"
+    "toShowTrayIcon": "在托盘中显示 Idle Break 图标"
   },
   "utils": {
     "none_other": "{{count}}",
@@ -196,7 +196,7 @@
     "newVersionAvailable": "有新的版本！"
   },
   "welcome": {
-    "title": "欢迎使用 Stretchly",
+    "title": "欢迎使用 Idle Break",
     "breakTimeReminderApp": "休息提醒应用",
     "viewTutorial": "查看教程",
     "openPreferences": "打开偏好设置",

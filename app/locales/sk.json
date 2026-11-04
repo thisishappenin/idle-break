@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - Pamätá si prestávky za vás",
+    "toolTipHeader": "Idle Break - Pamätá si prestávky za vás",
     "microbreakIn": "Krátka prestávka za $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Dlhá prestávka za $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Obnovenie prestávok",
@@ -16,7 +16,7 @@
     "untilMorning": "Do rána",
     "indefinitely": "Na neurčito",
     "resetBreaks": "Resetovať prestávky",
-    "quitStretchly": "Ukončiť Stretchly",
+    "quitStretchly": "Ukončiť Idle Break",
     "restoreDefaults": "Obnoviť pôvodné nastavenia",
     "areYouSure": "Táto akcia obnoví pôvodné nastavenia a všetky vaše zmeny sa stratia.",
     "continue": "Pokračovať",
@@ -33,7 +33,7 @@
     "finish": "Dokončiť túto prestávku"
   },
   "preferences": {
-    "title": "Nastavenia Stretchly",
+    "title": "Nastavenia Idle Break",
     "nav": {
       "settings": "Nastavenia",
       "schedule": "Časovanie",
@@ -42,7 +42,7 @@
       "heart": "Podporiť Stretchly"
     },
     "settings": {
-      "openAtLogin": "Spustiť Stretchly automaticky po prihlásení",
+      "openAtLogin": "Spustiť Idle Break automaticky po prihlásení",
       "showBreaksIn": "Zobraziť prestávky ako:",
       "window": "Okno",
       "fullscreen": "Celá obrazovka",
@@ -180,7 +180,7 @@
     "showCurrentTimeInBreaks": "Zobraziť aktuálny miestny čas v okne prestávky",
     "currentTimeInBreaks": "Aktuálny čas",
     "showTrayIcon": "Ikona v systémovej lište",
-    "toShowTrayIcon": "Zobraziť ikonu Stretchly v systémovej lište"
+    "toShowTrayIcon": "Zobraziť ikonu Idle Break v systémovej lište"
   },
   "utils": {
     "remaining": "{{count}} do konca",
@@ -214,7 +214,7 @@
     "newVersionAvailable": "Je dostupná nová verzia!"
   },
   "welcome": {
-    "title": "Vitajte v Stretchly",
+    "title": "Vitajte v Idle Break",
     "breakTimeReminderApp": "Pamätá si prestávky za vás",
     "viewTutorial": "Pozrieť si Návod",
     "openPreferences": "Otvoriť Nastavenia",

@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - 휴식 시간 알림 앱",
+    "toolTipHeader": "Idle Break - 휴식 시간 알림 앱",
     "microbreakIn": "짧은 휴식까지 $t(utils.seconds, {'count': {{seconds}} }) 남음",
     "breakIn": "긴 휴식까지 $t(utils.seconds, {'count': {{seconds}} }) 남음",
     "resumingBreaks": "휴식 재개",
@@ -16,7 +16,7 @@
     "untilMorning": "아침까지",
     "indefinitely": "무기한",
     "resetBreaks": "휴식 재설정",
-    "quitStretchly": "Stretchly 종료",
+    "quitStretchly": "Idle Break 종료",
     "restoreDefaults": "기본값 복원",
     "warning": "앱 기본값이 복원되며, 모든 설정이 초기화됩니다.",
     "continue": "계속",
@@ -31,7 +31,7 @@
     "title": "휴식을 취할 시간입니다!"
   },
   "preferences": {
-    "title": "Stretchly 환경설정",
+    "title": "Idle Break 환경설정",
     "nav": {
       "settings": "설정",
       "schedule": "일정",
@@ -40,7 +40,7 @@
       "heart": "Stretchly 사랑하기"
     },
     "settings": {
-      "openAtLogin": "로그인 시 Stretchly 자동 시작",
+      "openAtLogin": "로그인 시 Idle Break 자동 시작",
       "showBreaksIn": "휴식 표시 방법:",
       "window": "창",
       "fullscreen": "전체 화면",
@@ -170,7 +170,7 @@
     "timeToBreakInTray": "휴식까지 남은 시간",
     "showTimeToBreakInTray": "메뉴바 아이콘에 다음 휴식까지 남은 시간 표시",
     "showTrayIcon": "메뉴바 아이콘 표시",
-    "toShowTrayIcon": "메뉴바에 Stretchly 아이콘 표시",
+    "toShowTrayIcon": "메뉴바에 Idle Break 아이콘 표시",
     "currentTimeInBreaks": "현재 시간",
     "showCurrentTimeInBreaks": "휴식 창에 현재 현지 시간 표시"
   },
@@ -188,7 +188,7 @@
     "newVersionAvailable": "새 버전이 나왔습니다!"
   },
   "welcome": {
-    "title": "Stretchly에 오신 것을 환영합니다",
+    "title": "Idle Break에 오신 것을 환영합니다",
     "breakTimeReminderApp": "휴식 시간 알림 앱",
     "viewTutorial": "튜토리얼 보기",
     "openPreferences": "환경설정 열기",

@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - Przerwo-przypominajka",
+    "toolTipHeader": "Idle Break - Przerwo-przypominajka",
     "microbreakIn": "Mikroprzerwa za $t(utils.seconds, {'count': {{seconds}} })",
     "breakIn": "Długa przerwa za $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Wznawiam przerwy",
@@ -16,7 +16,7 @@
     "untilMorning": "do rana",
     "indefinitely": "do odwołania",
     "resetBreaks": "Zresetuj przerwy",
-    "quitStretchly": "Zamknij Stretchly",
+    "quitStretchly": "Zamknij Idle Break",
     "restoreDefaults": "Przywróć domyślne",
     "warning": "To przywróci ustawienia domyślne i skasuje twoje zmiany.",
     "continue": "Kontynuuj",
@@ -31,16 +31,16 @@
     "title": "Czas na przerwę!"
   },
   "preferences": {
-    "title": "Ustawienia Stretchly",
+    "title": "Ustawienia Idle Break",
     "nav": {
       "settings": "Ustawienia",
       "schedule": "Harmonogram",
       "theme": "Motyw",
-      "about": "O Stretchly",
+      "about": "O Idle Break",
       "heart": "Pokochaj Stretchly"
     },
     "settings": {
-      "openAtLogin": "Uruchom Stretchly automatycznie po zalogowaniu",
+      "openAtLogin": "Uruchom Idle Break automatycznie po zalogowaniu",
       "showBreaksIn": "Pokaż przerwy za:",
       "window": "Okno",
       "fullscreen": "Pełny ekran",
@@ -172,7 +172,7 @@
     "currentTimeInBreaks": "Aktualny czas",
     "showCurrentTimeInBreaks": "Pokaż aktualną godzinę w okienku przerwy",
     "showTimeToBreakInTray": "Pokaż czas pozostały do następnej przerwy w ikonie paska zadań",
-    "toShowTrayIcon": "Pokaż ikonę Stretchly w pasku menu",
+    "toShowTrayIcon": "Pokaż ikonę Idle Break w pasku menu",
     "showTrayIcon": "Pokaż ikonę na pasku menu"
   },
   "utils": {
@@ -201,7 +201,7 @@
     "newVersionAvailable": "Dostępna nowa wersja!"
   },
   "welcome": {
-    "title": "Witaj w Stretchly",
+    "title": "Witaj w Idle Break",
     "breakTimeReminderApp": "Przerwo-przypominajka",
     "viewTutorial": "Zobacz wprowadzenie",
     "openPreferences": "Otwórz ustawienia",

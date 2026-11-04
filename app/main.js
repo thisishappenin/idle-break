@@ -20,6 +20,7 @@ import {
   canPostpone, canSkip, formatTimeRemaining,
   minutesRemaining, insideWindowsPortable
 } from './utils/utils.js'
+import { migrateLegacyUserData } from './utils/legacyUserData.js'
 import IdeasLoader from './utils/ideasLoader.js'
 import BreaksPlanner from './breaksPlanner.js'
 import AppIcon from './utils/appIcon.js'
@@ -49,8 +50,8 @@ process.on('uncaughtException', (err, _) => {
   handlingUncaughtException = true
   const dialogOpts = {
     type: 'error',
-    title: 'Stretchly',
-    message: 'An error occurred while running Stretchly and it will now quit. To report the issue, click Report.',
+    title: 'Idle Break',
+    message: 'An error occurred while running Idle Break and it will now quit. To report the issue, click Report.',
     buttons: ['Report', 'OK']
   }
   dialog.showMessageBox(dialogOpts).then(async (returnValue) => {
@@ -120,14 +121,22 @@ if (insideWindowsPortable()) {
     mkdirSync(portableDataPath, { recursive: true })
   }
   app.setPath('userData', portableDataPath)
+} else {
+  const userDataPath = join(app.getPath('appData'), 'Idle Break')
+  try {
+    migrateLegacyUserData(join(app.getPath('appData'), 'Stretchly'), userDataPath)
+  } catch (error) {
+    console.error('Idle Break: could not copy settings from the old Stretchly folder', error)
+  }
+  app.setPath('userData', userDataPath)
 }
 
 log.initialize({ preload: true })
 
-// Match the appId the installer stamps onto the shortcut so notifications show Stretchly.
+// Match the appId the installer stamps onto the shortcut so notifications show Idle Break.
 // Skip unpackaged dev runs.
 if (process.platform === 'win32' && app.isPackaged) {
-  app.setAppUserModelId('net.hovancik.stretchly')
+  app.setAppUserModelId('io.github.thisishappenin.idlebreak')
 }
 
 const global = {
@@ -990,7 +999,7 @@ function createBreakPreview () {
     focusable: false,
     alwaysOnTop: true,
     hasShadow: false,
-    title: 'Stretchly',
+    title: 'Idle Break',
     webPreferences: {
       preload: join(__dirname, './microbreak-preload.mjs'),
       sandbox: false
@@ -1103,7 +1112,7 @@ function startMicrobreak () {
       focusable: showBreaksAsRegularWindows,
       alwaysOnTop: keepOnTop,
       hasShadow: false,
-      title: 'Stretchly',
+      title: 'Idle Break',
       webPreferences: {
         preload: join(__dirname, './microbreak-preload.mjs'),
         sandbox: false
@@ -1253,7 +1262,7 @@ function startBreak () {
       focusable: showBreaksAsRegularWindows,
       alwaysOnTop: keepOnTop,
       hasShadow: false,
-      title: 'Stretchly',
+      title: 'Idle Break',
       webPreferences: {
         preload: join(__dirname, './break-preload.mjs'),
         sandbox: false

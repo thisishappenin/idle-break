@@ -1,6 +1,6 @@
 {
   "main": {
-    "toolTipHeader": "Stretchly - A szünet emlékeztető alkalmazás",
+    "toolTipHeader": "Idle Break - A szünet emlékeztető alkalmazás",
     "microbreakIn": "Rövid szünet $t(utils.seconds, {'count': {{seconds}} }) múlva",
     "breakIn": "Hosszú szünet $t(utils.seconds, {'count': {{seconds}} }) múlva",
     "resumingBreaks": "Szünetek folytatása",
@@ -16,7 +16,7 @@
     "untilMorning": "Reggelig",
     "indefinitely": "Határozatlan ideig",
     "resetBreaks": "Szünetek visszaállítása",
-    "quitStretchly": "Stretchly bezárása",
+    "quitStretchly": "Idle Break bezárása",
     "restoreDefaults": "Alapértelmezések visszaállítása",
     "warning": "Az alkalmazás alapértelmezett beállításai visszaállnak és az összes jelenlegi beállítás elvész.",
     "continue": "Folytatás",
@@ -32,7 +32,7 @@
     "finish": "Szünet befejezése"
   },
   "preferences": {
-    "title": "Stretchly Beállítások",
+    "title": "Idle Break Beállítások",
     "nav": {
       "settings": "Beállítások",
       "schedule": "Időzítés",
@@ -41,7 +41,7 @@
       "heart": "Stretchly támogatása"
     },
     "settings": {
-      "openAtLogin": "Stretchly automatikus indítása bejelentkezés után",
+      "openAtLogin": "Idle Break automatikus indítása bejelentkezés után",
       "showBreaksIn": "Szünetek megjelenítése:",
       "window": "Ablakban",
       "fullscreen": "Teljes képernyőn",
@@ -163,7 +163,7 @@
     "3": "Negyedik monitor",
     "showBreaksAsRegularWindowsTitle": "Ablak üzemmód:",
     "showTrayIcon": "Tálca ikon megjelenítése",
-    "toShowTrayIcon": "Mutassa a Stretchly ikont a tálcán",
+    "toShowTrayIcon": "Mutassa a Idle Break ikont a tálcán",
     "showCurrentTimeInBreaks": "Mutassa a jelenlegi időt a szünet ablakban",
     "screen": "Monitor a szünetekhez:",
     "screenInfo": "Ha a szünetek megjelenítése az összes monitoron nincs engedélyezve, kiválaszthatod, hogy melyik monitoron szeretnéd a szüneteket megjeleníteni.",
@@ -202,7 +202,7 @@
     "newVersionAvailable": "Új verzió érhető el!"
   },
   "welcome": {
-    "title": "Üdvözöl a Stretchly",
+    "title": "Üdvözöl a Idle Break",
     "breakTimeReminderApp": "A szünet emlékeztető alkalmazás",
     "viewTutorial": "Útmutató megnyitása",
     "openPreferences": "Beállítások megnyitása",
@@ -469,7 +469,7 @@
     },
     "aas": {
       "title": "Ismétlés",
-      "text": "Megtaláltad már a Stretchly rutinod? Ne felejtsd el ismételni több alkalommal is, hogy a hosszantartó ülés káros hatásait megelőzd."
+      "text": "Megtaláltad már a Idle Break rutinod? Ne felejtsd el ismételni több alkalommal is, hogy a hosszantartó ülés káros hatásait megelőzd."
     },
     "aaa": {
       "title": "Nem vagy egyedül",

@@ -28,7 +28,7 @@ window.onload = async (e) => {
       await window.runtime.platform(),
       await window.runtime.getSystemVersion()
     )
-      ? 'Stretchly'
+      ? 'Idle Break'
       : ''
     const notification = new Notification(title, {
       body: text,
@@ -65,7 +65,7 @@ window.onload = async (e) => {
   })
 
   async function notifyNewVersion (silent) {
-    const title = await window.utils.shouldShowNotificationTitle(await window.runtime.platform(), await window.runtime.getSystemVersion()) ? 'Stretchly' : ''
+    const title = await window.utils.shouldShowNotificationTitle(await window.runtime.platform(), await window.runtime.getSystemVersion()) ? 'Idle Break' : ''
     const notification = new Notification(title, {
       body: await window.i18next.t('process.newVersionAvailable'),
       silent,

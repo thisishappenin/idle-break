@@ -1,7 +1,7 @@
 {
   "main": {
     "breakIn": "Μεγάλο διάλυμα σε $t(utils.seconds, {'count': {{seconds}} })",
-    "toolTipHeader": "Stretchly - Η εφαρμογή υπενθύμισης διαλυμάτων",
+    "toolTipHeader": "Idle Break - Η εφαρμογή υπενθύμισης διαλυμάτων",
     "microbreakIn": "Μικρό διάλυμα σε $t(utils.seconds, {'count': {{seconds}} })",
     "resumingBreaks": "Συνέχιση των διαλειμμάτων",
     "toBreak": "Μεγάλο διάλειμμα",
@@ -21,7 +21,7 @@
     "resetBreaks": "Επαναφορά διαλειμμάτων",
     "warning": "Αυτό θα επαναφέρει τις προεπιλογές της εφαρμογής και όλες οι ρυθμίσεις σας θα χαθούν.",
     "forHour": "1 ώρα",
-    "quitStretchly": "Έξοδος από το Stretchly",
+    "quitStretchly": "Έξοδος από το Idle Break",
     "continue": "Συνέχεια",
     "downloadLatestVersion": "Κατεβάστε την τελευταία έκδοση"
   },
@@ -40,7 +40,7 @@
       "heart": "Αγαπήστε το Stretchly"
     },
     "settings": {
-      "openAtLogin": "Εκκίνηση του Stretchly αυτόματα κατά την είσοδο",
+      "openAtLogin": "Εκκίνηση του Idle Break αυτόματα κατά την είσοδο",
       "showBreaksIn": "Εμφανίζει διαλείμματα σε:",
       "fullscreen": "Πλήρης οθόνη",
       "showIdeas": "Εμφάνιση συμβουλών άσκησης κατά τη διάρκεια των διαλειμμάτων",
@@ -113,7 +113,7 @@
       "desc1": "Η λήψη τακτικών διαλειμμάτων κατά τη χρήση υπολογιστή είναι επιστημονικά αποδεδειγμένο ότι είναι σημαντική για τη σωματική και ψυχική ευημερία σας.",
       "becomeContributor": "Γίνετε Χορηγός"
     },
-    "title": "Προτιμήσεις Stretchly"
+    "title": "Προτιμήσεις Idle Break"
   },
   "contributorPreferences": {
     "beforeLongBreak": "Μακρύ Διάλειμμα:",
@@ -173,7 +173,7 @@
     "pauseUntilMorningInfo": "Καθορίστε μέχρι ποια ώρα θα πρέπει να παύει η \"Παύση μέχρι το πρωί\".",
     "opacityTheme": "Διαφάνεια θέματος:",
     "cursor": "Ακολουθήστε τον δείκτη",
-    "toShowTrayIcon": "Εμφάνιση του εικονιδίου Stretchly στη γραμμή μενού",
+    "toShowTrayIcon": "Εμφάνιση του εικονιδίου Idle Break στη γραμμή μενού",
     "showCurrentTimeInBreaks": "Εμφάνιση τρέχουσας τοπικής ώρας στο παράθυρο διαλείμματος"
   },
   "utils": {
@@ -197,7 +197,7 @@
     "newVersionAvailable": "Η νέα έκδοση είναι διαθέσιμη!"
   },
   "welcome": {
-    "title": "Καλώς ήρθατε στο Stretchly",
+    "title": "Καλώς ήρθατε στο Idle Break",
     "breakTimeReminderApp": "Η εφαρμογή υπενθύμισης χρόνου διαλείμματος",
     "viewTutorial": "Δείτε Εγχειρίδιο",
     "openPreferences": "Ανοίξτε τις Προτιμήσεις",

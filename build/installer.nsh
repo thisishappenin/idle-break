@@ -3,11 +3,11 @@
 !macro customInstall
   CreateDirectory "$INSTDIR\bin"
   ClearErrors
-  FileOpen $0 "$INSTDIR\bin\stretchly.cmd" w
+  FileOpen $0 "$INSTDIR\bin\idlebreak.cmd" w
   ${if} ${Errors}
-    DetailPrint "Stretchly: failed to create CLI shim at $INSTDIR\bin\stretchly.cmd"
+    DetailPrint "Idle Break: failed to create CLI shim at $INSTDIR\bin\idlebreak.cmd"
   ${else}
-    FileWrite $0 "@echo off$\r$\nsetlocal$\r$\nset $\"STRETCHLY_EXE=%~dp0..\Stretchly.exe$\"$\r$\ntasklist /FI $\"IMAGENAME eq Stretchly.exe$\" 2>NUL | find /I $\"Stretchly.exe$\" >NUL$\r$\nif errorlevel 1 ($\r$\n  powershell -NoProfile -Command $\"Start-Process -FilePath $$env:STRETCHLY_EXE$\"$\r$\n) else ($\r$\n  $\"%STRETCHLY_EXE%$\" %*$\r$\n)$\r$\n"
+    FileWrite $0 "@echo off$\r$\nsetlocal$\r$\nset $\"IDLEBREAK_EXE=%~dp0..\Idle Break.exe$\"$\r$\ntasklist /FI $\"IMAGENAME eq Idle Break.exe$\" 2>NUL | find /I $\"Idle Break.exe$\" >NUL$\r$\nif errorlevel 1 ($\r$\n  powershell -NoProfile -Command $\"Start-Process -FilePath $$env:IDLEBREAK_EXE$\"$\r$\n) else ($\r$\n  $\"%IDLEBREAK_EXE%$\" %*$\r$\n)$\r$\n"
     FileClose $0
   ${endif}
 

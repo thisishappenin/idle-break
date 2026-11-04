@@ -2106,7 +2106,7 @@ ipcMain.on('save-setting', function (event, key, value) {
   if (key === 'pauseWhileUsing' && !breakPlanner.isPaused) {
     const wasPaused = breakPlanner.appExclusionsManager.isSchedulerCleared
     breakPlanner.appExclusionsManager.reinitialize(settings)
-    if (wasPaused && !breakPlanner.appExclusionsManager.isSchedulerCleared) breakPlanner.reset()
+    if (wasPaused && !breakPlanner.appExclusionsManager.isSchedulerCleared) breakPlanner.resumeFromAppPause()
   }
 
   if (BREAK_PREVIEW_KEYS.includes(key)) {

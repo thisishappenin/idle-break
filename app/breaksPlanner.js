@@ -27,6 +27,7 @@ class BreaksPlanner extends EventEmitter {
     this.idleSnapshot = null
     this.usageTimer = null
     this.lastBreakFinishedAt = null
+    this.heldForApp = false
 
     this.on('microbreakStarted', (shouldPlaySound) => {
       this.idleSnapshot = null
@@ -124,8 +125,9 @@ class BreaksPlanner extends EventEmitter {
         const inBreak = this.scheduler.reference === 'finishMicrobreak' || this.scheduler.reference === 'finishBreak'
         if (foreground && inBreak) {
           this.appExclusionsManager.isOnAppExclusion = false
-        } else if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak' && this.scheduler.reference !== null) {
-          this.clear()
+        } else if (!this.isPaused && !inBreak && this.scheduler.reference !== null) {
+          this.heldForApp = this.scheduler.hold()
+          if (!this.heldForApp && !this.scheduler.held) this.clear()
           log.info(`Stretchly: pausing breaks as 'pause' exclusion found running: '${exclusion}'`)
           this.emit('updateToolTip')
         } else if (!this.isPaused && this.scheduler.reference === 'finishBreak') {
@@ -153,7 +155,7 @@ class BreaksPlanner extends EventEmitter {
     this.appExclusionsManager.on('appExclusionFinished', (rule) => {
       if (rule === 'pause') {
         if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak') {
-          this.reset()
+          this.resumeFromAppPause()
           log.info("Stretchly: resuming breaks as no 'pause' exclusion found running")
           this.emit('updateToolTip')
         }
@@ -167,6 +169,16 @@ class BreaksPlanner extends EventEmitter {
         }
       }
     })
+  }
+
+  resumeFromAppPause () {
+    const wasHeld = this.heldForApp
+    this.heldForApp = false
+    if (wasHeld) {
+      this.scheduler?.release()
+      return
+    }
+    this.reset()
   }
 
   breakFinishedDuringIdle (idleTime) {
@@ -358,6 +370,7 @@ class BreaksPlanner extends EventEmitter {
   }
 
   clear () {
+    this.heldForApp = false
     this.stopUsageWatch()
     this.scheduler.cancel()
     this.deferredBreakEvent = null

@@ -106,6 +106,11 @@ describe('trayPanelState', () => {
     ])
   })
 
+  it('passes the countdown colour on, or null for the automatic one', () => {
+    expect(buildTrayPanelState({ ...base, countdownColor: '#ffcc00' }).countdownColor).to.equal('#ffcc00')
+    expect(buildTrayPanelState(base).countdownColor).to.equal(null)
+  })
+
   it('passes the chosen theme colour on, or null when not using it', () => {
     expect(buildTrayPanelState({ ...base, themeColor: '#478484' }).themeColor).to.equal('#478484')
     expect(buildTrayPanelState(base).themeColor).to.equal(null)

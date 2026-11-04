@@ -6,9 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Optional custom colour for the countdown in the break popup, the tray panel and the tray number (Theme tab, under Opacity)
 - The tray panel and the tray tooltip show when you are in a meeting (with the app using the microphone), and update as soon as the call starts or ends
 - Left-clicking the tray icon (Windows and macOS) opens a small panel that stays open while you use it: the countdown, 5 minute shorten and extend buttons, start and pause options, the idle reset switch, Preferences and Quit. Right-click still opens the menu
-- Changing a break window colour, transparency, size or position on the Theme page briefly shows the real popup on your screen (sliders update it as you drag), with a "Show popup now" button. The page also previews the number-only tray icon
+- Changing a break window colour, transparency, size or position on the Theme page briefly shows the real popup on your screen (sliders update it as you drag), with a "Show popup now" button.
 - Corner popups and reminder popups get a dark outline on light themes, and their timer bar is inset so the popup colour shows around it, keeping both visible over a white window
 - On Windows, the number-only tray icon is drawn at your display scale in a font and size you choose in Preferences (bundled DejaVu Sans by default), with smoothing you can turn off
 - Tray menu items to shorten or extend the next work session in 5 minute steps, for that one session only. The menu opens again after each press so you can use them several times
@@ -57,6 +58,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- The Theme tab preview is a single slim row with the Show popup now button; the tray number mock-ups are gone since the real tray icon updates live
 - Preferences open wider by default and lay each tab out in two columns, so they scroll much less; on narrow windows they fall back to one column
 - The tray panel is more compact (short pause buttons, one-line session stepper) and follows the Appearance colour chosen on the Theme tab
 - Preferences are grouped into labelled sections: Settings is split into General, Breaks, When you are away, Calls and Do Not Disturb and Defaults; the break window display options (window or full screen, all monitors) moved to Theme next to the window size and position; the tray number font, size and smoothing only show for the number-only tray style on Windows

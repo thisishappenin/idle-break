@@ -7,7 +7,9 @@ import './platform.js'
 
 window.onload = async (event) => {
   const [idea, started, duration, strictMode, postpone,
-    postponePercent, backgroundColor, danger, breakHealthMode, alwaysSkip] = await window.breaks.sendBreakData()
+    postponePercent, backgroundColor, danger, breakHealthMode, alwaysSkip, countdownColor] = await window.breaks.sendBreakData()
+
+  if (countdownColor) document.documentElement.style.setProperty('--countdown-color', countdownColor)
 
   document.ondragover = event =>
     event.preventDefault()

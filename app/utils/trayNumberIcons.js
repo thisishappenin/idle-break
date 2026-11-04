@@ -4,6 +4,7 @@ import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import log from 'electron-log/main.js'
 import { encodeIco } from './icoEncoder.js'
+import { hexToRgb } from './countdownColor.js'
 
 class TrayNumberIcons {
   constructor ({ directory, render, onReady }) {
@@ -17,9 +18,9 @@ class TrayNumberIcons {
     mkdirSync(directory, { recursive: true })
   }
 
-  keyFor ({ text, font, dark, crisp, heightRatio }) {
+  keyFor ({ text, font, dark, crisp, heightRatio, color }) {
     const fontHash = createHash('sha1').update(font).digest('hex').slice(0, 8)
-    return `n${text}-${dark ? 'dark' : 'light'}-${crisp ? 'crisp' : 'smooth'}-h${Math.round(heightRatio * 100)}-${fontHash}`
+    return `n${text}-${dark ? 'dark' : 'light'}-${crisp ? 'crisp' : 'smooth'}-h${Math.round(heightRatio * 100)}-c${color ? color.slice(1) : 'auto'}-${fontHash}`
   }
 
   pathFor (request) {
@@ -32,9 +33,9 @@ class TrayNumberIcons {
     return null
   }
 
-  async create (key, { text, font, dark, crisp, heightRatio }) {
+  async create (key, { text, font, dark, crisp, heightRatio, color: custom }) {
     try {
-      const color = dark ? [255, 255, 255] : [0, 0, 0]
+      const color = custom ? hexToRgb(custom) : dark ? [255, 255, 255] : [0, 0, 0]
       const frames = await this.render({ text, fontFamily: font, color, crisp, heightRatio })
       if (!frames) return
       const path = join(this.directory, `${key}.ico`)

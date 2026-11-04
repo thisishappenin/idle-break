@@ -93,6 +93,8 @@ export default {
   trayMenuStaysOpen: true,
   trayPanel: true,
   trayPanelThemeColor: true,
+  countdownColorCustom: false,
+  countdownColor: '#ffffff',
   currentTimeInBreaks: false,
   currentTimeInBreaksFontSize: 28,
   currentTimeInBreaksFormat: 'tt',

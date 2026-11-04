@@ -53,6 +53,28 @@ describe('trayNumberIcons', () => {
     })
   })
 
+  it('draws the number in the countdown colour when one is set', async () => {
+    const render = vi.fn(async () => frames)
+    const icons = new TrayNumberIcons({ directory, render, onReady: () => {} })
+
+    icons.pathFor({ ...request, color: '#ffcc00' })
+    await settle()
+
+    expect(render.mock.calls[0][0].color).to.deep.equal([255, 204, 0])
+  })
+
+  it('keeps a separate icon for each countdown colour', async () => {
+    const render = vi.fn(async () => frames)
+    const icons = new TrayNumberIcons({ directory, render, onReady: () => {} })
+
+    icons.pathFor(request)
+    icons.pathFor({ ...request, color: '#ffcc00' })
+    icons.pathFor({ ...request, color: '#00ccff' })
+    await settle()
+
+    expect(render.mock.calls.length).to.equal(3)
+  })
+
   it('draws each number, colour and font only once', async () => {
     const render = vi.fn(async () => frames)
     const icons = new TrayNumberIcons({ directory, render, onReady: () => {} })

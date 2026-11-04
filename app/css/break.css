@@ -197,6 +197,7 @@ picture {
 }
 
 #progress-time {
+  color: var(--countdown-color, inherit);
   font-variant-numeric: tabular-nums;
   opacity: 0.75;
 }

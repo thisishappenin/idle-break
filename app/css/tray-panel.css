@@ -79,6 +79,7 @@ section + section {
 }
 
 .countdown .time {
+  color: var(--countdown-color, var(--ink));
   font-size: 26px;
   font-variant-numeric: tabular-nums;
   font-weight: 600;

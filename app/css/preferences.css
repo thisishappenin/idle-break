@@ -459,60 +459,6 @@ body > div:not(.navigation):not(.custom-message) {
   }
 }
 
-.theme-preview {
-  align-items: flex-start;
-  background: var(--main-bg-color);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 20px;
-  padding-bottom: 8px;
-  position: sticky;
-  top: 56px;
-  z-index: 5;
-}
-
-.preview-popup {
-  flex: 1 1 260px;
-  max-width: 420px;
-}
-
-.preview-popup p {
-  margin: 0 0 8px;
-}
-
-.preview-tray {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  justify-content: center;
-}
-
-.preview-tray.hidden {
-  display: none;
-}
-
-.preview-taskbar {
-  align-items: center;
-  border: 1px solid rgba(128, 128, 128, 0.5);
-  border-radius: 4px;
-  display: flex;
-  gap: 10px;
-  padding: 4px 10px;
-}
-
-.preview-taskbar-light {
-  background: #f3f3f3;
-}
-
-.preview-taskbar-dark {
-  background: #202020;
-}
-
-.preview-zoom,
-.preview-actual {
-  image-rendering: pixelated;
-}
-
 .display-mode label {
   margin-right: 24px;
 }
@@ -562,19 +508,39 @@ body > div:not(.navigation):not(.custom-message) {
   min-width: 260px;
 }
 
-.theme > .preview-section {
-  background: var(--main-bg-color);
-  margin-bottom: 14px;
-  padding-bottom: 8px;
-  position: sticky;
-  top: 56px;
-  z-index: 5;
-}
-
 .shortcut {
   grid-template-columns: 1fr auto;
 }
 
 .shortcut > input {
   margin: 0;
+}
+
+.preview-bar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-bottom: 18px;
+}
+
+.preview-bar > span {
+  color: var(--muted, #5d5d5d);
+}
+
+.countdown-color {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.countdown-color input[type="color"] {
+  height: 26px;
+  padding: 0;
+  width: 44px;
+}
+
+.countdown-color input[type="color"]:disabled {
+  opacity: 0.4;
 }

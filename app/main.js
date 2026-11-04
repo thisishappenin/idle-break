@@ -28,6 +28,7 @@ import TrayNumberIcons from './utils/trayNumberIcons.js'
 import TrayPanel from './utils/trayPanel.js'
 import { buildTrayPanelState } from './utils/trayPanelState.js'
 import { breakWindowSize } from './utils/breakWindowSize.js'
+import { countdownColor } from './utils/countdownColor.js'
 import { UntilMorning } from './utils/untilMorning.js'
 import AutostartManager from './utils/autostartManager.js'
 import Command from './utils/commands.js'
@@ -704,7 +705,8 @@ function drawnTrayNumberPath (number, useDarkColors) {
     font,
     dark: useDarkColors,
     crisp: settings.get('trayIconCrispDigits'),
-    heightRatio: settings.get('trayIconFontSize')
+    heightRatio: settings.get('trayIconFontSize'),
+    color: countdownColor(settings)
   })
 }
 
@@ -963,7 +965,7 @@ function placeBreakWindow (win, displayId) {
   win.setPosition(x, y)
 }
 
-const BREAK_PREVIEW_KEYS = ['mainColor', 'miniBreakColor', 'transparentMode', 'opacity', 'breakWindowWidth', 'breakWindowHeight', 'breakWindowPosition', 'showBreaksAsRegularWindows', 'fullscreen', 'blurredBackground']
+const BREAK_PREVIEW_KEYS = ['mainColor', 'miniBreakColor', 'transparentMode', 'opacity', 'breakWindowWidth', 'breakWindowHeight', 'breakWindowPosition', 'showBreaksAsRegularWindows', 'fullscreen', 'blurredBackground', 'countdownColorCustom', 'countdownColor']
 const BREAK_PREVIEW_RESIZE_KEYS = ['breakWindowWidth', 'breakWindowHeight', 'breakWindowPosition']
 const BREAK_PREVIEW_DURATION = 4000
 const BREAK_PREVIEW_SECONDS_ELAPSED = 13
@@ -1030,7 +1032,7 @@ function createBreakPreview () {
 
   ipcMain.handle('send-mini-break-data', () => [
     idea, Date.now() - BREAK_PREVIEW_SECONDS_ELAPSED * 1000, 5 * 60 * 1000, false,
-    true, 100, color, 0, false, true
+    true, 100, color, 0, false, true, countdownColor(settings)
   ])
   breakPreviewHandlerAdded = true
 
@@ -1139,7 +1141,7 @@ function startMicrobreak () {
     }
     return [idea, startTime, breakDuration, strictMode,
       postponable, postponableDurationPercent,
-      calculateBackgroundColor(settings.get('miniBreakColor')), danger, settings.get('breakHealthMode'), settings.get('alwaysShowSkip')]
+      calculateBackgroundColor(settings.get('miniBreakColor')), danger, settings.get('breakHealthMode'), settings.get('alwaysShowSkip'), countdownColor(settings)]
   })
 
   const contentDisplayId = displayManager.getContentDisplayId()
@@ -1310,7 +1312,7 @@ function startBreak () {
     }
     return [idea, startTime, breakDuration, strictMode,
       postponable, postponableDurationPercent,
-      calculateBackgroundColor(settings.get('mainColor')), danger, settings.get('breakHealthMode'), settings.get('alwaysShowSkip')]
+      calculateBackgroundColor(settings.get('mainColor')), danger, settings.get('breakHealthMode'), settings.get('alwaysShowSkip'), countdownColor(settings)]
   })
 
   const contentDisplayId = displayManager.getContentDisplayId()
@@ -1718,7 +1720,8 @@ function trayPanelState () {
     pauseIndefinitely: settings.get('pauseIndefinitelyOption'),
     idleEnabled: settings.get('naturalBreaks'),
     contributor: Boolean(global.isContributor),
-    themeColor: settings.get('trayPanelThemeColor') ? settings.get('mainColor') : null
+    themeColor: settings.get('trayPanelThemeColor') ? settings.get('mainColor') : null,
+    countdownColor: countdownColor(settings)
   })
 }
 

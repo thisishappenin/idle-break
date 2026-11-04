@@ -48,6 +48,11 @@ function applyTheme () {
     root.style.removeProperty('--theme-bg')
     root.style.removeProperty('--theme-ink')
   }
+  if (state.countdownColor) {
+    root.style.setProperty('--countdown-color', state.countdownColor)
+  } else {
+    root.style.removeProperty('--countdown-color')
+  }
 }
 
 function render () {

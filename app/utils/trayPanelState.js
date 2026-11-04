@@ -19,7 +19,8 @@ export function buildTrayPanelState ({
   idleEnabled,
   contributor,
   meeting,
-  themeColor
+  themeColor,
+  countdownColor
 }) {
   const start = []
   if (!locked && canAct && hasMicrobreak) {
@@ -34,6 +35,7 @@ export function buildTrayPanelState ({
     locked,
     newVersion: !locked && newVersion,
     themeColor: themeColor || null,
+    countdownColor: countdownColor || null,
     meeting: !locked && meeting ? { apps: meeting.apps, waiting: Boolean(meeting.waiting) } : null,
     status: statusLines,
     countdown: {

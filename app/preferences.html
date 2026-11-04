@@ -389,27 +389,10 @@
     </div>
   </div>
   <div class="theme hidden">
-    <section class="pref-section preview-section">
-          <div class="theme-label">
-            <span data-i18next="preferences.theme.preview"></span>
-          </div>
-          <div class="theme-preview">
-            <div class="preview-popup">
-              <p data-i18next="preferences.theme.previewPopupHint"></p>
-              <button type="button" id="previewPopup" data-i18next="preferences.theme.previewPopup"></button>
-            </div>
-            <div class="preview-tray" id="previewTray">
-              <div class="preview-taskbar preview-taskbar-light">
-                <canvas class="preview-actual"></canvas>
-                <canvas class="preview-zoom"></canvas>
-              </div>
-              <div class="preview-taskbar preview-taskbar-dark">
-                <canvas class="preview-actual"></canvas>
-                <canvas class="preview-zoom"></canvas>
-              </div>
-            </div>
-          </div>
-    </section>
+    <div class="preview-bar">
+      <button type="button" id="previewPopup" data-i18next="preferences.theme.previewPopup"></button>
+      <span data-i18next="preferences.theme.previewPopupHint"></span>
+    </div>
     <div class="pref-columns">
       <section class="pref-section">
             <div class="theme-label">
@@ -456,6 +439,11 @@
               <label data-i18next="preferences.theme.opacity" for="opacity"></label>
               <input type="range" min="30" max="100" step="5" name="opacity" data-divisor="0.01" id="opacity">
               <output data-unit="percent"></output>
+            </div>
+            <div class="countdown-color">
+              <input type="checkbox" value="countdownColorCustom" id="countdownColorCustom">
+              <label data-i18next="preferences.theme.countdownColorCustom" for="countdownColorCustom"></label>
+              <input type="color" id="countdownColor" aria-label="Countdown colour">
             </div>
       </section>
       <section class="pref-section">

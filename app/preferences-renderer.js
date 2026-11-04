@@ -4,8 +4,6 @@ import acceleratorFromEvent from './utils/acceleratorFromEvent.js'
 import { isLightColor } from './utils/colorContrast.js'
 import { parsePauseDurations, formatPauseDurations } from './utils/pauseDurations.js'
 import HtmlTranslate from './utils/htmlTranslate.js'
-import { trayPreviewSize } from './utils/themePreview.js'
-import { drawTrayNumber } from './utils/trayNumberDrawer.js'
 
 import './platform.js'
 
@@ -13,38 +11,6 @@ const versionChecker = new VersionChecker()
 let eventsAttached = false
 let themePreviewAttached = false
 const liveSliders = ['breakWindowWidth', 'breakWindowHeight', 'opacity']
-let trayPreviewRequest = 0
-
-async function updateTrayPreview () {
-  const request = ++trayPreviewRequest
-  const tray = document.querySelector('#previewTray')
-  const font = document.querySelector('#trayIconFont').value
-  const visible = document.querySelector('#trayIconStyle').value === 'text' && font !== ''
-  tray.classList.toggle('hidden', !visible)
-  if (!visible) return
-  const ratio = window.devicePixelRatio
-  const size = trayPreviewSize(ratio)
-  const crisp = document.querySelector('#trayIconCrispDigits').checked
-  const heightRatio = document.querySelector('#trayIconFontSize').value / 100
-  for (const [selector, color] of [['.preview-taskbar-light', [0, 0, 0]], ['.preview-taskbar-dark', [255, 255, 255]]]) {
-    try {
-      const [{ rgba }] = await drawTrayNumber({ text: '15', fontFamily: font, color, crisp, heightRatio, sizes: [size] })
-      if (request !== trayPreviewRequest) return
-      const image = new window.ImageData(rgba, size, size)
-      const [actual, zoom] = document.querySelectorAll(`${selector} canvas`)
-      for (const [canvas, cssSize] of [[actual, size / ratio], [zoom, 64]]) {
-        canvas.width = size
-        canvas.height = size
-        canvas.style.width = `${cssSize}px`
-        canvas.style.height = `${cssSize}px`
-        canvas.getContext('2d').putImageData(image, 0, 0)
-      }
-    } catch (exception) {
-      console.error(exception)
-      tray.classList.add('hidden')
-    }
-  }
-}
 
 function updateTrayOptionVisibility () {
   const numberOnly = document.querySelector('#trayIconStyle').value === 'text' &&
@@ -52,9 +18,13 @@ function updateTrayOptionVisibility () {
   document.querySelectorAll('.tray-number-only').forEach(row => row.classList.toggle('hidden', !numberOnly))
 }
 
+function updateCountdownColorControl () {
+  document.querySelector('#countdownColor').disabled = !document.querySelector('#countdownColorCustom').checked
+}
+
 function updateThemePreview () {
   updateTrayOptionVisibility()
-  updateTrayPreview()
+  updateCountdownColorControl()
 }
 
 window.onload = async (e) => {
@@ -363,6 +333,11 @@ window.onload = async (e) => {
     }
   })
 
+  const countdownPicker = document.querySelector('#countdownColor')
+  countdownPicker.value = settings.countdownColor
+  if (!eventsAttached) {
+    countdownPicker.onchange = (event) => window.settings.saveSettings('countdownColor', event.target.value)
+  }
   updateThemePreview()
   if (!themePreviewAttached) {
     themePreviewAttached = true

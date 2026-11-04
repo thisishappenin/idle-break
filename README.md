@@ -31,6 +31,24 @@ What is different here (every change is listed in the [changelog](CHANGELOG.md#u
 **Preferences**
 - Reorganised into labelled sections in two columns at a wider default size, with postpone, shortcut, sound and theme options all in one place
 
+### Screenshots
+
+The tray panel opens when you left-click the tray icon, in the default look, themed with a custom countdown and the in-a-meeting banner, and while paused:
+
+![The tray panel in three looks](docs/images/tray-panel.png)
+
+Compact break popups follow your chosen colour and stay readable at small sizes:
+
+![Compact break popups in dark, teal and white](docs/images/popups.png)
+
+Preferences lay out in two columns, grouped into labelled sections:
+
+![Preferences, Theme tab](docs/images/preferences-theme.png)
+
+![Preferences, Settings tab](docs/images/preferences-settings.png)
+
+*These images are rendered from the app's own interface pages with sample data, so fonts and sizes can look slightly different on Windows.*
+
 Try it without installing anything: on the **Actions** tab, run **Test build of packages** and tick **Build normal packages**, then download the Windows artifact. These builds are unsigned, so Windows SmartScreen will warn you. The fork is tested mainly on Windows 11; macOS and Linux builds are produced but less tested, and some features are Windows-only.
 
 Much of this fork was written with the help of an AI assistant (Claude) and checked with tests and by running the app; the commit history shows which commits.

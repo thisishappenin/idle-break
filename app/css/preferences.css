@@ -91,6 +91,60 @@ body > div > :last-child {
   width: 100%;
 }
 
+.slider-row > .list-edit {
+  box-sizing: border-box;
+  grid-column: 1 / -1;
+  margin: 0;
+  overflow: hidden;
+  text-align: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.list-dialog {
+  background: var(--main-bg-color);
+  border: 1px solid var(--control-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+  color: var(--main-color);
+  max-width: 420px;
+  padding: 16px;
+  width: calc(100% - 48px);
+}
+
+.list-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.list-dialog > p {
+  margin: 0 0 10px;
+}
+
+.list-dialog textarea {
+  background: var(--control-bg);
+  border: 1px solid var(--control-border);
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: var(--main-color);
+  font: inherit;
+  padding: 6px 8px;
+  resize: vertical;
+  width: 100%;
+}
+
+.list-dialog textarea:focus-visible {
+  outline: 2px solid var(--accent);
+}
+
+.list-dialog-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
 .shortcut-input {
   cursor: pointer;
   text-align: center;

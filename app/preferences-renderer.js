@@ -4,12 +4,22 @@ import acceleratorFromEvent from './utils/acceleratorFromEvent.js'
 import { isLightColor } from './utils/colorContrast.js'
 import { parsePauseDurations, formatPauseDurations } from './utils/pauseDurations.js'
 import HtmlTranslate from './utils/htmlTranslate.js'
+import { parseEntryList, formatEntryList } from './utils/entryList.js'
 
 import './platform.js'
 
 const versionChecker = new VersionChecker()
 let eventsAttached = false
 let themePreviewAttached = false
+let pauseWhileUsingEntries = []
+
+async function showPauseWhileUsingSummary () {
+  const button = document.querySelector('#pauseWhileUsingEdit')
+  button.textContent = pauseWhileUsingEntries.length
+    ? pauseWhileUsingEntries.join(', ')
+    : await window.i18next.t('preferences.settings.pauseWhileUsingAdd')
+  button.title = pauseWhileUsingEntries.join('\n')
+}
 const liveSliders = ['breakWindowWidth', 'breakWindowHeight', 'opacity']
 
 function updateTrayOptionVisibility () {
@@ -122,6 +132,7 @@ window.onload = async (e) => {
 
   window.stretchly.onTranslate(async () => {
     new HtmlTranslate(document).translate()
+    showPauseWhileUsingSummary()
     document.querySelector('#breakWindowPosition').value = (await window.settings.currentSettings()).breakWindowPosition
     document.querySelectorAll('input[type="range"]').forEach(async range => {
       const settings = await window.settings.currentSettings()
@@ -282,13 +293,30 @@ window.onload = async (e) => {
     }
   }
 
-  const pauseWhileUsing = document.querySelector('#pauseWhileUsing')
-  pauseWhileUsing.value = (settings.pauseWhileUsing ?? []).join(', ')
+  pauseWhileUsingEntries = settings.pauseWhileUsing ?? []
+  await showPauseWhileUsingSummary()
   if (!eventsAttached) {
-    pauseWhileUsing.onchange = () => {
-      const entries = pauseWhileUsing.value.split(',').map(entry => entry.trim()).filter(Boolean)
-      pauseWhileUsing.value = entries.join(', ')
-      window.settings.saveSettings('pauseWhileUsing', entries)
+    const dialog = document.querySelector('#pauseWhileUsingDialog')
+    const list = document.querySelector('#pauseWhileUsingList')
+    const save = async () => {
+      pauseWhileUsingEntries = parseEntryList(list.value)
+      window.settings.saveSettings('pauseWhileUsing', pauseWhileUsingEntries)
+      await showPauseWhileUsingSummary()
+      dialog.close()
+    }
+    document.querySelector('#pauseWhileUsingEdit').onclick = () => {
+      list.value = formatEntryList(pauseWhileUsingEntries)
+      dialog.showModal()
+      list.focus()
+      list.setSelectionRange(list.value.length, list.value.length)
+    }
+    document.querySelector('#pauseWhileUsingSave').onclick = save
+    document.querySelector('#pauseWhileUsingCancel').onclick = () => dialog.close()
+    list.onkeydown = (event) => {
+      if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+        event.preventDefault()
+        save()
+      }
     }
   }
 

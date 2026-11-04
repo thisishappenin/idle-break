@@ -189,8 +189,8 @@
               <input type="text" id="monitorMeetingsIgnoreApps">
             </div>
             <div class="slider-row">
-              <label data-i18next="preferences.settings.pauseWhileUsing" for="pauseWhileUsing"></label>
-              <input type="text" id="pauseWhileUsing">
+              <label data-i18next="preferences.settings.pauseWhileUsing" for="pauseWhileUsingEdit"></label>
+              <button type="button" class="list-edit" id="pauseWhileUsingEdit"></button>
             </div>
             <div>
               <input type="checkbox" class="negative" value="monitorDnd" id="monitorDnd">
@@ -774,6 +774,14 @@
     </div>
     <div></div>
   </div>
+  <dialog class="list-dialog" id="pauseWhileUsingDialog">
+    <p data-i18next="preferences.settings.pauseWhileUsingHelp"></p>
+    <textarea id="pauseWhileUsingList" rows="8" spellcheck="false" placeholder="Youtube&#10;reddit"></textarea>
+    <div class="list-dialog-buttons">
+      <button type="button" id="pauseWhileUsingCancel" data-i18next="preferences.settings.listCancel"></button>
+      <button type="button" id="pauseWhileUsingSave" data-i18next="preferences.settings.listSave"></button>
+    </div>
+  </dialog>
 </body>
 <script type="module" src="./preferences-renderer.js"></script>
 

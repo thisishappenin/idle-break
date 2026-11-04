@@ -4,13 +4,13 @@
 
 > **The break time reminder app**
 
-*Stretchly* is a cross-platform [Electron](https://www.electronjs.org/) app that reminds you to take breaks when working on your computer.
+*Stretchly* is a Windows [Electron](https://www.electronjs.org/) app that reminds you to take breaks when working on your computer.
 
-## About this version
+## About this app
 
-> **My own version of [Stretchly](https://github.com/hovancik/stretchly), built mainly for Windows.** It started from Jan Hovancik's open source app (BSD-2-Clause, see [License](#license)) and is now developed here on its own. It is not affiliated with the original project. If you want the official app, installers or support, use [hovancik/stretchly](https://github.com/hovancik/stretchly). You are welcome to use this version too.
+> **A separate, Windows-only app that started from [Stretchly](https://github.com/hovancik/stretchly) by Jan Hovancik** (BSD-2-Clause, see [License](#license)). It is now developed here on its own, runs on Windows only, and is not affiliated with the original project. For macOS, Linux, or the original app, installers and support, use [hovancik/stretchly](https://github.com/hovancik/stretchly). You are welcome to use this app too.
 
-What is different from the original (every change is listed in the [changelog](CHANGELOG.md#unreleased)):
+What is different from the original Stretchly (every change is listed in the [changelog](CHANGELOG.md#unreleased)):
 
 **A tray panel and a better tray icon**
 - Left-click the tray icon for a small panel that stays open: the countdown, buttons to shorten or extend the next work session in 5 minute steps, start or pause breaks, the idle switch, Preferences and Quit. Right-click keeps the usual menu
@@ -49,10 +49,10 @@ Preferences lay out in two columns, grouped into labelled sections:
 
 Windows only: download it from the [Releases](https://github.com/thisishappenin/stretchly/releases) page. Builds are unsigned, so Windows SmartScreen will warn you. There are no macOS or Linux builds.
 
-Much of this version was written with the help of an AI assistant (Claude) and checked with tests and by running the app; the commit history shows which commits.
+Much of this app was written with the help of an AI assistant (Claude) and checked with tests and by running the app; the commit history shows which commits.
 
 ## Table of contents
-- [About this version](#about-this-version)
+- [About this app](#about-this-app)
 - [Install](#install--)
 - [Default behavior](#default-behavior)
 - [Preferences](#preferences)
@@ -67,7 +67,7 @@ Much of this version was written with the help of an AI assistant (Claude) and c
 
 ## Install [![GitHub All Releases](https://img.shields.io/github/downloads/thisishappenin/stretchly/total)](https://github.com/thisishappenin/stretchly/releases)
 
-**This version supports Windows only** (tested on Windows 11). There are no macOS or Linux builds, because I can't test or maintain them. The source still contains code for those systems, inherited from the original Stretchly, but it is unsupported here. For macOS or Linux use the [original Stretchly](https://github.com/hovancik/stretchly).
+**This app supports Windows only** (tested on Windows 11). There are no macOS or Linux builds, because I can't test or maintain them. Some code inherited from the original may still mention other systems, but it is unsupported here.
 
 Download the installer or the portable version from the [Releases](https://github.com/thisishappenin/stretchly/releases) page. Builds are unsigned, so Windows SmartScreen will warn you.
 

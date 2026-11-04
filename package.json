@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thisishappenin/stretchly.git"
+    "url": "git+https://github.com/thisishappenin/idle-break.git"
   },
   "keywords": [
     "Idle Break",
@@ -33,9 +33,9 @@
   "author": "Jan Hovancik <jan@hovancik.net>",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/thisishappenin/stretchly/issues"
+    "url": "https://github.com/thisishappenin/idle-break/issues"
   },
-  "homepage": "https://github.com/thisishappenin/stretchly",
+  "homepage": "https://github.com/thisishappenin/idle-break",
   "build": {
     "appId": "io.github.thisishappenin.idlebreak",
     "productName": "Idle Break",

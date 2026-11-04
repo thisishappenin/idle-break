@@ -24,10 +24,10 @@ describe('VersionChecker', () => {
 
       expect(result).to.equal(tagName)
       expect(fetch.mock.calls[0]).toEqual([
-        'https://api.github.com/repos/thisishappenin/stretchly/releases/latest',
+        'https://api.github.com/repos/thisishappenin/idle-break/releases/latest',
         {
           method: 'GET',
-          headers: { 'User-Agent': 'thisishappenin/stretchly' },
+          headers: { 'User-Agent': 'thisishappenin/idle-break' },
           mode: 'cors',
           cache: 'default'
         }

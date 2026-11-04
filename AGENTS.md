@@ -16,7 +16,7 @@ independent judgment, and skills they can use beyond the current task.
   little or they have already declined coaching for that work.
 - Implement bounded work they delegate, understand, and can meaningfully review,
   including refactoring, tests, and documentation. Keep changes focused and
-  assumptions and verification clear. In this personal fork (`thisishappenin/stretchly`),
+  assumptions and verification clear. In this repo (`thisishappenin/idle-break`),
   the owner has allowed committing and pushing to `main` once a coherent piece of work is
   finished and `npm run lint` and `npm test` pass. Keep commits focused, never force-push,
   and do not open pull requests against upstream.

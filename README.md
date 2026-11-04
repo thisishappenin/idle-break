@@ -47,7 +47,7 @@ Preferences lay out in two columns, grouped into labelled sections:
 
 *These images are rendered from the app's own interface pages with sample data, so fonts and sizes can look slightly different on Windows.*
 
-Windows only: download it from the [Releases](https://github.com/thisishappenin/stretchly/releases) page. Builds are unsigned, so Windows SmartScreen will warn you. There are no macOS or Linux builds.
+Windows only: download it from the [Releases](https://github.com/thisishappenin/idle-break/releases) page. Builds are unsigned, so Windows SmartScreen will warn you. There are no macOS or Linux builds.
 
 Much of this app was written with the help of an AI assistant (Claude) and checked with tests and by running the app; the commit history shows which commits.
 
@@ -65,11 +65,11 @@ Much of this app was written with the help of an AI assistant (Claude) and check
 - [Humans and Tools](#humans-and-tools)
 - [License](#license)
 
-## Install [![GitHub All Releases](https://img.shields.io/github/downloads/thisishappenin/stretchly/total)](https://github.com/thisishappenin/stretchly/releases)
+## Install [![GitHub All Releases](https://img.shields.io/github/downloads/thisishappenin/idle-break/total)](https://github.com/thisishappenin/idle-break/releases)
 
 **This app supports Windows only** (tested on Windows 11). There are no macOS or Linux builds, because I can't test or maintain them. Some code inherited from the original may still mention other systems, but it is unsupported here.
 
-Download the installer or the portable version from the [Releases](https://github.com/thisishappenin/stretchly/releases) page. Builds are unsigned, so Windows SmartScreen will warn you.
+Download the installer or the portable version from the [Releases](https://github.com/thisishappenin/idle-break/releases) page. Builds are unsigned, so Windows SmartScreen will warn you.
 
 > **Note:** Chocolatey, winget and the Microsoft Store install the *original* Stretchly, not this app.
 
@@ -543,7 +543,7 @@ You won't be able to chat on Discord.*
 
 For setup and usage, see the [original Stretchly tutorial](https://hovancik.net/stretchly/about), [Preferences](#preferences), and [Advanced Preferences](#advanced-preferences).
 
-Check [Known issues](#known-issues) and [existing issues](https://github.com/thisishappenin/stretchly/issues?q=is%3Aissue) before opening a [bug report](https://github.com/thisishappenin/stretchly/issues/new?template=bug_report.yml) or [feature request](https://github.com/thisishappenin/stretchly/issues/new?template=feature_request.yml). Please complete the relevant template.
+Check [Known issues](#known-issues) and [existing issues](https://github.com/thisishappenin/idle-break/issues?q=is%3Aissue) before opening a [bug report](https://github.com/thisishappenin/idle-break/issues/new?template=bug_report.yml) or [feature request](https://github.com/thisishappenin/idle-break/issues/new?template=feature_request.yml). Please complete the relevant template.
 
 For development discussions and contributions, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -558,7 +558,7 @@ Issues and Pull Requests are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
 - [git](https://git-scm.com/)
 - [Github account](https://github.com/), if you'd like to upstream your changes
 
-Now you can clone the repo with `git clone https://github.com/thisishappenin/stretchly.git`. Change to the new created directory and run `npm i` to install node packages needed. If your system is running Python 3.12 and newer, you also need to install `setuptools`, for example with `pip install setuptools`, as `distutils` have been [deprecated](https://docs.python.org/3/library/distutils.html).
+Now you can clone the repo with `git clone https://github.com/thisishappenin/idle-break.git`. Change to the new created directory and run `npm i` to install node packages needed. If your system is running Python 3.12 and newer, you also need to install `setuptools`, for example with `pip install setuptools`, as `distutils` have been [deprecated](https://docs.python.org/3/library/distutils.html).
 
 Alternatively, open the repo in the included [Dev Container](https://containers.dev/) (`.devcontainer`). It is a minimal, hardened environment (non-root user, all Linux capabilities dropped, no forwarded ports) for editing code and running tests, which makes it a good fit for LLM coding agents. It is not meant for running the Idle Break GUI.
 

@@ -1,6 +1,6 @@
 <!--
 
-Have you read Code of Conduct? By filing an Pull Request, you are expected to comply with it, including treating everyone with respect: https://github.com/thisishappenin/stretchly/blob/master/CODE_OF_CONDUCT.md
+Have you read Code of Conduct? By filing an Pull Request, you are expected to comply with it, including treating everyone with respect: https://github.com/thisishappenin/idle-break/blob/master/CODE_OF_CONDUCT.md
 
 -->
 

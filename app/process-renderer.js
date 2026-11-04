@@ -71,6 +71,6 @@ window.onload = async (e) => {
       silent,
       icon: '../build/icon.ico'
     })
-    notification.onclick = () => window.electronApi.openExternal('https://github.com/thisishappenin/stretchly/releases')
+    notification.onclick = () => window.electronApi.openExternal('https://github.com/thisishappenin/idle-break/releases')
   }
 }

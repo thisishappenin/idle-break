@@ -1,6 +1,6 @@
 # Contributing to *Idle Break*
 
-Have you read Code of Conduct? When contributing, you are expected to comply with it, including treating everyone with respect: https://github.com/thisishappenin/stretchly/blob/master/CODE_OF_CONDUCT.md
+Have you read Code of Conduct? When contributing, you are expected to comply with it, including treating everyone with respect: https://github.com/thisishappenin/idle-break/blob/main/CODE_OF_CONDUCT.md
 
 ## Pull Requests
 PRs are welcome, but before implementing a feature, please, **open an Issue first, so we can be sure that no one else is working on it and that the changes will be accepted. It is important do discuss changes before implementing them (Why should we add it? How should it work? How should it look? Where will it be? ...).** Failing to do so might get your PR closed.
@@ -10,12 +10,12 @@ Once you are sure that the maintainer of *Idle Break* will accept your proposed 
 Other things to keep in mind:
 - use `node` version from `package.json`
 - write tests if possible
-- add yourself to [README](https://github.com/thisishappenin/stretchly#contributors)
-- add your changes to [CHANGELOG](https://github.com/thisishappenin/stretchly/blob/master/CHANGELOG.md)
-- tick a checkbox when adding something from [TODOs](https://github.com/thisishappenin/stretchly#todos-and-ideas)
+- add yourself to [README](https://github.com/thisishappenin/idle-break#contributors)
+- add your changes to [CHANGELOG](https://github.com/thisishappenin/idle-break/blob/main/CHANGELOG.md)
+- tick a checkbox when adding something from [TODOs](https://github.com/thisishappenin/idle-break#todos-and-ideas)
 - do not edit version number
 - keep the [code style](http://standardjs.com/)
-- edit screenshots in [README](https://github.com/thisishappenin/stretchly/blob/master/README.md) if needed
+- edit screenshots in [README](https://github.com/thisishappenin/idle-break/blob/main/README.md) if needed
 - be nice and have fun ;]
 
 When you are ready with your code, make sure to follow steps in PULL_REQUEST_TEMPLATE.

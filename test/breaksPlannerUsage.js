@@ -5,7 +5,6 @@ import BreaksPlanner from '../app/breaksPlanner.js'
 vi.mock('electron', () => ({ powerMonitor: { getSystemIdleTime: () => 0 }, app: { getPath: () => '' } }))
 vi.mock('node-desktop-idle-v2', () => ({ desktopIdle: { startMonitoring: () => {}, stopMonitoring: () => {}, getIdleTime: () => 0 } }))
 vi.mock('windows-focus-assist', () => ({ getFocusAssist: () => ({ value: 0 }) }))
-vi.mock('@particle/dbus-next', () => ({ default: { sessionBus: () => ({ on: () => {}, disconnect: () => {} }) } }))
 vi.mock('../app/utils/appExclusionsManager.js', () => ({
   default: class { on () {} stop () {} reset () {} reinitialize () {} }
 }))

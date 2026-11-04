@@ -8,7 +8,35 @@
 
 [![Become a Sponsor!](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=success)](https://github.com/sponsors/hovancik) [![Become a Patron!](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=Patreon&color=success)](https://www.patreon.com/hovancik)
 
+## This fork
+
+> **An unofficial fork of [Stretchly](https://github.com/hovancik/stretchly) with extra features, mainly for Windows.** It is not affiliated with the Stretchly project, and these changes have not been submitted upstream. For the official app, installers and support, use [hovancik/stretchly](https://github.com/hovancik/stretchly).
+
+What is different here (every change is listed in the [changelog](CHANGELOG.md#unreleased)):
+
+**A tray panel and a better tray icon**
+- Left-click the tray icon for a small panel that stays open: the countdown, buttons to shorten or extend the next work session in 5 minute steps, start or pause breaks, the idle switch, Preferences and Quit. Right-click keeps the usual menu
+- A number-only tray icon drawn sharply at your display scale (Windows), with your own font, size and colour, and an indicator when you are in a meeting
+
+**Breaks and popups**
+- Compact, themed break popups with a large countdown, which stay readable on small monitors, plus break windows you can place in a corner of the screen
+- Break reminders as themed popups, a live preview of the popup while you change colour, size or position, and an optional custom countdown colour
+- A "just breaks" mode with a single break type
+
+**Timing that copes with real work**
+- Breaks wait for your calls to end (Windows, detects microphone use), and sitting through a meeting is not counted as time away
+- After a break, the countdown waits at full length until you are back at the computer; locking the screen and idle time no longer leave it stuck or reset it by surprise
+- An optional undo popup when idle time resets the timer
+
+**Preferences**
+- Reorganised into labelled sections in two columns at a wider default size, with postpone, shortcut, sound and theme options all in one place
+
+Try it without installing anything: on the **Actions** tab, run **Test build of packages** and tick **Build normal packages**, then download the Windows artifact. These builds are unsigned, so Windows SmartScreen will warn you. The fork is tested mainly on Windows 11; macOS and Linux builds are produced but less tested, and some features are Windows-only.
+
+Much of this fork was written with the help of an AI assistant (Claude) and checked with tests and by running the app; the commit history shows which commits.
+
 ## Table of contents
+- [This fork](#this-fork)
 - [Install](#install--)
 - [Default behavior](#default-behavior)
 - [Preferences](#preferences)

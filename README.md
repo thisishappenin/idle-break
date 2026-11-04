@@ -398,7 +398,7 @@ This option has no effect when `allScreens` is `false` or when `showBreaksAsRegu
 
 In the Settings tab, under "Calls and Do Not Disturb", list the apps or websites that should pause the break countdown while you are using them, separated by commas, for example `Gmail, vlc, netflix`. Idle Break checks which window is in front (Windows only) and compares each entry, ignoring upper and lower case, with the app's process name (`chrome`, `vlc`) and with the window title. Browsers show the page title in the window title, so a website name such as `youtube` or `netflix` matches while that tab is in front. Idle Break cannot see the address itself, only the title, and it does not save or send titles anywhere.
 
-The countdown pauses while a match is in front and starts again when you switch away. The tray tooltip and panel say that breaks are paused for an app exclusion. This list is saved as `pauseWhileUsing` in the preferences file. It works together with a `pause` rule in `appExclusions` (below) but is ignored if the active rule there is a `resume` rule.
+The countdown to the next break pauses while a match is in front and starts again when you switch away. A break that is already running keeps counting down and finishes normally, and the pause starts afterwards if the app is still in front. The tray tooltip and panel say that breaks are paused for an app exclusion. This list is saved as `pauseWhileUsing` in the preferences file. It works together with a `pause` rule in `appExclusions` (below) but is ignored if the active rule there is a `resume` rule.
 
 #### Pause/resume breaks based on running programs
 

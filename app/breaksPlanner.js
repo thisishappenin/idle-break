@@ -119,9 +119,12 @@ class BreaksPlanner extends EventEmitter {
       }
     })
 
-    this.appExclusionsManager.on('appExclusionStarted', (rule, exclusion) => {
+    this.appExclusionsManager.on('appExclusionStarted', (rule, exclusion, { foreground = false } = {}) => {
       if (rule === 'pause') {
-        if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak' && this.scheduler.reference !== null) {
+        const inBreak = this.scheduler.reference === 'finishMicrobreak' || this.scheduler.reference === 'finishBreak'
+        if (foreground && inBreak) {
+          this.appExclusionsManager.isOnAppExclusion = false
+        } else if (!this.isPaused && this.scheduler.reference !== 'finishMicrobreak' && this.scheduler.reference !== 'finishBreak' && this.scheduler.reference !== null) {
           this.clear()
           log.info(`Stretchly: pausing breaks as 'pause' exclusion found running: '${exclusion}'`)
           this.emit('updateToolTip')

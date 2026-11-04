@@ -17,6 +17,7 @@ class AppExclusionsManager extends EventEmitter {
     super()
     this.timer = null
     this.foreground = null
+    this.matchedForeground = false
     this.stopForeground = null
     this.appExclusion = effectiveRule(settings)
     this.appExclusionsCheckInterval = settings.get('appExclusionsCheckInterval')
@@ -72,9 +73,12 @@ class AppExclusionsManager extends EventEmitter {
   }
 
   async _runningAppExclusion () {
+    this.matchedForeground = false
     const found = await this._runningCommand()
     if (found) return found
-    return matchForeground(this.appExclusion.foreground ?? [], this.foreground)
+    const foreground = matchForeground(this.appExclusion.foreground ?? [], this.foreground)
+    this.matchedForeground = Boolean(foreground)
+    return foreground
   }
 
   async _runningCommand () {
@@ -95,7 +99,7 @@ class AppExclusionsManager extends EventEmitter {
       const appExclusion = await this._runningAppExclusion()
       if (!this.isOnAppExclusion && appExclusion) {
         this.isOnAppExclusion = true
-        this.emit('appExclusionStarted', this.appExclusion.rule, appExclusion)
+        this.emit('appExclusionStarted', this.appExclusion.rule, appExclusion, { foreground: this.matchedForeground })
       }
       if (this.isOnAppExclusion && !appExclusion) {
         this.isOnAppExclusion = false

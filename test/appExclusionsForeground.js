@@ -44,7 +44,7 @@ describe('AppExclusionsManager pause while using', () => {
   it('pauses while a listed app or window title is in front and resumes when it is not', async () => {
     manager = new AppExclusionsManager(settingsWith({ pauseWhileUsing: ['gmail', ' '] }))
     const events = []
-    manager.on('appExclusionStarted', (rule, found) => events.push(['started', rule, found]))
+    manager.on('appExclusionStarted', (rule, found, details) => events.push(['started', rule, found, details]))
     manager.on('appExclusionFinished', rule => events.push(['finished', rule]))
     expect(watchers).to.have.length(1)
     expect(watchers[0].options.interval).to.equal(1000)
@@ -56,7 +56,7 @@ describe('AppExclusionsManager pause while using', () => {
     watchers[0].options.onChange({ process: 'chrome', title: 'Docs' })
     await vi.advanceTimersByTimeAsync(1000)
     expect(manager.isSchedulerCleared).to.equal(false)
-    expect(events).to.deep.equal([['started', 'pause', 'gmail'], ['finished', 'pause']])
+    expect(events).to.deep.equal([['started', 'pause', 'gmail', { foreground: true }], ['finished', 'pause']])
   })
 
   it('stops watching when the list is cleared', () => {
@@ -73,6 +73,16 @@ describe('AppExclusionsManager pause while using', () => {
     expect(manager.isSchedulerCleared).to.equal(true)
     manager.stop()
     expect(watchers[0].stopped).to.equal(true)
+  })
+
+  it('reports a running program as not being in front', async () => {
+    const rule = { rule: 'pause', active: true, commands: ['other.exe'] }
+    manager = new AppExclusionsManager(settingsWith({ appExclusions: [rule], pauseWhileUsing: ['gmail'] }))
+    const details = []
+    manager.on('appExclusionStarted', (_rule, _found, info) => details.push(info))
+    watchers[0].options.onChange({ process: 'chrome', title: 'Inbox - Gmail' })
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(details).to.deep.equal([{ foreground: false }])
   })
 
   it('leaves a resume rule alone, since "only while running" and "pause while using" would conflict', () => {

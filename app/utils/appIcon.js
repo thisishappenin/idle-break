@@ -1,6 +1,5 @@
 class AppIcon {
   constructor ({
-    platform,
     paused,
     monochrome,
     inverted,
@@ -10,7 +9,6 @@ class AppIcon {
     percentage,
     reference
   }) {
-    this.platform = platform
     this.paused = paused
     this.monochrome = monochrome
     this.inverted = inverted
@@ -45,26 +43,13 @@ class AppIcon {
     }
 
     if (this.trayIconStyle === 'text' && suffixString !== '') {
-      const extString = this.platform === 'win32' ? 'ico' : 'png'
-      if (this.platform === 'darwin') return `trayMacText${suffixString}Template.png`
-      return `trayText${darkModeString}${suffixString}.${extString}`
+      return `trayText${darkModeString}${suffixString}.ico`
     }
 
     if (this.monochrome) {
-      if (this.platform === 'darwin') {
-        return `trayMacMonochrome${pausedString}${suffixString}Template.png`
-      } else {
-        const extString = this.platform === 'win32' ? 'ico' : 'png'
-        return `trayMonochrome${invertedMonochromeString}${pausedString}${suffixString}.${extString}`
-      }
-    } else {
-      if (this.platform === 'darwin') {
-        return `trayMac${pausedString}${darkModeString}${suffixString}.png`
-      } else {
-        const extString = this.platform === 'win32' ? 'ico' : 'png'
-        return `tray${pausedString}${darkModeString}${suffixString}.${extString}`
-      }
+      return `trayMonochrome${invertedMonochromeString}${pausedString}${suffixString}.ico`
     }
+    return `tray${pausedString}${darkModeString}${suffixString}.ico`
   }
 
   get windowIconFileName () {

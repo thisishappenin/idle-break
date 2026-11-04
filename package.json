@@ -44,10 +44,6 @@
         "nsis",
         "7z",
         "portable"
-      ],
-      "asarUnpack": [
-        "node_modules/windows-notification-state/**",
-        "node_modules/macos-notification-state/**"
       ]
     },
     "portable": {
@@ -89,8 +85,6 @@
     "vitest": "^5.0.5"
   },
   "dependencies": {
-    "@particle/dbus-next": "^0.11.4",
-    "auto-launch": "^6.0.0-rc1",
     "dompurify": "^3.4.17",
     "electron-log": "^5.4.4",
     "electron-store": "^12.0.0",
@@ -107,8 +101,6 @@
   "allowScripts": {
     "electron-winstaller@5.4.0": true,
     "node-desktop-idle-v2@1.1.26": true,
-    "windows-focus-assist@1.4.0": true,
-    "usocket": true,
-    "fsevents": true
+    "windows-focus-assist@1.4.0": true
   }
 }

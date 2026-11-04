@@ -19,6 +19,13 @@ describe('breakWindowSize', () => {
     expect(breakWindowSize({ displayWidth: 1366, displayHeight: 768, ...request })).to.deep.equal({ width: MIN_BREAK_WINDOW_WIDTH, height: MIN_BREAK_WINDOW_HEIGHT })
   })
 
+  it('sizes the width as if an ultrawide monitor were 16:9, so the popup is not stretched', () => {
+    const request = { widthRatio: 0.2, heightRatio: 0.15 }
+    expect(breakWindowSize({ displayWidth: 2560, displayHeight: 1440, ...request })).to.deep.equal({ width: 512, height: 216 })
+    expect(breakWindowSize({ displayWidth: 3440, displayHeight: 1440, ...request })).to.deep.equal({ width: 512, height: 216 })
+    expect(breakWindowSize({ displayWidth: 5120, displayHeight: 1440, ...request })).to.deep.equal({ width: 512, height: 216 })
+  })
+
   it('never makes the window bigger than the display', () => {
     expect(breakWindowSize({ displayWidth: 320, displayHeight: 100, widthRatio: 0.1, heightRatio: 0.1 }))
       .to.deep.equal({ width: 320, height: 100 })

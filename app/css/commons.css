@@ -153,11 +153,6 @@ body {
     'Noto Sans JP Regular';
 }
 
-.darwin .darwin-hidden,
-.linux .linux-hidden,
-.freebsd .linux-hidden,
-.openbsd .linux-hidden,
-.store .store-hidden,
 .portable .portable-hidden {
   display: none;
 }
@@ -253,10 +248,6 @@ input[type="checkbox"] + label:before {
 
 body[dir=rtl] input[type="checkbox"] + label:before {
   margin: 0 0 0 4px;
-}
-
-.darwin input[type="checkbox"] + label:before {
-  font: 12px sans-serif;
 }
 
 .win32 input[type="checkbox"] + label:before {

@@ -184,10 +184,6 @@ body > div > :last-child {
   font: 13px sans-serif;
 }
 
-.darwin .appearance > input[type="radio"] + label:before {
-  font: 13px sans-serif;
-}
-
 #greenClouds + label:before {
   background: #478484;
   color: #478484;

@@ -4,7 +4,7 @@ import {
   powerMonitor
 } from 'electron'
 import { EventEmitter } from 'node:events'
-import { readFile, readFileSync, writeFile, existsSync, mkdirSync } from 'node:fs'
+import { readFile, writeFile, existsSync, mkdirSync } from 'node:fs'
 import { dirname, join } from 'path'
 import { resolveLocalImage } from './utils/imageResolver.js'
 import { resolveLocalAudio } from './utils/audioResolver.js'
@@ -18,8 +18,7 @@ import { DateTime } from 'luxon'
 
 import {
   canPostpone, canSkip, formatTimeRemaining,
-  minutesRemaining, insideWindowsStore, insideFlatpak, insideSnap, insideWindowsPortable,
-  shouldRelaunchWithX11, shouldSuggestX11OnWayland
+  minutesRemaining, insideWindowsPortable
 } from './utils/utils.js'
 import IdeasLoader from './utils/ideasLoader.js'
 import BreaksPlanner from './breaksPlanner.js'
@@ -126,8 +125,8 @@ if (insideWindowsPortable()) {
 log.initialize({ preload: true })
 
 // Match the appId the installer stamps onto the shortcut so notifications show Stretchly.
-// Skip the Store build (OS-assigned AUMID) and unpackaged dev runs.
-if (process.platform === 'win32' && !insideWindowsStore() && app.isPackaged) {
+// Skip unpackaged dev runs.
+if (process.platform === 'win32' && app.isPackaged) {
   app.setAppUserModelId('net.hovancik.stretchly')
 }
 
@@ -147,27 +146,12 @@ ipcMain.handle('get-global-value', (event, name) => {
 const commandLineArguments = process.argv
   .slice(app.isPackaged ? 1 : 2)
 
-function readForceX11OnWayland () {
-  try {
-    const config = JSON.parse(readFileSync(join(app.getPath('userData'), 'config.json'), 'utf8'))
-    return config.forceX11OnWayland === true
-  } catch {
-    return false
-  }
-}
-
 const gotTheLock = app.requestSingleInstanceLock(commandLineArguments)
 
 if (!gotTheLock) {
   const cmd = new Command(commandLineArguments, app.getVersion(), false)
   cmd.runOrForward()
   app.quit()
-} else if (shouldRelaunchWithX11(readForceX11OnWayland(), commandLineArguments,
-  app.commandLine.getSwitchValue('ozone-platform'))) {
-  log.info('Stretchly: relaunching with X11 backend because forceX11OnWayland is enabled')
-  app.releaseSingleInstanceLock()
-  app.relaunch({ args: process.argv.slice(1).concat(['--ozone-platform=x11']) })
-  app.exit(0)
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory, commandLineArguments) => {
     log.info(`Stretchly: arguments received from second instance: ${commandLineArguments}`)
@@ -283,10 +267,6 @@ app.on('before-quit', (event) => {
     event.preventDefault()
   } else {
     globalShortcut.unregisterAll()
-    // Clean up D-Bus connections
-    if (autostartManager) {
-      autostartManager.disconnect()
-    }
     if (processWin && !processWin.isDestroyed()) {
       processWin.destroy()
       processWin = null
@@ -330,14 +310,6 @@ async function initialize (isAppStart = true) {
             log.info('Stretchly: removing showBreakActionsInStrictMode')
           } else {
             log.info('Stretchly: not migrating showBreakActionsInStrictMode')
-          }
-        },
-        '1.18.2': store => {
-          if (insideFlatpak() || insideWindowsStore() || insideSnap()) {
-            if (!store.get('disableAppUpdateFeatures')) {
-              store.set('disableAppUpdateFeatures', true)
-              log.info('Stretchly: setting disableAppUpdateFeatures to true because we are in Flatpak/Windows Store/Snap build')
-            }
           }
         },
         '1.19.0': store => {
@@ -465,10 +437,7 @@ async function initialize (isAppStart = true) {
     breakPlanner.nextBreak()
   }
 
-  autostartManager = new AutostartManager({
-    app,
-    settings
-  })
+  autostartManager = new AutostartManager({ app })
 
   if (!settings.get('_migratedOpenAtLogin')) {
     // one time migration with 1.20 or after
@@ -501,19 +470,7 @@ async function initialize (isAppStart = true) {
       log.error('Stretchly: error creating audio directory', error)
     }
   }
-  // Initialize portal early for Flatpak so it's ready when user opens preferences
-  if (insideFlatpak()) {
-    autostartManager.flatpakPortalManager.initialize().catch(err => {
-      log.error('Stretchly: Failed to initialize portal manager during startup:', err)
-    })
-  }
-
   displayManager = new DisplayManager(settings)
-
-  if (isAppStart && shouldSuggestX11OnWayland(settings.get('forceX11OnWayland'),
-    app.commandLine.getSwitchValue('ozone-platform'))) {
-    log.info('Stretchly: running on Wayland, where some features may not work: with multiple monitors, all break windows can open on one monitor, and global keyboard shortcuts may not register or work. Set forceX11OnWayland to true in preferences file to use the X11 backend, which shows breaks on all monitors')
-  }
 
   try {
     await startI18next()
@@ -721,7 +678,6 @@ function trayIconPath () {
     monochrome: settings.get('useMonochromeTrayIcon'),
     inverted: useDarkColors,
     darkMode: useDarkColors,
-    platform: process.platform,
     trayIconStyle: settings.get('trayIconStyle'),
     timeToBreak: minutesRemaining(breakPlanner.timeToNextBreak),
     percentage: breakPlanner.progressPercentage,
@@ -938,22 +894,6 @@ function startBreakNotification () {
   updateTray()
 }
 
-function getBlurredBackgroundWindowOptions () {
-  if (!settings.get('blurredBackground')) {
-    return {}
-  }
-
-  switch (process.platform) {
-    case 'darwin':
-      return {
-        vibrancy: 'hud',
-        visualEffectState: 'active'
-      }
-    default:
-      return {}
-  }
-}
-
 function placeBreakWindow (win, displayId) {
   if (win.isDestroyed()) return
   if (!displayManager.usesCornerPosition) {
@@ -965,7 +905,7 @@ function placeBreakWindow (win, displayId) {
   win.setPosition(x, y)
 }
 
-const BREAK_PREVIEW_KEYS = ['mainColor', 'miniBreakColor', 'transparentMode', 'opacity', 'breakWindowWidth', 'breakWindowHeight', 'breakWindowPosition', 'showBreaksAsRegularWindows', 'fullscreen', 'blurredBackground', 'countdownColorCustom', 'countdownColor']
+const BREAK_PREVIEW_KEYS = ['mainColor', 'miniBreakColor', 'transparentMode', 'opacity', 'breakWindowWidth', 'breakWindowHeight', 'breakWindowPosition', 'showBreaksAsRegularWindows', 'fullscreen', 'countdownColorCustom', 'countdownColor']
 const BREAK_PREVIEW_RESIZE_KEYS = ['breakWindowWidth', 'breakWindowHeight', 'breakWindowPosition']
 const BREAK_PREVIEW_DURATION = 4000
 const BREAK_PREVIEW_SECONDS_ELAPSED = 13
@@ -990,7 +930,7 @@ function breakPreviewDisplayId () {
 }
 
 function breakPreviewBounds (displayId) {
-  if (settings.get('fullscreen') && process.platform !== 'darwin') {
+  if (settings.get('fullscreen')) {
     return {
       width: displayManager.getDisplayWidth(displayId),
       height: displayManager.getDisplayHeight(displayId),
@@ -1045,7 +985,6 @@ function createBreakPreview () {
     show: false,
     backgroundThrottling: false,
     transparent: !showBreaksAsRegularWindows,
-    ...getBlurredBackgroundWindowOptions(),
     backgroundColor: !showBreaksAsRegularWindows && displayManager.usesCornerPosition ? '#00000000' : color,
     skipTaskbar: true,
     focusable: false,
@@ -1159,27 +1098,24 @@ function startMicrobreak () {
       show: false,
       backgroundThrottling: false,
       transparent: !showBreaksAsRegularWindows,
-      ...getBlurredBackgroundWindowOptions(),
       backgroundColor: !showBreaksAsRegularWindows && displayManager.usesCornerPosition ? '#00000000' : calculateBackgroundColor(settings.get('miniBreakColor')),
       skipTaskbar: !showBreaksAsRegularWindows,
       focusable: showBreaksAsRegularWindows,
       alwaysOnTop: keepOnTop,
       hasShadow: false,
       title: 'Stretchly',
-      titleBarStyle: process.platform === 'darwin' ? (showBreaksAsRegularWindows ? 'default' : 'hidden') : undefined,
-      titleBarOverlay: process.platform === 'darwin' ? !showBreaksAsRegularWindows : undefined,
       webPreferences: {
         preload: join(__dirname, './microbreak-preload.mjs'),
         sandbox: false
       }
     }
 
-    if (settings.get('fullscreen') && process.platform !== 'darwin') {
+    if (settings.get('fullscreen')) {
       windowOptions.width = displayManager.getDisplayWidth(localDisplayId)
       windowOptions.height = displayManager.getDisplayHeight(localDisplayId)
       windowOptions.x = displayManager.getDisplayX(localDisplayId, 0, true)
       windowOptions.y = displayManager.getDisplayY(localDisplayId, 0, true)
-    } else if (!(settings.get('fullscreen') && process.platform === 'win32')) {
+    } else if (!settings.get('fullscreen')) {
       Object.assign(windowOptions, displayManager.getBreakWindowPosition(localDisplayId, windowOptions))
     }
 
@@ -1202,20 +1138,11 @@ function startMicrobreak () {
       }
 
       log.info(`Stretchly: showing window ${localDisplayId + 1} of ${displayManager.getDisplayCount()}`)
-      if (process.platform === 'darwin') {
-        if (showBreaksAsRegularWindows) {
-          microbreakWinLocal.setFullScreen(settings.get('fullscreen'))
-        } else {
-          microbreakWinLocal.setMinimizable(false)
-          microbreakWinLocal.setClosable(false)
-          microbreakWinLocal.setKiosk(settings.get('fullscreen'))
-        }
-      }
       if (localDisplayId === emitOnId) {
         breakPlanner.emit('microbreakStarted', true)
         log.info('Stretchly: starting Mini break')
       }
-      if (!settings.get('fullscreen') && process.platform !== 'darwin') {
+      if (!settings.get('fullscreen')) {
         setTimeout(() => {
           placeBreakWindow(microbreakWinLocal, localDisplayId)
         }, 0)
@@ -1225,10 +1152,6 @@ function startMicrobreak () {
     ipcMain.on('mini-break-loaded', onMiniBreakLoaded)
 
     microbreakWinLocal.loadURL(isBlank ? modalPath + '?blank=1' : modalPath)
-    // kiosk fullscreen owns its own Space; CanJoinAllSpaces would eject it (menu bar returns)
-    if (!(process.platform === 'darwin' && !showBreaksAsRegularWindows && settings.get('fullscreen'))) {
-      microbreakWinLocal.setVisibleOnAllWorkspaces(true)
-    }
     microbreakWinLocal.setAlwaysOnTop(keepOnTop, 'pop-up-menu')
     if (microbreakWinLocal) {
       microbreakWinLocal.on('close', (e) => {
@@ -1249,11 +1172,6 @@ function startMicrobreak () {
         log.info('Stretchly: not showing on more Monitors as it is disabled.')
       }
       break
-    }
-  }
-  if (process.platform === 'darwin') {
-    if (app.dock.isVisible) {
-      app.dock.hide()
     }
   }
 }
@@ -1330,27 +1248,24 @@ function startBreak () {
       show: false,
       backgroundThrottling: false,
       transparent: !showBreaksAsRegularWindows,
-      ...getBlurredBackgroundWindowOptions(),
       backgroundColor: !showBreaksAsRegularWindows && displayManager.usesCornerPosition ? '#00000000' : calculateBackgroundColor(settings.get('mainColor')),
       skipTaskbar: !showBreaksAsRegularWindows,
       focusable: showBreaksAsRegularWindows,
       alwaysOnTop: keepOnTop,
       hasShadow: false,
       title: 'Stretchly',
-      titleBarStyle: process.platform === 'darwin' ? (showBreaksAsRegularWindows ? 'default' : 'hidden') : undefined,
-      titleBarOverlay: process.platform === 'darwin' ? !showBreaksAsRegularWindows : undefined,
       webPreferences: {
         preload: join(__dirname, './break-preload.mjs'),
         sandbox: false
       }
     }
 
-    if (settings.get('fullscreen') && process.platform !== 'darwin') {
+    if (settings.get('fullscreen')) {
       windowOptions.width = displayManager.getDisplayWidth(localDisplayId)
       windowOptions.height = displayManager.getDisplayHeight(localDisplayId)
       windowOptions.x = displayManager.getDisplayX(localDisplayId, 0, true)
       windowOptions.y = displayManager.getDisplayY(localDisplayId, 0, true)
-    } else if (!(settings.get('fullscreen') && process.platform === 'win32')) {
+    } else if (!settings.get('fullscreen')) {
       Object.assign(windowOptions, displayManager.getBreakWindowPosition(localDisplayId, windowOptions))
     }
 
@@ -1373,21 +1288,12 @@ function startBreak () {
       }
 
       log.info(`Stretchly: showing window ${localDisplayId + 1} of ${displayManager.getDisplayCount()}`)
-      if (process.platform === 'darwin') {
-        if (showBreaksAsRegularWindows) {
-          breakWinLocal.setFullScreen(settings.get('fullscreen'))
-        } else {
-          breakWinLocal.setMinimizable(false)
-          breakWinLocal.setClosable(false)
-          breakWinLocal.setKiosk(settings.get('fullscreen'))
-        }
-      }
       if (localDisplayId === emitOnId) {
         breakPlanner.emit('breakStarted', true)
         log.info('Stretchly: starting Long break')
       }
 
-      if (!settings.get('fullscreen') && process.platform !== 'darwin') {
+      if (!settings.get('fullscreen')) {
         setTimeout(() => {
           placeBreakWindow(breakWinLocal, localDisplayId)
         }, 0)
@@ -1397,10 +1303,6 @@ function startBreak () {
     ipcMain.on('long-break-loaded', onLongBreakLoaded)
 
     breakWinLocal.loadURL(isBlank ? modalPath + '?blank=1' : modalPath)
-    // kiosk fullscreen owns its own Space; CanJoinAllSpaces would eject it (menu bar returns)
-    if (!(process.platform === 'darwin' && !showBreaksAsRegularWindows && settings.get('fullscreen'))) {
-      breakWinLocal.setVisibleOnAllWorkspaces(true)
-    }
     breakWinLocal.setAlwaysOnTop(keepOnTop, 'pop-up-menu')
     if (breakWinLocal) {
       breakWinLocal.on('close', (e) => {
@@ -1423,11 +1325,6 @@ function startBreak () {
       break
     }
   }
-  if (process.platform === 'darwin') {
-    if (app.dock.isVisible) {
-      app.dock.hide()
-    }
-  }
 }
 
 function breakComplete (shouldPlaySound, windows, breakType) {
@@ -1437,10 +1334,6 @@ function breakComplete (shouldPlaySound, windows, breakType) {
   if (shouldPlaySound && !settings.get('silentNotifications')) {
     const audio = breakType === 'mini' ? 'miniBreakAudio' : 'longBreakAudio'
     processWin.webContents.send('play-sound', settings.get(audio), settings.get('volume'))
-  }
-  if (process.platform === 'darwin') {
-    // get focus on the last app
-    Menu.sendActionToFirstResponder('hide:')
   }
   return closeWindows(windows)
 }
@@ -1669,7 +1562,7 @@ function adjustWorkSession (milliseconds) {
 let trayPanel = null
 
 function usesTrayPanel () {
-  return settings.get('trayPanel') && process.platform !== 'linux'
+  return settings.get('trayPanel')
 }
 
 function getTrayPanel () {
@@ -1837,12 +1730,6 @@ function createPreferencesWindow () {
 function updateTray () {
   if (process.platform === 'win32' && Date.now() - lastWindowsThemeCheck > 60000) refreshWindowsTheme()
 
-  if (process.platform === 'darwin') {
-    if (app.dock.isVisible) {
-      app.dock.hide()
-    }
-  }
-
   if (!appIcon && !settings.get('showTrayIcon')) {
     return
   }
@@ -1865,9 +1752,6 @@ function updateTray () {
         trayMenuPosition = screen.getCursorScreenPoint()
         if (usesTrayPanel()) {
           trayPanel?.hide()
-          if (process.platform === 'darwin') {
-            appIcon.popUpContextMenu(Menu.buildFromTemplate(currentTrayMenuTemplate))
-          }
         }
       })
     }
@@ -1885,9 +1769,7 @@ function updateTray () {
 
     const newTrayMenuTemplate = getTrayMenuTemplate()
     if (JSON.stringify(newTrayMenuTemplate) !== JSON.stringify(currentTrayMenuTemplate)) {
-      if (!(usesTrayPanel() && process.platform === 'darwin')) {
-        appIcon.setContextMenu(Menu.buildFromTemplate(newTrayMenuTemplate))
-      }
+      appIcon.setContextMenu(Menu.buildFromTemplate(newTrayMenuTemplate))
       currentTrayMenuTemplate = newTrayMenuTemplate
     }
     trayPanel?.refresh()
@@ -2236,16 +2118,10 @@ ipcMain.handle('show-debug', (event) => {
   const breaknumber = breakPlanner.breakNumber
   const postponesnumber = breakPlanner.postponesNumber
   const doNotDisturb = breakPlanner.dndManager.isOnDnd
-  let settingsFile = settings.path
-  let logsFile = log.transports.file.getFile().path
-  let imagesFolder = join(app.getPath('userData'), 'images')
-  let audioFolder = join(app.getPath('userData'), 'audio')
-  if (insideWindowsStore()) {
-    settingsFile = settingsFile.replace('Roaming', 'Local\\Packages\\33881JanHovancik.stretchly_24fg4m0zq65je\\LocalCache\\Roaming')
-    logsFile = logsFile.replace('Roaming', 'Local\\Packages\\33881JanHovancik.stretchly_24fg4m0zq65je\\LocalCache\\Roaming')
-    imagesFolder = imagesFolder.replace('Roaming', 'Local\\Packages\\33881JanHovancik.stretchly_24fg4m0zq65je\\LocalCache\\Roaming')
-    audioFolder = audioFolder.replace('Roaming', 'Local\\Packages\\33881JanHovancik.stretchly_24fg4m0zq65je\\LocalCache\\Roaming')
-  }
+  const settingsFile = settings.path
+  const logsFile = log.transports.file.getFile().path
+  const imagesFolder = join(app.getPath('userData'), 'images')
+  const audioFolder = join(app.getPath('userData'), 'audio')
   return [
     reference,
     timeleft,

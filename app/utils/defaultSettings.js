@@ -1,6 +1,6 @@
 import defaultBreakIdeas from './defaultBreakIdeas.js'
 import defaultMicrobreakIdeas from './defaultMicrobreakIdeas.js'
-import { insideFlatpak, insideWindowsStore, insideSnap, insideWindowsPortable } from './utils.js'
+import { insideWindowsPortable } from './utils.js'
 
 export default {
   microbreakDuration: 20000,
@@ -30,7 +30,6 @@ export default {
   miniBreakColor: '#478484',
   customColor: '#808080',
   transparentMode: false,
-  blurredBackground: false,
   opacity: 0.9,
   longBreakAudio: 'crystal-glass',
   miniBreakAudio: 'crystal-glass',
@@ -108,13 +107,12 @@ export default {
   startLastBreakAgainShortcut: '',
   showTrayMenuInStrictMode: false,
   customPreferencesMessage: '',
-  disableAppUpdateFeatures: insideFlatpak() || insideWindowsStore() || insideSnap() || insideWindowsPortable(),
+  disableAppUpdateFeatures: insideWindowsPortable(),
   hidePreferencesFileLocation: false,
   hideStrictModePreferences: false,
   miniBreakManualFinish: false,
   longBreakManualFinish: false,
   breakHealthMode: false,
   openAtLogin: false,
-  forceX11OnWayland: false,
   _migratedOpenAtLogin: false
 }

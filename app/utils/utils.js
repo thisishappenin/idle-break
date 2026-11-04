@@ -1,4 +1,3 @@
-import fs from 'node:fs'
 import { DateTime } from 'luxon'
 
 function formatTimeRemaining (milliseconds, locale, i18next, humanizeDuration) {
@@ -75,58 +74,11 @@ function shouldShowNotificationTitle (platform, systemVersion, semver) {
   if (platform === 'win32' && semver.gte(semver.coerce(systemVersion), '10.0.19042')) {
     return false
   }
-  if (platform === 'darwin' && semver.gte(semver.coerce(systemVersion), '10.16.0')) {
-    return false
-  }
   return true
-}
-
-function insideFlatpak (runtime = process, fileExists = fs.existsSync) {
-  return runtime.platform === 'linux' && fileExists('/.flatpak-info')
-}
-
-function insideWindowsStore (runtime = process) {
-  return runtime.platform === 'win32' && !!runtime.windowsStore
-}
-
-function insideSnap (runtime = process) {
-  return runtime.platform === 'linux' && !!runtime.env.SNAP
 }
 
 function insideWindowsPortable (runtime = process) {
   return runtime.platform === 'win32' && !!runtime.env.PORTABLE_EXECUTABLE_DIR
-}
-
-function getLinuxDisplayBackend (ozonePlatform = '', runtime = process) {
-  if (runtime.platform !== 'linux') return null
-
-  const normalizedOzonePlatform = ozonePlatform.trim().toLowerCase()
-  if (normalizedOzonePlatform === 'wayland' || normalizedOzonePlatform === 'x11') {
-    return normalizedOzonePlatform
-  }
-
-  const normalizedSessionType = (runtime.env.XDG_SESSION_TYPE || '').trim().toLowerCase()
-  if (normalizedSessionType === 'wayland' || normalizedSessionType === 'x11') {
-    return normalizedSessionType
-  }
-
-  if (runtime.env.WAYLAND_DISPLAY) return 'wayland'
-  if (runtime.env.DISPLAY) return 'x11'
-  return null
-}
-
-function shouldRelaunchWithX11 (forceX11OnWayland, commandLineArguments, ozonePlatform, runtime = process, fileExists = fs.existsSync) {
-  if (forceX11OnWayland !== true) return false
-  if (!commandLineArguments.every(arg => arg.startsWith('--'))) return false
-  if (commandLineArguments.some(arg => arg.startsWith('--ozone-platform='))) return false
-  if (insideFlatpak(runtime, fileExists)) return false
-  return getLinuxDisplayBackend(ozonePlatform, runtime) === 'wayland'
-}
-
-function shouldSuggestX11OnWayland (forceX11OnWayland, ozonePlatform, runtime = process, fileExists = fs.existsSync) {
-  if (forceX11OnWayland === true) return false
-  if (insideFlatpak(runtime, fileExists)) return false
-  return getLinuxDisplayBackend(ozonePlatform, runtime) === 'wayland'
 }
 
 export {
@@ -140,11 +92,5 @@ export {
   formatCurrentTime,
   minutesRemaining,
   shouldShowNotificationTitle,
-  insideFlatpak,
-  insideWindowsStore,
-  insideSnap,
-  insideWindowsPortable,
-  getLinuxDisplayBackend,
-  shouldRelaunchWithX11,
-  shouldSuggestX11OnWayland
+  insideWindowsPortable
 }

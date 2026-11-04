@@ -58,6 +58,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- Break popups on ultrawide monitors are sized as if the display were 16:9, so a percentage size no longer makes them stretch across a very wide screen
+- Removed code, files and dependencies that only served the Microsoft Store, Flatpak, Snap, macOS, Linux and Wayland (autostart, Do Not Disturb detection, tray icon images, packaging files, the blurred background option)
 - The Microsoft Store (appx) package is no longer built, and the README no longer carries macOS, Linux and Wayland notes
 - Windows only: macOS and Linux packaging, the snap, ARM and flatpak workflows and the macOS/Linux test runs are removed, since they can no longer be maintained
 - This is now a standalone version of Stretchly: the update check, the "Download latest version" links and the bug report link point to this repository's releases and issues, and pushing a `v*` tag builds installers and attaches them as a draft release

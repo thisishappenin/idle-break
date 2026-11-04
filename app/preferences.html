@@ -65,7 +65,7 @@
             <div class="theme-label">
               <span data-i18next="preferences.settings.general"></span>
             </div>
-            <div class="store-hidden portable-hidden">
+            <div class="portable-hidden">
               <input type="checkbox" value="openAtLogin" id="openAtLogin">
               <label data-i18next="preferences.settings.openAtLogin" for="openAtLogin"></label>
             </div>
@@ -708,9 +708,8 @@
           <br />Node.js: <span id="node"></span>,
           Chromium: <span id="chrome"></span>,
           Electron: <span id="electron"></span>
-          <br />OS: <span id="platform"></span><span class="linux-hidden darwin-hidden">,
-            Windows Store: <span id="windowsStore"></span>,
-            Windows Portable: <span id="windowsPortable"></span></span>
+          <br />OS: <span id="platform"></span>,
+          Windows Portable: <span id="windowsPortable"></span>
         </p>
         <p>
           <button>copy to clipboard</button>

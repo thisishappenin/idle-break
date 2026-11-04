@@ -394,6 +394,12 @@ By default, when breaks are shown on all screens (`allScreens: true`), the count
 
 This option has no effect when `allScreens` is `false` or when `showBreaksAsRegularWindows` is `true`. Invalid values fall back to `"all"`.
 
+#### Pause the countdown while using an app or website
+
+In the Settings tab, under "Calls and Do Not Disturb", list the apps or websites that should pause the break countdown while you are using them, separated by commas, for example `Gmail, vlc, netflix`. Idle Break checks which window is in front (Windows only) and compares each entry, ignoring upper and lower case, with the app's process name (`chrome`, `vlc`) and with the window title. Browsers show the page title in the window title, so a website name such as `youtube` or `netflix` matches while that tab is in front. Idle Break cannot see the address itself, only the title, and it does not save or send titles anywhere.
+
+The countdown pauses while a match is in front and starts again when you switch away. The tray tooltip and panel say that breaks are paused for an app exclusion. This list is saved as `pauseWhileUsing` in the preferences file. It works together with a `pause` rule in `appExclusions` (below) but is ignored if the active rule there is a `resume` rule.
+
 #### Pause/resume breaks based on running programs
 
 By editing `appExclusions` in the preferences file, you can automatically control when Idle Break breaks are paused.

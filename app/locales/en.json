@@ -81,6 +81,7 @@
       "monitorDnd": "Show breaks even in Do Not Disturb mode",
       "meetingBreakDelay": "Wait after a call ends:",
       "monitorMeetingsIgnoreApps": "Apps that never count as calls:",
+      "pauseWhileUsing": "Pause the countdown while one of these is in front (app names or words in the window title, such as a website name, separated by commas):",
       "pauseForSuspendOrLock": "Pause breaks while the computer is locked or asleep",
       "idleResetTime": "Reset the break timer after being idle for:",
       "themedNotifications": "Show reminders in a themed popup instead of a system notification",

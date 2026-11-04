@@ -281,6 +281,16 @@ window.onload = async (e) => {
     }
   }
 
+  const pauseWhileUsing = document.querySelector('#pauseWhileUsing')
+  pauseWhileUsing.value = (settings.pauseWhileUsing ?? []).join(', ')
+  if (!eventsAttached) {
+    pauseWhileUsing.onchange = () => {
+      const entries = pauseWhileUsing.value.split(',').map(entry => entry.trim()).filter(Boolean)
+      pauseWhileUsing.value = entries.join(', ')
+      window.settings.saveSettings('pauseWhileUsing', entries)
+    }
+  }
+
   const pauseDurations = document.querySelector('#pauseDurations')
   pauseDurations.value = formatPauseDurations(settings.pauseDurations)
   if (!eventsAttached) {

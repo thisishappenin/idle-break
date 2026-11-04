@@ -72,6 +72,7 @@ export default {
   microbreakIdeas: defaultMicrobreakIdeas,
   showBreaksAsRegularWindows: false,
   appExclusions: [],
+  pauseWhileUsing: [],
   appExclusionsCheckInterval: 2000,
   pauseForSuspendOrLock: true,
   pauseDurations: [30, 60, 120, 300],

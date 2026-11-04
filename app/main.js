@@ -28,7 +28,7 @@ import TrayNumberIcons from './utils/trayNumberIcons.js'
 import TrayPanel from './utils/trayPanel.js'
 import { buildTrayPanelState } from './utils/trayPanelState.js'
 import { breakWindowSize } from './utils/breakWindowSize.js'
-import { countdownColor } from './utils/countdownColor.js'
+import { countdownColor, trayNumberColor } from './utils/countdownColor.js'
 import { UntilMorning } from './utils/untilMorning.js'
 import AutostartManager from './utils/autostartManager.js'
 import Command from './utils/commands.js'
@@ -706,7 +706,7 @@ function drawnTrayNumberPath (number, useDarkColors) {
     dark: useDarkColors,
     crisp: settings.get('trayIconCrispDigits'),
     heightRatio: settings.get('trayIconFontSize'),
-    color: countdownColor(settings)
+    color: trayNumberColor(settings)
   })
 }
 

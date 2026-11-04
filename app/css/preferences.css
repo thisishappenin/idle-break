@@ -528,19 +528,19 @@ body > div:not(.navigation):not(.custom-message) {
   color: var(--muted, #5d5d5d);
 }
 
-.countdown-color {
+.color-option {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 4px 10px;
 }
 
-.countdown-color input[type="color"] {
+.color-option input[type="color"] {
   height: 26px;
   padding: 0;
   width: 44px;
 }
 
-.countdown-color input[type="color"]:disabled {
+.color-option input[type="color"]:disabled {
   opacity: 0.4;
 }

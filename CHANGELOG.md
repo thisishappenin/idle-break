@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Optional custom colour for the countdown in the break popup, the tray panel and the tray number (Theme tab, under Opacity)
+- Optional custom colour for the countdown in the break popup and the tray panel (Theme tab, under Opacity), and a separate custom colour for the number in the Windows tray icon (Theme tab, Menubar section)
 - The tray panel and the tray tooltip show when you are in a meeting (with the app using the microphone), and update as soon as the call starts or ends
 - Left-clicking the tray icon (Windows and macOS) opens a small panel that stays open while you use it: the countdown, 5 minute shorten and extend buttons, start and pause options, the idle reset switch, Preferences and Quit. Right-click still opens the menu
 - Changing a break window colour, transparency, size or position on the Theme page briefly shows the real popup on your screen (sliders update it as you drag), with a "Show popup now" button.

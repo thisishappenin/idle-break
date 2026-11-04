@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest'
 import { expect } from 'chai'
-import { countdownColor, hexToRgb } from '../app/utils/countdownColor.js'
+import { countdownColor, hexToRgb, trayNumberColor } from '../app/utils/countdownColor.js'
 
 const settingsWith = values => ({ get: key => values[key] })
 
@@ -22,5 +22,12 @@ describe('countdownColor', () => {
   it('turns a hex colour into red, green and blue', () => {
     expect(hexToRgb('#ffcc00')).to.deep.equal([255, 204, 0])
     expect(hexToRgb('#000000')).to.deep.equal([0, 0, 0])
+  })
+
+  it('keeps the tray number colour separate from the countdown colour', () => {
+    const settings = settingsWith({ countdownColorCustom: true, countdownColor: '#ffcc00', trayNumberColorCustom: false, trayNumberColor: '#00ccff' })
+    expect(countdownColor(settings)).to.equal('#ffcc00')
+    expect(trayNumberColor(settings)).to.equal(null)
+    expect(trayNumberColor(settingsWith({ trayNumberColorCustom: true, trayNumberColor: '#00ccff' }))).to.equal('#00ccff')
   })
 })

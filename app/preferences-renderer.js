@@ -19,7 +19,9 @@ function updateTrayOptionVisibility () {
 }
 
 function updateCountdownColorControl () {
-  document.querySelector('#countdownColor').disabled = !document.querySelector('#countdownColorCustom').checked
+  for (const name of ['countdownColor', 'trayNumberColor']) {
+    document.querySelector(`#${name}`).disabled = !document.querySelector(`#${name}Custom`).checked
+  }
 }
 
 function updateThemePreview () {
@@ -333,10 +335,12 @@ window.onload = async (e) => {
     }
   })
 
-  const countdownPicker = document.querySelector('#countdownColor')
-  countdownPicker.value = settings.countdownColor
-  if (!eventsAttached) {
-    countdownPicker.onchange = (event) => window.settings.saveSettings('countdownColor', event.target.value)
+  for (const name of ['countdownColor', 'trayNumberColor']) {
+    const picker = document.querySelector(`#${name}`)
+    picker.value = settings[name]
+    if (!eventsAttached) {
+      picker.onchange = (event) => window.settings.saveSettings(name, event.target.value)
+    }
   }
   updateThemePreview()
   if (!themePreviewAttached) {

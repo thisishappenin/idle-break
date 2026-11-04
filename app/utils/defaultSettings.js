@@ -95,6 +95,8 @@ export default {
   trayPanelThemeColor: true,
   countdownColorCustom: false,
   countdownColor: '#ffffff',
+  trayNumberColorCustom: false,
+  trayNumberColor: '#005fb8',
   currentTimeInBreaks: false,
   currentTimeInBreaksFontSize: 28,
   currentTimeInBreaksFormat: 'tt',

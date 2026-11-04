@@ -138,11 +138,16 @@ function render () {
 
 function finish (focused) {
   if (focused) panel.querySelector(`[data-key="${focused}"]`)?.focus()
-  reportHeight()
+  reportHeight(true)
 }
 
-function reportHeight () {
-  window.trayPanel.setHeight(Math.ceil(panel.getBoundingClientRect().height))
+let reportedHeight = null
+
+function reportHeight (force = false) {
+  const height = Math.ceil(panel.getBoundingClientRect().height)
+  if (!force && height === reportedHeight) return
+  reportedHeight = height
+  window.trayPanel.setHeight(height)
 }
 
 function tick () {
@@ -163,5 +168,5 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') send('close')
 })
 setInterval(tick, 1000)
-new window.ResizeObserver(reportHeight).observe(panel)
+new window.ResizeObserver(() => reportHeight()).observe(panel)
 window.trayPanel.ready()

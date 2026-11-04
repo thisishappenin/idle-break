@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - "Minutes to break (number only)" tray icon style, without the Stretchly logo
 
 ### Fixed
+- The tray panel no longer shakes while it is open: it is only resized or moved when its size or position really changes
 - The tray panel no longer jumps or resizes as it opens: it appears once it has its final size and position
 - The tray panel no longer leaves an empty strip at the bottom; it resizes to its content
 - Time spent in a meeting is not counted as time away, so a call you sat through without touching the computer no longer cancels the countdown or the break waiting for it when it ends

@@ -19,6 +19,7 @@ class TrayPanel {
     this.hiddenAt = 0
     this.awaitingSize = false
     this.revealTimer = null
+    this.appliedHeight = null
 
     ipcMain.on('tray-panel-ready', (event) => {
       if (!this.isPanel(event)) return
@@ -32,10 +33,15 @@ class TrayPanel {
     ipcMain.on('tray-panel-height', (event, height) => {
       if (!this.isPanel(event) || !Number.isFinite(height)) return
       const area = screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).workArea
-      this.win.setContentSize(WIDTH, Math.round(Math.min(Math.max(height, MIN_HEIGHT), area.height - 16)))
+      const target = Math.round(Math.min(Math.max(height, MIN_HEIGHT), area.height - 16))
+      const resized = target !== this.appliedHeight
+      if (resized) {
+        this.win.setContentSize(WIDTH, target)
+        this.appliedHeight = target
+      }
       if (this.awaitingSize) {
         this.reveal()
-      } else if (this.visible) {
+      } else if (resized && this.visible) {
         this.place()
       }
     })
@@ -85,6 +91,7 @@ class TrayPanel {
 
   create () {
     this.loaded = false
+    this.appliedHeight = null
     const win = new BrowserWindow({
       width: WIDTH,
       height: 420,
@@ -156,7 +163,8 @@ class TrayPanel {
     const reference = hasBounds ? { x: this.trayBounds.x, y: this.trayBounds.y } : cursor
     const workArea = screen.getDisplayNearestPoint(reference).workArea
     const { x, y } = trayPanelPosition({ trayBounds: this.trayBounds, cursor, size: { width, height }, workArea })
-    this.win.setPosition(x, y)
+    const [currentX, currentY] = this.win.getPosition()
+    if (currentX !== x || currentY !== y) this.win.setPosition(x, y)
   }
 }
 

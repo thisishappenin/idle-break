@@ -4,6 +4,7 @@ import { trayPanelPosition } from './trayPanelPosition.js'
 const WIDTH = 280
 const MIN_HEIGHT = 100
 const REOPEN_GUARD = 250
+const SIZE_WAIT = 250
 
 class TrayPanel {
   constructor ({ pagePath, preloadPath, getState, onAction }) {
@@ -16,6 +17,8 @@ class TrayPanel {
     this.wantShow = false
     this.trayBounds = null
     this.hiddenAt = 0
+    this.awaitingSize = false
+    this.revealTimer = null
 
     ipcMain.on('tray-panel-ready', (event) => {
       if (!this.isPanel(event)) return
@@ -30,7 +33,11 @@ class TrayPanel {
       if (!this.isPanel(event) || !Number.isFinite(height)) return
       const area = screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).workArea
       this.win.setContentSize(WIDTH, Math.round(Math.min(Math.max(height, MIN_HEIGHT), area.height - 16)))
-      if (this.visible) this.place()
+      if (this.awaitingSize) {
+        this.reveal()
+      } else if (this.visible) {
+        this.place()
+      }
     })
   }
 
@@ -62,6 +69,7 @@ class TrayPanel {
 
   hide () {
     this.wantShow = false
+    this.cancelReveal()
     if (this.visible) this.win.hide()
   }
 
@@ -70,6 +78,7 @@ class TrayPanel {
   }
 
   destroy () {
+    this.cancelReveal()
     if (this.win && !this.win.isDestroyed()) this.win.destroy()
     this.win = null
   }
@@ -111,10 +120,25 @@ class TrayPanel {
 
   display () {
     this.wantShow = false
+    this.awaitingSize = true
+    clearTimeout(this.revealTimer)
+    this.revealTimer = setTimeout(() => this.reveal(), SIZE_WAIT)
     this.push()
+  }
+
+  reveal () {
+    if (!this.awaitingSize) return
+    this.cancelReveal()
+    if (!this.win || this.win.isDestroyed()) return
     this.place()
     this.win.show()
     this.win.focus()
+  }
+
+  cancelReveal () {
+    this.awaitingSize = false
+    clearTimeout(this.revealTimer)
+    this.revealTimer = null
   }
 
   push () {

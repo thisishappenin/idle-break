@@ -260,13 +260,15 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
 
 @media (max-height: 320px), (max-width: 480px) {
   html {
+    /* 1 unit is 1px in a 360x120 popup; the popup keeps this look and scales with the window */
+    --u: min(0.8333vh, 0.2778vw);
     /* a background image stops the body color filling the square window corners */
     background: linear-gradient(transparent, transparent);
   }
 
   body {
-    border-radius: 8px;
-    clip-path: inset(0 round 8px);
+    border-radius: calc(8 * var(--u));
+    clip-path: inset(0 round calc(8 * var(--u)));
     box-shadow: inset 0 0 0 1px var(--popup-outline, color-mix(in srgb, #ffffff 10%, transparent));
   }
 
@@ -276,10 +278,10 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
 
   .breaks {
     align-items: center;
-    gap: 6px 16px;
+    gap: calc(6 * var(--u)) calc(16 * var(--u));
     grid-template: auto / 1fr auto;
     justify-items: stretch;
-    padding: 12px 14px 16px 18px;
+    padding: calc(12 * var(--u)) calc(14 * var(--u)) calc(16 * var(--u)) calc(18 * var(--u));
   }
 
   .breaks > :nth-child(1) > .microbreak-idea:empty,
@@ -300,54 +302,54 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
   .breaks > :nth-child(1) > .microbreak-idea,
   .breaks > :nth-child(1) > .break-idea {
     -webkit-line-clamp: 2;
-    font-size: 14px;
-    line-height: 19px;
+    font-size: calc(14 * var(--u));
+    line-height: calc(19 * var(--u));
   }
 
   .breaks > :nth-child(1) > .break-text {
     -webkit-line-clamp: 1;
-    font-size: 12px;
-    line-height: 16px;
-    margin-top: 2px;
+    font-size: calc(12 * var(--u));
+    line-height: calc(16 * var(--u));
+    margin-top: calc(2 * var(--u));
   }
 
   .breaks progress {
-    bottom: 5px;
-    height: 4px;
-    left: 12px;
+    bottom: calc(5 * var(--u));
+    height: calc(4 * var(--u));
+    left: calc(12 * var(--u));
     margin: 0;
     position: fixed;
-    width: calc(100% - 24px);
+    width: calc(100% - calc(24 * var(--u)));
   }
 
   #progress-time {
-    font-size: 34px;
+    font-size: calc(34 * var(--u));
     font-weight: 600;
-    letter-spacing: -0.5px;
-    line-height: 40px;
+    letter-spacing: calc(-0.5 * var(--u));
+    line-height: calc(40 * var(--u));
     opacity: 1;
     padding-top: 0;
   }
 
   .breaks > :nth-child(2) {
     flex-wrap: nowrap;
-    gap: 6px;
+    gap: calc(6 * var(--u));
   }
 
   .breaks > :nth-child(2) > a {
     background: color-mix(in srgb, var(--surface-ink) 8%, transparent);
-    border-radius: 4px;
+    border-radius: calc(4 * var(--u));
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--surface-ink) 18%, transparent);
     flex-direction: column;
-    font-size: 12px;
+    font-size: calc(12 * var(--u));
     font-weight: 400;
-    gap: 4px;
+    gap: calc(4 * var(--u));
     box-sizing: border-box;
-    height: 56px;
+    height: calc(56 * var(--u));
     justify-content: center;
-    line-height: 13px;
-    min-width: 56px;
-    padding: 0 8px;
+    line-height: calc(13 * var(--u));
+    min-width: calc(56 * var(--u));
+    padding: 0 calc(8 * var(--u));
     white-space: nowrap;
   }
 
@@ -358,8 +360,8 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
 
   .breaks > :nth-child(2) > a img,
   body[dir=rtl] .breaks > :nth-child(2) > a img {
-    height: 18px;
-    width: 18px;
+    height: calc(18 * var(--u));
+    width: calc(18 * var(--u));
   }
 
   .breaks > :nth-child(2) .tiptext {

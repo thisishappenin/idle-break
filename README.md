@@ -71,7 +71,7 @@ Much of this app was written with the help of an AI assistant (Claude) and check
 
 Download the installer or the portable version from the [Releases](https://github.com/thisishappenin/stretchly/releases) page. Builds are unsigned, so Windows SmartScreen will warn you.
 
-> **Note:** Chocolatey, winget and the Microsoft Store install the *original* Stretchly, not this version.
+> **Note:** Chocolatey, winget and the Microsoft Store install the *original* Stretchly, not this app.
 
 You can install *Stretchly* for all users silently by running this as administrator:
 ```cmd
@@ -490,7 +490,7 @@ This might be useful for corporate installations.
 
 ## Contributor Preferences
 
-> The sponsoring, Patreon and Discord options below belong to the original Stretchly project and its author, not to this version.
+> The sponsoring, Patreon and Discord options below belong to the original Stretchly project and its author, not to this app.
 
 *Stretchly* is free but you can support it by contributing code, translations or money. You will be rewarded by getting access to **Contributor Preferences**, ability to **Sync Preferences**, chat on **Discord** and more!
 

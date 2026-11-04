@@ -47,7 +47,7 @@ Preferences lay out in two columns, grouped into labelled sections:
 
 *These images are rendered from the app's own interface pages with sample data, so fonts and sizes can look slightly different on Windows.*
 
-Download it from the [Releases](https://github.com/thisishappenin/stretchly/releases) page. Builds are unsigned, so Windows SmartScreen will warn you. It is tested mainly on Windows 11; macOS and Linux builds are produced but less tested, and some features are Windows-only.
+Windows only: download it from the [Releases](https://github.com/thisishappenin/stretchly/releases) page. Builds are unsigned, so Windows SmartScreen will warn you. There are no macOS or Linux builds.
 
 Much of this version was written with the help of an AI assistant (Claude) and checked with tests and by running the app; the commit history shows which commits.
 
@@ -67,101 +67,16 @@ Much of this version was written with the help of an AI assistant (Claude) and c
 
 ## Install [![GitHub All Releases](https://img.shields.io/github/downloads/thisishappenin/stretchly/total)](https://github.com/thisishappenin/stretchly/releases)
 
-**Installers** and **portable versions** for Windows, macOS and Linux are on the [Releases](https://github.com/thisishappenin/stretchly/releases) page. For supported versions of your OS check [Electron's supported versions](https://github.com/electron/electron/blob/main/README.md#platform-support). Read on for details of specific OSes.
+**This version supports Windows only** (tested on Windows 11). There are no macOS or Linux builds, because I can't test or maintain them. The source still contains code for those systems, inherited from the original Stretchly, but it is unsupported here. For macOS or Linux use the [original Stretchly](https://github.com/hovancik/stretchly).
 
-> **Note:** Homebrew, Flathub, the Snap Store, `apt` and other package managers mentioned below install the *original* Stretchly, not this version. To get this version, use the Releases page.
+Download the installer or the portable version from the [Releases](https://github.com/thisishappenin/stretchly/releases) page. Builds are unsigned, so Windows SmartScreen will warn you.
 
-### macOS
-
-Requires macOS Ventura (13) or later.
-
-It is recommended to install *Stretchly* with [Homebrew tap](https://github.com/hovancik/homebrew-stretchly) by running the following command.
-See [Application Signing](#application-signing) for details.
-```zsh
-brew install --cask hovancik/stretchly/stretchly
-```
-
-> Note for macOS users: Homebrew recently disabled the `--no-quarantine` flag. As a result, macOS Gatekeeper may block the app on its first launch, showing an "unidentified developer" warning. To bypass this, go to `System Settings > Privacy & Security`, scroll down, and click Open Anyway next to the Stretchly alert. Alternatively, locate the app in Finder, Control-click (or Right-click) its icon, and select Open.
-
-When upgrading, run the following command.
-Don't forget to Quit Stretchly, first.
-```zsh
-brew upgrade --cask hovancik/stretchly/stretchly
-```
-
-To uninstall:
-```zsh
-brew uninstall --cask hovancik/stretchly/stretchly
-brew untap hovancik/stretchly
-```
-
-> **Note:** A `stretchly` cask also exists in the default `homebrew/cask` tap. It is deprecated and [scheduled to be disabled on September 1, 2026](https://github.com/Homebrew/homebrew-cask/blob/main/Casks/s/stretchly.rb) because the app is unsigned and fails Homebrew's Gatekeeper check. Until then, the bare name `stretchly` is ambiguous — always use the fully qualified `hovancik/stretchly/stretchly` to get this tap's version.
-
-If you're using [Alfred](https://www.alfredapp.com) or [Raycast](https://www.raycast.com/) on macOS you can use this [Alfred Workflow](https://github.com/KingOfSpades/stretchFred) or [Raycast Extension](https://www.raycast.com/u-ran/stretchly) to interact with Stretchly.
-
-#### Application Signing
-
-*Stretchly* is only ad-hoc signed (due to its costs and me not owning supported Apple device) so you will need to use a workaround for the first run. The workaround
-depends on if you're running an Intel or Apple Silicon chip.
-
-- **Intel Chips**: [Open a Mac app from an unidentified developer](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac).
-- **Apple Chips**: Open a terminal and run this command:
-
-```bash
-sudo xattr -r -d com.apple.quarantine /Applications/Stretchly.app
-```
-
-Not sure which chip your computer has? [Here's how to tell](https://support.apple.com/en-us/HT211814).
-
-### Windows
-
-You can also install *Stretchly* with [Chocolatey](https://chocolatey.org) by running the following command from the command line or from PowerShell:
-```powershell
-choco install stretchly
-```
-
-To update:
-```powershell
-choco upgrade stretchly
-```
-
-Stretchly is also available in Microsoft's [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/).
-You can install it by running:
-```powershell
-winget install -e --id Stretchly.Stretchly
-```
-
-Stretchly can be also found at official [Microsoft Store](https://apps.microsoft.com/store/detail/stretchly/9PP2B76LQQBN?hl=en-us&gl=us).
+> **Note:** Chocolatey, winget and the Microsoft Store install the *original* Stretchly, not this version.
 
 You can install *Stretchly* for all users silently by running this as administrator:
 ```cmd
 installer.exe /S /allusers
 ```
-
-### Linux / Portable
-
-For portable versions and for Linux installers, head to [Github Releases page](https://github.com/thisishappenin/stretchly/releases). The most widely used distributions should be covered.
-
-Stretchly is also available in some of the Linux stores:
-- [Flathub](https://flathub.org/apps/details/net.hovancik.Stretchly)
-- [Snap Store](https://snapcraft.io/stretchly)
-
-For Debian/Ubuntu and derivates you could also try this `apt` repository: `deb [trusted=yes] https://apt.fury.io/hovancik/ /`.
-
-#### Linux note
-
-Please see [http://electron.atom.io/docs/api/tray/](http://electron.atom.io/docs/api/tray/) for Electron's Tray Linux specifics.
-
-For Natural breaks, you might need some packages too (`libxss-dev`).
-
-If *Stretchly* is not starting, you might need to run:
-```sh
-sudo sysctl kernel.unprivileged_userns_clone=1
-sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-```
-Read more [here](https://github.com/electron/electron/issues/17972). Depending on your distro, you probably want to do something similar to this, so the preferences are kept after reboot: Add `kernel.unprivileged_userns_clone=1` and `kernel.apparmor_restrict_unprivileged_userns=0` to `/etc/sysctl.d/00-local-userns.conf` and reboot.
-
-If you're on Wayland and you would like to be able to monitor idle time, you'll need to add your user to `input` group, with `sudo gpasswd --add $USER input` (depending on your distro) and logout/login to take an effect.
 
 ### Running from source
 
@@ -713,7 +628,6 @@ You can help to translate Stretchly on [Weblate](https://hosted.weblate.org/enga
 ## Known issues
 - On KDE Wayland, global shortcuts can appear configured but fail to work; see [electron/electron#42573](https://github.com/electron/electron/issues/42573). Use the tray menu and break controls, or quit Stretchly and restart with `stretchly --ozone-platform=x11`.
 - Windows Store build's autostart is not working, so was disabled. To use autostart, install Stretchly with the [regular installer](https://github.com/thisishappenin/stretchly/releases), or create a shortcut to Stretchly from `shell:AppsFolder` (Win+R) and move it to the `shell:startup` folder (Win+R).
-- The Snap build may fail to start on native Wayland. Start it with the X11 backend (`stretchly --ozone-platform=x11`) as a workaround. See [#1693](https://github.com/hovancik/stretchly/issues/1693).
 - Wayland multi-display window placement issue puts all break windows on one monitor; start with X11 backend (`stretchly --ozone-platform=x11`) if needed, or set [`forceX11OnWayland`](#use-x11-backend-on-wayland) to make Stretchly do it automatically. See [electron/electron#48749](https://github.com/electron/electron/issues/48749).
 
 ### MacOS

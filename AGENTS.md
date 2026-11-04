@@ -44,7 +44,7 @@ Explain its requirements before helping prepare an Issue or Pull Request.
 
 - Use JavaScript ESM and StandardJS (two spaces, no semicolons). Prefer small
   changes that reuse existing code and self-explanatory code without comments.
-- Consider Windows, macOS, Linux, accessibility, and background performance.
+- This fork supports Windows only (no macOS or Linux builds or CI). Consider accessibility and background performance, and do not break the shared code paths.
   Renderer browser compatibility is limited to Electron's Chromium.
 - For scheduling or settings changes, trace timing, captured settings,
   cancellation, and reinitialization before recommending changes.

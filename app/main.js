@@ -57,7 +57,7 @@ process.on('uncaughtException', (err, _) => {
   dialog.showMessageBox(dialogOpts).then(async (returnValue) => {
     if (returnValue.response === 0) {
       try {
-        await shell.openExternal('https://github.com/hovancik/stretchly/issues')
+        await shell.openExternal('https://github.com/thisishappenin/stretchly/issues')
       } catch (error) {
         log.error(error)
       }
@@ -1779,7 +1779,7 @@ function handleTrayPanelAction (action) {
       break
     case 'download':
       hideAfter()
-      shell.openExternal('https://hovancik.net/stretchly/downloads')
+      shell.openExternal('https://github.com/thisishappenin/stretchly/releases')
       break
     case 'quit':
       app.quit()
@@ -1908,7 +1908,7 @@ function getTrayMenuTemplate () {
     trayMenu.push({
       label: i18next.t('main.downloadLatestVersion'),
       click: function () {
-        shell.openExternal('https://hovancik.net/stretchly/downloads')
+        shell.openExternal('https://github.com/thisishappenin/stretchly/releases')
       }
     }, {
       type: 'separator'

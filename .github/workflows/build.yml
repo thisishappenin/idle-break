@@ -2,8 +2,8 @@ name: Packages build
 
 on:
   push:
-    branches:
-      - release
+    tags:
+      - 'v*'
 
 permissions:
   contents: write

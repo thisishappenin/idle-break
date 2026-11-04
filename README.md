@@ -1,4 +1,4 @@
-# Stretchly [![Awesome Humane Tech](https://raw.githubusercontent.com/humanetech-community/awesome-humane-tech/main/humane-tech-badge.svg?sanitize=true)](https://github.com/humanetech-community/awesome-humane-tech) [![Build Status](https://travis-ci.org/hovancik/stretchly.svg?branch=master)](https://travis-ci.org/hovancik/stretchly) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![codecov](https://codecov.io/gh/hovancik/stretchly/graph/badge.svg?token=eOjky4kr2j)](https://codecov.io/gh/hovancik/stretchly) [![Translation status](https://hosted.weblate.org/widgets/stretchly/-/stretchly/svg-badge.svg)](https://hosted.weblate.org/engage/stretchly/)
+# Stretchly [![Awesome Humane Tech](https://raw.githubusercontent.com/humanetech-community/awesome-humane-tech/main/humane-tech-badge.svg?sanitize=true)](https://github.com/humanetech-community/awesome-humane-tech) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 <img src="stretchly_128x128.png" align="right" alt="Stretchly logo">
 
@@ -6,13 +6,11 @@
 
 *Stretchly* is a cross-platform [Electron](https://www.electronjs.org/) app that reminds you to take breaks when working on your computer.
 
-[![Become a Sponsor!](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=success)](https://github.com/sponsors/hovancik) [![Become a Patron!](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=Patreon&color=success)](https://www.patreon.com/hovancik)
+## About this version
 
-## This fork
+> **My own version of [Stretchly](https://github.com/hovancik/stretchly), built mainly for Windows.** It started from Jan Hovancik's open source app (BSD-2-Clause, see [License](#license)) and is now developed here on its own. It is not affiliated with the original project. If you want the official app, installers or support, use [hovancik/stretchly](https://github.com/hovancik/stretchly). You are welcome to use this version too.
 
-> **An unofficial fork of [Stretchly](https://github.com/hovancik/stretchly) with extra features, mainly for Windows.** It is not affiliated with the Stretchly project, and these changes have not been submitted upstream. For the official app, installers and support, use [hovancik/stretchly](https://github.com/hovancik/stretchly).
-
-What is different here (every change is listed in the [changelog](CHANGELOG.md#unreleased)):
+What is different from the original (every change is listed in the [changelog](CHANGELOG.md#unreleased)):
 
 **A tray panel and a better tray icon**
 - Left-click the tray icon for a small panel that stays open: the countdown, buttons to shorten or extend the next work session in 5 minute steps, start or pause breaks, the idle switch, Preferences and Quit. Right-click keeps the usual menu
@@ -49,12 +47,12 @@ Preferences lay out in two columns, grouped into labelled sections:
 
 *These images are rendered from the app's own interface pages with sample data, so fonts and sizes can look slightly different on Windows.*
 
-Try it without installing anything: on the **Actions** tab, run **Test build of packages** and tick **Build normal packages**, then download the Windows artifact. These builds are unsigned, so Windows SmartScreen will warn you. The fork is tested mainly on Windows 11; macOS and Linux builds are produced but less tested, and some features are Windows-only.
+Download it from the [Releases](https://github.com/thisishappenin/stretchly/releases) page. Builds are unsigned, so Windows SmartScreen will warn you. It is tested mainly on Windows 11; macOS and Linux builds are produced but less tested, and some features are Windows-only.
 
-Much of this fork was written with the help of an AI assistant (Claude) and checked with tests and by running the app; the commit history shows which commits.
+Much of this version was written with the help of an AI assistant (Claude) and checked with tests and by running the app; the commit history shows which commits.
 
 ## Table of contents
-- [This fork](#this-fork)
+- [About this version](#about-this-version)
 - [Install](#install--)
 - [Default behavior](#default-behavior)
 - [Preferences](#preferences)
@@ -67,9 +65,11 @@ Much of this fork was written with the help of an AI assistant (Claude) and chec
 - [Humans and Tools](#humans-and-tools)
 - [License](#license)
 
-## Install [![GitHub All Releases](https://img.shields.io/github/downloads/hovancik/stretchly/total)](https://github.com/hovancik/stretchly/releases) [![Packaging status](https://repology.org/badge/tiny-repos/stretchly.svg)](https://repology.org/project/stretchly/versions)
+## Install [![GitHub All Releases](https://img.shields.io/github/downloads/thisishappenin/stretchly/total)](https://github.com/thisishappenin/stretchly/releases)
 
-The latest official **installers** and **portable versions** for macOS, Windows and Linux can be found at [Github Releases](https://github.com/hovancik/stretchly/releases) page. For supported versions of your OS check [Electron's supported versions](https://github.com/electron/electron/blob/main/README.md#platform-support). Read on for details of specific OSes.
+**Installers** and **portable versions** for Windows, macOS and Linux are on the [Releases](https://github.com/thisishappenin/stretchly/releases) page. For supported versions of your OS check [Electron's supported versions](https://github.com/electron/electron/blob/main/README.md#platform-support). Read on for details of specific OSes.
+
+> **Note:** Homebrew, Flathub, the Snap Store, `apt` and other package managers mentioned below install the *original* Stretchly, not this version. To get this version, use the Releases page.
 
 ### macOS
 
@@ -140,7 +140,7 @@ installer.exe /S /allusers
 
 ### Linux / Portable
 
-For portable versions and for Linux installers, head to [Github Releases page](https://github.com/hovancik/stretchly/releases). The most widely used distributions should be covered.
+For portable versions and for Linux installers, head to [Github Releases page](https://github.com/thisishappenin/stretchly/releases). The most widely used distributions should be covered.
 
 Stretchly is also available in some of the Linux stores:
 - [Flathub](https://flathub.org/apps/details/net.hovancik.Stretchly)
@@ -612,6 +612,8 @@ This might be useful for corporate installations.
 
 ## Contributor Preferences
 
+> The sponsoring, Patreon and Discord options below belong to the original Stretchly project and its author, not to this version.
+
 *Stretchly* is free but you can support it by contributing code, translations or money. You will be rewarded by getting access to **Contributor Preferences**, ability to **Sync Preferences**, chat on **Discord** and more!
 
 You can access contributor features after authenticating with  Github or Patreon in the "Love Stretchly" section of Preferences.
@@ -663,14 +665,14 @@ You won't be able to chat on Discord.*
 
 For setup and usage, see the [tutorial](https://hovancik.net/stretchly/about), [Preferences](#preferences), and [Advanced Preferences](#advanced-preferences).
 
-Check [Known issues](#known-issues) and [existing issues](https://github.com/hovancik/stretchly/issues?q=is%3Aissue) before opening a [bug report](https://github.com/hovancik/stretchly/issues/new?template=bug_report.yml) or [feature request](https://github.com/hovancik/stretchly/issues/new?template=feature_request.yml). Please complete the relevant template.
+Check [Known issues](#known-issues) and [existing issues](https://github.com/thisishappenin/stretchly/issues?q=is%3Aissue) before opening a [bug report](https://github.com/thisishappenin/stretchly/issues/new?template=bug_report.yml) or [feature request](https://github.com/thisishappenin/stretchly/issues/new?template=feature_request.yml). Please complete the relevant template.
 
 For development discussions and contributions, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Development
-Feel free to join in the [development](https://github.com/hovancik/stretchly/blob/master/CONTRIBUTING.md) of this app via Issues and Pull Requests.
+Issues and Pull Requests are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-**Before implementing a feature, please open an Issue first, so we can be sure that no one else is working on it and that the changes will be accepted. It is important do discuss changes before implementing them (Why should we add it? How should it work? How should it look? Where will it be? ...).**
+**Before implementing a feature, please open an Issue first, so we can agree on it (why, how it should work and look).**
 
 ### Pre-requisites
 - [Node.js](https://nodejs.org/) (please use version specified in `package.json`)
@@ -679,7 +681,7 @@ Feel free to join in the [development](https://github.com/hovancik/stretchly/blo
 - [git](https://git-scm.com/)
 - [Github account](https://github.com/), if you'd like to upstream your changes
 
-Now you can clone the repo with `git clone https://github.com/hovancik/stretchly.git`. Change to the new created directory and run `npm i` to install node packages needed. If your system is running Python 3.12 and newer, you also need to install `setuptools`, for example with `pip install setuptools`, as `distutils` have been [deprecated](https://docs.python.org/3/library/distutils.html).
+Now you can clone the repo with `git clone https://github.com/thisishappenin/stretchly.git`. Change to the new created directory and run `npm i` to install node packages needed. If your system is running Python 3.12 and newer, you also need to install `setuptools`, for example with `pip install setuptools`, as `distutils` have been [deprecated](https://docs.python.org/3/library/distutils.html).
 
 Alternatively, open the repo in the included [Dev Container](https://containers.dev/) (`.devcontainer`). It is a minimal, hardened environment (non-root user, all Linux capabilities dropped, no forwarded ports) for editing code and running tests, which makes it a good fit for LLM coding agents. It is not meant for running the Stretchly GUI.
 
@@ -710,7 +712,7 @@ You can help to translate Stretchly on [Weblate](https://hosted.weblate.org/enga
 
 ## Known issues
 - On KDE Wayland, global shortcuts can appear configured but fail to work; see [electron/electron#42573](https://github.com/electron/electron/issues/42573). Use the tray menu and break controls, or quit Stretchly and restart with `stretchly --ozone-platform=x11`.
-- Windows Store build's autostart is not working, so was disabled. To use autostart, install Stretchly with the [regular installer](https://github.com/hovancik/stretchly/releases), or create a shortcut to Stretchly from `shell:AppsFolder` (Win+R) and move it to the `shell:startup` folder (Win+R).
+- Windows Store build's autostart is not working, so was disabled. To use autostart, install Stretchly with the [regular installer](https://github.com/thisishappenin/stretchly/releases), or create a shortcut to Stretchly from `shell:AppsFolder` (Win+R) and move it to the `shell:startup` folder (Win+R).
 - The Snap build may fail to start on native Wayland. Start it with the X11 backend (`stretchly --ozone-platform=x11`) as a workaround. See [#1693](https://github.com/hovancik/stretchly/issues/1693).
 - Wayland multi-display window placement issue puts all break windows on one monitor; start with X11 backend (`stretchly --ozone-platform=x11`) if needed, or set [`forceX11OnWayland`](#use-x11-backend-on-wayland) to make Stretchly do it automatically. See [electron/electron#48749](https://github.com/electron/electron/issues/48749).
 
@@ -837,4 +839,4 @@ Sounds used in this application are listed [here](http://freesound.org/people/ho
 This app uses [Noto Sans](https://fonts.google.com/specimen/Noto+Sans) fonts licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 ## License
-See [LICENSE](https://github.com/hovancik/stretchly/blob/master/LICENSE) file.
+See [LICENSE](LICENSE) file. Stretchly was created by Jan Hovancik and is released under the BSD-2-Clause license; his copyright notice is kept as the license requires.

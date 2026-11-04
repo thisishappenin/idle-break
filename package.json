@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hovancik/stretchly.git"
+    "url": "git+https://github.com/thisishappenin/stretchly.git"
   },
   "keywords": [
     "Stretchly",
@@ -33,9 +33,9 @@
   "author": "Jan Hovancik <jan@hovancik.net>",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/hovancik/stretchly/issues"
+    "url": "https://github.com/thisishappenin/stretchly/issues"
   },
-  "homepage": "https://hovancik.net/stretchly",
+  "homepage": "https://github.com/thisishappenin/stretchly",
   "build": {
     "appId": "net.hovancik.stretchly",
     "productName": "Stretchly",

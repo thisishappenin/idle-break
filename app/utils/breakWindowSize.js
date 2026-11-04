@@ -1,9 +1,9 @@
-export const MIN_BREAK_WINDOW_WIDTH = 360
-export const MIN_BREAK_WINDOW_HEIGHT = 120
+export const MIN_BREAK_WINDOW_WIDTH = 240
+export const MIN_BREAK_WINDOW_HEIGHT = 80
 
 const REFERENCE_DISPLAY_HEIGHT = 1080
 const WIDEST_ASPECT_RATIO = 16 / 9
-const MIN_SCALE = 0.9
+const MIN_SCALE = 1
 const MAX_SCALE = 2
 
 export function breakWindowScale (displayHeight) {

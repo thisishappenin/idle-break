@@ -61,7 +61,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Renamed the app and the GitHub repository to Idle Break (`thisishappenin/idle-break`): new name, installer, Windows app ID and command line command (`idlebreak`). It keeps its data in `%APPDATA%\Idle Break` and copies your settings, images and sounds from the old `%APPDATA%\Stretchly` folder the first time it starts
-- Small break popups keep one look at every resolution: the window and everything in it scale with the height of the display (a 360x120 design at 1080p), and on ultrawide monitors a percentage size is measured as if the display were 16:9
+- Small break popups keep one look at every resolution: the window and everything in it scale with the height of the display (a 360x120 design at 1080p, down to 240x80 with the size sliders), and on ultrawide monitors a percentage size is measured as if the display were 16:9
 - Removed code, files and dependencies that only served the Microsoft Store, Flatpak, Snap, macOS, Linux and Wayland (autostart, Do Not Disturb detection, tray icon images, packaging files, the blurred background option)
 - The Microsoft Store (appx) package is no longer built, and the README no longer carries macOS, Linux and Wayland notes
 - Windows only: macOS and Linux packaging, the snap, ARM and flatpak workflows and the macOS/Linux test runs are removed, since they can no longer be maintained

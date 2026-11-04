@@ -9,14 +9,14 @@ describe('breakWindowSize', () => {
   })
 
   it('does not let a small percentage make the window too small to hold its content', () => {
-    const size = breakWindowSize({ displayWidth: 1920, displayHeight: 1080, widthRatio: 0.12, heightRatio: 0.1 })
+    const size = breakWindowSize({ displayWidth: 1920, displayHeight: 1080, widthRatio: 0.05, heightRatio: 0.05 })
     expect(size).to.deep.equal({ width: MIN_BREAK_WINDOW_WIDTH, height: MIN_BREAK_WINDOW_HEIGHT })
   })
 
   it('keeps the same percentage on a bigger monitor but the minimum on a smaller one', () => {
     const request = { widthRatio: 0.2, heightRatio: 0.15 }
     expect(breakWindowSize({ displayWidth: 3840, displayHeight: 2160, ...request })).to.deep.equal({ width: 768, height: 324 })
-    expect(breakWindowSize({ displayWidth: 1366, displayHeight: 768, ...request })).to.deep.equal({ width: 324, height: 115 })
+    expect(breakWindowSize({ displayWidth: 1366, displayHeight: 768, ...request })).to.deep.equal({ width: 273, height: 115 })
   })
 
   it('sizes the width as if an ultrawide monitor were 16:9, so the popup is not stretched', () => {
@@ -28,19 +28,19 @@ describe('breakWindowSize', () => {
 
   it('keeps the same look at every resolution by scaling the minimum size with the display height', () => {
     const small = { widthRatio: 0.12, heightRatio: 0.1 }
-    expect(breakWindowSize({ displayWidth: 1920, displayHeight: 1080, ...small })).to.deep.equal({ width: MIN_BREAK_WINDOW_WIDTH, height: MIN_BREAK_WINDOW_HEIGHT })
-    expect(breakWindowSize({ displayWidth: 2560, displayHeight: 1440, ...small })).to.deep.equal({ width: 480, height: 160 })
-    expect(breakWindowSize({ displayWidth: 3840, displayHeight: 2160, ...small })).to.deep.equal({ width: 720, height: 240 })
-    expect(breakWindowSize({ displayWidth: 3440, displayHeight: 1440, ...small })).to.deep.equal({ width: 480, height: 160 })
+    expect(breakWindowSize({ displayWidth: 1920, displayHeight: 1080, ...small })).to.deep.equal({ width: 240, height: 108 })
+    expect(breakWindowSize({ displayWidth: 2560, displayHeight: 1440, ...small })).to.deep.equal({ width: 320, height: 144 })
+    expect(breakWindowSize({ displayWidth: 3840, displayHeight: 2160, ...small })).to.deep.equal({ width: 480, height: 216 })
+    expect(breakWindowSize({ displayWidth: 3440, displayHeight: 1440, ...small })).to.deep.equal({ width: 320, height: 144 })
   })
 
-  it('does not shrink the popup below 90% of its design size on small displays', () => {
-    expect(breakWindowSize({ displayWidth: 1280, displayHeight: 720, widthRatio: 0.12, heightRatio: 0.1 })).to.deep.equal({ width: 324, height: 108 })
+  it('does not shrink the popup below the minimum on small displays', () => {
+    expect(breakWindowSize({ displayWidth: 1280, displayHeight: 720, widthRatio: 0.12, heightRatio: 0.1 })).to.deep.equal({ width: MIN_BREAK_WINDOW_WIDTH, height: MIN_BREAK_WINDOW_HEIGHT })
   })
 
   it('never makes the window bigger than the display', () => {
-    expect(breakWindowSize({ displayWidth: 320, displayHeight: 100, widthRatio: 0.1, heightRatio: 0.1 }))
-      .to.deep.equal({ width: 320, height: 100 })
+    expect(breakWindowSize({ displayWidth: 200, displayHeight: 60, widthRatio: 0.1, heightRatio: 0.1 }))
+      .to.deep.equal({ width: 200, height: 60 })
     expect(breakWindowSize({ displayWidth: 1920, displayHeight: 1080, widthRatio: 1.5, heightRatio: 1.5 }))
       .to.deep.equal({ width: 1920, height: 1080 })
   })

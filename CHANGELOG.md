@@ -58,6 +58,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- The Microsoft Store (appx) package is no longer built, and the README no longer carries macOS, Linux and Wayland notes
 - Windows only: macOS and Linux packaging, the snap, ARM and flatpak workflows and the macOS/Linux test runs are removed, since they can no longer be maintained
 - This is now a standalone version of Stretchly: the update check, the "Download latest version" links and the bug report link point to this repository's releases and issues, and pushing a `v*` tag builds installers and attaches them as a draft release
 - The Theme tab preview is a single slim row with the Show popup now button; the tray number mock-ups are gone since the real tray icon updates live

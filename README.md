@@ -186,7 +186,7 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `trayIconFont` - on Windows, the font used to draw the number in the `text` tray icon style. The default `DejaVu Sans` is bundled with *Stretchly*; Preferences list a few common Windows fonts, and the preferences file accepts the name of any installed font. An empty value uses the built-in pictures instead
 - `trayIconFontSize` - height of the tray number as a fraction of the icon, from `0.3` to `1` (default `0.5`)
 - `trayIconCrispDigits` - draw the tray number with pure pixels instead of smoothed edges (off by default)
-- `trayPanel` - on Windows and macOS, left-clicking the tray icon opens a small panel with the countdown, buttons to shorten or extend the next work session by 5 minutes, start or pause breaks, the idle reset switch, Preferences and Quit; right-click opens the usual menu. Set to `false` to use only the menu (on by default)
+- `trayPanel` - left-clicking the tray icon opens a small panel with the countdown, buttons to shorten or extend the next work session by 5 minutes, start or pause breaks, the idle reset switch, Preferences and Quit; right-click opens the usual menu. Set to `false` to use only the menu (on by default)
 - `countdownColorCustom` and `countdownColor` - use your own colour (for example `#ffcc00`) for the countdown in the break popup and the tray panel, instead of the automatic one that follows the theme (off by default)
 - `trayNumberColorCustom` and `trayNumberColor` - on Windows, use your own colour for the number in the number-only tray icon instead of black or white to match the taskbar (off by default; one colour is used on both light and dark taskbars)
 - `trayPanelThemeColor` - the tray panel uses the Appearance colour chosen on the Theme tab, like the break popups; set to `false` to follow only the light or dark app theme (on by default)
@@ -300,7 +300,7 @@ You can also set `naturalBreaksCheckInterval` in milliseconds: how often idle ti
 On Windows, set `monitorMeetings` to `true` to detect meetings by checking whether any app is using the microphone. While a meeting is running, the break timer keeps counting down but the break itself waits until the meeting ends, and idle detection does not reset the timer. `monitorMeetingsCheckInterval` (default `5000` milliseconds) sets how often this is checked. Once the meeting ends, the deferred break starts after `meetingBreakDelay` milliseconds (default `5000`), unless a new meeting starts in the meantime. Other platforms are not supported yet.
 
 #### Do Not Disturb check interval
-In the preferences file, set `monitorDndCheckInterval` in milliseconds: how often Do Not Disturb status is checked. A higher number means lower CPU and energy usage, but slightly less responsive detection. On macOS and Linux this check can be relatively expensive, so increasing it can noticeably lower energy usage. Default value is `2000` which is 2 seconds.
+In the preferences file, set `monitorDndCheckInterval` in milliseconds: how often Do Not Disturb status is checked. A higher number means lower CPU and energy usage, but slightly less responsive detection. Default value is `2000` which is 2 seconds.
 
 #### Volume for break sounds [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
 In the preferences file, set `volume` to your preferred value. Default value is `1`, which is 100% volume. Set it, for example, to `0.61` for 61% volume. This applies to both start and end break sounds.
@@ -365,7 +365,7 @@ If you'd like to disable the shortcut, set value to empty string `""`. That's th
 #### Appearance [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
 In the preferences file, change `themeSource: 'system'` to either `'light'` or `'dark'` to always use the specified theme.
 
-In the preferences file, change `trayIconThemeSource: 'system'` to either `'light'` or `'dark'` to force the tray icon's light or dark variant instead of following the system theme. On Windows, `'system'` follows the Windows mode used by the taskbar. On macOS and Linux, it follows the same light/dark theme as the rest of Stretchly (the OS theme, or whatever `themeSource` is set to). On macOS this affects colour icons only; monochrome icons are tinted by the system.
+In the preferences file, change `trayIconThemeSource: 'system'` to either `'light'` or `'dark'` to force the tray icon's light or dark variant instead of following the system theme. On Windows, `'system'` follows the Windows mode used by the taskbar.
 
 #### Break window color
 In the preferences file, change `mainColor` to whatever color you like.
@@ -374,7 +374,7 @@ In the preferences file, change `mainColor` to whatever color you like.
 To show the Welcome window again on the next start, change `"isFirstRun"` to `true`.
 
 #### Theme transparency [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
-To specify how solid the break window should be when Theme transparency is enabled, set the value of `opacity` from `0` to `1` (which is in turn 0 to 100%). If you want the break window to have a blurred background, set the value of `blurredBackground` to `true` (for macOS only).
+To specify how solid the break window should be when Theme transparency is enabled, set the value of `opacity` from `0` to `1` (which is in turn 0 to 100%).
 
 #### Break window size [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
 To specify the size of the break window, set the value of `breakWindowHeight` and `breakWindowWidth` from `0` to `0.99` (which is in turn 0 to 99% of the size of the screen). Don't set 100% as that's fullscreen. The window is never made smaller than 360 by 120 pixels, so its text always fits, however small the monitor.
@@ -400,21 +400,6 @@ By editing `appExclusions` in the preferences file, you can automatically contro
 
 To pause breaks while any of the listed programs are running, use `"rule": "pause"`:
 
-Linux
-```
-"appExclusions": [
-    {
-        "rule": "pause",
-        "active": true,
-        "commands": [
-            "/usr/bin/vlc",
-            "signal-desktop"
-        ]
-    }
-]
-```
-
-Windows
 ```
 "appExclusions": [
     {
@@ -430,21 +415,6 @@ Windows
 
 To allow breaks only while at least one listed program is running, use `"rule": "resume"`. Breaks are paused when none of the listed programs are running:
 
-Linux
-```
-"appExclusions": [
-    {
-        "rule": "resume",
-        "active": true,
-        "commands": [
-            "/usr/bin/vlc",
-            "signal-desktop"
-        ]
-    }
-]
-```
-
-Windows
 ```
 "appExclusions": [
     {
@@ -488,7 +458,7 @@ Inspired by the screen-edge vignette used in video games to indicate low health,
 #### Hide menubar/tray icon [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
 To hide Stretchly icon in menubar/tray, set the value of `showTrayIcon` from `true` to `false`.
 
-Note that this will disable graphical way of opening Stretchly Preferences. To access Preferences, you will have to use command line options (ie: `stretchly preferences` on Linux).
+Note that this will disable graphical way of opening Stretchly Preferences. To access Preferences, you will have to use command line options (ie: `stretchly preferences`).
 
 #### Show tray menu in Strict Mode
 If you want to show tray menu even while in Strict mode, set `showTrayMenuInStrictMode` to `true`.
@@ -512,13 +482,6 @@ This might be useful for corporate installations.
 If you want to hide Strict Mode preferences section from the Preferences window, set `hideStrictModePreferences` to `true`.
 
 This might be useful for corporate installations.
-
-#### Use X11 backend on Wayland
-On Linux Wayland sessions, all break windows can open on one monitor (see [Known issues](#known-issues)). If you want Stretchly to always use the X11 backend (XWayland) instead, set `forceX11OnWayland` to `true`. Stretchly will then restart itself with `--ozone-platform=x11` on start, however it was launched (autostart, app menu or terminal), so you don't need to edit launcher files.
-
-This has no effect in the Flatpak build, which already uses X11. A `--ozone-platform` switch on the command line is never overridden: if you start Stretchly with one, it won't restart, even with `forceX11OnWayland` set to `true`. If Stretchly starts on Wayland while this is off, it writes a note to the log about features that may not work there.
-
-The X11 backend does not fully fix global keyboard shortcuts. On GNOME, for example, they register but only work while an X11 window has focus.
 
 #### Set automatic start from congfig file
 If you want autostart to work based on the value from config file, set `openAtLogin`.
@@ -591,7 +554,6 @@ Issues and Pull Requests are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Pre-requisites
 - [Node.js](https://nodejs.org/) (please use version specified in `package.json`)
-  - Linux/MacOS - you might want to use [Node Version Manager](https://github.com/nvm-sh/nvm) to install specific version
   - Windows - download [installer](https://nodejs.org/en/download/) for specific version; during installation *check* “Install Additional Tools for Node.js”
 - [git](https://git-scm.com/)
 - [Github account](https://github.com/), if you'd like to upstream your changes
@@ -626,12 +588,6 @@ You can help to translate Stretchly on [Weblate](https://hosted.weblate.org/enga
 
 
 ## Known issues
-- On KDE Wayland, global shortcuts can appear configured but fail to work; see [electron/electron#42573](https://github.com/electron/electron/issues/42573). Use the tray menu and break controls, or quit Stretchly and restart with `stretchly --ozone-platform=x11`.
-- Windows Store build's autostart is not working, so was disabled. To use autostart, install Stretchly with the [regular installer](https://github.com/thisishappenin/stretchly/releases), or create a shortcut to Stretchly from `shell:AppsFolder` (Win+R) and move it to the `shell:startup` folder (Win+R).
-- Wayland multi-display window placement issue puts all break windows on one monitor; start with X11 backend (`stretchly --ozone-platform=x11`) if needed, or set [`forceX11OnWayland`](#use-x11-backend-on-wayland) to make Stretchly do it automatically. See [electron/electron#48749](https://github.com/electron/electron/issues/48749).
-
-### MacOS
-- users experiencing their Dock hiding after a break, requiring command + tab or a mouse click to get focus back, check System Preferences > Users & Groups > {User} > Login Items. If Hide is checked for Stretchly, uncheck it, it should solve the issue.
 
 ### Windows
 - users who upgraded to Windows 10 from previous Windows versions might be in "Do Not Disturb mode" all the time so they need to check "Show breaks even in Do Not Disturb mode"

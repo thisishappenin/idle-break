@@ -377,7 +377,7 @@ To show the Welcome window again on the next start, change `"isFirstRun"` to `tr
 To specify how solid the break window should be when Theme transparency is enabled, set the value of `opacity` from `0` to `1` (which is in turn 0 to 100%).
 
 #### Break window size [![Contributor Preferences](https://img.shields.io/badge/Contributor_Preferences-✔-success)](#contributor-preferences)
-To specify the size of the break window, set the value of `breakWindowHeight` and `breakWindowWidth` from `0` to `0.99` (which is in turn 0 to 99% of the size of the screen). Don't set 100% as that's fullscreen. The window is never made smaller than 240 by 80 pixels, so its text always fits. Small popups keep one look and scale with the height of the display (a 360 by 120 design at 1080p), and on an ultrawide monitor the width is measured as if the display were 16:9.
+To specify the size of the break window, set the value of `breakWindowHeight` and `breakWindowWidth` from `0.01` to `1` (which is in turn 1 to 100% of the size of the screen). At 100% the window covers the whole screen without being fullscreen mode. The window is never made smaller than 240 by 80 pixels, so its text always fits. Small popups keep one look and scale with the height of the display (a 360 by 120 design at 1080p), and on an ultrawide monitor the width is measured as if the display were 16:9.
 
 The position and size are remembered separately for each screen resolution (including its Windows scaling) and switch automatically when you move between, for example, a laptop and a widescreen monitor. They are saved as `breakWindowProfiles` in the preferences file, and a screen you have not adjusted yet starts from your current values.
 

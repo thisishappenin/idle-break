@@ -38,6 +38,19 @@ describe('breakWindowSize', () => {
     expect(breakWindowSize({ displayWidth: 1280, displayHeight: 720, widthRatio: 0.12, heightRatio: 0.1 })).to.deep.equal({ width: MIN_BREAK_WINDOW_WIDTH, height: MIN_BREAK_WINDOW_HEIGHT })
   })
 
+  it('lets 100% cover the whole display, even an ultrawide one, and the last stretch blends in smoothly', () => {
+    expect(breakWindowSize({ displayWidth: 3440, displayHeight: 1440, widthRatio: 1, heightRatio: 1 })).to.deep.equal({ width: 3440, height: 1440 })
+    expect(breakWindowSize({ displayWidth: 1920, displayHeight: 1080, widthRatio: 1, heightRatio: 1 })).to.deep.equal({ width: 1920, height: 1080 })
+    expect(breakWindowSize({ displayWidth: 3440, displayHeight: 1440, widthRatio: 0.85, heightRatio: 0.85 }).width).to.equal(2176)
+    const almost = breakWindowSize({ displayWidth: 3440, displayHeight: 1440, widthRatio: 0.99, heightRatio: 0.99 }).width
+    expect(almost).to.be.within(3300, 3440)
+  })
+
+  it('gives the minimum size for 1%', () => {
+    expect(breakWindowSize({ displayWidth: 1920, displayHeight: 1080, widthRatio: 0.01, heightRatio: 0.01 }))
+      .to.deep.equal({ width: MIN_BREAK_WINDOW_WIDTH, height: MIN_BREAK_WINDOW_HEIGHT })
+  })
+
   it('never makes the window bigger than the display', () => {
     expect(breakWindowSize({ displayWidth: 200, displayHeight: 60, widthRatio: 0.1, heightRatio: 0.1 }))
       .to.deep.equal({ width: 200, height: 60 })

@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- The break window width and height sliders go from 1 to 100 percent; 100 percent covers the whole screen, ultrawide ones too
 - The break window position and size are remembered for each screen resolution and switch automatically when you change screens, for example between a laptop and a widescreen monitor
 - Setting to pause the break countdown while an app or website is in front (Settings tab, Windows): list app names or words from the window title, such as a website name, and the countdown waits until you switch away. A break that is already running is not interrupted
 - Optional custom colour for the countdown in the break popup and the tray panel (Theme tab, under Opacity), and a separate custom colour for the number in the Windows tray icon (Theme tab, Menubar section)

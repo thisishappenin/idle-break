@@ -108,6 +108,7 @@ let syncPreferencesWin = null
 let myStretchlyWin = null
 let settings
 let pausedForSuspendOrLock = false
+let awayStartedAt = 0
 let nextIdea = null
 let lastBreak = null
 let danger = 0
@@ -574,7 +575,12 @@ function onSuspendOrLock () {
       log.info('Stretchly: not pausing for suspendOrLock because paused already')
     } else {
       pausedForSuspendOrLock = true
-      pauseBreaks(1)
+      awayStartedAt = Date.now()
+      if (breakPlanner.holdForAway()) {
+        log.info('Stretchly: holding the countdown while the computer is locked or asleep')
+      } else {
+        pauseBreaks(1)
+      }
       updateTray()
     }
   } else {
@@ -586,7 +592,13 @@ function onResumeOrUnlock () {
   log.info('System: resume or unlock')
   if (pausedForSuspendOrLock) {
     pausedForSuspendOrLock = false
-    resumeBreaks(false)
+    if (breakPlanner.isPaused) {
+      resumeBreaks(false)
+    } else {
+      const awayMs = Date.now() - awayStartedAt
+      const result = breakPlanner.returnFromAway(awayMs)
+      log.info(`Stretchly: back after ${Math.round(awayMs / 1000)} seconds away, ${result === 'reset' ? 'restarting' : 'continuing'} the countdown`)
+    }
   } else {
     // correct the planner for the time spent in suspend
     breakPlanner.correctScheduler()

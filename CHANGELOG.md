@@ -63,6 +63,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - time-to-break tray icon no longer requests a missing number icon when more than 99 minutes remain
 
 ### Changed
+- Locking the computer or putting it to sleep freezes the countdown, which carries on from the same point when you return, unless you were away longer than the idle reset time, in which case it starts over
 - Pausing for an app on the pause list, or for a program in an `appExclusions` pause rule, freezes the countdown and carries on from the same point when it ends, instead of restarting it
 - Renamed the app and the GitHub repository to Idle Break (`thisishappenin/idle-break`): new name, installer, Windows app ID and command line command (`idlebreak`). It keeps its data in `%APPDATA%\Idle Break` and copies your settings, images and sounds from the old `%APPDATA%\Stretchly` folder the first time it starts
 - Small break popups keep one look at every resolution: the window and everything in it scale with the height of the display (a 360x120 design at 1080p, down to 240x80 with the size sliders), and on ultrawide monitors a percentage size is measured as if the display were 16:9

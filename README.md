@@ -445,7 +445,9 @@ For Windows, note that paths not specified. This is because on Windows, the API 
 You can also specify `appExclusionsCheckInterval` in milliseconds: lower number means more often checks, but also higher CPU usage. Default value is `2000` which is 2 seconds.
 
 #### Pause breaks on Suspend/Lock ![Not Reliable](https://img.shields.io/badge/Not_Reliable-β-yellow)
-If you don't want to reset breaks once system is back from Suspend/Lock, set `pauseForSuspendOrLock` to `false`.
+By default the countdown to the next break freezes while the computer is locked or asleep. When you come back, it carries on from where it stopped if you were away for no longer than the idle reset time ("Reset the break timer after being idle for", 5 minutes by default), and starts over if you were away longer. If "Reset the break timer when I am away" is turned off, it always carries on. A break that is running when the computer locks is ended and the countdown starts over.
+
+Set `pauseForSuspendOrLock` to `false` (the checkbox "Pause breaks while the computer is locked or asleep" in Settings) if you want the countdown to keep running while the computer is locked or asleep.
 
 #### Monitor to show breaks on ![Not Reliable](https://img.shields.io/badge/Not_Reliable-β-yellow)
 In case you have disabled showing of breaks on all monitors, you can specify which one should contain the break window. Set `screen` value to one of the following:

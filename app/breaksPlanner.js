@@ -28,6 +28,7 @@ class BreaksPlanner extends EventEmitter {
     this.usageTimer = null
     this.lastBreakFinishedAt = null
     this.heldForApp = false
+    this.heldForAway = false
 
     this.on('microbreakStarted', (shouldPlaySound) => {
       this.idleSnapshot = null
@@ -44,7 +45,7 @@ class BreaksPlanner extends EventEmitter {
     })
 
     this.naturalBreaksManager.on('clearBreakScheduler', () => {
-      if (this.isHoldingForUsage) {
+      if (this.isHoldingForUsage || this.heldForAway) {
         this.naturalBreaksManager.isSchedulerCleared = false
         return
       }
@@ -60,6 +61,7 @@ class BreaksPlanner extends EventEmitter {
     })
 
     this.naturalBreaksManager.on('naturalBreakFinished', (idleTime) => {
+      if (this.heldForAway) return
       if (this.isHoldingForUsage) {
         this.resumeAfterUsage()
         return
@@ -169,6 +171,26 @@ class BreaksPlanner extends EventEmitter {
         }
       }
     })
+  }
+
+  holdForAway () {
+    const scheduler = this.scheduler
+    const inBreak = scheduler?.reference === 'finishMicrobreak' || scheduler?.reference === 'finishBreak'
+    if (this.isPaused || !scheduler || scheduler.reference === null || inBreak) return false
+    this.heldForAway = scheduler.hold()
+    return this.heldForAway || scheduler.held
+  }
+
+  returnFromAway (awayMs) {
+    const wasHeld = this.heldForAway
+    this.heldForAway = false
+    const resetAfter = this.settings.get('naturalBreaks') ? this.settings.get('naturalBreaksInactivityResetTime') : Infinity
+    if (awayMs > resetAfter) {
+      this.reset()
+      return 'reset'
+    }
+    if (wasHeld) this.scheduler?.release()
+    return 'resumed'
   }
 
   resumeFromAppPause () {
@@ -371,6 +393,7 @@ class BreaksPlanner extends EventEmitter {
 
   clear () {
     this.heldForApp = false
+    this.heldForAway = false
     this.stopUsageWatch()
     this.scheduler.cancel()
     this.deferredBreakEvent = null

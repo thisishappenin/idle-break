@@ -53,7 +53,8 @@ class BreaksPlanner extends EventEmitter {
         this.idleSnapshot = {
           reference: this.scheduler.reference,
           timeLeft: this.scheduler.timeLeft,
-          breakNumber: this.breakNumber
+          breakNumber: this.breakNumber,
+          fraction: this.remainingFraction
         }
         this.clear()
         log.info('Stretchly: pausing breaks because of idle time')
@@ -500,21 +501,28 @@ class BreaksPlanner extends EventEmitter {
 
   get _progressInterval () {
     if (!this.scheduler) return null
-    const { reference, delay } = this.scheduler
+    const { reference, total } = this.scheduler
 
     if (reference === 'startMicrobreak' || reference === 'startBreak') {
-      return delay
+      return total
     }
 
     if (reference === 'startBreakNotification') {
-      return delay + this.settings.get('breakNotificationInterval')
+      return total + this.settings.get('breakNotificationInterval')
     }
 
     if (reference === 'startMicrobreakNotification') {
-      return delay + this.settings.get('microbreakNotificationInterval')
+      return total + this.settings.get('microbreakNotificationInterval')
     }
 
     return null
+  }
+
+  get remainingFraction () {
+    const total = this._progressInterval
+    const remaining = this.timeToNextBreak
+    if (total === null || total <= 0 || remaining === null) return this.idleSnapshot?.fraction ?? null
+    return Math.max(0, Math.min(1, remaining / total))
   }
 
   get progressPercentage () {

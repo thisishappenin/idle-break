@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- New tray icon style on Windows: a ring that shortens clockwise until nothing is left as the next break approaches, with a pause symbol in the middle while breaks are paused (including for an app on the pause list) and a colour that moves towards green as idle time grows
+
+### Fixed
+- The progress tray icon no longer jumps back after a pause, because the progress is measured against the full length of the countdown
 
 ## [1.23.0] - 2026-11-06
 ### Added

@@ -92,3 +92,47 @@ describe('breaksPlanner while the computer is locked or asleep', () => {
     expect(planner.holdForAway()).to.equal(false)
   })
 })
+
+describe('breaksPlanner remaining fraction for the tray ring', () => {
+  let planner
+
+  beforeEach(() => {
+    vi.useFakeTimers()
+    planner = new BreaksPlanner(settingsWith())
+    planner.nextBreak()
+  })
+
+  afterEach(() => {
+    planner.clear()
+    vi.useRealTimers()
+  })
+
+  it('shrinks from 1 towards 0 as the break gets closer', () => {
+    expect(planner.remainingFraction).to.equal(1)
+    vi.advanceTimersByTime(10 * MINUTE)
+    expect(planner.remainingFraction).to.be.within(0.749, 0.751)
+    vi.advanceTimersByTime(30 * MINUTE - 1)
+    expect(planner.remainingFraction).to.be.below(0.001)
+  })
+
+  it('keeps counting against the full length after a pause instead of jumping back to a full ring', () => {
+    vi.advanceTimersByTime(10 * MINUTE)
+    planner.holdForAway()
+    vi.advanceTimersByTime(60 * MINUTE)
+    planner.returnFromAway(MINUTE)
+    expect(planner.remainingFraction).to.be.within(0.749, 0.751)
+    vi.advanceTimersByTime(10 * MINUTE)
+    expect(planner.remainingFraction).to.be.within(0.499, 0.501)
+  })
+
+  it('has no fraction during a break, and no countdown when nothing is scheduled', () => {
+    planner.emit('microbreakStarted', false)
+    expect(planner.remainingFraction).to.equal(null)
+  })
+
+  it('remembers where the ring was when idle time cleared the countdown', () => {
+    vi.advanceTimersByTime(20 * MINUTE)
+    planner.naturalBreaksManager.emit('clearBreakScheduler')
+    expect(planner.remainingFraction).to.be.within(0.499, 0.501)
+  })
+})

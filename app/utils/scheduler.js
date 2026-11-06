@@ -2,6 +2,7 @@ class Scheduler {
   constructor (func, delay, reference = null) {
     this.timer = null
     this.delay = delay
+    this.total = delay
     this.func = func
     this.reference = reference
     this.remaining = null
@@ -47,12 +48,14 @@ class Scheduler {
   adjust (milliseconds, minimum = 1000) {
     if (this.held) {
       this.remaining = Math.max(minimum, this.remaining + milliseconds)
+      this.total = Math.max(this.remaining, this.total + milliseconds)
       return true
     }
     if (this.timer === null) return false
     const timeLeft = this.timeLeft
     clearTimeout(this.timer)
     this.delay = Math.max(minimum, timeLeft + milliseconds)
+    this.total = Math.max(this.delay, this.total + milliseconds)
     this.plan()
     return true
   }

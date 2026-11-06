@@ -1,4 +1,5 @@
 import { vi } from 'vitest'
+import { expect } from 'chai'
 import 'chai/register-should'
 import Scheduler from '../app/utils/scheduler'
 
@@ -186,4 +187,33 @@ describe('scheduler', function () {
         resolve()
       }, 160)
     }))
+})
+
+describe('Scheduler total', () => {
+  it('keeps the full length after a hold and release', async () => {
+    const { default: Scheduler } = await import('../app/utils/scheduler.js')
+    vi.useFakeTimers()
+    const scheduler = new Scheduler(() => {}, 40 * 60000, 'startMicrobreak')
+    scheduler.plan()
+    vi.advanceTimersByTime(10 * 60000)
+    scheduler.hold()
+    scheduler.release()
+    expect(scheduler.total).to.equal(40 * 60000)
+    expect(scheduler.timeLeft).to.be.within(30 * 60000 - 100, 30 * 60000)
+    scheduler.cancel()
+    vi.useRealTimers()
+  })
+
+  it('follows adjustments, so a longer or shorter session changes the length', async () => {
+    const { default: Scheduler } = await import('../app/utils/scheduler.js')
+    vi.useFakeTimers()
+    const scheduler = new Scheduler(() => {}, 40 * 60000, 'startMicrobreak')
+    scheduler.plan()
+    scheduler.adjust(5 * 60000)
+    expect(scheduler.total).to.equal(45 * 60000)
+    scheduler.adjust(-10 * 60000)
+    expect(scheduler.total).to.equal(35 * 60000)
+    scheduler.cancel()
+    vi.useRealTimers()
+  })
 })

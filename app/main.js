@@ -21,6 +21,7 @@ import {
   minutesRemaining, insideWindowsPortable
 } from './utils/utils.js'
 import { migrateLegacyUserData } from './utils/legacyUserData.js'
+import { TrayRingIcons } from './utils/trayRingDrawer.js'
 import { DISPLAY_PROFILE_KEYS, displayProfileKey, saveDisplayProfile, applyDisplayProfile } from './utils/displayProfiles.js'
 import IdeasLoader from './utils/ideasLoader.js'
 import BreaksPlanner from './breaksPlanner.js'
@@ -29,7 +30,7 @@ import TrayNumberIcons from './utils/trayNumberIcons.js'
 import TrayPanel from './utils/trayPanel.js'
 import { buildTrayPanelState } from './utils/trayPanelState.js'
 import { breakWindowSize } from './utils/breakWindowSize.js'
-import { countdownColor, trayNumberColor } from './utils/countdownColor.js'
+import { countdownColor, trayNumberColor, hexToRgb } from './utils/countdownColor.js'
 import { UntilMorning } from './utils/untilMorning.js'
 import AutostartManager from './utils/autostartManager.js'
 import Command from './utils/commands.js'
@@ -692,8 +693,31 @@ function drawnTrayNumberPath (number, useDarkColors) {
   })
 }
 
+let trayRingIcons = null
+
+function ringTrayIconPath (useDarkColors) {
+  if (process.platform !== 'win32') return null
+  const paused = breakPlanner.isPaused || breakPlanner.dndManager.isOnDnd || breakPlanner.appExclusionsManager.isSchedulerCleared
+  const fraction = breakPlanner.remainingFraction
+  if (fraction === null && !paused) return null
+  const resetAfter = settings.get('naturalBreaksInactivityResetTime')
+  const idle = settings.get('naturalBreaks') ? breakPlanner.naturalBreaksManager.idleTime : 0
+  const custom = trayNumberColor(settings)
+  trayRingIcons ??= new TrayRingIcons(join(app.getPath('userData'), 'tray-ring-icons'))
+  return trayRingIcons.pathFor({
+    fraction,
+    paused,
+    idleFraction: resetAfter > 0 ? idle / resetAfter : 0,
+    base: custom ? hexToRgb(custom) : useDarkColors ? [255, 255, 255] : [0, 0, 0]
+  })
+}
+
 function trayIconPath () {
   const useDarkColors = trayIconUseDarkColors()
+  if (settings.get('trayIconStyle') === 'ring') {
+    const ringPath = ringTrayIconPath(useDarkColors)
+    if (ringPath) return ringPath
+  }
   const params = {
     paused:
       breakPlanner.isPaused ||

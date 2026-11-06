@@ -23,9 +23,12 @@ async function showPauseWhileUsingSummary () {
 const liveSliders = ['breakWindowWidth', 'breakWindowHeight', 'opacity']
 
 function updateTrayOptionVisibility () {
-  const numberOnly = document.querySelector('#trayIconStyle').value === 'text' &&
-    document.body.classList.contains('win32')
-  document.querySelectorAll('.tray-number-only').forEach(row => row.classList.toggle('hidden', !numberOnly))
+  const style = document.querySelector('#trayIconStyle').value
+  const onWindows = document.body.classList.contains('win32')
+  document.querySelectorAll('.tray-number-only').forEach(row => {
+    const shown = onWindows && (style === 'text' || (style === 'ring' && row.classList.contains('tray-ring-also')))
+    row.classList.toggle('hidden', !shown)
+  })
 }
 
 function updateCountdownColorControl () {

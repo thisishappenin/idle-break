@@ -541,6 +541,16 @@
               <label data-i18next="preferences.theme.trayNumberColorCustom" for="trayNumberColorCustom"></label>
               <input type="color" id="trayNumberColor" aria-label="Tray number colour">
             </div>
+            <div class="tray-ring-only">
+              <label data-i18next="preferences.theme.trayRingThickness" for="trayRingThickness"></label>
+              <input type="range" min="10" max="35" step="1" name="trayRingThickness" data-divisor="0.01" id="trayRingThickness">
+              <output data-unit="percent"></output>
+            </div>
+            <div class="tray-ring-only color-option">
+              <input type="checkbox" value="trayRingIdleColorEnabled" id="trayRingIdleColorEnabled">
+              <label data-i18next="preferences.theme.trayRingIdleColor" for="trayRingIdleColorEnabled"></label>
+              <input type="color" id="trayRingIdleColor" aria-label="Idle ring colour">
+            </div>
             <div class="tray-number-only">
               <input type="checkbox" value="trayIconCrispDigits" id="trayIconCrispDigits">
               <label data-i18next="preferences.theme.trayIconCrispDigits" for="trayIconCrispDigits"></label>

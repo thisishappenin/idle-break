@@ -178,6 +178,8 @@
       "trayIconStyleRing": "Ring that shrinks to the next break (Windows)",
       "countdownColorCustom": "Custom countdown colour (popup and panel)",
       "trayNumberColorCustom": "Custom number or ring colour (the same on light and dark taskbars)",
+      "trayRingThickness": "Ring thickness:",
+      "trayRingIdleColor": "Turn the ring this colour as idle time grows",
       "previewPopup": "Show popup now",
       "previewPopupHint": "Changing a colour, transparency, size or position shows the real popup on your screen for a few seconds.",
       "trayIconFont": "Font for the number (Windows, number-only style):",

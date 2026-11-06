@@ -25,15 +25,23 @@ const liveSliders = ['breakWindowWidth', 'breakWindowHeight', 'opacity']
 function updateTrayOptionVisibility () {
   const style = document.querySelector('#trayIconStyle').value
   const onWindows = document.body.classList.contains('win32')
-  document.querySelectorAll('.tray-number-only').forEach(row => {
-    const shown = onWindows && (style === 'text' || (style === 'ring' && row.classList.contains('tray-ring-also')))
+  document.querySelectorAll('.tray-number-only, .tray-ring-only').forEach(row => {
+    const forText = row.classList.contains('tray-number-only')
+    const forRing = row.classList.contains('tray-ring-only') || row.classList.contains('tray-ring-also')
+    const shown = onWindows && ((style === 'text' && forText) || (style === 'ring' && forRing))
     row.classList.toggle('hidden', !shown)
   })
 }
 
+const COLOR_SWITCHES = {
+  countdownColor: 'countdownColorCustom',
+  trayNumberColor: 'trayNumberColorCustom',
+  trayRingIdleColor: 'trayRingIdleColorEnabled'
+}
+
 function updateCountdownColorControl () {
-  for (const name of ['countdownColor', 'trayNumberColor']) {
-    document.querySelector(`#${name}`).disabled = !document.querySelector(`#${name}Custom`).checked
+  for (const [name, switchId] of Object.entries(COLOR_SWITCHES)) {
+    document.querySelector(`#${name}`).disabled = !document.querySelector(`#${switchId}`).checked
   }
 }
 
@@ -376,7 +384,7 @@ window.onload = async (e) => {
     }
   })
 
-  for (const name of ['countdownColor', 'trayNumberColor']) {
+  for (const name of Object.keys(COLOR_SWITCHES)) {
     const picker = document.querySelector(`#${name}`)
     picker.value = settings[name]
     if (!eventsAttached) {

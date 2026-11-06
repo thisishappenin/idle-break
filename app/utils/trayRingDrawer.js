@@ -5,15 +5,15 @@ import { encodeIco } from './icoEncoder.js'
 export const RING_SIZES = [16, 20, 24, 32, 40, 48]
 export const RING_STEPS = 60
 export const IDLE_STEPS = 10
-export const IDLE_COLOR = [76, 175, 80]
+export const DEFAULT_IDLE_COLOR = [229, 57, 53]
+export const DEFAULT_THICKNESS = 0.22
 
 const SUPERSAMPLE = 4
-const OUTER_RADIUS = 0.46
-const THICKNESS = 0.15
+const OUTER_RADIUS = 0.48
 const TRACK_ALPHA = 0.3
-const BAR_WIDTH = 0.1
-const BAR_GAP = 0.1
-const BAR_HEIGHT = 0.34
+const BAR_WIDTH = 0.4
+const BAR_HALF_GAP = 0.22
+const BAR_HALF_HEIGHT = 0.62
 
 const clamp01 = value => Math.min(1, Math.max(0, value))
 
@@ -29,15 +29,15 @@ export function mixColors (from, to, amount) {
   return from.map((value, index) => Math.round(value + (to[index] - value) * amount))
 }
 
-export function drawRing ({ size, fraction, paused, color }) {
+export function drawRing ({ size, fraction, paused, color, thickness = DEFAULT_THICKNESS }) {
   const arc = (fraction === null ? 0 : clamp01(fraction)) * Math.PI * 2
   const rgba = new Uint8ClampedArray(size * size * 4)
   const center = size / 2
   const outer = size * OUTER_RADIUS
-  const inner = outer - Math.max(2, size * THICKNESS)
-  const barWidth = size * BAR_WIDTH
-  const barHalfGap = size * BAR_GAP / 2
-  const barHalfHeight = size * BAR_HEIGHT / 2
+  const inner = outer - Math.max(2, size * thickness)
+  const barWidth = inner * BAR_WIDTH
+  const barHalfGap = inner * BAR_HALF_GAP
+  const barHalfHeight = inner * BAR_HALF_HEIGHT
   const samples = SUPERSAMPLE * SUPERSAMPLE
 
   for (let y = 0; y < size; y++) {
@@ -52,7 +52,7 @@ export function drawRing ({ size, fraction, paused, color }) {
             alpha += 1
           } else if (radius >= inner && radius <= outer) {
             const angle = (Math.atan2(dx, -dy) + Math.PI * 2) % (Math.PI * 2)
-            if (angle <= arc) alpha += 1
+            if (angle >= Math.PI * 2 - arc) alpha += 1
             else if (paused) alpha += TRACK_ALPHA
           }
         }
@@ -67,16 +67,19 @@ export function drawRing ({ size, fraction, paused, color }) {
   return rgba
 }
 
-export function ringFrames ({ fraction, paused, color }) {
-  return RING_SIZES.map(size => ({ size, rgba: Buffer.from(drawRing({ size, fraction, paused, color })) }))
+export function ringFrames ({ fraction, paused, color, thickness }) {
+  return RING_SIZES.map(size => ({ size, rgba: Buffer.from(drawRing({ size, fraction, paused, color, thickness })) }))
 }
 
-export function ringColor ({ base, idleFraction }) {
-  return mixColors(base, IDLE_COLOR, idleStep(idleFraction) / IDLE_STEPS)
+export function ringColor ({ base, idleFraction, idleColor = null }) {
+  return idleColor ? mixColors(base, idleColor, idleStep(idleFraction) / IDLE_STEPS) : base
 }
 
-export function ringKey ({ fraction, paused, idleFraction, base }) {
-  return `ring-${paused && fraction === null ? 'x' : ringStep(fraction)}-${paused ? 'p' : 'r'}-${idleStep(idleFraction)}-${base.map(value => value.toString(16).padStart(2, '0')).join('')}`
+const hex = color => color.map(value => value.toString(16).padStart(2, '0')).join('')
+
+export function ringKey ({ fraction, paused, idleFraction, base, idleColor = null, thickness = DEFAULT_THICKNESS }) {
+  const idle = idleColor ? `${idleStep(idleFraction)}${hex(idleColor)}` : 'n'
+  return `ring-${paused && fraction === null ? 'x' : ringStep(fraction)}-${paused ? 'p' : 'r'}-${idle}-${hex(base)}-t${Math.round(thickness * 100)}`
 }
 
 export class TrayRingIcons {
@@ -87,12 +90,12 @@ export class TrayRingIcons {
     mkdirSync(directory, { recursive: true })
   }
 
-  pathFor ({ fraction, paused, idleFraction, base }) {
-    const key = ringKey({ fraction, paused, idleFraction, base })
+  pathFor ({ fraction, paused, idleFraction, base, idleColor = null, thickness = DEFAULT_THICKNESS }) {
+    const key = ringKey({ fraction, paused, idleFraction, base, idleColor, thickness })
     if (!this.paths.has(key)) {
       const path = join(this.directory, `${key}.ico`)
       const quantised = fraction === null ? null : ringStep(fraction) / RING_STEPS
-      writeFileSync(path, encodeIco(ringFrames({ fraction: quantised, paused, color: ringColor({ base, idleFraction }) })))
+      writeFileSync(path, encodeIco(ringFrames({ fraction: quantised, paused, thickness, color: ringColor({ base, idleFraction, idleColor }) })))
       this.paths.set(key, path)
     }
     return this.paths.get(key)

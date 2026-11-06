@@ -6,9 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.24.1] - 2026-11-06
+### Changed
+- The tray ring is thicker, empties clockwise from the top, and turns red instead of green as idle time grows. Its thickness and idle colour are settings on the Theme tab, and the idle colour can be switched off
+
 ## [1.24.0] - 2026-11-06
 ### Added
-- New tray icon style on Windows: a ring that shortens clockwise until nothing is left as the next break approaches, with a pause symbol in the middle while breaks are paused (including for an app on the pause list) and a colour that moves towards green as idle time grows
+- New tray icon style on Windows: a ring that empties clockwise from the top until nothing is left as the next break approaches, with a pause symbol in the middle while breaks are paused (including for an app on the pause list) and a colour that moves towards green as idle time grows
 
 ### Fixed
 - The progress tray icon no longer jumps back after a pause, because the progress is measured against the full length of the countdown

@@ -14,7 +14,7 @@ What is different from the original Stretchly (every change is listed in the [ch
 
 **A tray panel and a better tray icon**
 - Left-click the tray icon for a small panel that stays open: the countdown, buttons to shorten or extend the next work session in 5 minute steps, start or pause breaks, the idle switch, Preferences and Quit. Right-click keeps the usual menu
-- A ring tray icon (Windows) that shortens clockwise as the next break gets closer until nothing is left, shows a pause symbol in the middle while an app on your pause list is in front (or breaks are paused), and turns from your tray colour towards green as you stay idle
+- A ring tray icon (Windows) that empties clockwise from the top as the next break gets closer until nothing is left, shows a pause symbol in the middle while an app on your pause list is in front (or breaks are paused), and turns from your tray colour towards red (a colour you can change or switch off) as you stay idle, with a thickness you can set
 - A number-only tray icon drawn sharply at your display scale (Windows), with your own font, size and colour, and an indicator when you are in a meeting
 
 **Breaks and popups**
@@ -183,7 +183,7 @@ Here are the preferences editable via the app. If values in the app does not sui
 - `allScreens` - show breaks on all screens
 - `language` - language
 - `useMonochromeTrayIcon` - use monochrome icon
-- `trayIconStyle` - icon style for menubar: default, time to break, progress to break, minutes to break as number only (`text`), or a ring that shrinks to the next break (`ring`, Windows). The ring starts at the top and shortens clockwise; it shows a pause symbol in the middle and a faint track when breaks are paused, including for an app on the pause list; and it blends from the tray colour towards green as idle time approaches the idle reset time. During a break the normal icon is shown. The ring uses the custom colour from `trayNumberColor` if set, otherwise white or black to match the taskbar
+- `trayIconStyle` - icon style for menubar: default, time to break, progress to break, minutes to break as number only (`text`), or a ring that shrinks to the next break (`ring`, Windows). The ring starts full and empties clockwise from the top, so the remaining part always ends at the top; it shows a pause symbol in the middle and a faint track when breaks are paused, including for an app on the pause list; and it blends from the tray colour towards the idle colour (red by default) as idle time approaches the idle reset time. During a break the normal icon is shown. The ring uses the custom colour from `trayNumberColor` if set, otherwise white or black to match the taskbar. `trayRingThickness` sets how thick it is (a fraction of the icon size, `0.1` to `0.35`, default `0.22`), `trayRingIdleColorEnabled` turns the idle colour change on or off and `trayRingIdleColor` sets that colour (default `#e53935`)
 - `trayIconFont` - on Windows, the font used to draw the number in the `text` tray icon style. The default `DejaVu Sans` is bundled with *Idle Break*; Preferences list a few common Windows fonts, and the preferences file accepts the name of any installed font. An empty value uses the built-in pictures instead
 - `trayIconFontSize` - height of the tray number as a fraction of the icon, from `0.3` to `1` (default `0.5`)
 - `trayIconCrispDigits` - draw the tray number with pure pixels instead of smoothed edges (off by default)

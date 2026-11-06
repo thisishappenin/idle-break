@@ -694,6 +694,7 @@ function drawnTrayNumberPath (number, useDarkColors) {
 }
 
 let trayRingIcons = null
+const IDLE_HEX = /^#[0-9a-f]{6}$/i
 
 function ringTrayIconPath (useDarkColors) {
   if (process.platform !== 'win32') return null
@@ -708,7 +709,9 @@ function ringTrayIconPath (useDarkColors) {
     fraction,
     paused,
     idleFraction: resetAfter > 0 ? idle / resetAfter : 0,
-    base: custom ? hexToRgb(custom) : useDarkColors ? [255, 255, 255] : [0, 0, 0]
+    base: custom ? hexToRgb(custom) : useDarkColors ? [255, 255, 255] : [0, 0, 0],
+    idleColor: settings.get('trayRingIdleColorEnabled') && IDLE_HEX.test(settings.get('trayRingIdleColor')) ? hexToRgb(settings.get('trayRingIdleColor')) : null,
+    thickness: settings.get('trayRingThickness')
   })
 }
 

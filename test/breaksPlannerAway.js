@@ -125,6 +125,30 @@ describe('breaksPlanner remaining fraction for the tray ring', () => {
     expect(planner.remainingFraction).to.be.within(0.499, 0.501)
   })
 
+  it('is based on the default interval, so a countdown set shorter starts as a short ring, not a full one', () => {
+    expect(planner.adjustWorkSession(-35 * MINUTE)).to.equal(true)
+    expect(planner.remainingFraction).to.be.within(0.1249, 0.1251)
+    vi.advanceTimersByTime(MINUTE)
+    expect(planner.remainingFraction).to.be.within(0.0999, 0.1001)
+  })
+
+  it('stays full when a session is extended past the default interval until it falls below it', () => {
+    planner.adjustWorkSession(5 * MINUTE)
+    expect(planner.remainingFraction).to.equal(1)
+    vi.advanceTimersByTime(10 * MINUTE)
+    expect(planner.remainingFraction).to.be.within(0.874, 0.876)
+  })
+
+  it('uses the default interval of a long-breaks-only schedule', () => {
+    planner.clear()
+    planner = new BreaksPlanner(settingsWith({ break: true, microbreak: false, breakInterval: 2, breakNotification: false }))
+    planner.nextBreak()
+    expect(planner.defaultInterval).to.equal(120 * MINUTE)
+    expect(planner.remainingFraction).to.equal(1)
+    vi.advanceTimersByTime(60 * MINUTE)
+    expect(planner.remainingFraction).to.be.within(0.499, 0.501)
+  })
+
   it('has no fraction during a break, and no countdown when nothing is scheduled', () => {
     planner.emit('microbreakStarted', false)
     expect(planner.remainingFraction).to.equal(null)

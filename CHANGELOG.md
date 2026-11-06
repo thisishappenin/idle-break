@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.24.2] - 2026-11-06
+### Changed
+- The tray ring is always measured against the default work interval, so a countdown that was shortened (for example to 5 of 40 minutes) starts as a short ring instead of a full one
+
 ## [1.24.1] - 2026-11-06
 ### Changed
 - The tray ring is thicker, empties clockwise from the top, and turns red instead of green as idle time grows. Its thickness and idle colour are settings on the Theme tab, and the idle colour can be switched off

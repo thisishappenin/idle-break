@@ -518,10 +518,18 @@ class BreaksPlanner extends EventEmitter {
     return null
   }
 
+  get defaultInterval () {
+    const interval = this.settings.get('microbreakInterval')
+    if (this.settings.get('break') && !this.settings.get('microbreak')) {
+      return interval * (this.settings.get('breakInterval') + 1)
+    }
+    return interval
+  }
+
   get remainingFraction () {
-    const total = this._progressInterval
+    const total = this.defaultInterval
     const remaining = this.timeToNextBreak
-    if (total === null || total <= 0 || remaining === null) return this.idleSnapshot?.fraction ?? null
+    if (!(total > 0) || remaining === null) return this.idleSnapshot?.fraction ?? null
     return Math.max(0, Math.min(1, remaining / total))
   }
 

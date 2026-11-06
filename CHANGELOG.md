@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.23.0] - 2026-11-06
 ### Added
 - The break window width and height sliders go from 1 to 100 percent; 100 percent covers the whole screen, ultrawide ones too
 - The break window position and size are remembered for each screen resolution and switch automatically when you change screens, for example between a laptop and a widescreen monitor

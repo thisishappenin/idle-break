@@ -78,6 +78,31 @@ describe('breaksPlanner while the computer is locked or asleep', () => {
     expect(planner.scheduler.timeLeft).to.be.within(30 * MINUTE - 100, 30 * MINUTE)
   })
 
+  it('still carries on after lock followed by sleep, which holds the countdown twice', () => {
+    start()
+    expect(planner.holdForAway()).to.equal(true)
+    expect(planner.holdForAway()).to.equal(true)
+    vi.advanceTimersByTime(MINUTE)
+    expect(planner.returnFromAway(MINUTE)).to.equal('resumed')
+    expect(planner.scheduler.held).to.equal(false)
+    expect(planner.scheduler.timeLeft).to.be.within(30 * MINUTE - 100, 30 * MINUTE)
+  })
+
+  it('releases a countdown that nothing is holding any more', () => {
+    start()
+    planner.scheduler.hold()
+    expect(planner.releaseOrphanedHold()).to.equal(true)
+    expect(planner.scheduler.held).to.equal(false)
+    expect(planner.scheduler.timeLeft).to.be.within(30 * MINUTE - 100, 30 * MINUTE)
+  })
+
+  it('leaves a countdown alone while it is held on purpose', () => {
+    start()
+    planner.holdForAway()
+    expect(planner.releaseOrphanedHold()).to.equal(false)
+    expect(planner.scheduler.held).to.equal(true)
+  })
+
   it('keeps the countdown frozen when the idle monitor reports a long idle time during the lock', () => {
     start()
     planner.holdForAway()

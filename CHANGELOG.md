@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.24.3] - 2026-11-07
+### Fixed
+- The countdown no longer stays frozen after the computer locks and then sleeps (as when closing a laptop lid): the second event used to forget that the countdown was frozen, so it was never released on wake. A countdown that nothing is holding any more is also released automatically
+
 ## [1.24.2] - 2026-11-06
 ### Changed
 - The tray ring is always measured against the default work interval, so a countdown that was shortened (for example to 5 of 40 minutes) starts as a short ring instead of a full one

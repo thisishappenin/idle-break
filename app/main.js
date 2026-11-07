@@ -569,6 +569,10 @@ i18next.on('languageChanged', () => {
 
 function onSuspendOrLock () {
   log.info('System: suspend or lock')
+  if (pausedForSuspendOrLock) {
+    log.info('Stretchly: already holding the countdown for suspendOrLock')
+    return
+  }
   if (settings.get('pauseForSuspendOrLock')) {
     if (breakPlanner.isPaused || breakPlanner.dndManager.isOnDnd ||
       breakPlanner.naturalBreaksManager.isSchedulerCleared ||
@@ -1801,6 +1805,7 @@ function createPreferencesWindow () {
 }
 
 function updateTray () {
+  breakPlanner?.releaseOrphanedHold()
   if (process.platform === 'win32' && Date.now() - lastWindowsThemeCheck > 60000) refreshWindowsTheme()
 
   if (!appIcon && !settings.get('showTrayIcon')) {

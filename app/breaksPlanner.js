@@ -178,8 +178,17 @@ class BreaksPlanner extends EventEmitter {
     const scheduler = this.scheduler
     const inBreak = scheduler?.reference === 'finishMicrobreak' || scheduler?.reference === 'finishBreak'
     if (this.isPaused || !scheduler || scheduler.reference === null || inBreak) return false
+    if (this.heldForAway) return true
     this.heldForAway = scheduler.hold()
     return this.heldForAway || scheduler.held
+  }
+
+  releaseOrphanedHold () {
+    const scheduler = this.scheduler
+    if (!scheduler?.held || this.isPaused || this.heldForApp || this.heldForAway || this.isHoldingForUsage ||
+      this.appExclusionsManager.isSchedulerCleared) return false
+    log.warn('Stretchly: releasing a countdown that was left frozen')
+    return scheduler.release()
   }
 
   returnFromAway (awayMs) {

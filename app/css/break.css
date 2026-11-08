@@ -260,8 +260,8 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
 
 @media (max-height: 320px), (max-width: 480px) {
   html {
-    /* 1 unit is 1px in a 360x120 popup; the popup keeps this look and scales with the window */
-    --u: min(0.8333vh, 0.2778vw);
+    /* 1 unit is 1px in a 360x120 popup; the popup keeps this look and scales with the window, mostly with its height */
+    --u: min(0.8333vh, 0.3333vw);
     /* a background image stops the body color filling the square window corners */
     background: linear-gradient(transparent, transparent);
   }
@@ -323,10 +323,10 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
   }
 
   #progress-time {
-    font-size: calc(34 * var(--u));
+    font-size: calc(36 * var(--u));
     font-weight: 600;
     letter-spacing: calc(-0.5 * var(--u));
-    line-height: calc(40 * var(--u));
+    line-height: calc(42 * var(--u));
     opacity: 1;
     padding-top: 0;
   }
@@ -341,14 +341,14 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
     border-radius: calc(4 * var(--u));
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--surface-ink) 18%, transparent);
     flex-direction: column;
-    font-size: calc(12 * var(--u));
+    font-size: calc(13 * var(--u));
     font-weight: 400;
-    gap: calc(4 * var(--u));
+    gap: calc(5 * var(--u));
     box-sizing: border-box;
-    height: calc(56 * var(--u));
+    height: calc(66 * var(--u));
     justify-content: center;
-    line-height: calc(13 * var(--u));
-    min-width: calc(56 * var(--u));
+    line-height: calc(15 * var(--u));
+    min-width: calc(66 * var(--u));
     padding: 0 calc(8 * var(--u));
     white-space: nowrap;
   }
@@ -360,8 +360,8 @@ body[dir=rtl] .breaks > :nth-child(2) > a img {
 
   .breaks > :nth-child(2) > a img,
   body[dir=rtl] .breaks > :nth-child(2) > a img {
-    height: calc(18 * var(--u));
-    width: calc(18 * var(--u));
+    height: calc(22 * var(--u));
+    width: calc(22 * var(--u));
   }
 
   .breaks > :nth-child(2) .tiptext {

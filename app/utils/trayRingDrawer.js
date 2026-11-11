@@ -11,6 +11,7 @@ export const DEFAULT_THICKNESS = 0.22
 const SUPERSAMPLE = 4
 const OUTER_RADIUS = 0.48
 const TRACK_ALPHA = 0.3
+const DOT_RADIUS = 0.4
 const BAR_WIDTH = 0.4
 const BAR_HALF_GAP = 0.22
 const BAR_HALF_HEIGHT = 0.62
@@ -31,6 +32,8 @@ export function mixColors (from, to, amount) {
 
 export function drawRing ({ size, fraction, paused, color, thickness = DEFAULT_THICKNESS }) {
   const arc = (fraction === null ? 0 : clamp01(fraction)) * Math.PI * 2
+  const waiting = !paused && arc === 0
+  const showTrack = paused || waiting
   const rgba = new Uint8ClampedArray(size * size * 4)
   const center = size / 2
   const outer = size * OUTER_RADIUS
@@ -38,6 +41,7 @@ export function drawRing ({ size, fraction, paused, color, thickness = DEFAULT_T
   const barWidth = inner * BAR_WIDTH
   const barHalfGap = inner * BAR_HALF_GAP
   const barHalfHeight = inner * BAR_HALF_HEIGHT
+  const dotRadius = inner * DOT_RADIUS
   const samples = SUPERSAMPLE * SUPERSAMPLE
 
   for (let y = 0; y < size; y++) {
@@ -48,12 +52,14 @@ export function drawRing ({ size, fraction, paused, color, thickness = DEFAULT_T
           const dx = x + (sx + 0.5) / SUPERSAMPLE - center
           const dy = y + (sy + 0.5) / SUPERSAMPLE - center
           const radius = Math.hypot(dx, dy)
-          if (paused && Math.abs(dy) <= barHalfHeight && Math.abs(dx) >= barHalfGap && Math.abs(dx) <= barHalfGap + barWidth) {
+          if (waiting && radius <= dotRadius) {
+            alpha += 1
+          } else if (paused && Math.abs(dy) <= barHalfHeight && Math.abs(dx) >= barHalfGap && Math.abs(dx) <= barHalfGap + barWidth) {
             alpha += 1
           } else if (radius >= inner && radius <= outer) {
             const angle = (Math.atan2(dx, -dy) + Math.PI * 2) % (Math.PI * 2)
             if (angle >= Math.PI * 2 - arc) alpha += 1
-            else if (paused) alpha += TRACK_ALPHA
+            else if (showTrack) alpha += TRACK_ALPHA
           }
         }
       }

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.24.5] - 2026-11-11
+### Fixed
+- The tray ring no longer shows as a solid white square when the countdown has run out and the break is waiting, for example for a call to end: it now shows a faint ring with a dot in the middle, which is different from the pause symbol
+
 ## [1.24.4] - 2026-11-08
 ### Changed
 - Small break popups have bigger buttons, icons and labels, and their contents now follow the height of the window more closely, so making the window taller makes everything inside larger instead of leaving empty space

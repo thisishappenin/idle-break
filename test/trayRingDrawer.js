@@ -39,9 +39,26 @@ describe('drawRing', () => {
     expect(alphaAt(rgba, 36, 42)).to.equal(0)
   })
 
-  it('leaves nothing when the time is up', () => {
+  it('shows a faint ring with a dot in the middle when the time is up, never a blank icon', () => {
     const rgba = ring({ fraction: 0 })
-    expect(rgba.every((value, index) => index % 4 !== 3 || value === 0)).to.equal(true)
+    expect(alphaAt(rgba, 24, 24)).to.equal(255)
+    expect(alphaAt(rgba, 24, 3)).to.be.within(60, 100)
+    expect(alphaAt(rgba, 3, 24)).to.be.within(60, 100)
+    expect(alphaAt(rgba, 24, 14)).to.equal(0)
+  })
+
+  it('is never fully transparent at any size or step, which Windows would paint as a solid square', () => {
+    for (const size of [16, 20, 24, 32, 40, 48]) {
+      for (const fraction of [0, 0.004, 0.02, 0.5, 1, null]) {
+        for (const paused of [false, true]) {
+          if (fraction === null && !paused) continue
+          const rgba = drawRing({ size, fraction, paused, color: white })
+          let any = false
+          for (let index = 3; index < rgba.length; index += 4) if (rgba[index] > 0) any = true
+          expect(any, `${size}px fraction ${fraction} paused ${paused}`).to.equal(true)
+        }
+      }
+    }
   })
 
   it('shows a pause symbol in the middle and a faint track where the ring is missing', () => {

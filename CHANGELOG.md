@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.24.6] - 2026-11-17
+### Fixed
+- The tray ring no longer turns red from idle time during a call, since the break timer does not reset during one. It uses its own colour while a call is detected (blue by default, with a setting on the Theme tab to change or switch it off), and idle time is ignored for it
+
 ## [1.24.5] - 2026-11-11
 ### Fixed
 - The tray ring no longer shows as a solid white square when the countdown has run out and the break is waiting, for example for a call to end: it now shows a faint ring with a dot in the middle, which is different from the pause symbol

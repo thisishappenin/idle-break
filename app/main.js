@@ -21,7 +21,7 @@ import {
   minutesRemaining, insideWindowsPortable
 } from './utils/utils.js'
 import { migrateLegacyUserData } from './utils/legacyUserData.js'
-import { TrayRingIcons } from './utils/trayRingDrawer.js'
+import { TrayRingIcons, ringLook } from './utils/trayRingDrawer.js'
 import { DISPLAY_PROFILE_KEYS, displayProfileKey, saveDisplayProfile, applyDisplayProfile } from './utils/displayProfiles.js'
 import IdeasLoader from './utils/ideasLoader.js'
 import BreaksPlanner from './breaksPlanner.js'
@@ -700,6 +700,11 @@ function drawnTrayNumberPath (number, useDarkColors) {
 let trayRingIcons = null
 const IDLE_HEX = /^#[0-9a-f]{6}$/i
 
+function ringSettingColor (name) {
+  const color = settings.get(name)
+  return settings.get(`${name}Enabled`) && IDLE_HEX.test(color) ? hexToRgb(color) : null
+}
+
 function ringTrayIconPath (useDarkColors) {
   if (process.platform !== 'win32') return null
   const paused = breakPlanner.isPaused || breakPlanner.dndManager.isOnDnd || breakPlanner.appExclusionsManager.isSchedulerCleared
@@ -712,10 +717,14 @@ function ringTrayIconPath (useDarkColors) {
   return trayRingIcons.pathFor({
     fraction,
     paused,
-    idleFraction: resetAfter > 0 ? idle / resetAfter : 0,
-    base: custom ? hexToRgb(custom) : useDarkColors ? [255, 255, 255] : [0, 0, 0],
-    idleColor: settings.get('trayRingIdleColorEnabled') && IDLE_HEX.test(settings.get('trayRingIdleColor')) ? hexToRgb(settings.get('trayRingIdleColor')) : null,
-    thickness: settings.get('trayRingThickness')
+    thickness: settings.get('trayRingThickness'),
+    ...ringLook({
+      inCall: breakPlanner.meetingManager.isInMeeting,
+      callColor: ringSettingColor('trayRingCallColor'),
+      base: custom ? hexToRgb(custom) : useDarkColors ? [255, 255, 255] : [0, 0, 0],
+      idleColor: ringSettingColor('trayRingIdleColor'),
+      idleFraction: resetAfter > 0 ? idle / resetAfter : 0
+    })
   })
 }
 

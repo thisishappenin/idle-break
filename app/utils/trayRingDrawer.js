@@ -77,6 +77,11 @@ export function ringFrames ({ fraction, paused, color, thickness }) {
   return RING_SIZES.map(size => ({ size, rgba: Buffer.from(drawRing({ size, fraction, paused, color, thickness })) }))
 }
 
+export function ringLook ({ inCall, callColor, base, idleColor, idleFraction }) {
+  if (inCall) return { base: callColor ?? base, idleColor: null, idleFraction: 0 }
+  return { base, idleColor, idleFraction }
+}
+
 export function ringColor ({ base, idleFraction, idleColor = null }) {
   return idleColor ? mixColors(base, idleColor, idleStep(idleFraction) / IDLE_STEPS) : base
 }

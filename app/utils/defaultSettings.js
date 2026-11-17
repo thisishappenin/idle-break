@@ -99,6 +99,8 @@ export default {
   trayRingThickness: 0.22,
   trayRingIdleColorEnabled: true,
   trayRingIdleColor: '#e53935',
+  trayRingCallColorEnabled: true,
+  trayRingCallColor: '#2196f3',
   trayNumberColorCustom: false,
   trayNumberColor: '#005fb8',
   currentTimeInBreaks: false,

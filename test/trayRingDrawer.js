@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import { mkdtempSync, rmSync, existsSync, readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { drawRing, ringKey, ringColor, ringStep, TrayRingIcons, DEFAULT_IDLE_COLOR } from '../app/utils/trayRingDrawer.js'
+import { drawRing, ringKey, ringColor, ringLook, ringStep, TrayRingIcons, DEFAULT_IDLE_COLOR } from '../app/utils/trayRingDrawer.js'
 
 const SIZE = 48
 const alphaAt = (rgba, x, y) => rgba[(y * SIZE + x) * 4 + 3]
@@ -183,5 +183,28 @@ describe('TrayRingIcons', () => {
   it('can draw a paused icon when no time is known', () => {
     const icons = new TrayRingIcons(join(directory, 'rings'))
     expect(existsSync(icons.pathFor({ fraction: null, paused: true, idleFraction: 0, base: [0, 0, 0] }))).to.equal(true)
+  })
+})
+
+describe('ringLook', () => {
+  const look = { base: [0, 0, 0], idleColor: [200, 0, 0], idleFraction: 0.8 }
+
+  it('keeps the normal colour and the idle colour when not in a call', () => {
+    expect(ringLook({ inCall: false, callColor: [0, 0, 255], ...look })).to.deep.equal(look)
+  })
+
+  it('uses the call colour and ignores idle time during a call', () => {
+    expect(ringLook({ inCall: true, callColor: [0, 0, 255], ...look }))
+      .to.deep.equal({ base: [0, 0, 255], idleColor: null, idleFraction: 0 })
+  })
+
+  it('still ignores idle time during a call when the call colour is switched off', () => {
+    expect(ringLook({ inCall: true, callColor: null, ...look }))
+      .to.deep.equal({ base: [0, 0, 0], idleColor: null, idleFraction: 0 })
+  })
+
+  it('gives a call a different icon from a quiet ring and from an idle one', () => {
+    const key = options => ringKey({ fraction: 0.5, paused: false, thickness: 0.22, ...ringLook({ callColor: [0, 0, 255], ...look, ...options }) })
+    expect(new Set([key({ inCall: true }), key({ inCall: false }), key({ inCall: false, idleFraction: 0 })]).size).to.equal(3)
   })
 })

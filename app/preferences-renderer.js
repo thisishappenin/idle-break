@@ -36,7 +36,8 @@ function updateTrayOptionVisibility () {
 const COLOR_SWITCHES = {
   countdownColor: 'countdownColorCustom',
   trayNumberColor: 'trayNumberColorCustom',
-  trayRingIdleColor: 'trayRingIdleColorEnabled'
+  trayRingIdleColor: 'trayRingIdleColorEnabled',
+  trayRingCallColor: 'trayRingCallColorEnabled'
 }
 
 function updateCountdownColorControl () {

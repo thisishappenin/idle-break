@@ -5,6 +5,7 @@ import { isLightColor } from './utils/colorContrast.js'
 import { parsePauseDurations, formatPauseDurations } from './utils/pauseDurations.js'
 import HtmlTranslate from './utils/htmlTranslate.js'
 import { parseEntryList, formatEntryList } from './utils/entryList.js'
+import { summarize, formatWorkDuration } from './utils/workTime.js'
 
 import './platform.js'
 
@@ -12,6 +13,42 @@ const versionChecker = new VersionChecker()
 let eventsAttached = false
 let themePreviewAttached = false
 let pauseWhileUsingEntries = []
+
+async function refreshWorkDashboard () {
+  const data = await window.stretchly.getWorkTime()
+  const summary = summarize(data.days, new Date())
+  const goal = data.goalSeconds
+  document.querySelector('#workToday').textContent = formatWorkDuration(summary.today)
+  document.querySelector('#workTodayGoal').textContent = await window.i18next.t('preferences.work.goalNote', { goal: formatWorkDuration(goal) })
+  document.querySelector('#workTodayBar').style.width = `${goal > 0 ? Math.min(100, Math.round(summary.today / goal * 100)) : 0}%`
+  document.querySelector('#workTodayBar').classList.toggle('reached', goal > 0 && summary.today >= goal)
+  document.querySelector('#workWeek').textContent = formatWorkDuration(summary.week)
+  document.querySelector('#workMonth').textContent = formatWorkDuration(summary.month)
+  document.querySelector('#workMonthAverage').textContent = summary.monthAverage
+    ? await window.i18next.t('preferences.work.average', { time: formatWorkDuration(summary.monthAverage) })
+    : ''
+  document.querySelector('#workDisabledNote').classList.toggle('hidden', data.enabled)
+
+  const chart = document.querySelector('#workChart')
+  const scale = Math.max(goal, ...summary.chart.map(item => item.seconds), 1)
+  chart.replaceChildren(...summary.chart.map(item => {
+    const day = new Date(`${item.date}T12:00:00`)
+    const column = document.createElement('div')
+    column.className = `work-column${item.today ? ' today' : ''}${goal > 0 && item.seconds >= goal ? ' reached' : ''}`
+    column.title = `${day.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' })}: ${formatWorkDuration(item.seconds)}`
+    const bar = document.createElement('div')
+    bar.className = 'work-column-bar'
+    bar.style.height = `${Math.round(item.seconds / scale * 100)}%`
+    const track = document.createElement('div')
+    track.className = 'work-column-track'
+    track.append(bar)
+    const label = document.createElement('span')
+    label.textContent = day.toLocaleDateString(undefined, { weekday: 'narrow' })
+    column.append(track, label)
+    return column
+  }))
+  chart.style.setProperty('--goal-line', goal > 0 ? Math.round(goal / scale * 100) : -10)
+}
 
 async function showPauseWhileUsingSummary () {
   const button = document.querySelector('#pauseWhileUsingEdit')
@@ -219,6 +256,7 @@ window.onload = async (e) => {
         }
       })
 
+      if (toBeDisplayed.classList.contains('work')) refreshWorkDashboard()
       setSameWidths()
       setWindowHeight()
     }
@@ -306,6 +344,14 @@ window.onload = async (e) => {
   }
 
   pauseWhileUsingEntries = settings.pauseWhileUsing ?? []
+  refreshWorkDashboard()
+  if (!eventsAttached) {
+    setInterval(() => {
+      if (!document.querySelector('.work').classList.contains('hidden')) refreshWorkDashboard()
+    }, 30000)
+    document.querySelector('#workTrackerEnabled').addEventListener('change', () => setTimeout(refreshWorkDashboard, 200))
+    document.querySelector('#workGoalHours').addEventListener('change', () => setTimeout(refreshWorkDashboard, 200))
+  }
   await showPauseWhileUsingSummary()
   if (!eventsAttached) {
     const dialog = document.querySelector('#pauseWhileUsingDialog')

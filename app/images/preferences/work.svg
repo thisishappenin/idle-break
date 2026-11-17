@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Prefs / Toolbar Icon / Work time</title>
+    <g stroke="none" fill="none" fill-rule="evenodd">
+        <rect x="0" y="0" width="32" height="32" rx="4"></rect>
+        <g fill="#8E8E93" fill-rule="nonzero">
+            <rect x="5" y="17" width="5" height="9" rx="1"></rect>
+            <rect x="13.5" y="10" width="5" height="16" rx="1"></rect>
+            <rect x="22" y="5" width="5" height="21" rx="1"></rect>
+        </g>
+    </g>
+</svg>

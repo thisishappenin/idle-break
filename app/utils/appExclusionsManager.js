@@ -108,6 +108,10 @@ class AppExclusionsManager extends EventEmitter {
     }, this.appExclusionsCheckInterval)
   }
 
+  get usingListedApp () {
+    return Boolean(matchForeground(this.appExclusion?.foreground ?? [], this.foreground))
+  }
+
   get isSchedulerCleared () {
     if (this.appExclusion === undefined) { return false }
     if (this.appExclusion.rule === 'pause') {

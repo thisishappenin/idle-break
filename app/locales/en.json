@@ -14,6 +14,8 @@
     "startBreakNow": "Start a Long break now",
     "trayPanelNextBreakIn": "Next break in",
     "trayPanelWorkSession": "Work session",
+    "trayPanelWorkedToday": "Worked today",
+    "workGoalReached": "You have reached your goal of {{hours}} hours of work today. Nice work!",
     "trayPanelThisSessionOnly": "Applies to the next break only",
     "trayPanelMinutes": "{{minutes}} min",
     "trayPanelHours": "{{hours}} h",
@@ -57,6 +59,7 @@
       "theme": "Theme",
       "sounds": "Sounds",
       "shortcuts": "Shortcuts",
+      "work": "Work",
       "about": "About",
       "heart": "Love Stretchly"
     },
@@ -222,6 +225,21 @@
       "authenticateUsing": "Authenticate using:",
       "contributorPreferences": "Contributor Preferences",
       "syncPreferences": "Sync Preferences"
+    },
+    "work": {
+      "dashboard": "Time spent working:",
+      "today": "Today",
+      "week": "This week",
+      "month": "This month",
+      "lastDays": "Last 14 days:",
+      "options": "Work time tracking:",
+      "enabled": "Track the time I spend working",
+      "goal": "Daily goal:",
+      "idleLimit": "Stop counting after being away for:",
+      "goalNote": "of {{goal}}",
+      "average": "{{time}} average on days worked",
+      "disabledNote": "Tracking is switched off, so no new time is being added.",
+      "explanation": "Time counts while you are active on the computer, including calls. It does not count during breaks, while you are away for longer than the limit above (calls excepted), while the computer is locked or asleep, or while an app or website from your pause list is in front."
     }
   },
   "contributorPreferences": {

@@ -1,4 +1,5 @@
 import formatClock from './utils/formatClock.js'
+import { formatWorkDuration } from './utils/workTime.js'
 import { isLightColor } from './utils/colorContrast.js'
 
 const panel = document.querySelector('#panel')
@@ -73,6 +74,16 @@ function render () {
     ...state.status.map(line => el('div', { class: 'status', text: line }))
   )
   if (header.children.length) panel.append(header)
+  if (state.work) {
+    const { seconds, goalSeconds } = state.work
+    const fraction = goalSeconds > 0 ? Math.min(1, seconds / goalSeconds) : 0
+    const bar = el('div', { class: 'work-bar' }, el('span', { style: `width: ${Math.round(fraction * 100)}%` }))
+    panel.append(section(
+      el('div', { class: 'work' },
+        el('span', { class: 'caption', text: labels.workedToday }),
+        el('span', { class: 'work-time', text: formatWorkDuration(seconds) + (goalSeconds > 0 ? ` / ${formatWorkDuration(goalSeconds)}` : '') })),
+      goalSeconds > 0 && bar))
+  }
   if (state.locked) return finish(focused)
 
   if (state.newVersion) {

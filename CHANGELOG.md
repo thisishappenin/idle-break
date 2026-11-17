@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.25.0] - 2026-11-17
+### Added
+- Work time tracking: the time you are active on the computer counts towards a daily goal (7 hours by default) and a note appears when you reach it. Time counts during calls, and does not count during breaks, while the computer is locked or asleep, after being away longer than a limit you set (5 minutes by default), or while an app or website from the pause list is in front
+- A Work tab in Preferences with today, this week and this month, the monthly average and a chart of the last 14 days, plus the tracking settings (on or off, daily goal, away limit)
+- The tray panel shows the time worked today against the goal
+
 ## [1.24.6] - 2026-11-17
 ### Fixed
 - The tray ring no longer turns red from idle time during a call, since the break timer does not reset during one. It uses its own colour while a call is detected (blue by default, with a setting on the Theme tab to change or switch it off), and idle time is ignored for it

@@ -91,6 +91,7 @@ function exposeStretchly () {
     trayIconRendered: (id, result) => ipcRenderer.send('tray-icon-rendered', id, result),
     getWindowBounds: () => ipcRenderer.invoke('get-window-bounds'),
     getVersion: () => ipcRenderer.invoke('get-version'),
+    getWorkTime: () => ipcRenderer.invoke('get-work-time'),
     setWindowSize: (width, height) => ipcRenderer.send('set-window-size', width, height),
     restoreDefaults: () => ipcRenderer.send('restore-defaults'),
     closeWindow: () => ipcRenderer.send('close-current-window'),

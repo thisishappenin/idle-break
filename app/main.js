@@ -21,6 +21,7 @@ import {
   minutesRemaining, insideWindowsPortable
 } from './utils/utils.js'
 import { migrateLegacyUserData } from './utils/legacyUserData.js'
+import WorkTimeTracker from './utils/workTimeTracker.js'
 import { TrayRingIcons, ringLook } from './utils/trayRingDrawer.js'
 import { DISPLAY_PROFILE_KEYS, displayProfileKey, saveDisplayProfile, applyDisplayProfile } from './utils/displayProfiles.js'
 import IdeasLoader from './utils/ideasLoader.js'
@@ -118,6 +119,40 @@ let currentTrayIconPath = null
 let currentTrayMenuTemplate = null
 let trayUpdateIntervalObj = null
 let displayChangesWatched = false
+let workTracker = null
+let workTimer = null
+const WORK_TICK_MS = 5000
+
+function userIsWorking () {
+  if (microbreakWins || breakWins || pausedForSuspendOrLock) return false
+  if (breakPlanner.appExclusionsManager.usingListedApp) return false
+  if (breakPlanner.meetingManager.isInMeeting) return true
+  return powerMonitor.getSystemIdleTime() < settings.get('workTrackerIdleMinutes') * 60
+}
+
+function workTick () {
+  if (!workTracker || !breakPlanner || !settings.get('workTrackerEnabled')) {
+    workTracker?.stopCounting()
+    return
+  }
+  workTracker.tick(userIsWorking())
+  const goalSeconds = settings.get('workGoalHours') * 3600
+  if (workTracker.shouldNotifyGoal(goalSeconds)) {
+    log.info('Stretchly: daily work goal reached')
+    showNotification(i18next.t('main.workGoalReached', { hours: settings.get('workGoalHours') }), 12000)
+  }
+}
+
+function startWorkTracking () {
+  workTracker ??= new WorkTimeTracker({ filePath: join(app.getPath('userData'), 'work-time.json') })
+  workTimer ??= setInterval(workTick, WORK_TICK_MS)
+}
+
+ipcMain.handle('get-work-time', () => ({
+  days: workTracker?.snapshot() ?? {},
+  goalSeconds: settings.get('workGoalHours') * 3600,
+  enabled: settings.get('workTrackerEnabled')
+}))
 
 if (insideWindowsPortable()) {
   const portableDataPath = join(process.env.PORTABLE_EXECUTABLE_DIR, 'Data')
@@ -280,6 +315,7 @@ app.on('before-quit', (event) => {
     event.preventDefault()
   } else {
     globalShortcut.unregisterAll()
+    workTracker?.save()
     if (processWin && !processWin.isDestroyed()) {
       processWin.destroy()
       processWin = null
@@ -486,6 +522,7 @@ async function initialize (isAppStart = true) {
   displayManager = new DisplayManager(settings)
   syncDisplayProfile()
   watchDisplayChanges()
+  startWorkTracking()
 
   try {
     await startI18next()
@@ -1698,6 +1735,9 @@ function trayPanelState () {
     pauseUntilMorning: settings.get('pauseUntilMorningOption'),
     pauseIndefinitely: settings.get('pauseIndefinitelyOption'),
     idleEnabled: settings.get('naturalBreaks'),
+    work: settings.get('workTrackerEnabled') && workTracker
+      ? { seconds: workTracker.todaySeconds(), goalSeconds: settings.get('workGoalHours') * 3600 }
+      : null,
     contributor: Boolean(global.isContributor),
     themeColor: settings.get('trayPanelThemeColor') ? settings.get('mainColor') : null,
     countdownColor: countdownColor(settings)

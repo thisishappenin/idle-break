@@ -91,6 +91,35 @@ section + section {
   color: var(--muted);
 }
 
+.work {
+  align-items: baseline;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.work .caption {
+  color: var(--muted);
+}
+
+.work .work-time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.work-bar {
+  background: var(--control);
+  border-radius: 3px;
+  height: 5px;
+  overflow: hidden;
+}
+
+.work-bar > span {
+  background: var(--countdown-color, var(--accent));
+  display: block;
+  height: 100%;
+}
+
 .status {
   color: var(--muted);
   line-height: 16px;

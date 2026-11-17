@@ -8,7 +8,7 @@ body > div > :last-child {
   box-shadow: var(--box-shadow);
   display: grid;
   grid-gap: 16px;
-  grid-template: 56px/ repeat(6, minmax(57px, min-content)) auto;
+  grid-template: 56px/ repeat(7, minmax(57px, min-content)) auto;
   padding: 0 16px;
   position: fixed;
   width: calc(100% - 16px);
@@ -40,7 +40,7 @@ body > div > :last-child {
   text-decoration: none
 }
 
-.navigation > :nth-child(7) {
+.navigation > :nth-child(8) {
   justify-self: end;
 }
 
@@ -466,6 +466,7 @@ body[dir=rtl] .heart > .authenticate > a {
 .settings,
 .schedule,
 .theme,
+.work,
 .audio,
 .shortcuts {
   font-size: 13px;
@@ -521,6 +522,7 @@ body > div:not(.navigation):not(.custom-message) {
 .settings,
 .schedule,
 .theme,
+.work,
 .audio,
 .shortcuts {
   box-sizing: border-box;
@@ -599,4 +601,118 @@ body > div:not(.navigation):not(.custom-message) {
 
 .color-option input[type="color"]:disabled {
   opacity: 0.4;
+}
+
+/* Work time dashboard */
+.work-cards {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.work-card {
+  background: var(--control-bg);
+  border: 1px solid var(--control-border);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+}
+
+.work-card-label {
+  color: var(--muted, #5d5d5d);
+  font-size: 12px;
+}
+
+.work-card-value {
+  font-size: 24px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.work-card-note {
+  color: var(--muted, #5d5d5d);
+  font-size: 12px;
+  min-height: 15px;
+}
+
+.work-bar {
+  background: var(--control-border);
+  border-radius: 3px;
+  height: 6px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.work-bar > span {
+  background: var(--accent, #005fb8);
+  display: block;
+  height: 100%;
+  transition: width 0.3s;
+}
+
+.work-bar > span.reached {
+  background: #2e9e57;
+}
+
+.work-chart {
+  align-items: stretch;
+  display: flex;
+  gap: 4px;
+  height: 150px;
+  position: relative;
+}
+
+.work-chart::before {
+  border-top: 1px dashed var(--muted, #5d5d5d);
+  bottom: calc(18px + (100% - 18px) * var(--goal-line, 0) / 100);
+  content: "";
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  right: 0;
+}
+
+.work-column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.work-column-track {
+  align-items: flex-end;
+  display: flex;
+  flex: 1;
+}
+
+.work-column-bar {
+  background: var(--control-border);
+  border-radius: 3px 3px 0 0;
+  min-height: 2px;
+  width: 100%;
+}
+
+.work-column.today .work-column-bar {
+  background: var(--accent, #005fb8);
+}
+
+.work-column.reached .work-column-bar {
+  background: #2e9e57;
+}
+
+.work-column > span {
+  color: var(--muted, #5d5d5d);
+  font-size: 11px;
+  height: 15px;
+  text-align: center;
+}
+
+.work-column.today > span {
+  color: inherit;
+  font-weight: 600;
 }

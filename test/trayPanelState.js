@@ -34,6 +34,13 @@ describe('trayPanelState', () => {
     expect(state.adjust.extend).to.equal('main.extendWorkSession:5')
   })
 
+  it('shows the time worked today only when tracking is on and the panel is not locked', () => {
+    expect(buildTrayPanelState(base).work).to.equal(null)
+    const work = { seconds: 3600, goalSeconds: 25200 }
+    expect(buildTrayPanelState({ ...base, work }).work).to.deep.equal(work)
+    expect(buildTrayPanelState({ ...base, work, locked: true }).work).to.equal(null)
+  })
+
   it('hides the session adjustment when no break is scheduled', () => {
     expect(buildTrayPanelState({ ...base, canAdjust: false }).adjust).to.equal(null)
   })
